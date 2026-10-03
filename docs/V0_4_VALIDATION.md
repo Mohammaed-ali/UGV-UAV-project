@@ -27,6 +27,20 @@ The probe saw both vehicles ready and separate PX4 telemetry publishers. It laun
 
 The first probe run failed its movement threshold for uav02 because it commanded RTL immediately after the SEARCHING transition. The probe now waits for measured movement by both vehicles; the corrected run passed. This was probe timing, not a flight failure.
 
+## Gate 4 — two-PX4 mission flow: PASS
+
+Run: `scripts/validate_px4_two_mission.sh` with QGroundControl connected.
+Result: `validation/px4_two_mission.json` (144.4 s). The runner used the existing
+mission graph with one configured synthetic target and separate search lanes.
+
+Both vehicles became ready, armed, entered OFFBOARD and SEARCHING. uav01 made
+two detections; the tracker produced one persistent target ID (`tgt_001`),
+assigned once to uav01. uav02 remained SEARCHING during the assignment.
+uav01 reached STANDOFF and AWAITING_OPERATOR, accepted CONTINUE_HOLD followed
+by RETURN, and landed/disarmed. uav02 followed the no-target timeout/loiter/RTL
+path and also landed/disarmed. The mission did not enter COMPLETE until both
+were DOCKED. The acceptance gate now records `two_uav: PASS`.
+
 ## Later gates
 
-Two-UAV mission flow, three/eight-PX4 scale, QGC multi-vehicle UI, camera and perception are pending validation. Their launch/configuration presence is not evidence of completion.
+Three/eight-PX4 scale, QGC multi-vehicle UI, camera and perception are pending validation. Their launch/configuration presence is not evidence of completion.

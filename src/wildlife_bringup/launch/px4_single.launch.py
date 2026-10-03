@@ -15,6 +15,7 @@ def _nodes(context):
     if count not in (1, 2, 8):
         raise ValueError('vehicle_count must be 1, 2 or 8')
     validation = LaunchConfiguration('validation_file').perform(context)
+    single_target = LaunchConfiguration('single_target').perform(context).lower() == 'true'
     if count > 1:
         with open(validation) as stream:
             passed = json.load(stream)
@@ -55,7 +56,11 @@ def _nodes(context):
                 'map_origin_x': float((index % 4) * 3) if count == 8 else 0.0,
                 'map_origin_y': float((index // 4) * 4) if count == 8 else -35.0 * index,
             }], output='screen'),
-            Node(package='wildlife_perception', executable='detector_sim', name=f'{did}_perception', parameters=[pp, {'drone_id': did, 'detection_probability': ParameterValue(LaunchConfiguration('detection_probability'), value_type=float)}], output='screen'),
+            Node(package='wildlife_perception', executable='detector_sim', name=f'{did}_perception', parameters=[pp, {
+                'drone_id': did,
+                'detection_probability': ParameterValue(LaunchConfiguration('detection_probability'), value_type=float),
+                **({'target_positions': [15.0, 12.0]} if single_target else {}),
+            }], output='screen'),
         ])
     return nodes
 
@@ -69,6 +74,7 @@ def generate_launch_description():
         DeclareLaunchArgument('search_timeout', default_value='90.0'),
         DeclareLaunchArgument('loiter_duration', default_value='20.0'),
         DeclareLaunchArgument('detection_probability', default_value='0.55'),
+        DeclareLaunchArgument('single_target', default_value='false'),
         DeclareLaunchArgument('validation_file', default_value='/tmp/wildlife_px4_acceptance.json'),
         OpaqueFunction(function=_nodes),
     ])

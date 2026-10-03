@@ -58,9 +58,30 @@ ros2 launch wildlife_bringup subject1_demo.launch.py
 
 The original Gazebo proxy/camera demo remains available via `subject2_demo.launch.py`. It uses logical UAV movement; PX4 runs use `start_px4_single.sh`.
 
+## V0.4 two-PX4 validation
+
+The V0.3 baseline has been checkpointed at `v0.3-final`; V0.4 development is
+on `codex/v0.4-development`. With QGroundControl connected, the two-vehicle
+isolation and mission gates can be reproduced using:
+
+```bash
+scripts/validate_px4_two.sh
+scripts/validate_px4_two_mission.sh
+```
+
+The first gate independently commands uav01 and uav02 and verifies separate
+PX4 telemetry, commands, ACKs, map origins, physical search, return and landing.
+The second runs the existing mission graph: both search, one target is assigned
+to uav01, the operator holds then returns uav01, and uav02 times out to RTL.
+Both vehicles land/disarm before mission COMPLETE. See `docs/V0_4_VALIDATION.md`.
+
 ## Current scope
 
-Single-PX4 target and no-target missions, QGC connectivity and RViz markers passed. Two/eight adapter configurations exist with active IDs, namespaced DDS, origin and altitude parameters, but fleet flight and physical separation have not been validated. Counts above one require lower-count acceptance; the provided runtime starts one vehicle only.
+Single-PX4 target and no-target missions, two-PX4 isolation and one two-PX4
+mission flow pass. QGC links and single-vehicle RViz markers passed; the QGC
+multi-vehicle UI and eight-PX4 runtime are not yet validated. The two-PX4
+runtime uses 35 m separated spawn points and matching map origins. Counts
+above two require further scale validation.
 
 The PX4 run uses deterministic synthetic detections and a logical UGV. Physical UGV/Gazebo integration in the same PX4 world and calibrated camera geolocation are later milestones. Optional V0.2 OpenCV plumbing remains available; it is an approximate colored-blob detector, not a validated map-geolocation or YOLO pipeline.
 
