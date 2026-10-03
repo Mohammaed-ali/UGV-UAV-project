@@ -9,3 +9,6 @@ No duplicate PX4 mission FSM/package was copied from the supplied reference. Its
 V0.2 is checked out on its verified branch. Approximately 193 MiB of redundant generated file content was deleted; its total disk usage is now about 1.9 MiB. Upstream sources and usable dependencies were moved to a shared space-free directory rather than deleted. Exact inventory: docs/CLEANUP_REPORT.json. The reference and V0.1 were retained.
 
 The desktop saved project/chat still points at the old V0.2 folder: no supported tool exposes rebinding it. Open/add the confirmed V0.3 folder in the app to change that UI project association; all development commands and files for this milestone already use V0.3.
+
+
+For the remaining desktop setting, open the project's menu, choose **Edit project**, use **Add folder** for the V0.3 path above if necessary, then point to that folder and choose **Make primary**. New chats use the primary folder; this existing chat retains its recorded working directory. This session has no enabled native desktop control or project-folder mutation tool, so that UI setting was not changed here. [Official OpenAI documentation](https://learn.chatgpt.com/docs/projects?surface=app).
