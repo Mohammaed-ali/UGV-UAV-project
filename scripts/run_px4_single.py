@@ -33,16 +33,28 @@ try:
     gz = start('gazebo', ['gz', 'sim', '-r', '-s', str(world)])
     if not os.environ.get('HEADLESS'):
         start('gazebo_gui', ['gz', 'sim', '-g'])
-    env = dict(os.environ, PX4_SYS_AUTOSTART='4001', PX4_SIM_MODEL='gz_x500',
+    model = os.environ.get('WILDLIFE_PX4_MODEL', 'gz_x500')
+    env = dict(os.environ,
+               PX4_SYS_AUTOSTART=os.environ.get('WILDLIFE_PX4_AUTOSTART', '4001'),
+               PX4_SIM_MODEL=model,
                PX4_UXRCE_DDS_NS='uav01', PX4_GZ_MODEL_POSE='0,0',
                PX4_UXRCE_DDS_PORT='8888', PX4_GZ_WORLD='wildlife_px4', PX4_GZ_STANDALONE='1')
     px4 = start('px4', [str(deps / 'PX4-Autopilot/build/px4_sitl_default/bin/px4'), '-d', '-i', '0'],
                 cwd=deps / 'PX4-Autopilot', env=env)
+    bridge_child = None
+    if model == 'gz_x500_mono_cam_down':
+        bridge = root / 'install/wildlife_simulation/share/wildlife_simulation/config/px4_camera_bridge.yaml'
+        if not bridge.is_file():
+            raise RuntimeError('Build wildlife_simulation to install ' + str(bridge))
+        bridge_child = start('camera_bridge', ['ros2', 'run', 'ros_gz_bridge', 'parameter_bridge',
+                                               '--ros-args', '-p', 'config_file:=' + str(bridge)])
     ros = start('ros', ['ros2', 'launch', 'wildlife_bringup', 'px4_single.launch.py',
                       'sitl_enabled:=true', 'vehicle_count:=1', *sys.argv[1:]])
     print('Single-UAV simulation started; logs:', run, flush=True)
     while True:
-        for child in (agent, gz, px4, ros):
+        for child in (agent, gz, px4, ros, bridge_child):
+            if child is None:
+                continue
             if child.poll() is not None:
                 raise RuntimeError('A simulation process exited; inspect ' + str(run))
         time.sleep(.25)

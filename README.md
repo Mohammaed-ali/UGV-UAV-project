@@ -1,11 +1,11 @@
-# Wildlife ROS 2 Jazzy — V0.3
+# Wildlife ROS 2 Jazzy — V0.4 development
 
 Primary development workspace: `/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3`.
 V0.2 remains frozen at `v0.2.0-verified` in Git and in the cleaned V0.2 folder.
 
 The academic mission pipeline remains:
 `detector -> Detection -> tracking/fusion -> Target -> assignment -> UAV behavior -> PX4 adapter -> PX4`.
-Measured PX4 telemetry returns through `DroneState`. PX4 owns flight control. The existing nine packages and all message/service/action definitions are preserved. The supplied V0.3 workspace is a reference, not a replacement.
+Measured PX4 telemetry returns through `DroneState`. PX4 owns flight control. The existing nine packages and all message/service/action definitions are preserved. The confirmed V0.3 implementation is checkpointed at `v0.3-final` and remains the V0.4 baseline.
 
 ## Build and tests
 
@@ -78,6 +78,24 @@ structure can be checked with `scripts/validate_px4_fleet.sh 4` or `8`; this
 checks identities, telemetry and readiness without launching the fleet. See
 `docs/V0_4_VALIDATION.md`.
 
+## Real Gazebo camera and OpenCV mission
+
+With QGroundControl connected, the one-vehicle camera profile uses the pinned
+PX4 `x500_mono_cam_down` model. It bridges actual Gazebo images and CameraInfo
+to ROS, where a separate OpenCV PX4 backend produces map-frame Detections from
+the visible orange dummy target. Run:
+
+```bash
+scripts/validate_px4_camera.sh
+scripts/validate_px4_real_camera_mission.sh
+```
+
+The second command passed image detection, map localization, one persistent
+target assignment, physical standoff, HOLD, RETURN, measured landing/disarm
+and COMPLETE. The default PX4 profile still uses `detector_sim`; the real
+camera profile selects `detector_backend:=opencv`. Camera frame assumptions
+and timing limits are in `docs/V0_4_CAMERA_GEOMETRY.md`.
+
 ## Current scope
 
 Single-PX4 target and no-target missions, two-PX4 isolation, one two-PX4
@@ -86,6 +104,11 @@ single-vehicle RViz markers passed; the QGC multi-vehicle UI and eight-PX4
 flight are not yet validated. The two-PX4 runtime uses 35 m separated spawn
 points and matching map origins.
 
-The PX4 run uses deterministic synthetic detections and a logical UGV. Physical UGV/Gazebo integration in the same PX4 world and calibrated camera geolocation are later milestones. Optional V0.2 OpenCV plumbing remains available; it is an approximate colored-blob detector, not a validated map-geolocation or YOLO pipeline.
+The default PX4 run uses deterministic synthetic detections and a logical UGV.
+The selected one-PX4 camera profile uses measured-pose ground-plane
+localization. Physical UGV/Gazebo integration in the PX4 world, exact
+sensor-time pose synchronization, moving visual targets and YOLO remain future
+work. The older V0.2 OpenCV node remains available for its logical-camera
+demo; it still uses an approximate projection.
 
 See `docs/V0_3_VALIDATION.md`, `docs/V0_3_COMPARISON.md`, `docs/CLEANUP_REPORT.json` and `CODEX_HANDOFF_V0_3.md`.

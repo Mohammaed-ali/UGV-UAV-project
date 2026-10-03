@@ -42,3 +42,13 @@ For rosdep, source the px4_msgs overlay and use `--ignore-src --skip-keys px4_ms
 - [QGroundControl logging options](https://docs.qgroundcontrol.com/Stable_V5.1/en/qgc-dev-guide/command_line_options.html)
 
 No micro-ROS, Nav2 or YOLO dependency was added. No serial permission or ModemManager change was made for UDP SITL.
+
+## V0.4 camera profile
+
+The real-camera profile reuses the pinned PX4 `x500_mono_cam_down` model and
+installed Jazzy `ros_gz_bridge`, `sensor_msgs`, `cv_bridge`, OpenCV and
+`px4_msgs`. It adds no upstream dependency or version upgrade. The optional
+`opencv_px4_detector` executable requires the pinned px4_msgs overlay at
+runtime; logic-only `detector_sim` does not import it. The exact Gazebo image
+and CameraInfo topic mappings are in
+`src/wildlife_simulation/config/px4_camera_bridge.yaml`.

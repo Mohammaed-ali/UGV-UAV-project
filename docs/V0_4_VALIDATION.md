@@ -68,8 +68,31 @@ PX4 system ID. This verifies a GCS link to each instance. The QGroundControl
 vehicle list, displayed position, mode, battery and warnings were not
 visually inspected in this session.
 
+## Gates 8–11 — real camera and one target mission: PASS
+
+The pinned `x500_mono_cam_down` Gazebo sensor was observed at its actual
+`/world/wildlife_px4/model/x500_mono_cam_down_0/.../imager/image` topic. The
+installed `ros_gz_bridge` published it as
+`/drones/uav01/camera/image_raw`, together with CameraInfo. The repeatable
+camera-only probe `scripts/validate_px4_camera.sh` passed: 15 RGB 1280×960
+frames, increasing stamps, `camera_link` frame ID, valid intrinsics, and
+successful `cv_bridge` conversion. Observed delivery rate was 31.18 fps for
+that short sample (`validation/px4_camera.json`).
+
+The world has a stationary orange visual dummy at map (15, 8) m. The
+`opencv` backend in `wildlife_perception` uses actual image pixels,
+CameraInfo, fresh DroneState position and PX4 attitude for ground-plane
+localization. `scripts/validate_px4_real_camera_mission.sh` passed
+(`validation/px4_real_camera_mission.json`, 94.8 s): 2,360 image messages,
+36 OpenCV Detections, one persistent Target assigned to uav01, physical
+standoff, operator HOLD then RETURN, measured landing/disarming and mission
+COMPLETE. The best measured detection was 0.38 m from the configured target
+position. This result does not establish a general geolocation error bound;
+see `V0_4_CAMERA_GEOMETRY.md` for frame and timing assumptions.
+
 ## Later gates
 
-Eight-PX4 deployment/flight, QGC multi-vehicle UI inspection, camera and
-perception are pending validation. Their launch/configuration presence is not
-evidence of completion.
+Eight-PX4 deployment/flight, QGC multi-vehicle UI inspection, two-camera
+fusion, moving-target flight, health/fault flight and deconfliction flight
+remain pending validation. Their launch/configuration presence is not evidence
+of completion.

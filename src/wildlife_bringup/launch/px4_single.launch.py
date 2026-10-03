@@ -16,6 +16,11 @@ def _nodes(context):
         raise ValueError('vehicle_count must be 1, 2 or 8')
     validation = LaunchConfiguration('validation_file').perform(context)
     single_target = LaunchConfiguration('single_target').perform(context).lower() == 'true'
+    backend = LaunchConfiguration('detector_backend').perform(context)
+    if backend not in ('sim', 'opencv', 'none'):
+        raise ValueError('detector_backend must be sim, opencv or none')
+    if backend == 'opencv' and count != 1:
+        raise ValueError('real camera backend is validated only for uav01')
     if count > 1:
         with open(validation) as stream:
             passed = json.load(stream)
@@ -46,8 +51,7 @@ def _nodes(context):
         Node(package='rviz2', executable='rviz2', name='rviz2', arguments=['-d', os.path.join(get_package_share_directory('wildlife_bringup'), 'rviz', 'wildlife.rviz')], condition=IfCondition(LaunchConfiguration('show_rviz')), output='screen'),
     ]
     for index, did in enumerate(ids):
-        nodes.extend([
-            Node(package='wildlife_simulation', executable='px4_uav_adapter', name=f'{did}_manager', parameters=[vp, px, {
+        nodes.append(Node(package='wildlife_simulation', executable='px4_uav_adapter', name=f'{did}_manager', parameters=[vp, px, {
                 'sitl_enabled': ParameterValue(LaunchConfiguration('sitl_enabled'), value_type=bool),
                 'drone_id': did, 'system_id': index + 1, 'px4_namespace': '/' + did,
                 'slot_id': index // 2 + 1, 'is_upper_position': index % 2 == 0,
@@ -56,13 +60,18 @@ def _nodes(context):
                 'loiter_duration': ParameterValue(LaunchConfiguration('loiter_duration'), value_type=float),
                 'map_origin_x': float((index % 4) * 12 - 18) if count == 8 else 0.0,
                 'map_origin_y': float(-18 if index < 4 else 18) if count == 8 else -35.0 * index,
-            }], output='screen'),
-            Node(package='wildlife_perception', executable='detector_sim', name=f'{did}_perception', parameters=[pp, {
+            }], output='screen'))
+        if backend == 'sim':
+            nodes.append(Node(package='wildlife_perception', executable='detector_sim', name=f'{did}_perception', parameters=[pp, {
                 'drone_id': did,
                 'detection_probability': ParameterValue(LaunchConfiguration('detection_probability'), value_type=float),
                 **({'target_positions': [15.0, 12.0]} if single_target else {}),
-            }], output='screen'),
-        ])
+            }], output='screen'))
+        elif backend == 'opencv':
+            nodes.append(Node(package='wildlife_perception', executable='opencv_px4_detector',
+                              name=f'{did}_perception',
+                              parameters=[params('wildlife_perception', 'opencv_px4.yaml'),
+                                          {'drone_id': did}], output='screen'))
     return nodes
 
 
@@ -75,6 +84,7 @@ def generate_launch_description():
         DeclareLaunchArgument('search_timeout', default_value='90.0'),
         DeclareLaunchArgument('loiter_duration', default_value='20.0'),
         DeclareLaunchArgument('detection_probability', default_value='0.55'),
+        DeclareLaunchArgument('detector_backend', default_value='sim'),
         DeclareLaunchArgument('single_target', default_value='false'),
         DeclareLaunchArgument('validation_file', default_value='/tmp/wildlife_px4_acceptance.json'),
         OpaqueFunction(function=_nodes),

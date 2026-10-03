@@ -18,6 +18,7 @@ setup(
         'console_scripts': [
             'detector_sim = wildlife_perception.detector_sim:main',
             'opencv_detector = wildlife_perception.opencv_detector:main',
+            'opencv_px4_detector = wildlife_perception.opencv_px4_detector:main',
         ],
     },
 )
