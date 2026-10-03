@@ -19,9 +19,10 @@ def _nodes(context):
     if count > 1:
         with open(validation) as stream:
             passed = json.load(stream)
-        needed = 'one_uav' if count == 2 else 'two_uav'
-        if passed.get(needed) != 'PASS':
-            raise RuntimeError(f'{needed} acceptance must pass before this vehicle count')
+        needed = ('one_uav',) if count == 2 else ('two_uav', 'eight_structural')
+        for gate in needed:
+            if passed.get(gate) != 'PASS':
+                raise RuntimeError(f'{gate} acceptance must pass before this vehicle count')
     def params(package, filename):
         return os.path.join(get_package_share_directory(package), 'params', filename)
     vp = params('wildlife_vehicles', 'vehicles.yaml')
@@ -53,8 +54,8 @@ def _nodes(context):
                 'search_altitude': 10.0 + 1.5 * index,
                 'search_timeout': ParameterValue(LaunchConfiguration('search_timeout'), value_type=float),
                 'loiter_duration': ParameterValue(LaunchConfiguration('loiter_duration'), value_type=float),
-                'map_origin_x': float((index % 4) * 3) if count == 8 else 0.0,
-                'map_origin_y': float((index // 4) * 4) if count == 8 else -35.0 * index,
+                'map_origin_x': float((index % 4) * 12 - 18) if count == 8 else 0.0,
+                'map_origin_y': float(-18 if index < 4 else 18) if count == 8 else -35.0 * index,
             }], output='screen'),
             Node(package='wildlife_perception', executable='detector_sim', name=f'{did}_perception', parameters=[pp, {
                 'drone_id': did,

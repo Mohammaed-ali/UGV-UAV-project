@@ -73,15 +73,18 @@ The first gate independently commands uav01 and uav02 and verifies separate
 PX4 telemetry, commands, ACKs, map origins, physical search, return and landing.
 The second runs the existing mission graph: both search, one target is assigned
 to uav01, the operator holds then returns uav01, and uav02 times out to RTL.
-Both vehicles land/disarm before mission COMPLETE. See `docs/V0_4_VALIDATION.md`.
+Both vehicles land/disarm before mission COMPLETE. Four/eight stationary PX4
+structure can be checked with `scripts/validate_px4_fleet.sh 4` or `8`; this
+checks identities, telemetry and readiness without launching the fleet. See
+`docs/V0_4_VALIDATION.md`.
 
 ## Current scope
 
-Single-PX4 target and no-target missions, two-PX4 isolation and one two-PX4
-mission flow pass. QGC links and single-vehicle RViz markers passed; the QGC
-multi-vehicle UI and eight-PX4 runtime are not yet validated. The two-PX4
-runtime uses 35 m separated spawn points and matching map origins. Counts
-above two require further scale validation.
+Single-PX4 target and no-target missions, two-PX4 isolation, one two-PX4
+mission flow, and stationary four/eight-PX4 structure pass. QGC links and
+single-vehicle RViz markers passed; the QGC multi-vehicle UI and eight-PX4
+flight are not yet validated. The two-PX4 runtime uses 35 m separated spawn
+points and matching map origins.
 
 The PX4 run uses deterministic synthetic detections and a logical UGV. Physical UGV/Gazebo integration in the same PX4 world and calibrated camera geolocation are later milestones. Optional V0.2 OpenCV plumbing remains available; it is an approximate colored-blob detector, not a validated map-geolocation or YOLO pipeline.
 

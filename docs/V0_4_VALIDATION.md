@@ -41,6 +41,35 @@ by RETURN, and landed/disarmed. uav02 followed the no-target timeout/loiter/RTL
 path and also landed/disarmed. The mission did not enter COMPLETE until both
 were DOCKED. The acceptance gate now records `two_uav: PASS`.
 
+## Gates 5–6 — four/eight PX4 structural scale: PASS
+
+Runs: `scripts/validate_px4_fleet.sh 4` and
+`scripts/validate_px4_fleet.sh 8` with a GCS link.
+Results: `validation/px4_fleet_4.json` and
+`validation/px4_fleet_8.json`.
+
+Four and eight PX4 instances each produced distinct, valid local telemetry
+with matching ROS DroneState identity and map origins. MAV system IDs were
+1–4 and 1–8 respectively; each had a unique `/uavNN` DDS namespace and
+`x500_N` Gazebo entity. Every vehicle became ready with a GCS link and
+remained STORED/disarmed. No adapter sent a PX4 command before deployment.
+The eight-run sample recorded eight PX4 processes at about 21 MiB RSS each
+and roughly 18% CPU each while stationary; Gazebo/ROS process load was not
+included in that sample. These are structural runs, not multi-vehicle flight.
+
+The initial four-vehicle probe stopped on the final readiness event before
+the last DroneState callback. Waiting for the complete telemetry set fixed
+the probe; four and eight then passed.
+
+## Gate 7 — QGroundControl multi-vehicle view: PARTIALLY VALIDATED
+
+The four/eight runs observed `gcs_connection_lost == false` for each distinct
+PX4 system ID. This verifies a GCS link to each instance. The QGroundControl
+vehicle list, displayed position, mode, battery and warnings were not
+visually inspected in this session.
+
 ## Later gates
 
-Three/eight-PX4 scale, QGC multi-vehicle UI, camera and perception are pending validation. Their launch/configuration presence is not evidence of completion.
+Eight-PX4 deployment/flight, QGC multi-vehicle UI inspection, camera and
+perception are pending validation. Their launch/configuration presence is not
+evidence of completion.
