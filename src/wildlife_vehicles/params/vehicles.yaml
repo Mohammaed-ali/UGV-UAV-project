@@ -1,0 +1,154 @@
+ugv_manager:
+  ros__parameters:
+    deployment_mode: "SINGLE"
+    waypoints: [0.0, 0.0, 20.0, 0.0, 20.0, 20.0]
+    speed: 1.5
+    arrival_tolerance: 0.5
+    deploy_at_waypoint_indices: [0]
+    publish_rate_hz: 10.0
+
+deployment_manager:
+  ros__parameters:
+    inter_drone_delay: 3.0
+    deployment_mode: "SINGLE"
+
+docking_manager:
+  ros__parameters:
+    report_period: 5.0
+
+uav01_manager:
+  ros__parameters:
+    drone_id: "uav01"
+    slot_id: 1
+    is_upper_position: true
+    search_altitude: 10.0
+    standoff_distance: 12.0
+    search_speed: 1.2
+    loiter_duration: 20.0
+    search_timeout: 90.0
+    battery_drain_per_second: 0.15
+    lane_spacing: 5.0
+    search_half_width: 30.0
+    standoff_altitude_offset: 3.0
+    motion_tolerance: 0.5
+    home_x: 0.0
+    home_y: 0.0
+uav02_manager:
+  ros__parameters:
+    drone_id: "uav02"
+    slot_id: 1
+    is_upper_position: false
+    search_altitude: 10.0
+    standoff_distance: 12.0
+    search_speed: 1.2
+    loiter_duration: 20.0
+    search_timeout: 90.0
+    battery_drain_per_second: 0.15
+    lane_spacing: 5.0
+    search_half_width: 30.0
+    standoff_altitude_offset: 3.0
+    motion_tolerance: 0.5
+    home_x: 0.0
+    home_y: 0.0
+uav03_manager:
+  ros__parameters:
+    drone_id: "uav03"
+    slot_id: 2
+    is_upper_position: true
+    search_altitude: 10.0
+    standoff_distance: 12.0
+    search_speed: 1.2
+    loiter_duration: 20.0
+    search_timeout: 90.0
+    battery_drain_per_second: 0.15
+    lane_spacing: 5.0
+    search_half_width: 30.0
+    standoff_altitude_offset: 3.0
+    motion_tolerance: 0.5
+    home_x: 0.0
+    home_y: 0.0
+uav04_manager:
+  ros__parameters:
+    drone_id: "uav04"
+    slot_id: 2
+    is_upper_position: false
+    search_altitude: 10.0
+    standoff_distance: 12.0
+    search_speed: 1.2
+    loiter_duration: 20.0
+    search_timeout: 90.0
+    battery_drain_per_second: 0.15
+    lane_spacing: 5.0
+    search_half_width: 30.0
+    standoff_altitude_offset: 3.0
+    motion_tolerance: 0.5
+    home_x: 0.0
+    home_y: 0.0
+uav05_manager:
+  ros__parameters:
+    drone_id: "uav05"
+    slot_id: 3
+    is_upper_position: true
+    search_altitude: 10.0
+    standoff_distance: 12.0
+    search_speed: 1.2
+    loiter_duration: 20.0
+    search_timeout: 90.0
+    battery_drain_per_second: 0.15
+    lane_spacing: 5.0
+    search_half_width: 30.0
+    standoff_altitude_offset: 3.0
+    motion_tolerance: 0.5
+    home_x: 0.0
+    home_y: 0.0
+uav06_manager:
+  ros__parameters:
+    drone_id: "uav06"
+    slot_id: 3
+    is_upper_position: false
+    search_altitude: 10.0
+    standoff_distance: 12.0
+    search_speed: 1.2
+    loiter_duration: 20.0
+    search_timeout: 90.0
+    battery_drain_per_second: 0.15
+    lane_spacing: 5.0
+    search_half_width: 30.0
+    standoff_altitude_offset: 3.0
+    motion_tolerance: 0.5
+    home_x: 0.0
+    home_y: 0.0
+uav07_manager:
+  ros__parameters:
+    drone_id: "uav07"
+    slot_id: 4
+    is_upper_position: true
+    search_altitude: 10.0
+    standoff_distance: 12.0
+    search_speed: 1.2
+    loiter_duration: 20.0
+    search_timeout: 90.0
+    battery_drain_per_second: 0.15
+    lane_spacing: 5.0
+    search_half_width: 30.0
+    standoff_altitude_offset: 3.0
+    motion_tolerance: 0.5
+    home_x: 0.0
+    home_y: 0.0
+uav08_manager:
+  ros__parameters:
+    drone_id: "uav08"
+    slot_id: 4
+    is_upper_position: false
+    search_altitude: 10.0
+    standoff_distance: 12.0
+    search_speed: 1.2
+    loiter_duration: 20.0
+    search_timeout: 90.0
+    battery_drain_per_second: 0.15
+    lane_spacing: 5.0
+    search_half_width: 30.0
+    standoff_altitude_offset: 3.0
+    motion_tolerance: 0.5
+    home_x: 0.0
+    home_y: 0.0

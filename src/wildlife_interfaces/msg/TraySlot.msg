@@ -1,0 +1,9 @@
+uint8 slot_id
+string upper_drone
+string lower_drone
+bool upper_launched
+bool lower_launched
+bool upper_docked
+bool lower_docked
+geometry_msgs/Pose dock_pose_upper
+geometry_msgs/Pose dock_pose_lower
