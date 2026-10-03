@@ -5,6 +5,7 @@ from rclpy.qos import QoSProfile, DurabilityPolicy
 
 # Retain one-shot deployment events for nodes joining during launch.
 DEPLOYMENT_QOS = QoSProfile(depth=32, durability=DurabilityPolicy.TRANSIENT_LOCAL)
+from std_msgs.msg import Bool
 from wildlife_interfaces.msg import DroneCommand, UGVState, DeploymentRequest, TraySlot
 
 TRAY={1:('uav01','uav02'),2:('uav03','uav04'),3:('uav05','uav06'),4:('uav07','uav08')}
@@ -13,6 +14,14 @@ class DeploymentNode(Node):
     def __init__(self):
         super().__init__('deployment_manager')
         self.declare_parameter('inter_drone_delay',3.0); self.declare_parameter('deployment_mode','SINGLE')
+        self.declare_parameter('active_drone_ids', [f'uav{i:02d}' for i in range(1, 9)])
+        self.declare_parameter('require_ready', False)
+        self.active_ids = set(self.get_parameter('active_drone_ids').value)
+        self.require_ready = bool(self.get_parameter('require_ready').value)
+        self.readiness = {}
+        for did in sorted(self.active_ids):
+            self.create_subscription(Bool, f'/drones/{did}/ready',
+                                     lambda msg, did=did: self.readiness.update({did: (msg.data, time.monotonic())}), 10)
         self.delay=float(self.get_parameter('inter_drone_delay').value); self.default_mode=str(self.get_parameter('deployment_mode').value)
         self.cmd_pub=self.create_publisher(DroneCommand,'/deployment/commands',DEPLOYMENT_QOS); self.status_pub=self.create_publisher(TraySlot,'/deployment/status',20)
         self.create_subscription(DeploymentRequest,'/ugv/deployment_request',self.request_cb,DEPLOYMENT_QOS)
@@ -38,10 +47,14 @@ class DeploymentNode(Node):
         for slot in slots:
             u,l=TRAY[slot]
             for did,upper in ((u,True),(l,False)):
-                if did not in self.cancelled and did not in self.sent and not any(item[0] == did for item in self.pending): self.pending.append((did,slot,upper))
+                if did in self.active_ids and did not in self.cancelled and did not in self.sent and not any(item[0] == did for item in self.pending): self.pending.append((did,slot,upper))
         self.get_logger().info(f'Deployment request WP{wp} mode={mode}: {slots}')
     def tick(self):
         if not self.pending or time.monotonic()-self.last_send < self.delay: return
+        did = self.pending[0][0]
+        ready, received = self.readiness.get(did, (False, 0.0))
+        if self.require_ready and (not ready or time.monotonic() - received > 1.0):
+            return
         if self.pending[0][0] in self.blocked:
             return
         did,slot,upper=self.pending.pop(0)

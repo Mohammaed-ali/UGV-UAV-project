@@ -1,31 +1,44 @@
-# v0.2 dependency plan
+# V0.3 dependencies
 
-## Integrated now
-- ROS 2 Jazzy
-- Gazebo Harmonic / `gz sim` (visual simulation layer)
-- `ros_gz_sim` + `ros_gz_bridge` (Gazebo spawn/bridge)
-- OpenCV + `cv_bridge` (optional camera detector executable)
+Ubuntu 24.04, ROS 2 Jazzy, Gazebo Harmonic (observed 8.15.0), RViz, ros_gz_sim/bridge and cv_bridge/OpenCV are installed. The exact source pins and QGC SHA256 are in `DEPENDENCY_PINS.json`.
 
-## Deliberately deferred
-- **PX4 SITL:** not hard-wired into v0.2. The UAV model is a simple Gazebo visual proxy so the ROS mission logic remains buildable without a PX4 checkout. v0.3 will replace the proxy with PX4 SITL vehicle instances and `px4_msgs`/offboard integration.
-- **QGroundControl:** desktop ground-control application; no ROS package is required. Use it alongside PX4 SITL once PX4 is integrated.
-- **micro-ROS Agent:** deferred until a microcontroller/embedded node is introduced.
-- **Ultralytics YOLO:** deferred until the camera/image pipeline is validated. The intended contract is to keep publishing the existing `wildlife_interfaces/Detection` message, so the detector can be swapped without changing tracking/mission code.
+| Dependency | Pinned version/ref | Local directory |
+|---|---|---|
+| PX4 | v1.17.0 / d6f12ad1 | shared dependencies/PX4-Autopilot |
+| px4_msgs | release/1.17 / 86d8239e | shared dependencies/px4_msgs |
+| Micro XRCE-DDS Agent | v2.4.3 / 73622810 | shared dependencies/Micro-XRCE-DDS-Agent |
+| QGroundControl | official v5.1.5 x86_64 AppImage | shared dependencies/QGroundControl-x86_64.AppImage |
 
-## Ubuntu 24.04 setup
+Shared dependencies means `/home/mohammed-ali/Downloads/wildlife_px4_dependencies`. Keep this upstream build path free of spaces: PX4's generated DDS compiler flags failed in the previous `gpt ` path. The ROS workspace itself retains the user-selected path containing spaces and builds successfully there.
 
-Core ROS/Gazebo packages should be installed through the ROS 2 Jazzy apt repository. Python OpenCV is optional for the camera detector:
+`scripts/environment.sh` sources Jazzy, the available px4_msgs installation, and this workspace's installation. It sets the agent executable/library paths. `WILDLIFE_DEPS_DIR` can override the shared dependency directory. Logic-only runtime does not import the PX4 adapter.
+
+## Rebuild existing pinned dependencies
 
 ```bash
-sudo apt install ros-jazzy-ros-gz-sim ros-jazzy-ros-gz-bridge ros-jazzy-cv-bridge python3-opencv
+scripts/build_px4.sh
+scripts/build_agent.sh
+scripts/build_ros.sh
 ```
 
-If you do not want camera processing yet, you can omit OpenCV/cv_bridge and run the `detector_sim` backend.
+PX4 uses `px4-venv` with its Python build requirements; keep this isolated from ROS's Python environment. Agent uses the installed system FastDDS/FastCDR, with its optional logger and P2P profiles disabled. The logger profile failed to compile against system fmt 9; logging is disabled rather than replacing system ROS libraries. PX4 and ROS logs plus DDS telemetry provide validation evidence.
 
-## PX4 integration boundary
+The moved px4_msgs installation is at `msgs-install`; a future clean rebuild should use the pinned source and write build/install output in the shared directory. For a new machine, clone the three official repositories with the pins above, initialize PX4 submodules, create the Python venv with PX4's requirements, and build px4_msgs before this workspace. Build commands:
 
-The project deliberately uses a stable ROS-side interface:
+```bash
+source /opt/ros/jazzy/setup.bash
+colcon build --base-paths "$WILDLIFE_DEPS_DIR/px4_msgs" \
+  --build-base "$WILDLIFE_DEPS_DIR/msgs-build" \
+  --install-base "$WILDLIFE_DEPS_DIR/msgs-install"
+```
 
-`camera -> Detection -> tracking/fusion -> Target -> assignment -> standoff -> operator decision`
+For rosdep, source the px4_msgs overlay and use `--ignore-src --skip-keys px4_msgs` because px4_msgs is this pinned external source dependency, not an installed Jazzy apt package. Other dependencies resolve through the normal Jazzy rosdep setup.
 
-PX4 should own vehicle flight/autopilot behavior. The mission layer should send high-level flight intent, not duplicate PX4's inner-loop controller.
+## Official references
+
+- [PX4 v1.17 uXRCE-DDS](https://docs.px4.io/v1.17/en/middleware/uxrce_dds)
+- [PX4 v1.17 Offboard](https://docs.px4.io/v1.17/en/flight_modes/offboard)
+- [QGroundControl download/install](https://docs.qgroundcontrol.com/Stable_V5.1/en/qgc-user-guide/getting_started/download_and_install.html)
+- [QGroundControl logging options](https://docs.qgroundcontrol.com/Stable_V5.1/en/qgc-dev-guide/command_line_options.html)
+
+No micro-ROS, Nav2 or YOLO dependency was added. No serial permission or ModemManager change was made for UDP SITL.

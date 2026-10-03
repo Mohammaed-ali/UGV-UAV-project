@@ -97,6 +97,20 @@ class RegressionTests(unittest.TestCase):
                 n.tick()
             self.assertEqual(len(n.cmd_pub.messages), 8)
             self.assertEqual(len({m.drone_id for m in n.cmd_pub.messages}), 8)
+    def test_px4_deployment_requires_recent_ready_and_filters_active_ids(self):
+        n=self.node(DeploymentNode)
+        n.active_ids={'uav01'};n.require_ready=True;n.delay=0.;n.cmd_pub=Capture()
+        n.request_cb(DeploymentRequest(deployment_mode='SINGLE'))
+        self.assertEqual([item[0] for item in n.pending],['uav01'])
+        n.tick()
+        self.assertFalse(n.cmd_pub.messages)
+        n.readiness['uav01']=(True,time.monotonic()-2)
+        n.tick()
+        self.assertFalse(n.cmd_pub.messages)
+        n.readiness['uav01']=(True,time.monotonic())
+        n.tick()
+        self.assertEqual([m.drone_id for m in n.cmd_pub.messages],['uav01'])
+
     def test_deployment_pause_resume_abort(self):
         n = self.node(DeploymentNode)
         n.delay = 0.

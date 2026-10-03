@@ -68,7 +68,7 @@ class AdapterTests(unittest.TestCase):
     def test_rejected_command_and_bounds_fault(self):
         n=self.n
         n.send_command(VehicleCommand.VEHICLE_CMD_DO_SET_MODE,1.,6.)
-        n.ack_cb(VehicleCommandAck(command=VehicleCommand.VEHICLE_CMD_DO_SET_MODE,result=VehicleCommandAck.VEHICLE_CMD_RESULT_DENIED))
+        n.ack_cb(VehicleCommandAck(command=VehicleCommand.VEHICLE_CMD_DO_SET_MODE,result=VehicleCommandAck.VEHICLE_CMD_RESULT_DENIED,target_system=255,target_component=1))
         self.assertIsNotNone(n.fault)
         self.assertFalse(n.move_toward(1000.,0.,10.))
     def test_return_uses_px4_rtl_and_measured_landing(self):
@@ -82,5 +82,72 @@ class AdapterTests(unittest.TestCase):
         n.status_cb(VehicleStatus(arming_state=VehicleStatus.ARMING_STATE_DISARMED))
         n.tick()
         self.assertEqual(n.state,DroneState.DOCKED)
+
+    def test_launch_is_queued_until_telemetry_recovers(self):
+        n=self.n
+        n.received.clear()
+        n.command_cb(DroneCommand(drone_id=n.id,command=DroneCommand.LAUNCH))
+        self.assertTrue(n.pending_launch)
+        n.tick()
+        self.assertEqual(n.state,DroneState.STORED)
+        n.status_cb(VehicleStatus(pre_flight_checks_pass=True))
+        n.land_cb(VehicleLandDetected(landed=True))
+        n.local_cb(VehicleLocalPosition(xy_valid=True,z_valid=True))
+        n.tick()
+        self.assertFalse(n.pending_launch)
+        self.assertEqual(n.state,DroneState.TAKEOFF)
+    def test_abort_before_readiness_cancels_launch(self):
+        n=self.n;n.received.clear()
+        n.command_cb(DroneCommand(drone_id=n.id,command=DroneCommand.LAUNCH))
+        n.command_cb(DroneCommand(drone_id=n.id,command=DroneCommand.RETURN_HOME))
+        self.assertFalse(n.pending_launch)
+        self.assertTrue(n.launch_inhibited)
+        n.tick()
+        self.assertFalse(n.command_pub.messages)
+    def test_pause_before_readiness_latches_until_resume(self):
+        n=self.n;n.received.clear()
+        n.command_cb(DroneCommand(drone_id=n.id,command=DroneCommand.HOLD_POSITION))
+        n.command_cb(DroneCommand(drone_id=n.id,command=DroneCommand.LAUNCH))
+        self.assertFalse(n.pending_launch)
+        self.assertTrue(n.launch_inhibited)
+        n.command_cb(DroneCommand(drone_id=n.id,command=DroneCommand.RESUME))
+        self.assertFalse(n.launch_inhibited)
+    def test_spawn_origin_applies_in_both_directions(self):
+        n=self.n;n.origin=(10.,20.,1.)
+        n.local_cb(VehicleLocalPosition(xy_valid=True,z_valid=True,x=2.,y=3.,z=-4.))
+        self.assertEqual((n.x,n.y,n.z),(13.,22.,5.))
+        n.goal=(13.,22.,15.)
+        n.stream()
+        self.assertEqual(list(n.setpoint_pub.messages[-1].position),[2.,3.,-14.])
+    def test_search_lanes_stay_bounded(self):
+        n=self.n;n.home_z=0.
+        n.half_width=3.;n.lane=5.
+        visited=[]
+        for _ in range(25):
+            n.lawnmower_step()
+            visited.append(n.search_goal)
+            n.x,n.y,n.z=n.search_goal
+        self.assertLessEqual(max(y for _,y,_ in visited),30.)
+        self.assertGreater(len(set(visited)),2)
+
+    def test_other_command_sources_do_not_fault_adapter(self):
+        n=self.n
+        n.send_command(VehicleCommand.VEHICLE_CMD_DO_SET_MODE)
+        n.ack_cb(VehicleCommandAck(command=VehicleCommand.VEHICLE_CMD_DO_SET_MODE,result=VehicleCommandAck.VEHICLE_CMD_RESULT_DENIED,target_system=254,target_component=190))
+        self.assertIsNone(n.fault)
+    def test_fault_cannot_resume_when_telemetry_is_stale(self):
+        n=self.n;n.fail('test fault');n.received.clear()
+        n.command_cb(DroneCommand(drone_id=n.id,command=DroneCommand.RESUME))
+        self.assertEqual(n.state,DroneState.PAUSED)
+        self.assertFalse(n.heartbeat_pub.messages)
+    def test_fresh_fault_publishes_paused_and_explicit_return_can_dock(self):
+        n=self.n;n.was_airborne=True;n.fail('test fault')
+        n.tick()
+        self.assertEqual(n.state_pub.messages[-1].state,DroneState.PAUSED)
+        self.assertFalse(n.heartbeat_pub.messages)
+        n.command_cb(DroneCommand(drone_id=n.id,command=DroneCommand.RETURN_HOME))
+        n.tick()
+        self.assertEqual(n.state,DroneState.DOCKED)
+        self.assertFalse(n.heartbeat_pub.messages)
 
 if __name__=='__main__':unittest.main()

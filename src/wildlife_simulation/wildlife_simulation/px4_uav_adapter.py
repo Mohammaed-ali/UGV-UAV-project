@@ -13,6 +13,7 @@ from px4_msgs.msg import (VehicleLocalPosition, VehicleStatus, VehicleLandDetect
                           VehicleCommand, VehicleCommandAck, OffboardControlMode,
                           TrajectorySetpoint, BatteryStatus)
 from wildlife_interfaces.msg import DroneCommand, DroneState
+from std_msgs.msg import Bool
 from wildlife_vehicles.uav_node import UAVNode
 
 
@@ -37,12 +38,14 @@ class PX4UAVAdapter(UAVNode):
         super().__init__()
         for key, value in {'sitl_enabled': False, 'px4_namespace': '', 'system_id': 1,
                            'telemetry_timeout': 1.0, 'max_horizontal_distance': 60.0,
-                           'max_altitude': 30.0}.items():
+                           'max_altitude': 30.0, 'search_half_height': 30.0,
+                           'map_origin_x': 0.0, 'map_origin_y': 0.0, 'map_origin_z': 0.0}.items():
             self.declare_parameter(key, value)
         if not self.get_parameter('sitl_enabled').value:
             raise RuntimeError('This experimental backend requires sitl_enabled:=true')
-        if self.id != 'uav01' or self.get_parameter('system_id').value != 1:
-            raise ValueError('V0.3 milestone supports only uav01 / PX4 system 1')
+        self.system_id = int(self.get_parameter('system_id').value)
+        if self.id != f'uav{self.system_id:02d}' or not 1 <= self.system_id <= 8:
+            raise ValueError('drone_id must match PX4 system_id in 1..8')
         self.prefix = str(self.get_parameter('px4_namespace').value).rstrip('/')
         self.status = self.local = self.land = None
         self.received = {}
@@ -59,6 +62,10 @@ class PX4UAVAdapter(UAVNode):
         self.yaw = 0.0
         self.search_goal = None
         self.next_lane = 0.0
+        self.origin = tuple(float(self.get_parameter(f'map_origin_{axis}').value) for axis in 'xyz')
+        self.home_z = 0.0
+        self.pending_launch = False
+        self.ready_pub = self.create_publisher(Bool, f'/drones/{self.id}/ready', 10)
         self.heartbeat_pub = self.create_publisher(OffboardControlMode, self.topic('in', 'offboard_control_mode', OffboardControlMode), 10)
         self.setpoint_pub = self.create_publisher(TrajectorySetpoint, self.topic('in', 'trajectory_setpoint', TrajectorySetpoint), 10)
         self.command_pub = self.create_publisher(VehicleCommand, self.topic('in', 'vehicle_command', VehicleCommand), 10)
@@ -97,7 +104,8 @@ class PX4UAVAdapter(UAVNode):
             self.fail('PX4 position origin reset in flight; stop external control')
         self.reset_counters = counters
         self.local = msg
-        self.x, self.y, self.z = ned_to_enu((msg.x, msg.y, msg.z))
+        local = ned_to_enu((msg.x, msg.y, msg.z))
+        self.x, self.y, self.z = tuple(local[i] + self.origin[i] for i in range(3))
         self.yaw = math.pi / 2 - msg.heading
         self.received['local'] = time.monotonic()
 
@@ -112,25 +120,45 @@ class PX4UAVAdapter(UAVNode):
         self.fault = reason
         self.state = DroneState.PAUSED
 
+    def ready(self):
+        return (self.fresh() and self.fault is None and self.status.pre_flight_checks_pass
+                and self.land.landed and self.state == DroneState.STORED
+                and not self.launch_inhibited)
+
     def command_cb(self, msg):
         if msg.drone_id != self.id:
             return
-        if not self.fresh() or self.fault:
-            self.get_logger().warning('Ignoring flight request: telemetry unavailable or adapter faulted')
-            return
         if msg.command == DroneCommand.LAUNCH:
-            if not self.status.pre_flight_checks_pass or not self.land.landed:
-                self.get_logger().warning('PX4 preflight/landed checks do not permit launch')
-                return
-            if self.state == DroneState.STORED:
-                self.goal = (self.x, self.y, self.alt)
-                self.home_x, self.home_y = self.x, self.y
-        elif msg.command == DroneCommand.HOLD_POSITION:
+            if self.state == DroneState.STORED and not self.launch_inhibited:
+                self.pending_launch = True
+            return
+        if msg.command == DroneCommand.RETURN_HOME:
+            self.pending_launch = False
+        if self.fault:
+            # A fault cannot resume the ROS FSM, including while telemetry is stale.
+            if msg.command == DroneCommand.RETURN_HOME and self.fresh():
+                self.state = DroneState.RETURNING
+                self.send_command(VehicleCommand.VEHICLE_CMD_NAV_RETURN_TO_LAUNCH)
+            return
+        # Mission overrides latch even when telemetry is not ready.
+        if not self.fresh():
+            super().command_cb(msg)
+            return
+        if msg.command == DroneCommand.HOLD_POSITION:
             self.goal = (self.x, self.y, self.z)
         super().command_cb(msg)
 
+    def accept_pending_launch(self):
+        if not self.pending_launch or not self.ready():
+            return
+        self.pending_launch = False
+        self.home_x, self.home_y, self.home_z = self.x, self.y, self.z
+        self.goal = (self.home_x, self.home_y, self.home_z + self.alt)
+        super().command_cb(DroneCommand(drone_id=self.id, command=DroneCommand.LAUNCH))
+
     def ack_cb(self, msg):
-        if msg.command not in self.last_commands:
+        if (msg.target_system != 255 or msg.target_component != 1
+                or msg.command not in self.last_commands):
             return
         self.acks[msg.command] = msg.result
         if msg.result not in (VehicleCommandAck.VEHICLE_CMD_RESULT_ACCEPTED,
@@ -150,7 +178,7 @@ class PX4UAVAdapter(UAVNode):
         msg.timestamp = self.get_clock().now().nanoseconds // 1000
         msg.command = command
         msg.param1, msg.param2 = float(param1), float(param2)
-        msg.target_system = 1
+        msg.target_system = self.system_id
         msg.target_component = 1
         msg.source_system = 255
         msg.source_component = 1
@@ -168,7 +196,8 @@ class PX4UAVAdapter(UAVNode):
         mode = OffboardControlMode(timestamp=stamp, position=True)
         goal = TrajectorySetpoint()
         goal.timestamp = stamp
-        goal.position = enu_to_ned(self.goal)
+        local_goal = tuple(self.goal[i] - self.origin[i] for i in range(3))
+        goal.position = enu_to_ned(local_goal)
         goal.velocity = [math.nan] * 3
         goal.acceleration = [math.nan] * 3
         goal.jerk = [math.nan] * 3
@@ -191,20 +220,29 @@ class PX4UAVAdapter(UAVNode):
             return False
         radius = float(self.get_parameter('max_horizontal_distance').value)
         ceiling = float(self.get_parameter('max_altitude').value)
-        if math.hypot(tx - self.home_x, ty - self.home_y) > radius or not 0.5 <= tz <= ceiling:
+        if math.hypot(tx - self.home_x, ty - self.home_y) > radius or not 0.5 <= tz - self.home_z <= ceiling:
             self.fail('Position intent exceeds the configured SITL envelope')
             return False
         self.goal = (tx, ty, tz)
         return math.dist((self.x, self.y, self.z), self.goal) <= self.tol
 
+    def move_to_standoff(self):
+        if not self.target:
+            return False
+        target = self.target.pose.pose.position
+        return self.move_toward(target.x, target.y + self.standoff,
+                                self.home_z + self.alt + self.alt_offset)
+
     def lawnmower_step(self):
         if self.search_goal is None:
-            self.search_goal = (self.home_x + self.half_width, self.home_y, self.alt)
+            self.search_goal = (self.home_x + self.half_width, self.home_y, self.home_z + self.alt)
         if self.move_toward(*self.search_goal):
             self.next_lane += self.lane
+            if self.next_lane > float(self.get_parameter('search_half_height').value):
+                self.next_lane = 0.0
             self.lane_dir *= -1.
             self.search_goal = (self.home_x + self.lane_dir*self.half_width,
-                                self.home_y + self.next_lane, self.alt)
+                                self.home_y + self.next_lane, self.home_z + self.alt)
 
     def drain_battery(self):
         pass  # BatteryStatus is authoritative; never simulate PX4 battery drain.
@@ -212,22 +250,27 @@ class PX4UAVAdapter(UAVNode):
     def tick(self):
         if not hasattr(self, 'received'):
             return
+        self.ready_pub.publish(Bool(data=self.ready()))
+        self.accept_pending_launch()
         if not self.fresh():
             if self.stream_start is not None:
                 self.fail('Telemetry stale; heartbeat stopped so PX4 owns failsafe response')
             return
-        if self.fault:
+        if self.fault and self.state not in (DroneState.RETURNING, DroneState.DOCKED):
+            self.publish()
             return
-        if self.status.failsafe:
+        if self.status.failsafe and not self.fault:
             self.fail('PX4 reports failsafe; stop external control')
+            self.publish()
             return
         if self.status.nav_state == VehicleStatus.NAVIGATION_STATE_OFFBOARD:
             self.was_offboard = True
         elif self.was_offboard and self.state not in (DroneState.RETURNING, DroneState.DOCKING, DroneState.DOCKED):
             self.fail('PX4 left Offboard; yield to its selected mode')
+            self.publish()
             return
         if self.state == DroneState.TAKEOFF:
-            if self.move_toward(self.home_x, self.home_y, self.alt) and self.was_airborne:
+            if self.move_toward(self.home_x, self.home_y, self.home_z + self.alt) and self.was_airborne:
                 self.state = DroneState.SEARCHING
                 self.search_start = time.monotonic()
         elif self.state in (DroneState.RETURNING, DroneState.DOCKING):
