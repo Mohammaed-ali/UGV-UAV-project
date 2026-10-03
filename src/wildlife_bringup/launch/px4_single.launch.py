@@ -52,7 +52,8 @@ def _nodes(context):
                 'search_altitude': 10.0 + 1.5 * index,
                 'search_timeout': ParameterValue(LaunchConfiguration('search_timeout'), value_type=float),
                 'loiter_duration': ParameterValue(LaunchConfiguration('loiter_duration'), value_type=float),
-                'map_origin_x': float((index % 4) * 3), 'map_origin_y': float((index // 4) * 4),
+                'map_origin_x': float((index % 4) * 3) if count == 8 else 0.0,
+                'map_origin_y': float((index // 4) * 4) if count == 8 else -35.0 * index,
             }], output='screen'),
             Node(package='wildlife_perception', executable='detector_sim', name=f'{did}_perception', parameters=[pp, {'drone_id': did, 'detection_probability': ParameterValue(LaunchConfiguration('detection_probability'), value_type=float)}], output='screen'),
         ])
