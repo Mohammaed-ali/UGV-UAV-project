@@ -1,0 +1,21 @@
+# Two pinned PX4 down-camera model instances in the wildlife_px4 world.
+- ros_topic_name: /drones/uav01/camera/image_raw
+  gz_topic_name: /world/wildlife_px4/model/x500_mono_cam_down_0/link/camera_link/sensor/imager/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
+- ros_topic_name: /drones/uav01/camera/camera_info
+  gz_topic_name: /world/wildlife_px4/model/x500_mono_cam_down_0/link/camera_link/sensor/imager/camera_info
+  ros_type_name: sensor_msgs/msg/CameraInfo
+  gz_type_name: gz.msgs.CameraInfo
+  direction: GZ_TO_ROS
+- ros_topic_name: /drones/uav02/camera/image_raw
+  gz_topic_name: /world/wildlife_px4/model/x500_mono_cam_down_1/link/camera_link/sensor/imager/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
+- ros_topic_name: /drones/uav02/camera/camera_info
+  gz_topic_name: /world/wildlife_px4/model/x500_mono_cam_down_1/link/camera_link/sensor/imager/camera_info
+  ros_type_name: sensor_msgs/msg/CameraInfo
+  gz_type_name: gz.msgs.CameraInfo
+  direction: GZ_TO_ROS

@@ -51,10 +51,10 @@ try:
     assert not errors, f'cv_bridge: {errors[0]}'
     assert len(frames) >= 15, 'fewer than 15 actual image messages'
     assert camera_info, 'no CameraInfo message'
-    assert all(f['width'] == 1280 and f['height'] == 960 for f in frames), 'wrong image resolution'
+    assert all(f['width'] == 640 and f['height'] == 480 for f in frames), 'wrong image resolution'
     assert all(f['stamp_ns'] > 0 and f['frame_id'] for f in frames), 'missing image stamp or frame ID'
     assert all(frames[i]['stamp_ns'] < frames[i + 1]['stamp_ns'] for i in range(len(frames) - 1)), 'image stamps not increasing'
-    assert camera_info[-1].width == 1280 and camera_info[-1].height == 960, 'CameraInfo resolution mismatch'
+    assert camera_info[-1].width == 640 and camera_info[-1].height == 480, 'CameraInfo resolution mismatch'
     assert camera_info[-1].k[0] > 0 and camera_info[-1].k[4] > 0, 'CameraInfo focal lengths missing'
     result['result'] = 'PASS'
 except AssertionError as exc:

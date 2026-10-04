@@ -74,25 +74,48 @@ The pinned `x500_mono_cam_down` Gazebo sensor was observed at its actual
 `/world/wildlife_px4/model/x500_mono_cam_down_0/.../imager/image` topic. The
 installed `ros_gz_bridge` published it as
 `/drones/uav01/camera/image_raw`, together with CameraInfo. The repeatable
-camera-only probe `scripts/validate_px4_camera.sh` passed: 15 RGB 1280×960
+camera-only probe `scripts/validate_px4_camera.sh` passed: 15 RGB 640×480
 frames, increasing stamps, `camera_link` frame ID, valid intrinsics, and
-successful `cv_bridge` conversion. Observed delivery rate was 31.18 fps for
+successful `cv_bridge` conversion. Observed delivery rate was 10.31 fps for
 that short sample (`validation/px4_camera.json`).
 
 The world has a stationary orange visual dummy at map (15, 8) m. The
 `opencv` backend in `wildlife_perception` uses actual image pixels,
 CameraInfo, fresh DroneState position and PX4 attitude for ground-plane
 localization. `scripts/validate_px4_real_camera_mission.sh` passed
-(`validation/px4_real_camera_mission.json`, 94.8 s): 2,360 image messages,
-36 OpenCV Detections, one persistent Target assigned to uav01, physical
+(`validation/px4_real_camera_mission.json`, 87.6 s): 794 image messages,
+27 OpenCV Detections, one persistent Target assigned to uav01, physical
 standoff, operator HOLD then RETURN, measured landing/disarming and mission
-COMPLETE. The best measured detection was 0.38 m from the configured target
+COMPLETE. The best measured detection was 0.54 m from the configured target
 position. This result does not establish a general geolocation error bound;
 see `V0_4_CAMERA_GEOMETRY.md` for frame and timing assumptions.
 
+## Gate 12 — two real cameras, one fused target: PASS
+
+`scripts/validate_px4_two_camera_fusion.sh` passed in 77.3 s
+(`validation/px4_two_camera_fusion.json`). uav01 and uav02 produced 5 and 1
+real-image detections respectively. The tracker retained one `tgt_001` with
+both UAVs as witnesses. Both vehicles became ready, flew in OFFBOARD, then
+returned, landed and disarmed. This profile tests observation/fusion; it does
+not run mission assignment. The separate two-PX4 mission gate tests assignment.
+
+The workspace-local `mono_cam` model uses 640×480 at 10 Hz for both camera
+profiles. The earlier 1280×960 at 30 Hz two-camera attempt overloaded
+telemetry and triggered failsafe landing. Keep the reduced-load profile;
+upstream PX4 sources and dependency pins remain unchanged.
+
+## Continuation regression — 2026-10-04: PASS
+
+All nine ROS packages rebuilt. `colcon test-result --verbose` reports
+50 entries, zero errors/failures/skips, including target velocity, battery and
+stale-state assignment filters, one-shot low-battery RETURN, and motion
+interpolation. These unit checks do not establish the pending live health
+and moving-target gates. Logs: `/tmp/wildlife-v04-continuation-build.log` and
+`/tmp/wildlife-v04-continuation-tests.log`.
+
 ## Later gates
 
-Eight-PX4 deployment/flight, QGC multi-vehicle UI inspection, two-camera
-fusion, moving-target flight, health/fault flight and deconfliction flight
+Eight-PX4 deployment/flight, QGC multi-vehicle UI inspection,
+moving-target flight, health/fault flight and deconfliction flight
 remain pending validation. Their launch/configuration presence is not evidence
 of completion.
