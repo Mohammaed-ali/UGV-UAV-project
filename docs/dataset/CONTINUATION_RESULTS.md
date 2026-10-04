@@ -73,3 +73,28 @@ are still rejected. **43 unit tests PASSED** (`unit_tests_gate5.log`).
 
 Next: new live hard-kill/resume run in `datasets/crash_resume_gate_v2`, retaining
 seed 76543/count 200 and stable source/config/HEAD throughout both halves.
+
+## Gate 5 — PASSED on second attempt
+
+Ran the same crash harness with output `datasets/crash_resume_gate_v2`, seed
+76543/count 200, at unchanged commit `1f10111` and tool/config identity through
+kill and resume. SIGKILL after 30 commits, then resume exit 0; all original 30
+completion markers unchanged. Validator PASSED: 200 images, labels, frame
+JSONs, JSONL records, scenario rows and markers; 200 unique image hashes, no
+duplicates/leakage, no remaining temporary files. All owned generator/Gazebo/
+service-worker PIDs were absent afterward. Exactly one intended positive frame
+(147) has only ignored targets; its occluded person remains accounted.
+
+Evidence: `crash_resume.json`, `crash_resume_gate_v2.log`,
+`crash_resume_killed.log`, `crash_resume_resumed.log`,
+`crash_resume_processes.json`. Original first-attempt FAIL remains unchanged.
+
+Before pilot, strengthened `preview_dataset.py` to freshly reproject each
+audited target from the dataset asset manifest and actual recorded camera/
+object pose; verify stored projection agrees within 1e-8 px, then compare
+native visible boxes. Added corruption/known-optical-projection tests and
+same-class spatial alternative diagnostics. This changes QA only; camera,
+assets, sampler and sensor capture/labels are unchanged. **45 unit tests PASS**.
+No rerender of accepted smoke or determinism captures was needed.
+
+Next: Gate 6, 2,000 accepted pilot frames, then actual 300-frame/50-lowest audit.

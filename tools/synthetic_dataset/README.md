@@ -108,8 +108,24 @@ feasibility/resume identity. Asset licensing/provenance is under `assets/manifes
 and `assets/LICENSE`. The VisDrone map is preparation only, with unsupported
 categories explicitly unresolved.
 
+## Continuation checkpoint
+
+Gates 0–5 passed. Gate 4 compares realized poses with narrow absolute numerical
+tolerances and whole-quaternion sign equivalence; commanded scenes, native
+boxes, labels and scenario manifests stay exact. Both existing 50-frame runs
+also have identical RGB bytes. The second real SIGKILL/resume run passed all
+200 frames; the first failed attempt is retained and explained.
+Intended positive scenes with entirely occluded/tiny targets keep empty labels
+and explicit ignored metadata. They are counted separately in QA/reporting.
+Audits freshly reproject manifest geometry from realized poses and inspect
+same-class spatial alternatives; native class-only labels provide no instance
+identity oracle. See [continuation results](../../docs/dataset/CONTINUATION_RESULTS.md)
+for current evidence and the [historical handoff](../../docs/dataset/V0_5_B1_HANDOFF.md).
+Pilot/full generation remains next.
+
 Synthetic Gazebo imagery is not equivalent to real aerial-camera imagery.
 This pipeline validates simulator annotation/export and reproducible sampling;
 it establishes no detector accuracy or sim-to-real success. See
-[Phase 0](../../docs/dataset/PHASE0.md) and [dataset report](../../docs/dataset/DATASET_REPORT.md)
-for gate evidence and limitations.
+[Phase 0](../../docs/dataset/PHASE0.md) and the continuation handoff for current
+gate evidence and limitations. `docs/dataset/DATASET_REPORT.md` is a pending
+final deliverable; it must describe actual pilot/full results after those gates.
