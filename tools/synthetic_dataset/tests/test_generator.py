@@ -141,6 +141,7 @@ class GeneratorTests(unittest.TestCase):
             import yaml
             d=yaml.safe_load((Path(directory)/'data.yaml').read_text());self.assertEqual(d['names'],{0:'person',1:'car',2:'truck',3:'bus'})
             entries=list(csv.DictReader((Path(directory)/'manifests/scenarios.csv').open()));self.assertEqual(len(entries),1)
+            self.assertEqual(json.loads((Path(directory)/'statistics.json').read_text()),statistics([r]))
 
     def test_ignored_objects_stay_accounted(self):
         r=deepcopy(self.scenes[1]);o=r['objects'][0];o.update(label_state='ignored_tiny',ignored_reason='unit-test tiny fixture',bbox_px=[0,0,2,2],yolo_bbox=None)

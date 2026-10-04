@@ -55,7 +55,7 @@ def distribution(values):
 
 def statistics(records):
     stats={'frames':len(records),'frames_per_split':dict(Counter(r['split'] for r in records)),
-           'frame_types':dict(Counter(r['kind'] for r in records)),'objects_per_image':dict(Counter(len(r['objects']) for r in records)),
+           'frame_types':dict(Counter(r['kind'] for r in records)),'objects_per_image':dict(Counter(str(len(r['objects'])) for r in records)),
            'marginals':{},'cross_tables':{},'ignored_by_reason':{},'instances_per_class':{},
            'occlusion_requested':dict(Counter(r['occlusion_requested'] for r in records)),
            'placement_shortfall':sum(r['placement_shortfall'] for r in records)}
