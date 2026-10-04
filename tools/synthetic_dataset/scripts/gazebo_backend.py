@@ -186,7 +186,10 @@ class Gazebo:
             else:
                 o['yolo_bbox']=yolo_box(clipped,cam)
                 lines.append(str(o['class_id'])+' '+' '.join(f'{v:.9f}' for v in o['yolo_bbox']))
-        if scene['kind']=='positive' and not lines: raise RuntimeError('Positive scene has no exportable native target')
+        # "positive" describes the intended target-bearing scene. A fully
+        # occluded/tiny scene legitimately has empty visible YOLO labels;
+        # retain every target and its explicit ignored reason instead of
+        # retrying an unchanged scene forever or inventing a visible box.
         meta=dict(scene);meta['camera']=dict(scene['camera']);meta['camera']['commanded_pose']=scene['camera']
         meta['camera'].update(actual['dataset_rig']);meta['camera']['model']=cam;meta['camera']['live_camera_info']=self.camera_info
         meta['objects']=objects

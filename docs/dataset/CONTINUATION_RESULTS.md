@@ -46,3 +46,30 @@ FAIL and diagnostic remain preserved. RGB reproduction is measured only for
 these runs in this installed environment, not promised across renderers.
 
 Next: Gate 5 real SIGKILL/resume, with unchanged source/config/HEAD between halves.
+
+## Gate 5 — first attempt FAIL; capture policy corrected
+
+`crash_resume_test.py --output datasets/crash_resume_gate` killed the generator
+after 30 committed samples; resume preserved all 30 markers. It stopped at
+index 147 after three identical retries of a fully occluded one-person scene.
+Final count was 147, with matching indices/no duplicate image hashes, so this
+attempt **FAILS** the required 200 count. `crash_resume_attempt1.json/log` and
+the original bulk output/logs are retained; all recorded owned processes exited.
+
+A targeted rerender of only seed 76543/index 147 showed the moderate canopy
+completely hiding the person from the 9.28 m nadir camera. Zero native visible
+boxes were received; the target correctly became `ignored_occluded`. Image,
+metadata, script and log are preserved as `crash_rejected_scene.*` and
+`inspect_rejected_scene.py`. This necessary diagnostic did not rerun Gate 0/1.
+
+Minimum fix: remove the exception that required every intended positive scene
+to have an exported label. The configured ignored-object policy now applies
+even when all targets are ignored. Scene `kind=positive` denotes intended
+target presence, while empty YOLO labels denote no exportable visible boxes.
+No target, difficult factor or scene is dropped; no native annotation changes.
+The report must separately count such frames. Three capture-policy tests prove
+complete occlusion/tiny targets remain accounted and unexpected native labels
+are still rejected. **43 unit tests PASSED** (`unit_tests_gate5.log`).
+
+Next: new live hard-kill/resume run in `datasets/crash_resume_gate_v2`, retaining
+seed 76543/count 200 and stable source/config/HEAD throughout both halves.
