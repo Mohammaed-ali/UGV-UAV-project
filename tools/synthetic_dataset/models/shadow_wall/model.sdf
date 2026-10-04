@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="shadow_wall">
+    <static>true</static>
+    <link name="body">
+      <visual name="wall">
+        <pose>0 0 4 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>6 0.25 8</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.6 0.6 0.55 1</ambient>
+          <diffuse>0.6 0.6 0.55 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+    </link>
+  </model>
+</sdf>

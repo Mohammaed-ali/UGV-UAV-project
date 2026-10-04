@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="clutter_1">
+    <static>true</static>
+    <link name="body">
+      <visual name="trunk">
+        <pose>0 0 1.6 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.18</radius>
+            <length>3.2</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.3 0.19 0.1 1</ambient>
+          <diffuse>0.3 0.19 0.1 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="crown">
+        <pose>0 0 3.9 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>1.2</radius>
+            <length>2.4</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.15 0.32 0.1 1</ambient>
+          <diffuse>0.15 0.32 0.1 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+    </link>
+  </model>
+</sdf>

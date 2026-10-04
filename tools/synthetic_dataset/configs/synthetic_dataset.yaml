@@ -1,0 +1,63 @@
+dataset_name: gazebo_aerial_v1
+dataset_version: '1'
+master_seed: 12345
+count: 10000
+output: datasets/gazebo_aerial_v1
+class_mapping: class_mapping.yaml
+asset_manifest: ../assets/manifests/assets.json
+split_fractions: {train: 0.8, val: 0.1, test: 0.1}
+camera_source: src/wildlife_simulation/models/mono_cam/model.sdf
+sampling:
+  altitude_buckets_m: [10, 15, 20, 30, 40]
+  altitude_jitter_m: 1.0
+  off_nadir_buckets_deg: [0, 10, 20, 30]
+  angle_jitter_deg: 2.0
+  camera_yaw_deg: [0, 360]
+  object_yaw_deg: [0, 360]
+  roll_jitter_deg: 0.0
+  negative_ratio: 0.1
+  distractor_only_ratio: 0.1
+  object_count_weights: [2, 3, 3, 3, 2, 2, 1, 1]
+  distance_bands: {near: [0, 0.35], medium: [0.35, 0.70], far: [0.70, 0.90], edge: [0.90, 1.0]}
+  distance_weights: {near: 0.3, medium: 0.3, far: 0.3, edge: 0.1}
+  min_spacing_m: 0.5
+  placement_attempts: 300
+  occlusion_weights: {none: 0.75, mild: 0.15, moderate: 0.1}
+  distractor_count: [2, 6]
+lighting:
+  morning: {elevation_deg: [10, 30], azimuth_deg: [20, 160], intensity: [0.8, 1.1], color: [1.0, 0.88, 0.7]}
+  noon: {elevation_deg: [60, 85], azimuth_deg: [0, 360], intensity: [1.0, 1.3], color: [1.0, 1.0, 0.96]}
+  evening: {elevation_deg: [3, 15], azimuth_deg: [200, 340], intensity: [0.65, 0.95], color: [1.0, 0.65, 0.4]}
+  shadow: {elevation_deg: [25, 55], azimuth_deg: [0, 360], intensity: [0.85, 1.1], color: [0.95, 0.97, 1.0]}
+backgrounds: [grass, dirt, road, mixed]
+world:
+  name: aerial_dataset
+  rendering_engine: ogre2
+  ground_z: 0.0
+  ambient: [0.35, 0.35, 0.35, 1.0]
+  background_size_m: 240
+  zone_spacing_m: 500
+  pool_copies_per_variant: 3
+  staging_x_m: -1000
+  step_s: 0.01
+  real_time_factor: 8
+capture:
+  settling_frames: 3
+  sync_tolerance_s: 0.001
+  pose_tolerance_m: 0.001
+  orientation_tolerance: 0.00001
+  timeout_s: 40
+  max_retries: 3
+annotation:
+  method: native_visible_2d
+  min_box_px: 3
+  min_box_area_px: 9
+  visibility_threshold: null
+  association_min_iou: 0.01
+  bbox_max_is_inclusive: true
+qa:
+  previews: 100
+  audit_frames: 300
+  low_iou_frames: 50
+  median_iou_goal: 0.90
+  low_percentile_investigation: 0.75

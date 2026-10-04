@@ -1,0 +1,15 @@
+{
+  "status": "PASSED",
+  "original_branch": "codex/v0.4-development",
+  "original_head": "949baba06fea505147b5a1cff11a53bb523827a4",
+  "working_tree": "clean",
+  "source_release": "v0.4-final",
+  "source_release_commit": "949baba06fea505147b5a1cff11a53bb523827a4",
+  "build": "9 packages finished",
+  "test_summary": "56 tests, 0 errors, 0 failures, 0 skipped",
+  "commands": [
+    "scripts/check_prereqs.sh",
+    "scripts/build_ros.sh",
+    "source scripts/environment.sh; colcon test --base-paths src --executor sequential; colcon test-result --verbose"
+  ]
+}

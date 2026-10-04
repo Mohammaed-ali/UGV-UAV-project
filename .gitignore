@@ -9,3 +9,11 @@ third_party/
 
 # Exact release archives and checksum manifests are generated from Git.
 artifacts/
+
+# Offline V0.5 datasets (source, small evidence and pinned assets are tracked).
+/datasets/
+# Preserve Phase-0 metrics/contact sheets in Git; retain raw captures locally.
+/docs/dataset/evidence/phase0/benchmark/
+/docs/dataset/evidence/phase0/runtime/
+/docs/dataset/evidence/phase0/alignment/images/
+/docs/dataset/evidence/phase0/alignment/overlays/

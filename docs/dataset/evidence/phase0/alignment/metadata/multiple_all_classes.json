@@ -1,0 +1,432 @@
+{
+  "annotation_method": "native_visible_2d",
+  "annotation_timestamp": 16.3,
+  "background": {
+    "asset_id": "grass_0",
+    "family": "grass",
+    "texture_offset": [
+      0,
+      0
+    ],
+    "texture_rotation_deg": 0,
+    "texture_scale": 1,
+    "zone_x_m": 0
+  },
+  "camera": {
+    "actual_off_nadir_deg": 0,
+    "altitude_agl_m": 30,
+    "commanded_pose": {
+      "actual_off_nadir_deg": 0,
+      "altitude_agl_m": 30,
+      "ground_reference_z": 0.0,
+      "nominal_altitude_m": 30,
+      "nominal_off_nadir_deg": 0,
+      "pitch": 1.5707963267948966,
+      "position": [
+        0,
+        0,
+        30
+      ],
+      "quaternion": [
+        0.0,
+        0.7071067811865475,
+        0.0,
+        0.7071067811865476
+      ],
+      "roll": 0,
+      "viewing_azimuth_deg": 0,
+      "yaw": 0
+    },
+    "ground_reference_z": 0.0,
+    "live_camera_info": {
+      "K": [
+        269.96816635131836,
+        0.0,
+        320.0,
+        0.0,
+        269.9681854248047,
+        240.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "height": 480,
+      "width": 640
+    },
+    "model": {
+      "convention": "+X forward, -Y image right, -Z image down; world ENU",
+      "cx": 320.0,
+      "cy": 240.0,
+      "far": 100.0,
+      "fx": 269.9681840122649,
+      "fy": 269.9681840122649,
+      "height": 480,
+      "horizontal_fov": 1.74,
+      "near": 0.1,
+      "noise": null,
+      "source": "src/wildlife_simulation/models/mono_cam/model.sdf",
+      "source_sha256": "7ad6bc5ea6d3e708149246edea6219aebba80f9773e59ea9a7ca78f067a9c765",
+      "update_rate_hz": 10.0,
+      "vertical_fov": 1.453401713389793,
+      "width": 640
+    },
+    "nominal_altitude_m": 30,
+    "nominal_off_nadir_deg": 0,
+    "pitch": 1.5707963267948966,
+    "position": [
+      0.0,
+      0.0,
+      30.0
+    ],
+    "quaternion": [
+      0.0,
+      0.7071067811865475,
+      0.0,
+      0.7071067811865476
+    ],
+    "roll": 0,
+    "viewing_azimuth_deg": 0,
+    "yaw": 0
+  },
+  "case": "multiple_all_classes",
+  "distractors": [],
+  "frame_id": "multiple_all_classes",
+  "generation_timestamp": "2026-10-04T22:52:50.268549+00:00",
+  "index": 20,
+  "kind": "positive",
+  "lighting": {
+    "ambient": [
+      0.35,
+      0.35,
+      0.35,
+      1.0
+    ],
+    "azimuth_deg": 296.37618633659974,
+    "cast_shadows": true,
+    "color": [
+      1,
+      1,
+      0.96
+    ],
+    "direction": [
+      -0.3,
+      0.2,
+      -1
+    ],
+    "elevation_deg": 8.146282414005892,
+    "family": "noon",
+    "intensity": 1.1
+  },
+  "master_seed": 12345,
+  "native_box_count": 4,
+  "objects": [
+    {
+      "annotation_iou": 0.8180749884629214,
+      "asset_id": "person_0",
+      "bbox_px": [
+        390.0,
+        311.0,
+        399.0,
+        317.0
+      ],
+      "class_id": 0,
+      "class_name": "person",
+      "commanded_pose": {
+        "position": [
+          -8,
+          -8,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "distance_category": "near",
+      "footprint_radius_m": 0.5655623187703388,
+      "footprint_reference": [
+        2996.63258162225,
+        -5.875945793321932
+      ],
+      "gazebo_label": 10,
+      "horizontal_range_m": 23.507844387946907,
+      "ignored_reason": null,
+      "instance_id": "pool_person_0_0",
+      "label_state": "labelled",
+      "normalized_footprint_distance": 0.4769161601726388,
+      "occlusion_requested": "none",
+      "physical_dimensions_m": [
+        0.252,
+        0.6999999999999998,
+        1.68
+      ],
+      "pose": {
+        "position": [
+          -8.0,
+          -8.0,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "secondary_bbox_px": [
+        390.26971865190353,
+        311.4035850247551,
+        398.6781651756432,
+        317.41884222310296
+      ],
+      "slant_range_m": 25.905473141301165,
+      "truncated": false,
+      "usable_direction_radius_m": 37.07963976241725,
+      "visibility_method": "not measured; projected/native box IoU is not a pixel visibility fraction",
+      "visible_fraction": null,
+      "yaw_deg": 0,
+      "yolo_bbox": [
+        0.61640625,
+        0.6541666666666667,
+        0.0140625,
+        0.0125
+      ]
+    },
+    {
+      "annotation_iou": 0.9596552422850809,
+      "asset_id": "car_0",
+      "bbox_px": [
+        237.0,
+        294.0,
+        256.0,
+        334.0
+      ],
+      "class_id": 1,
+      "class_name": "car",
+      "commanded_pose": {
+        "position": [
+          -8,
+          8,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "distance_category": "near",
+      "footprint_radius_m": 2.5223221443741086,
+      "footprint_reference": [
+        2996.63258162225,
+        -5.875945793321932
+      ],
+      "gazebo_label": 20,
+      "horizontal_range_m": 15.692069091159615,
+      "ignored_reason": null,
+      "instance_id": "pool_car_0_0",
+      "label_state": "labelled",
+      "normalized_footprint_distance": 0.9488715476575756,
+      "occlusion_requested": "none",
+      "physical_dimensions_m": [
+        4.2,
+        1.86,
+        1.42
+      ],
+      "pose": {
+        "position": [
+          -8.0,
+          8.0,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "secondary_bbox_px": [
+        237.1581184818907,
+        293.62101618153054,
+        256.3774979677762,
+        333.8454193262391
+      ],
+      "slant_range_m": 19.097534481405606,
+      "truncated": false,
+      "usable_direction_radius_m": 15.038836449525787,
+      "visibility_method": "not measured; projected/native box IoU is not a pixel visibility fraction",
+      "visible_fraction": null,
+      "yaw_deg": 0,
+      "yolo_bbox": [
+        0.38515625,
+        0.6541666666666667,
+        0.0296875,
+        0.08333333333333333
+      ]
+    },
+    {
+      "annotation_iou": 0.9680550298765519,
+      "asset_id": "truck_0",
+      "bbox_px": [
+        381.0,
+        131.0,
+        410.0,
+        195.0
+      ],
+      "class_id": 2,
+      "class_name": "truck",
+      "commanded_pose": {
+        "position": [
+          8,
+          -8,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "distance_category": "near",
+      "footprint_radius_m": 4.51567893566405,
+      "footprint_reference": [
+        2996.63258162225,
+        -5.875945793321932
+      ],
+      "gazebo_label": 30,
+      "horizontal_range_m": 43.72044542256653,
+      "ignored_reason": null,
+      "instance_id": "pool_truck_0_0",
+      "label_state": "labelled",
+      "normalized_footprint_distance": 0.9919231192580668,
+      "occlusion_requested": "none",
+      "physical_dimensions_m": [
+        6.255,
+        2.345,
+        2.525
+      ],
+      "pose": {
+        "position": [
+          8.0,
+          -8.0,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "secondary_bbox_px": [
+        381.4627565601256,
+        130.9318710632889,
+        409.6618627520261,
+        195.22612619190738
+      ],
+      "slant_range_m": 45.054990165955736,
+      "truncated": false,
+      "usable_direction_radius_m": 38.5480855066417,
+      "visibility_method": "not measured; projected/native box IoU is not a pixel visibility fraction",
+      "visible_fraction": null,
+      "yaw_deg": 0,
+      "yolo_bbox": [
+        0.61796875,
+        0.33958333333333335,
+        0.0453125,
+        0.13333333333333333
+      ]
+    },
+    {
+      "annotation_iou": 0.9669602238725615,
+      "asset_id": "bus_0",
+      "bbox_px": [
+        228.0,
+        108.0,
+        260.0,
+        215.0
+      ],
+      "class_id": 3,
+      "class_name": "bus",
+      "commanded_pose": {
+        "position": [
+          8,
+          8,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "distance_category": "near",
+      "footprint_radius_m": 5.415874813915107,
+      "footprint_reference": [
+        2996.63258162225,
+        -5.875945793321932
+      ],
+      "gazebo_label": 40,
+      "horizontal_range_m": 5.816835897828019,
+      "ignored_reason": null,
+      "instance_id": "pool_bus_0_0",
+      "label_state": "labelled",
+      "normalized_footprint_distance": 0.12365675709819553,
+      "occlusion_requested": "none",
+      "physical_dimensions_m": [
+        10.52,
+        2.58,
+        3.0
+      ],
+      "pose": {
+        "position": [
+          8.0,
+          8.0,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "secondary_bbox_px": [
+        227.51089992172408,
+        107.5156134013886,
+        259.61711617592346,
+        214.79074682398212
+      ],
+      "slant_range_m": 12.341408783806243,
+      "truncated": false,
+      "usable_direction_radius_m": 12.643182931544551,
+      "visibility_method": "not measured; projected/native box IoU is not a pixel visibility fraction",
+      "visible_fraction": null,
+      "yaw_deg": 0,
+      "yolo_bbox": [
+        0.38125,
+        0.33645833333333336,
+        0.05,
+        0.22291666666666668
+      ]
+    }
+  ],
+  "occlusion_requested": "none",
+  "placement_shortfall": 0,
+  "planned_target_count": 4,
+  "scenario_sha256": "4a1463ff9aa1001802c4861e5a54d571f1461314c2fff874bccfa21d979bfbe9",
+  "scene_family": "12345:1",
+  "scene_id": "12345:1",
+  "scene_readback_timestamp": 16.0,
+  "scene_seed": 12451472201012505513,
+  "settling_sim_seconds": 0.3000000000000007,
+  "simulation_timestamp": 16.3,
+  "split": "train",
+  "timestamp_delta_s": 0.0
+}

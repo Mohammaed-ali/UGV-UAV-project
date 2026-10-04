@@ -1,0 +1,227 @@
+{
+  "annotation_method": "native_visible_2d",
+  "annotation_timestamp": 15.6,
+  "background": {
+    "asset_id": "grass_0",
+    "family": "grass",
+    "texture_offset": [
+      0,
+      0
+    ],
+    "texture_rotation_deg": 0,
+    "texture_scale": 1,
+    "zone_x_m": 0
+  },
+  "camera": {
+    "actual_off_nadir_deg": 0,
+    "altitude_agl_m": 20,
+    "commanded_pose": {
+      "actual_off_nadir_deg": 0,
+      "altitude_agl_m": 20,
+      "ground_reference_z": 0.0,
+      "nominal_altitude_m": 20,
+      "nominal_off_nadir_deg": 0,
+      "pitch": 1.5707963267948966,
+      "position": [
+        0,
+        0,
+        20
+      ],
+      "quaternion": [
+        0.0,
+        0.7071067811865475,
+        0.0,
+        0.7071067811865476
+      ],
+      "roll": 0,
+      "viewing_azimuth_deg": 0,
+      "yaw": 0
+    },
+    "ground_reference_z": 0.0,
+    "live_camera_info": {
+      "K": [
+        269.96816635131836,
+        0.0,
+        320.0,
+        0.0,
+        269.9681854248047,
+        240.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "height": 480,
+      "width": 640
+    },
+    "model": {
+      "convention": "+X forward, -Y image right, -Z image down; world ENU",
+      "cx": 320.0,
+      "cy": 240.0,
+      "far": 100.0,
+      "fx": 269.9681840122649,
+      "fy": 269.9681840122649,
+      "height": 480,
+      "horizontal_fov": 1.74,
+      "near": 0.1,
+      "noise": null,
+      "source": "src/wildlife_simulation/models/mono_cam/model.sdf",
+      "source_sha256": "7ad6bc5ea6d3e708149246edea6219aebba80f9773e59ea9a7ca78f067a9c765",
+      "update_rate_hz": 10.0,
+      "vertical_fov": 1.453401713389793,
+      "width": 640
+    },
+    "nominal_altitude_m": 20,
+    "nominal_off_nadir_deg": 0,
+    "pitch": 1.5707963267948966,
+    "position": [
+      0.0,
+      0.0,
+      20.0
+    ],
+    "quaternion": [
+      0.0,
+      0.7071067811865475,
+      0.0,
+      0.7071067811865476
+    ],
+    "roll": 0,
+    "viewing_azimuth_deg": 0,
+    "yaw": 0
+  },
+  "case": "partial_occlusion_bus",
+  "distractors": [
+    {
+      "instance_id": "canopy_mild",
+      "pose": {
+        "position": [
+          3.63,
+          0.0,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      }
+    }
+  ],
+  "frame_id": "partial_occlusion_bus",
+  "generation_timestamp": "2026-10-04T22:52:50.162725+00:00",
+  "index": 19,
+  "kind": "positive",
+  "lighting": {
+    "ambient": [
+      0.35,
+      0.35,
+      0.35,
+      1.0
+    ],
+    "azimuth_deg": 296.37618633659974,
+    "cast_shadows": true,
+    "color": [
+      1,
+      1,
+      0.96
+    ],
+    "direction": [
+      -0.3,
+      0.2,
+      -1
+    ],
+    "elevation_deg": 8.146282414005892,
+    "family": "noon",
+    "intensity": 1.1
+  },
+  "master_seed": 12345,
+  "native_box_count": 1,
+  "objects": [
+    {
+      "annotation_iou": 0.7750854071492205,
+      "asset_id": "bus_0",
+      "bbox_px": [
+        300.0,
+        193.0,
+        340.0,
+        323.0
+      ],
+      "class_id": 3,
+      "class_name": "bus",
+      "commanded_pose": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "distance_category": "near",
+      "footprint_radius_m": 5.415874813915107,
+      "footprint_reference": [
+        2996.63258162225,
+        -5.875945793321932
+      ],
+      "gazebo_label": 40,
+      "horizontal_range_m": 5.816835897828019,
+      "ignored_reason": null,
+      "instance_id": "pool_bus_0_0",
+      "label_state": "labelled",
+      "normalized_footprint_distance": 0.12365675709819553,
+      "occlusion_requested": "mild",
+      "physical_dimensions_m": [
+        10.52,
+        2.58,
+        3.0
+      ],
+      "pose": {
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "secondary_bbox_px": [
+        300.14939823439227,
+        156.62747258444767,
+        339.85060176560773,
+        323.37252741555244
+      ],
+      "slant_range_m": 12.341408783806243,
+      "truncated": false,
+      "usable_direction_radius_m": 12.643182931544551,
+      "visibility_method": "not measured; projected/native box IoU is not a pixel visibility fraction",
+      "visible_fraction": null,
+      "yaw_deg": 0,
+      "yolo_bbox": [
+        0.5,
+        0.5375,
+        0.0625,
+        0.2708333333333333
+      ]
+    }
+  ],
+  "occlusion_requested": "mild",
+  "placement_shortfall": 0,
+  "planned_target_count": 1,
+  "scenario_sha256": "4a1463ff9aa1001802c4861e5a54d571f1461314c2fff874bccfa21d979bfbe9",
+  "scene_family": "12345:1",
+  "scene_id": "12345:1",
+  "scene_readback_timestamp": 15.28,
+  "scene_seed": 12451472201012505513,
+  "settling_sim_seconds": 0.3200000000000003,
+  "simulation_timestamp": 15.6,
+  "split": "train",
+  "timestamp_delta_s": 0.0
+}
