@@ -7,7 +7,7 @@ class Phase:
     INIT='INIT'; DEPLOYING='DEPLOYING'; SEARCHING='SEARCHING'; TARGET_FOUND='TARGET_FOUND'; AWAITING_OPERATOR='AWAITING_OPERATOR'; RESOLVING='RESOLVING'; COMPLETE='COMPLETE'; PAUSED='PAUSED'; ABORTED='ABORTED'
 class MissionManager(Node):
     def __init__(self):
-        super().__init__('mission_manager'); self.declare_parameter('status_period',1.0); self.declare_parameter('expected_drones',8); self.phase=Phase.INIT; self.resume_phase=Phase.INIT; self.mission_id=f'M_{int(time.time())}'; self.drones={}; self.targets={}
+        super().__init__('mission_manager'); self.declare_parameter('status_period',1.0); self.declare_parameter('expected_drones',8); self.declare_parameter('battery_return_threshold',20.0); self.phase=Phase.INIT; self.resume_phase=Phase.INIT; self.mission_id=f'M_{int(time.time())}'; self.drones={}; self.targets={}; self.low_battery_returned=set(); self.fault_reported=set()
         self.status_pub=self.create_publisher(__import__('std_msgs.msg',fromlist=['String']).String,'/mission/status',10); self.cmd_pub=self.create_publisher(DroneCommand,'/mission/drone_commands',20)
         self.create_service(MissionControl,'/mission/control',self.control_cb); self.create_subscription(UGVState,'/ugv/state',self.ugv_cb,20); self.create_subscription(DroneState,'/drones/state',self.drone_cb,50); self.create_subscription(Target,'/targets/assigned',self.target_cb,20); self.create_subscription(OperatorAlert,'/operator/alerts',self.alert_cb,20); self.create_subscription(Target,'/targets/operator_decision',self.decision_cb,20); self.create_timer(float(self.get_parameter('status_period').value),self.status)
     def control_cb(self,req,res):
@@ -41,6 +41,16 @@ class MissionManager(Node):
         if m.state==UGVState.DEPLOYING and self.phase==Phase.INIT: self.phase=Phase.DEPLOYING
     def drone_cb(self,m):
         self.drones[m.drone_id]=m
+        if m.state==DroneState.PAUSED and m.drone_id not in self.fault_reported:
+            self.fault_reported.add(m.drone_id)
+            self.get_logger().warning(f'{m.drone_id} unavailable/paused; new assignments should exclude it')
+        if (m.drone_id not in self.low_battery_returned and
+                m.state in (DroneState.TAKEOFF, DroneState.SEARCHING, DroneState.STANDOFF, DroneState.AWAITING_OPERATOR) and
+                0. <= m.battery_percent < float(self.get_parameter('battery_return_threshold').value)):
+            command=DroneCommand(); command.drone_id=m.drone_id; command.command=DroneCommand.RETURN_HOME
+            self.cmd_pub.publish(command)
+            self.low_battery_returned.add(m.drone_id)
+            self.get_logger().warning(f'{m.drone_id} battery {m.battery_percent:.1f}%: requesting PX4 RTL')
         if self.phase == Phase.INIT and any(d.state not in (DroneState.STORED, DroneState.DOCKED) for d in self.drones.values()):
             self.phase = Phase.DEPLOYING
         if self.phase==Phase.DEPLOYING and any(d.state==DroneState.SEARCHING for d in self.drones.values()): self.phase=Phase.SEARCHING
@@ -58,6 +68,6 @@ class MissionManager(Node):
         if m.target_id in self.targets: self.targets[m.target_id].status=m.status
         if not any(d.state==DroneState.AWAITING_OPERATOR for d in self.drones.values()) and self.phase==Phase.AWAITING_OPERATOR: self.phase=Phase.RESOLVING
     def status(self):
-        s=sum(d.state==DroneState.SEARCHING for d in self.drones.values()); w=sum(d.state==DroneState.AWAITING_OPERATOR for d in self.drones.values()); r=sum(d.state==DroneState.RETURNING for d in self.drones.values()); k=sum(d.state==DroneState.DOCKED for d in self.drones.values()); line=f'[{self.mission_id}] Phase={self.phase} Targets={len(self.targets)} Searching={s} Awaiting={w} Returning={r} Docked={k}/{int(self.get_parameter("expected_drones").value)}'; self.get_logger().info(line); from std_msgs.msg import String; m=String(); m.data=line; self.status_pub.publish(m)
+        s=sum(d.state==DroneState.SEARCHING for d in self.drones.values()); w=sum(d.state==DroneState.AWAITING_OPERATOR for d in self.drones.values()); r=sum(d.state==DroneState.RETURNING for d in self.drones.values()); k=sum(d.state==DroneState.DOCKED for d in self.drones.values()); unavailable=sum(d.state==DroneState.PAUSED for d in self.drones.values()); line=f'[{self.mission_id}] Phase={self.phase} Targets={len(self.targets)} Searching={s} Awaiting={w} Returning={r} Docked={k}/{int(self.get_parameter("expected_drones").value)} Unavailable={unavailable}'; self.get_logger().info(line); from std_msgs.msg import String; m=String(); m.data=line; self.status_pub.publish(m)
 def main(args=None):
     rclpy.init(args=args); n=MissionManager(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()

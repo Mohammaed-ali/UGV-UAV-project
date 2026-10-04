@@ -5,7 +5,30 @@ from wildlife_interfaces.msg import Detection, Target
 class Track:
     def __init__(self,det,tid,alpha):
         self.tid=tid; self.cls=det.target_class; self.x=det.position_world.x; self.y=det.position_world.y; self.conf=det.confidence; self.covx=det.covariance_xx; self.covy=det.covariance_yy; self.witnesses={det.drone_id}; self.count=1; self.last=time.monotonic(); self.alpha=alpha
+        self.measured_x=self.x; self.measured_y=self.y
+        self.measurement_time=self.stamp_seconds(det)
+        self.vx=self.vy=0.
+
+    @staticmethod
+    def stamp_seconds(det):
+        stamp=det.header.stamp
+        value=stamp.sec+stamp.nanosec*1e-9
+        return value if value>0 else None
+
     def update(self,det):
+        now=time.monotonic()
+        stamp=self.stamp_seconds(det)
+        dt=(stamp-self.measurement_time if stamp is not None and self.measurement_time is not None
+            else now-self.last)
+        if dt>=.05:
+            # Smooth finite differences from actual measurement time. This is
+            # descriptive target motion, not a pursuit command to the UAV.
+            vx=(det.position_world.x-self.measured_x)/dt
+            vy=(det.position_world.y-self.measured_y)/dt
+            self.vx=.8*self.vx+.2*max(-8.,min(8.,vx))
+            self.vy=.8*self.vy+.2*max(-8.,min(8.,vy))
+            self.measured_x=det.position_world.x; self.measured_y=det.position_world.y
+            self.measurement_time=stamp
         self.x=(1-self.alpha)*self.x+self.alpha*det.position_world.x; self.y=(1-self.alpha)*self.y+self.alpha*det.position_world.y; self.conf=max(self.conf,det.confidence); self.covx=max(.01,self.covx*.95); self.covy=max(.01,self.covy*.95); self.witnesses.add(det.drone_id); self.count+=1; self.last=time.monotonic()
 class Tracker(Node):
     def __init__(self):
@@ -24,11 +47,11 @@ class Tracker(Node):
             if dist<bd and t.cls==d.target_class: best,bd=t,dist
         return best
     def publish(self,t,stamp):
-        m=Target(); m.header.stamp=stamp; m.target_id=t.tid; m.target_class=t.cls; m.confidence=t.conf; m.pose.pose.position.x=t.x; m.pose.pose.position.y=t.y; m.detecting_drones=list(sorted(t.witnesses)); m.status=Target.UNASSIGNED; m.detection_count=t.count; m.fused_covariance_xx=t.covx; m.fused_covariance_yy=t.covy; self.pub.publish(m)
+        m=Target(); m.header.stamp=stamp; m.target_id=t.tid; m.target_class=t.cls; m.confidence=t.conf; m.pose.pose.position.x=t.x; m.pose.pose.position.y=t.y; m.velocity_estimate.linear.x=t.vx; m.velocity_estimate.linear.y=t.vy; m.detecting_drones=list(sorted(t.witnesses)); m.status=Target.UNASSIGNED; m.detection_count=t.count; m.fused_covariance_xx=t.covx; m.fused_covariance_yy=t.covy; self.pub.publish(m)
     def expire(self):
         now=time.monotonic()
         for t in list(self.tracks.values()):
             if now-t.last>self.timeout:
-                m=Target(); m.header.stamp=self.get_clock().now().to_msg(); m.target_id=t.tid; m.target_class=t.cls; m.confidence=t.conf; m.pose.pose.position.x=t.x; m.pose.pose.position.y=t.y; m.detecting_drones=list(sorted(t.witnesses)); m.status=Target.LOST; m.detection_count=t.count; m.fused_covariance_xx=t.covx; m.fused_covariance_yy=t.covy; self.pub.publish(m); del self.tracks[t.tid]
+                m=Target(); m.header.stamp=self.get_clock().now().to_msg(); m.target_id=t.tid; m.target_class=t.cls; m.confidence=t.conf; m.pose.pose.position.x=t.x; m.pose.pose.position.y=t.y; m.velocity_estimate.linear.x=t.vx; m.velocity_estimate.linear.y=t.vy; m.detecting_drones=list(sorted(t.witnesses)); m.status=Target.LOST; m.detection_count=t.count; m.fused_covariance_xx=t.covx; m.fused_covariance_yy=t.covy; self.pub.publish(m); del self.tracks[t.tid]
 def main(args=None):
     rclpy.init(args=args); n=Tracker(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()

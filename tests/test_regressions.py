@@ -68,6 +68,26 @@ class RegressionTests(unittest.TestCase):
         self.assertEqual(n.pub.messages[-1].status, Target.LOST)
         n.cb(self.detection())
         self.assertIn('tgt_004', n.tracks)
+    def test_two_source_fusion_and_moving_target_velocity(self):
+        n = self.node(Tracker)
+        n.pub = Capture()
+        for index, did in enumerate(('uav01', 'uav02', 'uav01', 'uav02')):
+            detection = self.detection(x=float(index))
+            detection.drone_id = did
+            detection.header.stamp.sec = 100 + index
+            detection.covariance_xx = detection.covariance_yy = 4.
+            n.cb(detection)
+        self.assertEqual(len(n.tracks), 1)
+        fused = n.pub.messages[-1]
+        self.assertEqual(fused.target_id, 'tgt_001')
+        self.assertEqual(set(fused.detecting_drones), {'uav01', 'uav02'})
+        self.assertEqual(fused.detection_count, 4)
+        self.assertGreater(fused.velocity_estimate.linear.x, .2)
+        self.assertLess(fused.fused_covariance_xx, 4.)
+        different = self.detection(x=20.)
+        different.header.stamp.sec = 104
+        n.cb(different)
+        self.assertEqual(len(n.tracks), 2)
     def test_target_lifecycle_survives_measurement(self):
         n = self.node(TargetManager)
         n.tracked_cb(Target(target_id='t1'))
@@ -81,9 +101,23 @@ class RegressionTests(unittest.TestCase):
         n = self.node(Coordinator)
         n.pub = Capture()
         for did in ('uav01', 'uav02'):
-            n.drone_cb(DroneState(drone_id=did, state=DroneState.SEARCHING))
+            n.drone_cb(DroneState(drone_id=did, state=DroneState.SEARCHING, battery_percent=100.))
         n.target_cb(Target(target_id='t1'))
         n.target_cb(Target(target_id='t1'))
+        self.assertEqual(len(n.pub.messages), 1)
+    def test_assignment_excludes_low_battery_and_stale_vehicle(self):
+        n = self.node(Coordinator)
+        n.pub = Capture()
+        n.drone_cb(DroneState(drone_id='uav01', state=DroneState.SEARCHING, battery_percent=10.))
+        n.drone_cb(DroneState(drone_id='uav02', state=DroneState.SEARCHING, battery_percent=80.))
+        n.target_cb(Target(target_id='t1'))
+        self.assertEqual(n.pub.messages[-1].assigned_drone_id, 'uav02')
+        n.assigned.clear()
+        n.last_seen['uav02'] -= 10.
+        n.target_cb(Target(target_id='t2'))
+        self.assertEqual(len(n.pub.messages), 1)
+        n.drone_cb(DroneState(drone_id='uav02', state=DroneState.RETURNING, battery_percent=80.))
+        n.target_cb(Target(target_id='t2'))
         self.assertEqual(len(n.pub.messages), 1)
     def test_single_and_split_deployment_deduplicate(self):
         for mode in ('SINGLE', 'SPLIT'):
@@ -142,6 +176,14 @@ class RegressionTests(unittest.TestCase):
         n = self.node(MissionManager)
         n.drone_cb(DroneState(drone_id='uav01', state=DroneState.SEARCHING))
         self.assertEqual(n.phase, Phase.SEARCHING)
+    def test_mission_requests_one_low_battery_return(self):
+        n = self.node(MissionManager)
+        n.cmd_pub = Capture()
+        low = DroneState(drone_id='uav01', state=DroneState.SEARCHING, battery_percent=15.)
+        n.drone_cb(low)
+        n.drone_cb(low)
+        self.assertEqual([(m.drone_id, m.command) for m in n.cmd_pub.messages],
+                         [('uav01', DroneCommand.RETURN_HOME)])
 
     def test_ugv_waypoint_index_and_split(self):
         n = self.node(UGVNode)
