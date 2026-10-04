@@ -1,0 +1,166 @@
+{
+  "result": "PASS",
+  "failure": "",
+  "scenario": "low_battery",
+  "elapsed_s": 92.4,
+  "assignments": [
+    {
+      "target": "tgt_001",
+      "drone": "uav01",
+      "elapsed_s": 29.54
+    },
+    {
+      "target": "tgt_001",
+      "drone": "uav02",
+      "elapsed_s": 34.21
+    }
+  ],
+  "releases": [
+    {
+      "target": "tgt_001",
+      "drone": "uav01"
+    }
+  ],
+  "phases": [
+    "INIT",
+    "DEPLOYING",
+    "SEARCHING",
+    "TARGET_FOUND",
+    "AWAITING_OPERATOR",
+    "RESOLVING",
+    "COMPLETE"
+  ],
+  "state_histories": {
+    "uav01": [
+      0,
+      2,
+      3,
+      5,
+      7,
+      9
+    ],
+    "uav02": [
+      0,
+      2,
+      3,
+      5,
+      6,
+      7,
+      9
+    ]
+  },
+  "flight": {
+    "uav01": {
+      "offboard": true,
+      "armed": true,
+      "gcs": true
+    },
+    "uav02": {
+      "offboard": true,
+      "armed": true,
+      "gcs": true
+    }
+  },
+  "landed": {
+    "uav01": true,
+    "uav02": true
+  },
+  "disarmed": {
+    "uav01": true,
+    "uav02": true
+  },
+  "minimum_battery_percent": {
+    "uav01": 18.002605438232422,
+    "uav02": 50.00267028808594
+  },
+  "raw_minimum_battery_percent": {
+    "uav01": 18.002605438232422,
+    "uav02": 50.00267028808594
+  },
+  "mission_return_commands": [
+    "uav01"
+  ],
+  "paused_fault_observed": false,
+  "saved_parameters": {
+    "SIM_BAT_DRAIN": 60.0,
+    "SIM_BAT_MIN_PCT": 50.0
+  },
+  "parameters_restored": true,
+  "px4_cli": [
+    {
+      "arguments": [
+        "--instance",
+        "0",
+        "show",
+        "-q",
+        "SIM_BAT_DRAIN"
+      ],
+      "returncode": 0,
+      "stdout": "60.0000",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--instance",
+        "0",
+        "show",
+        "-q",
+        "SIM_BAT_MIN_PCT"
+      ],
+      "returncode": 0,
+      "stdout": "50.0000",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--instance",
+        "0",
+        "set",
+        "SIM_BAT_MIN_PCT",
+        "18.0"
+      ],
+      "returncode": 0,
+      "stdout": "SIM_BAT_MIN_PCT: curr: 50.0000 -> new: 18.0000",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--instance",
+        "0",
+        "set",
+        "SIM_BAT_DRAIN",
+        "1.0"
+      ],
+      "returncode": 0,
+      "stdout": "SIM_BAT_DRAIN: curr: 60.0000 -> new: 1.0000",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--instance",
+        "0",
+        "set",
+        "SIM_BAT_DRAIN",
+        "60.0"
+      ],
+      "returncode": 0,
+      "stdout": "SIM_BAT_DRAIN: curr: 1.0000 -> new: 60.0000",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--instance",
+        "0",
+        "set",
+        "SIM_BAT_MIN_PCT",
+        "50.0"
+      ],
+      "returncode": 0,
+      "stdout": "SIM_BAT_MIN_PCT: curr: 18.0000 -> new: 50.0000",
+      "stderr": ""
+    }
+  ],
+  "operator_completed": [
+    "uav02"
+  ]
+}

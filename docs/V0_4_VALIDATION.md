@@ -115,8 +115,8 @@ and moving-target gates. Logs: `/tmp/wildlife-v04-continuation-build.log` and
 
 ## Later gates
 
-Eight-PX4 deployment/flight, QGC multi-vehicle UI inspection,
-health/fault flight and deconfliction flight
+Eight-PX4 deployment/flight, full QGC multi-vehicle UI inspection,
+RViz visual QA and deconfliction flight
 remain pending validation. Their launch/configuration presence is not evidence
 of completion.
 
@@ -137,3 +137,28 @@ with the starting point (15, 8), not the contemporaneous moving-model pose;
 it must not be interpreted as moving-target localization accuracy. The UAV
 holds its original standoff point; it does not chase the target. Stale/lost
 and reacquisition behavior remains covered by regression tests.
+
+## Gate 14 — health, recovery, reassignment and multiple targets: PASS
+
+`scripts/validate_px4_health.sh low_battery` passed using PX4's own battery
+simulator. uav01 reported below 20% in both BatteryStatus and DroneState;
+mission logic requested RETURN exactly once. The coordinator released its
+assignment on a positive RETURNING state and the same `tgt_001` transferred
+to uav02. The new observer completed HOLD/RETURN. Both landed/disarmed before
+COMPLETE. The probe restored the original PX4 simulator parameters.
+
+`scripts/validate_px4_health.sh vehicle_unavailable` passed after a deliberate
+PX4 Offboard-to-loiter mode change. The adapter reported PAUSED and stopped
+its heartbeat; it did not fight the PX4-selected mode. No release occurred
+during the three-second pause. An explicit typed RETURN enabled recovery
+and the same target transferred to uav02. Both landed/disarmed and completed.
+This tests mode-loss recovery, not every possible PX4 native failsafe.
+
+`scripts/validate_px4_health.sh two_targets` passed with two spatially
+separated synthetic targets. Two distinct IDs were assigned to different
+UAVs; each completed HOLD/RETURN, landing/disarm and mission COMPLETE.
+These three gates use typed synthetic Detections with real PX4 movement.
+Evidence: `validation/px4_low_battery.json`,
+`validation/px4_vehicle_unavailable.json`, `validation/px4_two_targets.json`.
+Unit tests cover stale-state exclusion, no reassignment on pause, retry when
+no UAV is available, terminal target preservation and no duplicate UAV use.

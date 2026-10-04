@@ -3,7 +3,7 @@ from rclpy.node import Node
 from wildlife_interfaces.msg import Target
 class TargetManager(Node):
     def __init__(self):
-        super().__init__('target_manager'); self.declare_parameter('report_period',5.0); self.db={}; self.registry_pub=self.create_publisher(Target,'/targets/registry',20); self.unassigned_pub=self.create_publisher(Target,'/targets/unassigned',20); self.create_subscription(Target,'/targets/tracked',self.tracked_cb,30); self.create_subscription(Target,'/targets/assigned',self.assigned_cb,20); self.create_subscription(Target,'/targets/operator_decision',self.decision_cb,20); self.create_timer(float(self.get_parameter('report_period').value),self.report)
+        super().__init__('target_manager'); self.declare_parameter('report_period',5.0); self.db={}; self.registry_pub=self.create_publisher(Target,'/targets/registry',20); self.unassigned_pub=self.create_publisher(Target,'/targets/unassigned',20); self.create_subscription(Target,'/targets/tracked',self.tracked_cb,30); self.create_subscription(Target,'/targets/assigned',self.assigned_cb,20); self.create_subscription(Target,'/targets/released',self.released_cb,20); self.create_subscription(Target,'/targets/operator_decision',self.decision_cb,20); self.create_timer(float(self.get_parameter('report_period').value),self.report)
     def tracked_cb(self,t):
         old=self.db.get(t.target_id)
         if old and t.status != Target.LOST:
@@ -11,6 +11,13 @@ class TargetManager(Node):
         self.db[t.target_id]=t; self.publish(t)
     def assigned_cb(self,t):
         cur=self.db.get(t.target_id,t); cur.assigned_drone_id=t.assigned_drone_id; cur.status=Target.ASSIGNED; self.db[t.target_id]=cur; self.publish(cur)
+    def released_cb(self,t):
+        cur=self.db.get(t.target_id)
+        if (not cur or cur.assigned_drone_id!=t.assigned_drone_id or
+                cur.status in (Target.CLEARED,Target.LOST)):
+            return
+        cur.assigned_drone_id=''; cur.status=Target.UNASSIGNED; cur.operator_notified=False
+        self.publish(cur)
     def decision_cb(self,t):
         if t.target_id not in self.db: return
         cur=self.db[t.target_id]; cur.status=t.status; cur.assigned_drone_id=t.assigned_drone_id or cur.assigned_drone_id; cur.operator_notified=True; self.db[t.target_id]=cur; self.publish(cur)

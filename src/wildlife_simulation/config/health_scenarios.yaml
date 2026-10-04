@@ -1,0 +1,15 @@
+# Local SITL acceptance scenarios. Detections use the retained synthetic backend contract.
+low_battery:
+  injection: battery_drain
+  target_positions_m: [[5.0, -5.0]]
+  battery_floor_percent: 18.0
+  battery_drain_s: 1.0
+  deadline_s: 240.0
+vehicle_unavailable:
+  injection: px4_loiter
+  target_positions_m: [[5.0, -5.0]]
+  deadline_s: 240.0
+two_targets:
+  injection: none
+  target_positions_m: [[5.0, -5.0], [5.0, -30.0]]
+  deadline_s: 240.0
