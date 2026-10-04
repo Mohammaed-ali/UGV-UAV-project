@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/docs/dataset/evidence/inspect_association_scene.py", line 27, in <module>
+    try: g.capture(scene)
+         ^^^^^^^^^^^^^^^^
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/gazebo_backend.py", line 173, in capture
+    if len(used)!=len(candidates): raise RuntimeError('Native boxes cannot be associated with realized target instances')
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Native boxes cannot be associated with realized target instances

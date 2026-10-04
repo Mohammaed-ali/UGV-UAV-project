@@ -98,3 +98,31 @@ assets, sampler and sensor capture/labels are unchanged. **45 unit tests PASS**.
 No rerender of accepted smoke or determinism captures was needed.
 
 Next: Gate 6, 2,000 accepted pilot frames, then actual 300-frame/50-lowest audit.
+
+## Gate 6 — first pilot FAIL at 968; association corrected
+
+The first pilot (`datasets/gazebo_aerial_pilot`, seed 12345/count 2,000,
+commit `1f9d8fb`) stopped at index 968 after three association rejections.
+968 committed images/labels/metadata/markers remain valid; the partial validator
+fails only the expected final count. `pilot_attempt1.log` and
+`pilot_attempt1_validation.json/log` preserve the failure. It is not a passing pilot.
+
+The targeted diagnostic preserved actual RGB, native candidates, realized
+camera/target geometry, timing and association scores (`pilot_rejected_scene.*`,
+`inspect_association_scene.py`). All three instances are cars. The canopy leaves
+a native **13×7 px** visible rectangle on the first car, correctly within its
+97×113 px full projection, giving IoU **0.00827035**. Both other cars match
+near 0.99; neither overlaps the sliver. The 0.01 visible/full IoU cutoff rejected
+this valid, uniquely located native annotation. Image/annotation timestamps agree.
+
+Minimum fix: keep the existing IoU match, then allow a below-cutoff native box
+only when it overlaps **exactly one** same-class full projection and is contained
+in that projection within configured **1 px** raster padding. Overlapping
+same-class candidates, wrong labels and unexplained boxes still reject. Neither
+native boxes nor YOLO geometry are enlarged/changed. Five association regressions
+include this exact failure, ambiguous/outside/wrong-class rejection and ordinary
+matches. **50 unit tests PASS** (`unit_tests_association_fix.log`).
+
+Because this changes annotation association/config, reconfirm the repaired scene
+and current-revision determinism/crash evidence before the new pilot. Camera,
+assets, lighting, sampler, ROS packages and feasibility proof remain unchanged.

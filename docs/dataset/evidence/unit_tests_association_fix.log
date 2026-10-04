@@ -1,0 +1,61 @@
+test_corrupted_stored_geometry_rejected (test_annotation_audit.AuditTests.test_corrupted_stored_geometry_rejected) ... ok
+test_known_optical_projection (test_annotation_audit.AuditTests.test_known_optical_projection) ... ok
+test_occluded_pilot_sliver_uniquely_contained (test_association.AssociationTests.test_occluded_pilot_sliver_uniquely_contained) ... ok
+test_outside_and_noncontained_native_box_rejected (test_association.AssociationTests.test_outside_and_noncontained_native_box_rejected) ... ok
+test_overlapping_same_class_sliver_is_ambiguous (test_association.AssociationTests.test_overlapping_same_class_sliver_is_ambiguous) ... ok
+test_regular_iou_matches_and_empty_candidates_unchanged (test_association.AssociationTests.test_regular_iou_matches_and_empty_candidates_unchanged) ... ok
+test_wrong_class_sliver_rejected (test_association.AssociationTests.test_wrong_class_sliver_rejected) ... ok
+test_all_tiny_scene_keeps_native_box_without_yolo_row (test_capture_policy.CapturePolicyTests.test_all_tiny_scene_keeps_native_box_without_yolo_row) ... ok
+test_fully_occluded_scene_keeps_target_and_empty_label (test_capture_policy.CapturePolicyTests.test_fully_occluded_scene_keeps_target_and_empty_label) ... ok
+test_unexplained_native_class_is_still_rejected (test_capture_policy.CapturePolicyTests.test_unexplained_native_class_is_still_rejected) ... ok
+test_commanded_pose_sign_and_roundoff_are_exact (test_determinism.DeterminismTests.test_commanded_pose_sign_and_roundoff_are_exact) ... ok
+test_component_signs_are_not_equivalent (test_determinism.DeterminismTests.test_component_signs_are_not_equivalent) ... ok
+test_equivalent_sign_and_roundoff (test_determinism.DeterminismTests.test_equivalent_sign_and_roundoff) ... ok
+test_identical (test_determinism.DeterminismTests.test_identical) ... ok
+test_meaningful_realized_changes_fail (test_determinism.DeterminismTests.test_meaningful_realized_changes_fail) ... ok
+test_native_labels_and_scene_fields_are_exact (test_determinism.DeterminismTests.test_native_labels_and_scene_fields_are_exact) ... ok
+test_nonfinite_and_nonunit_fail (test_determinism.DeterminismTests.test_nonfinite_and_nonunit_fail) ... ok
+test_only_timing_values_are_excluded (test_determinism.DeterminismTests.test_only_timing_values_are_excluded) ... ok
+test_projection_and_iou_above_tolerance_fail (test_determinism.DeterminismTests.test_projection_and_iou_above_tolerance_fail) ... ok
+test_unexpected_fields_and_types_fail_even_when_equal (test_determinism.DeterminismTests.test_unexpected_fields_and_types_fail_even_when_equal) ... ok
+test_altitude_quotas (test_generator.GeneratorTests.test_altitude_quotas) ... ok
+test_angle_quotas (test_generator.GeneratorTests.test_angle_quotas) ... ok
+test_asset_dimensions (test_generator.GeneratorTests.test_asset_dimensions) ... ok
+test_asset_holdout (test_generator.GeneratorTests.test_asset_holdout) ... ok
+test_atomic_resume_and_corruption (test_generator.GeneratorTests.test_atomic_resume_and_corruption) ... ok
+test_class_order_and_mapping (test_generator.GeneratorTests.test_class_order_and_mapping) ... ok
+test_clipping (test_generator.GeneratorTests.test_clipping) ... ok
+test_distance_categories (test_generator.GeneratorTests.test_distance_categories) ... ok
+test_distribution_order_independence (test_generator.GeneratorTests.test_distribution_order_independence) ... ok
+test_gazebo_namespace (test_generator.GeneratorTests.test_gazebo_namespace) ... ok
+test_ground_footprint (test_generator.GeneratorTests.test_ground_footprint) ... ok
+test_ignored_objects_stay_accounted (test_generator.GeneratorTests.test_ignored_objects_stay_accounted) ... ok
+test_invalid_boxes (test_generator.GeneratorTests.test_invalid_boxes) ... ok
+test_iou_semantics (test_generator.GeneratorTests.test_iou_semantics) ... ok
+test_manifest_and_dataset_yaml (test_generator.GeneratorTests.test_manifest_and_dataset_yaml) ... /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/tests/test_generator.py:147: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpd46vav1i/manifests/scenarios.csv' mode='r' encoding='UTF-8'>
+  entries=list(csv.DictReader((Path(directory)/'manifests/scenarios.csv').open()));self.assertEqual(len(entries),1)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_metadata_serialization (test_generator.GeneratorTests.test_metadata_serialization) ... ok
+test_negative_mixture (test_generator.GeneratorTests.test_negative_mixture) ... ok
+test_off_nadir_definition (test_generator.GeneratorTests.test_off_nadir_definition) ... ok
+test_projection_optical_axes (test_generator.GeneratorTests.test_projection_optical_axes) ... ok
+test_scene_family_isolation (test_generator.GeneratorTests.test_scene_family_isolation) ... ok
+test_seed_changes_scene (test_generator.GeneratorTests.test_seed_changes_scene) ... ok
+test_seed_reproduction (test_generator.GeneratorTests.test_seed_reproduction) ... ok
+test_spacing_and_grounding (test_generator.GeneratorTests.test_spacing_and_grounding) ... ok
+test_split_counts (test_generator.GeneratorTests.test_split_counts) ... ok
+test_upward_rays_rejected (test_generator.GeneratorTests.test_upward_rays_rejected) ... ok
+test_validator_detects_duplicate_images_and_orphans (test_generator.GeneratorTests.test_validator_detects_duplicate_images_and_orphans) ... /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/validate_dataset.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpf2xvc6bi/manifests/scenarios.csv' mode='r' encoding='UTF-8'>
+  scenarios=list(csv.DictReader((root/'manifests/scenarios.csv').open()));actual_counts['scenario_manifest']=len(scenarios)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_validator_missing_files (test_generator.GeneratorTests.test_validator_missing_files) ... ok
+test_yaw_ranges (test_generator.GeneratorTests.test_yaw_ranges) ... ok
+test_yolo_conversion (test_generator.GeneratorTests.test_yolo_conversion) ... ok
+test_yolo_edges_positive (test_generator.GeneratorTests.test_yolo_edges_positive) ... ok
+
+----------------------------------------------------------------------
+Ran 50 tests in 2.263s
+
+OK

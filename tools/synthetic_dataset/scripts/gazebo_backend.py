@@ -29,6 +29,32 @@ def pose_dict(p):
             'quaternion':[p.orientation.x,p.orientation.y,p.orientation.z,p.orientation.w]}
 
 
+def associate_visible_boxes(objects,candidates,cam,min_iou,containment_padding_px):
+    """Match native class-only boxes; retain uniquely located occluded slivers.
+
+    Visible/full IoU can approach zero for a correctly labelled occluded target.
+    Below the regular cutoff, require containment in exactly one same-class
+    projection and no overlap with any other same-class target projection.
+    The padding only accommodates pixel rasterization at silhouette boundaries.
+    """
+    projected=[clip_box(o['secondary_bbox_px'],cam) for o in objects]
+    matches={};remaining=set(range(len(objects)));used=set()
+    scores=sorted([(iou(projected[j],b),j,k) for j,o in enumerate(objects)
+                   for k,(label,b) in enumerate(candidates) if label==o['gazebo_label']],reverse=True)
+    for score,j,k in scores:
+        if j in remaining and k not in used and score>=min_iou:
+            matches[j]=candidates[k][1];remaining.remove(j);used.add(k)
+    for k,(label,native) in enumerate(candidates):
+        if k in used: continue
+        overlapping=[j for j,o in enumerate(objects) if o['gazebo_label']==label and iou(projected[j],native)>0]
+        if len(overlapping)!=1 or overlapping[0] not in remaining: continue
+        j=overlapping[0];p=projected[j];pad=containment_padding_px
+        if native[0]>=p[0]-pad and native[1]>=p[1]-pad and native[2]<=p[2]+pad and native[3]<=p[3]+pad:
+            matches[j]=native;remaining.remove(j);used.add(k)
+    if len(used)!=len(candidates): raise RuntimeError('Native boxes cannot be associated with realized target instances')
+    return matches
+
+
 class Gazebo:
     def __init__(self,cfg,run_dir,headless=True):
         self.cfg,self.run_dir=cfg,Path(run_dir)
@@ -161,16 +187,8 @@ class Gazebo:
             b=[entry.box.min_corner.x,entry.box.min_corner.y,entry.box.max_corner.x+extra,entry.box.max_corner.y+extra]
             if clip_box(b,cam) is None: raise RuntimeError('Invalid native box')
             candidates.append((entry.label,b))
-        matches={};remaining=set(range(len(objects)))
-        # Native messages expose class labels, not stable instance IDs. Match by
-        # independent realized geometry and reject ambiguous or unexplained boxes.
-        scores=sorted([(iou(clip_box(o['secondary_bbox_px'],cam),b),j,k) for j,o in enumerate(objects)
-                       for k,(label,b) in enumerate(candidates) if label==o['gazebo_label']],reverse=True)
-        used=set()
-        for score,j,k in scores:
-            if j in remaining and k not in used and score>=cfg['annotation']['association_min_iou']:
-                matches[j]=candidates[k][1];remaining.remove(j);used.add(k)
-        if len(used)!=len(candidates): raise RuntimeError('Native boxes cannot be associated with realized target instances')
+        matches=associate_visible_boxes(objects,candidates,cam,cfg['annotation']['association_min_iou'],
+                                        cfg['annotation'].get('association_containment_padding_px',1.0))
         lines=[]
         for j,o in enumerate(objects):
             projected=clip_box(o['secondary_bbox_px'],cam);native=matches.get(j);clipped=clip_box(native,cam)
