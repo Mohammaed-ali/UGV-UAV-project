@@ -13,7 +13,8 @@ class Coordinator(Node):
         for name, value in {
                 'assignment_period': 1.0, 'max_assignment_distance': 50.0,
                 'distance_weight': 1.0, 'target_confidence_weight': 0.0,
-                'minimum_battery_percent': 25.0, 'state_timeout_s': 3.0}.items():
+                'minimum_battery_percent': 25.0, 'state_timeout_s': 3.0,
+                'minimum_witnesses_for_assignment': 1}.items():
             self.declare_parameter(name, value)
         self.drones = {}
         self.last_seen = {}
@@ -80,6 +81,9 @@ class Coordinator(Node):
     def assign(self, target):
         if (target.status != Target.UNASSIGNED or target.assigned_drone_id
                 or target.target_id in self.assigned_targets):
+            return
+        witnesses = int(self.get_parameter('minimum_witnesses_for_assignment').value)
+        if witnesses > 1 and len(set(target.detecting_drones)) < witnesses:
             return
         candidates = [drone for drone in self.drones.values() if self.eligible(drone)]
         max_distance = float(self.get_parameter('max_assignment_distance').value)

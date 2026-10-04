@@ -1,0 +1,12 @@
+# Eight non-overlapping search cells, with 12 m spaced X origins and 36 m rows.
+# The 4 m planning gap is checked against measured flight in the live probe.
+search:
+  search_half_width: 4.0
+  search_half_height: 0.0
+  # LandDetected publishes at 1 Hz of simulation time. At sub-real-time RTF
+  # it exceeds one wall second; local position still has the existing 2 s limit.
+  status_land_timeout_s: 3.0
+validation:
+  minimum_horizontal_separation_m: 3.0
+  state_max_receipt_age_s: 0.5
+  deadline_s: 300.0

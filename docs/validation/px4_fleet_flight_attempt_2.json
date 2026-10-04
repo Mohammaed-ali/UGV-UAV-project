@@ -1,0 +1,509 @@
+{
+  "result": "FAIL",
+  "failure": "fleet not docked",
+  "performance_samples": [
+    {
+      "elapsed_s": 120.1,
+      "searching": 4,
+      "px4_cpu_rss": [
+        "296540 36.6 21096",
+        " 296942 35.5 21400",
+        " 297364 34.3 21188",
+        " 297788 32.3 21084",
+        " 298214 29.6 21300",
+        " 298667 27.2 21216",
+        " 299096 25.3 21484",
+        " 299755 24.4 21032"
+      ]
+    },
+    {
+      "elapsed_s": 123.5,
+      "searching": 5,
+      "px4_cpu_rss": [
+        "296540 36.5 21096",
+        " 296942 35.5 21400",
+        " 297364 34.3 21188",
+        " 297788 32.4 21084",
+        " 298214 29.9 21300",
+        " 298667 27.6 21216",
+        " 299096 25.9 21492",
+        " 299755 25.2 21032"
+      ]
+    },
+    {
+      "elapsed_s": 126.8,
+      "searching": 6,
+      "px4_cpu_rss": [
+        "296540 36.5 21096",
+        " 296942 35.5 21400",
+        " 297364 34.3 21188",
+        " 297788 32.4 21084",
+        " 298214 30.1 21364",
+        " 298667 27.9 21220",
+        " 299096 26.4 21492",
+        " 299755 25.9 21032"
+      ]
+    },
+    {
+      "elapsed_s": 129.9,
+      "searching": 7,
+      "px4_cpu_rss": [
+        "296540 36.5 21096",
+        " 296942 35.5 21400",
+        " 297364 34.4 21188",
+        " 297788 32.5 21084",
+        " 298214 30.3 21364",
+        " 298667 28.3 21284",
+        " 299096 26.9 21492",
+        " 299755 26.5 21032"
+      ]
+    },
+    {
+      "elapsed_s": 133.6,
+      "searching": 8,
+      "px4_cpu_rss": [
+        "296540 36.4 21096",
+        " 296942 35.5 21400",
+        " 297364 34.4 21188",
+        " 297788 32.6 21084",
+        " 298214 30.5 21364",
+        " 298667 28.6 21284",
+        " 299096 27.3 21492",
+        " 299755 27.1 21032"
+      ]
+    }
+  ],
+  "validation_profile": {
+    "minimum_horizontal_separation_m": 3.0,
+    "state_max_receipt_age_s": 0.5,
+    "deadline_s": 300.0
+  },
+  "elapsed_s": 300.1,
+  "readiness": {
+    "uav01": true,
+    "uav02": true,
+    "uav03": true,
+    "uav04": true,
+    "uav05": true,
+    "uav06": true,
+    "uav07": true,
+    "uav08": true
+  },
+  "flight": {
+    "uav01": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav02": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav03": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav04": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav05": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav06": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav07": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav08": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    }
+  },
+  "states": {
+    "uav01": 11,
+    "uav02": 11,
+    "uav03": 11,
+    "uav04": 11,
+    "uav05": 11,
+    "uav06": 11,
+    "uav07": 11,
+    "uav08": 11
+  },
+  "state_histories": {
+    "uav01": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10,
+      11
+    ],
+    "uav02": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10,
+      11
+    ],
+    "uav03": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10,
+      11
+    ],
+    "uav04": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10,
+      11
+    ],
+    "uav05": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10,
+      11
+    ],
+    "uav06": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10,
+      11
+    ],
+    "uav07": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10,
+      11
+    ],
+    "uav08": [
+      0,
+      2,
+      3,
+      7,
+      10,
+      11
+    ]
+  },
+  "launches": [
+    "uav01",
+    "uav02",
+    "uav03",
+    "uav04",
+    "uav05",
+    "uav06",
+    "uav07",
+    "uav08"
+  ],
+  "deployment_events": [
+    {
+      "waypoint": 0,
+      "mode": "SPLIT"
+    },
+    {
+      "waypoint": 1,
+      "mode": "SPLIT"
+    }
+  ],
+  "phases": [
+    "INIT",
+    "DEPLOYING",
+    "SEARCHING"
+  ],
+  "premature_complete": false,
+  "max_simultaneous_search": 8,
+  "separation_samples": 620,
+  "minimum_horizontal_separation_m": 4.16,
+  "minimum_3d_separation_m": 4.44,
+  "minimum_pair": [
+    "uav01",
+    "uav02"
+  ],
+  "landed": {
+    "uav01": true,
+    "uav02": true,
+    "uav03": true,
+    "uav04": true,
+    "uav05": true,
+    "uav06": true,
+    "uav07": true,
+    "uav08": true
+  },
+  "disarmed": {
+    "uav01": true,
+    "uav02": true,
+    "uav03": true,
+    "uav04": true,
+    "uav05": true,
+    "uav06": true,
+    "uav07": true,
+    "uav08": true
+  },
+  "commands": {
+    "uav01": [
+      {
+        "command": 176,
+        "system": 1
+      },
+      {
+        "command": 400,
+        "system": 1
+      },
+      {
+        "command": 20,
+        "system": 1
+      }
+    ],
+    "uav02": [
+      {
+        "command": 176,
+        "system": 2
+      },
+      {
+        "command": 400,
+        "system": 2
+      },
+      {
+        "command": 20,
+        "system": 2
+      }
+    ],
+    "uav03": [
+      {
+        "command": 176,
+        "system": 3
+      },
+      {
+        "command": 400,
+        "system": 3
+      },
+      {
+        "command": 20,
+        "system": 3
+      }
+    ],
+    "uav04": [
+      {
+        "command": 176,
+        "system": 4
+      },
+      {
+        "command": 400,
+        "system": 4
+      },
+      {
+        "command": 20,
+        "system": 4
+      }
+    ],
+    "uav05": [
+      {
+        "command": 176,
+        "system": 5
+      },
+      {
+        "command": 400,
+        "system": 5
+      },
+      {
+        "command": 20,
+        "system": 5
+      }
+    ],
+    "uav06": [
+      {
+        "command": 176,
+        "system": 6
+      },
+      {
+        "command": 400,
+        "system": 6
+      },
+      {
+        "command": 20,
+        "system": 6
+      }
+    ],
+    "uav07": [
+      {
+        "command": 176,
+        "system": 7
+      },
+      {
+        "command": 400,
+        "system": 7
+      },
+      {
+        "command": 20,
+        "system": 7
+      }
+    ],
+    "uav08": [
+      {
+        "command": 176,
+        "system": 8
+      },
+      {
+        "command": 400,
+        "system": 8
+      },
+      {
+        "command": 20,
+        "system": 8
+      }
+    ]
+  },
+  "acknowledgements": {
+    "uav01": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav02": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav03": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav04": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav05": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav06": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav07": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav08": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ]
+  },
+  "px4_process_sample": [
+    "296540  8.3 23524",
+    " 296942  8.0 24348",
+    " 297364  8.1 23964",
+    " 297788  7.1 24120",
+    " 298214  6.7 24200",
+    " 298667  6.9 24008",
+    " 299096  6.0 24216",
+    " 299755  6.3 23692"
+  ]
+}

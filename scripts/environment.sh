@@ -11,3 +11,9 @@ fi
 export PATH="$WILDLIFE_DEPS_DIR/agent-build:$PATH"
 export LD_LIBRARY_PATH="$WILDLIFE_DEPS_DIR/agent-build:${LD_LIBRARY_PATH:-}"
 export WILDLIFE_WORKSPACE_DIR WILDLIFE_DEPS_DIR
+
+# This workspace's SITL runs are local. Keep ROS/Gazebo discovery on loopback
+# so host Wi-Fi/interface changes cannot interrupt the simulated vehicle graph.
+export ROS_AUTOMATIC_DISCOVERY_RANGE="${ROS_AUTOMATIC_DISCOVERY_RANGE:-LOCALHOST}"
+export GZ_IP="${GZ_IP:-127.0.0.1}"
+export ROS_LOG_DIR="${ROS_LOG_DIR:-/tmp/wildlife-ros-logs}"

@@ -1,4 +1,4 @@
-"""Own a stationary four/eight-PX4 structural validation runtime."""
+"""Own a four/eight-PX4 runtime; the default profile remains stationary."""
 import os
 from pathlib import Path
 import signal
@@ -53,10 +53,23 @@ try:
                    PX4_GZ_STANDALONE='1')
         px4.append(start(did, [px4_binary, '-d', '-i', str(index)],
                          cwd=deps / 'PX4-Autopilot', env=env))
-        time.sleep(.5)
+        # Serialize model creation/startup rather than overlapping Gazebo
+        # sensor registration for all instances. Never relax PX4 readiness.
+        deadline = time.monotonic() + 40.
+        vehicle_log = run / (did + '.log')
+        while time.monotonic() < deadline:
+            if px4[-1].poll() is not None:
+                raise RuntimeError(f'{did} exited during startup')
+            if 'Startup script returned successfully' in vehicle_log.read_text():
+                break
+            time.sleep(.25)
+        else:
+            raise RuntimeError(f'{did} startup timed out; inspect {vehicle_log}')
+        time.sleep(1.)
+    launch_file = sys.argv[2] if len(sys.argv) > 2 else 'px4_fleet_isolation.launch.py'
     ros = start('ros', ['ros2', 'launch', 'wildlife_bringup',
-                        'px4_fleet_isolation.launch.py', f'vehicle_count:={count}'])
-    print(f'{count}-PX4 structural runtime started; logs: {run}', flush=True)
+                        launch_file, f'vehicle_count:={count}', *sys.argv[3:]])
+    print(f'{count}-PX4 runtime started ({launch_file}); logs: {run}', flush=True)
     while True:
         for child in (agent, gz, *px4, ros):
             if child.poll() is not None:

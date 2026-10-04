@@ -1,4 +1,4 @@
-# V0.3 dependencies
+# V0.4 dependencies (V0.3 pins preserved)
 
 Ubuntu 24.04, ROS 2 Jazzy, Gazebo Harmonic (observed 8.15.0), RViz, ros_gz_sim/bridge and cv_bridge/OpenCV are installed. The exact source pins and QGC SHA256 are in `DEPENDENCY_PINS.json`.
 
@@ -52,3 +52,17 @@ installed Jazzy `ros_gz_bridge`, `sensor_msgs`, `cv_bridge`, OpenCV and
 runtime; logic-only `detector_sim` does not import it. The exact Gazebo image
 and CameraInfo topic mappings are in
 `src/wildlife_simulation/config/px4_camera_bridge.yaml`.
+
+The workspace-local `mono_cam` sensor copy retains the upstream license and
+uses 640×480/10 Hz. Two full-resolution cameras previously overloaded
+telemetry; selected reduced-load cameras are the validated profile. Gazebo
+UGV display mirroring uses the existing set_pose service, not a new controller.
+Standard `tf2_ros` supplies one identity world-to-map transform for the ENU
+visualization frame; exact image-time pose interpolation is still unimplemented.
+
+The environment defaults ROS discovery to LOCALHOST, Gazebo transport to
+127.0.0.1, and ROS logs to `/tmp`. Override these explicitly only for a
+separately validated distributed setup. Do not compile or rebuild the workspace
+while a live validation is running. PX4 LandDetected publishes at 1 Hz of
+simulation time; the fleet uses a separate three-second status/landing receipt
+age while retaining a existing two-second local-position age.

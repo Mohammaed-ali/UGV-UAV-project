@@ -15,6 +15,7 @@ from wildlife_simulation.px4_uav_adapter import versioned_topic
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--output', required=True)
+parser.add_argument('--two-camera', action='store_true')
 args = parser.parse_args()
 ids = ('uav01', 'uav02')
 rclpy.init()
@@ -26,7 +27,9 @@ land = {}
 ready = {did: False for did in ids}
 flight = {did: {'offboard': False, 'armed': False, 'gcs': False} for did in ids}
 detections = {did: 0 for did in ids}
+detection_samples = []
 assignments = {}
+track_witnesses = {}
 alerts = {}
 phases = []
 second_searched_during_assignment = False
@@ -48,7 +51,8 @@ def state_cb(msg):
 def assignment_cb(msg):
     global second_searched_during_assignment
     assignments.setdefault(msg.target_id, set()).add(msg.assigned_drone_id)
-    if states.get('uav02') and states['uav02'].state == DroneState.SEARCHING:
+    other = 'uav02' if msg.assigned_drone_id == 'uav01' else 'uav01'
+    if states.get(other) and states[other].state == DroneState.SEARCHING:
         second_searched_during_assignment = True
 
 
@@ -61,11 +65,16 @@ def phase_cb(msg):
 
 node.create_subscription(DroneState, '/drones/state', state_cb, 50)
 node.create_subscription(Target, '/targets/assigned', assignment_cb, 20)
+node.create_subscription(Target, '/targets/tracked', lambda m: track_witnesses.setdefault(m.target_id, set()).update(m.detecting_drones), 30)
 node.create_subscription(OperatorAlert, '/operator/alerts',
                          lambda msg: alerts.update({msg.drone_id: msg}), 20)
 node.create_subscription(String, '/mission/status', phase_cb, 10)
-node.create_subscription(Detection, '/detections/all',
-                         lambda msg: detections.update({msg.drone_id: detections.get(msg.drone_id, 0) + 1}), 20)
+def detection_cb(msg):
+    detections[msg.drone_id] = detections.get(msg.drone_id, 0) + 1
+    if len(detection_samples) < 200:
+        detection_samples.append({'drone': msg.drone_id, 'x': msg.position_world.x, 'y': msg.position_world.y})
+
+node.create_subscription(Detection, '/detections/all', detection_cb, 20)
 for did in ids:
     prefix = '/' + did
 
@@ -97,13 +106,14 @@ try:
             if not response.accepted:
                 raise AssertionError(response.message)
             pending = None
-        alert = alerts.get('uav01')
-        if alert and states.get('uav01') and states['uav01'].state == DroneState.AWAITING_OPERATOR:
+        observer = next(iter(next(iter(assignments.values()))), 'uav01') if assignments and args.two_camera else 'uav01'
+        alert = alerts.get(observer)
+        if alert and states.get(observer) and states[observer].state == DroneState.AWAITING_OPERATOR:
             if not held or (not returned and time.monotonic() - hold_at >= 3):
                 decision = (OperatorDecision.Request.RETURN if held
                             else OperatorDecision.Request.CONTINUE_HOLD)
                 pending = client.call_async(OperatorDecision.Request(
-                    target_id=alert.target_id, assigned_drone_id='uav01',
+                    target_id=alert.target_id, assigned_drone_id=observer,
                     decision=decision, operator_notes='V0.4 two-PX4 acceptance'))
                 if held:
                     returned = True
@@ -123,16 +133,21 @@ try:
     assert all(status.get(did) and status[did].arming_state == VehicleStatus.ARMING_STATE_DISARMED for did in ids), 'PX4 disarm not measured'
     assert all(all(flight[did].values()) for did in ids), 'flight state missing'
     assert all(DroneState.SEARCHING in histories[did] for did in ids), 'both did not search'
-    assert len(assignments) == 1 and list(assignments.values()) == [{'uav01'}], 'assignment not unique to uav01'
+    assert len(assignments) == 1 and len(next(iter(assignments.values()))) == 1, 'assignment not unique'
+    if not args.two_camera:
+        assert list(assignments.values()) == [{'uav01'}], 'synthetic assignment not unique to uav01'
     assert second_searched_during_assignment, 'uav02 not searching during assignment'
     assert detections['uav01'] > 0, 'no target detection'
     assert held and returned, 'operator HOLD/RETURN not exercised'
+    if args.two_camera:
+        assert all(detections[did] > 0 for did in ids), 'both real camera sources did not detect'
+        assert len(track_witnesses) == 1 and list(track_witnesses.values()) == [set(ids)], 'real camera observations did not fuse into one target'
     assert len(node.get_publishers_info_by_topic('/drones/state')) == 2, 'DroneState publisher count'
     result['result'] = 'PASS'
 except (AssertionError, TimeoutError) as exc:
     result['failure'] = str(exc)
 finally:
-    result.update(elapsed_s=round(time.monotonic() - start, 1),
+    result.update(two_camera=args.two_camera, detection_samples=detection_samples, track_witnesses={tid: sorted(dids) for tid, dids in track_witnesses.items()}, elapsed_s=round(time.monotonic() - start, 1),
                   states={did: states[did].state if did in states else None for did in ids},
                   state_histories={did: sorted(histories[did]) for did in ids},
                   ready=ready, flight=flight,

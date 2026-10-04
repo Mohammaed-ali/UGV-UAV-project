@@ -150,4 +150,38 @@ class AdapterTests(unittest.TestCase):
         self.assertEqual(n.state,DroneState.DOCKED)
         self.assertFalse(n.heartbeat_pub.messages)
 
+    def test_confirmed_docking_survives_later_telemetry_loss(self):
+        n=self.n; n.state=DroneState.DOCKED; n.was_airborne=True
+        n.stream_start=time.monotonic()-2; n.received.clear()
+        n.tick()
+        self.assertEqual(n.state,DroneState.DOCKED)
+        self.assertIsNone(n.fault)
+
+    def test_faulted_native_landing_needs_fresh_home_landing_and_disarm(self):
+        n=self.n; n.was_airborne=True; n.fail('native recovery')
+        n.home_x,n.home_y=n.x,n.y
+        n.land_cb(VehicleLandDetected(landed=False))
+        n.tick(); self.assertEqual(n.state,DroneState.PAUSED)
+        n.land_cb(VehicleLandDetected(landed=True))
+        n.status_cb(VehicleStatus(arming_state=VehicleStatus.ARMING_STATE_ARMED))
+        n.tick(); self.assertEqual(n.state,DroneState.PAUSED)
+        n.status_cb(VehicleStatus(arming_state=VehicleStatus.ARMING_STATE_DISARMED))
+        n.home_x+=10.
+        n.tick(); self.assertEqual(n.state,DroneState.PAUSED)
+        n.home_x=n.x
+        n.tick(); self.assertEqual(n.state,DroneState.DOCKED)
+        self.assertFalse(n.heartbeat_pub.messages)
+
+    def test_slow_status_timeout_never_extends_position_timeout(self):
+        from rclpy.parameter import Parameter
+        n=self.n
+        n.set_parameters([Parameter('status_land_timeout_s', value=3.0)])
+        now=time.monotonic()
+        n.received['land']=now-1.5; n.received['status']=now-1.5
+        self.assertTrue(n.fresh())
+        n.received['local']=now-1.5
+        self.assertFalse(n.fresh())
+        n.received['local']=now; n.received['land']=now-4.
+        self.assertFalse(n.fresh())
+
 if __name__=='__main__':unittest.main()

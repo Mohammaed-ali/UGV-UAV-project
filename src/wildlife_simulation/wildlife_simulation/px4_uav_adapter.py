@@ -37,7 +37,7 @@ class PX4UAVAdapter(UAVNode):
     def __init__(self):
         super().__init__()
         for key, value in {'sitl_enabled': False, 'px4_namespace': '', 'system_id': 1,
-                           'telemetry_timeout': 1.0, 'max_horizontal_distance': 60.0,
+                           'telemetry_timeout': 1.0, 'status_land_timeout_s': 0.0, 'max_horizontal_distance': 60.0,
                            'max_altitude': 30.0, 'search_half_height': 30.0,
                            'map_origin_x': 0.0, 'map_origin_y': 0.0, 'map_origin_z': 0.0}.items():
             self.declare_parameter(key, value)
@@ -112,7 +112,12 @@ class PX4UAVAdapter(UAVNode):
     def fresh(self):
         timeout = float(self.get_parameter('telemetry_timeout').value)
         now = time.monotonic()
-        return all(now - self.received.get(key, -math.inf) < timeout for key in ('status', 'local', 'land'))
+        slow_timeout = float(self.get_parameter('status_land_timeout_s').value)
+        if slow_timeout <= 0:
+            slow_timeout = timeout  # Preserve the existing configured timeout unless explicitly split.
+        return (now - self.received.get('local', -math.inf) < timeout
+                and all(now - self.received.get(key, -math.inf) < slow_timeout
+                        for key in ('status', 'land')))
 
     def fail(self, reason):
         if self.fault is None:
@@ -253,8 +258,19 @@ class PX4UAVAdapter(UAVNode):
         self.ready_pub.publish(Bool(data=self.ready()))
         self.accept_pending_launch()
         if not self.fresh():
-            if self.stream_start is not None:
-                self.fail('Telemetry stale; heartbeat stopped so PX4 owns failsafe response')
+            if self.stream_start is not None and self.state != DroneState.DOCKED:
+                ages = {key: round(time.monotonic() - self.received.get(key, -math.inf), 2) for key in ('local', 'status', 'land')}
+                self.fail(f'Telemetry stale {ages}; heartbeat stopped so PX4 owns failsafe response')
+            return
+        # A completed landing is terminal even if later transport or preflight
+        # health changes. For a faulted return, require fresh measured landing,
+        # disarm and proximity to the latched home before logical docking.
+        if (self.state == DroneState.PAUSED and self.was_airborne and self.land.landed
+                and self.status.arming_state == VehicleStatus.ARMING_STATE_DISARMED
+                and math.hypot(self.x - self.home_x, self.y - self.home_y) <= 2.0):
+            self.state = DroneState.DOCKED
+        if self.state == DroneState.DOCKED:
+            self.publish()
             return
         if self.fault and self.state not in (DroneState.RETURNING, DroneState.DOCKED):
             self.publish()

@@ -1,0 +1,584 @@
+{
+  "result": "PASS",
+  "failure": "",
+  "raw_telemetry_intervals": {
+    "uav01/status": {
+      "count": 272,
+      "maximum_s": 1.513,
+      "median_s": 0.849
+    },
+    "uav01/land": {
+      "count": 143,
+      "maximum_s": 2.668,
+      "median_s": 1.696
+    },
+    "uav02/status": {
+      "count": 258,
+      "maximum_s": 1.378,
+      "median_s": 0.855
+    },
+    "uav02/land": {
+      "count": 136,
+      "maximum_s": 2.619,
+      "median_s": 1.747
+    },
+    "uav03/status": {
+      "count": 236,
+      "maximum_s": 1.475,
+      "median_s": 0.888
+    },
+    "uav03/land": {
+      "count": 126,
+      "maximum_s": 2.863,
+      "median_s": 1.805
+    },
+    "uav04/status": {
+      "count": 214,
+      "maximum_s": 1.428,
+      "median_s": 0.914
+    },
+    "uav04/land": {
+      "count": 114,
+      "maximum_s": 2.555,
+      "median_s": 1.822
+    },
+    "uav05/land": {
+      "count": 103,
+      "maximum_s": 2.582,
+      "median_s": 1.832
+    },
+    "uav05/status": {
+      "count": 193,
+      "maximum_s": 1.394,
+      "median_s": 0.937
+    },
+    "uav06/status": {
+      "count": 176,
+      "maximum_s": 1.381,
+      "median_s": 0.975
+    },
+    "uav06/land": {
+      "count": 94,
+      "maximum_s": 2.588,
+      "median_s": 1.862
+    },
+    "uav07/status": {
+      "count": 158,
+      "maximum_s": 1.43,
+      "median_s": 0.98
+    },
+    "uav07/land": {
+      "count": 87,
+      "maximum_s": 2.943,
+      "median_s": 1.862
+    },
+    "uav08/land": {
+      "count": 79,
+      "maximum_s": 2.564,
+      "median_s": 1.884
+    },
+    "uav08/status": {
+      "count": 144,
+      "maximum_s": 1.33,
+      "median_s": 0.987
+    }
+  },
+  "performance_samples": [
+    {
+      "elapsed_s": 125.1,
+      "searching": 4,
+      "px4_cpu_rss": [
+        "323849 34.9 21120",
+        " 324247 34.2 21068",
+        " 324668 33.1 21260",
+        " 325097 30.7 21124",
+        " 325524 28.3 21216",
+        " 325962 25.6 21080",
+        " 326396 22.8 21112",
+        " 326869 20.6 21124"
+      ]
+    },
+    {
+      "elapsed_s": 128.4,
+      "searching": 5,
+      "px4_cpu_rss": [
+        "323849 34.7 21120",
+        " 324247 33.9 21068",
+        " 324668 32.9 21260",
+        " 325097 30.5 21124",
+        " 325524 28.3 21216",
+        " 325962 25.6 21080",
+        " 326396 22.9 21112",
+        " 326869 21.0 21124"
+      ]
+    },
+    {
+      "elapsed_s": 131.8,
+      "searching": 6,
+      "px4_cpu_rss": [
+        "323849 34.5 21120",
+        " 324247 33.7 21068",
+        " 324668 32.7 21260",
+        " 325097 30.4 21124",
+        " 325524 28.3 21216",
+        " 325962 25.6 21080",
+        " 326396 23.1 21112",
+        " 326869 21.4 21124"
+      ]
+    },
+    {
+      "elapsed_s": 135.1,
+      "searching": 7,
+      "px4_cpu_rss": [
+        "323849 34.3 21120",
+        " 324247 33.6 21068",
+        " 324668 32.6 21260",
+        " 325097 30.3 21124",
+        " 325524 28.2 21280",
+        " 325962 25.7 21080",
+        " 326396 23.4 21112",
+        " 326869 21.7 21124"
+      ]
+    },
+    {
+      "elapsed_s": 138.6,
+      "searching": 8,
+      "px4_cpu_rss": [
+        "323849 34.1 21120",
+        " 324247 33.4 21068",
+        " 324668 32.4 21260",
+        " 325097 30.2 21124",
+        " 325524 28.2 21288",
+        " 325962 25.7 21080",
+        " 326396 23.6 21112",
+        " 326869 22.1 21132"
+      ]
+    }
+  ],
+  "validation_profile": {
+    "minimum_horizontal_separation_m": 3.0,
+    "state_max_receipt_age_s": 0.5,
+    "deadline_s": 300.0
+  },
+  "elapsed_s": 236.8,
+  "readiness": {
+    "uav01": true,
+    "uav02": true,
+    "uav03": true,
+    "uav04": true,
+    "uav05": true,
+    "uav06": true,
+    "uav07": true,
+    "uav08": true
+  },
+  "flight": {
+    "uav01": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav02": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav03": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav04": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav05": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav06": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav07": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav08": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    }
+  },
+  "states": {
+    "uav01": 9,
+    "uav02": 9,
+    "uav03": 9,
+    "uav04": 9,
+    "uav05": 9,
+    "uav06": 9,
+    "uav07": 9,
+    "uav08": 9
+  },
+  "state_histories": {
+    "uav01": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ],
+    "uav02": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ],
+    "uav03": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ],
+    "uav04": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ],
+    "uav05": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ],
+    "uav06": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ],
+    "uav07": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ],
+    "uav08": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ]
+  },
+  "launches": [
+    "uav01",
+    "uav02",
+    "uav03",
+    "uav04",
+    "uav05",
+    "uav06",
+    "uav07",
+    "uav08"
+  ],
+  "deployment_events": [
+    {
+      "waypoint": 0,
+      "mode": "SPLIT"
+    },
+    {
+      "waypoint": 1,
+      "mode": "SPLIT"
+    }
+  ],
+  "phases": [
+    "DEPLOYING",
+    "SEARCHING",
+    "COMPLETE"
+  ],
+  "premature_complete": false,
+  "max_simultaneous_search": 8,
+  "separation_samples": 678,
+  "minimum_horizontal_separation_m": 4.21,
+  "minimum_3d_separation_m": 4.47,
+  "minimum_pair": [
+    "uav01",
+    "uav02"
+  ],
+  "landed": {
+    "uav01": true,
+    "uav02": true,
+    "uav03": true,
+    "uav04": true,
+    "uav05": true,
+    "uav06": true,
+    "uav07": true,
+    "uav08": true
+  },
+  "disarmed": {
+    "uav01": true,
+    "uav02": true,
+    "uav03": true,
+    "uav04": true,
+    "uav05": true,
+    "uav06": true,
+    "uav07": true,
+    "uav08": true
+  },
+  "commands": {
+    "uav01": [
+      {
+        "command": 176,
+        "system": 1
+      },
+      {
+        "command": 400,
+        "system": 1
+      },
+      {
+        "command": 20,
+        "system": 1
+      }
+    ],
+    "uav02": [
+      {
+        "command": 176,
+        "system": 2
+      },
+      {
+        "command": 400,
+        "system": 2
+      },
+      {
+        "command": 20,
+        "system": 2
+      }
+    ],
+    "uav03": [
+      {
+        "command": 176,
+        "system": 3
+      },
+      {
+        "command": 400,
+        "system": 3
+      },
+      {
+        "command": 20,
+        "system": 3
+      }
+    ],
+    "uav04": [
+      {
+        "command": 176,
+        "system": 4
+      },
+      {
+        "command": 400,
+        "system": 4
+      },
+      {
+        "command": 20,
+        "system": 4
+      }
+    ],
+    "uav05": [
+      {
+        "command": 176,
+        "system": 5
+      },
+      {
+        "command": 400,
+        "system": 5
+      },
+      {
+        "command": 20,
+        "system": 5
+      }
+    ],
+    "uav06": [
+      {
+        "command": 176,
+        "system": 6
+      },
+      {
+        "command": 400,
+        "system": 6
+      },
+      {
+        "command": 20,
+        "system": 6
+      }
+    ],
+    "uav07": [
+      {
+        "command": 176,
+        "system": 7
+      },
+      {
+        "command": 400,
+        "system": 7
+      },
+      {
+        "command": 20,
+        "system": 7
+      }
+    ],
+    "uav08": [
+      {
+        "command": 176,
+        "system": 8
+      },
+      {
+        "command": 400,
+        "system": 8
+      },
+      {
+        "command": 20,
+        "system": 8
+      }
+    ]
+  },
+  "acknowledgements": {
+    "uav01": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav02": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav03": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav04": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav05": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav06": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav07": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav08": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ]
+  },
+  "px4_process_sample": [
+    "323849 30.2 21124",
+    " 324247 29.9 21076",
+    " 324668 29.4 21272",
+    " 325097 28.2 21128",
+    " 325524 27.2 21304",
+    " 325962 25.6 21088",
+    " 326396 25.1 21120",
+    " 326869 24.8 21132"
+  ]
+}

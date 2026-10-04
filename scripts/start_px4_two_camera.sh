@@ -9,4 +9,6 @@ export WILDLIFE_PX4_AUTOSTART=4014
 export WILDLIFE_UAV02_GZ_POSE=-10,0
 model_dir="$(cd "$(dirname "$0")/../src/wildlife_simulation/models" && pwd)"
 export GZ_SIM_RESOURCE_PATH="$model_dir:${GZ_SIM_RESOURCE_PATH:-}"
-exec "$(dirname "$0")/start_px4_two.sh" px4_two_fusion.launch.py
+launch_file="${1:-px4_two_fusion.launch.py}"
+if [[ "$#" -gt 0 ]]; then shift; fi
+exec "$(dirname "$0")/start_px4_two.sh" "$launch_file" "$@"

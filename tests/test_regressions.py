@@ -164,6 +164,18 @@ class RegressionTests(unittest.TestCase):
         n.registry_cb(Target(target_id='t2', status=Target.LOST))
         self.assertNotIn('t2', n.assigned_targets)
 
+    def test_camera_fusion_profile_waits_for_two_witnesses(self):
+        n = self.node(Coordinator)
+        n.pub = Capture()
+        n.set_parameters([Parameter('minimum_witnesses_for_assignment', value=2)])
+        n.drone_cb(DroneState(drone_id='uav01', state=DroneState.SEARCHING, battery_percent=80.))
+        t = Target(target_id='t1', detecting_drones=['uav01'])
+        n.target_cb(t)
+        self.assertFalse(n.pub.messages)
+        t.detecting_drones = ['uav01', 'uav02']
+        n.target_cb(t)
+        self.assertEqual(len(n.pub.messages), 1)
+
     def test_single_and_split_deployment_deduplicate(self):
         for mode in ('SINGLE', 'SPLIT'):
             n = self.node(DeploymentNode)

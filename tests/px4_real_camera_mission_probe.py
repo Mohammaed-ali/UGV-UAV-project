@@ -18,6 +18,7 @@ from wildlife_simulation.px4_uav_adapter import versioned_topic
 parser = argparse.ArgumentParser()
 parser.add_argument('--output', required=True)
 parser.add_argument('--moving', action='store_true')
+parser.add_argument('--hold-seconds', type=float, default=3.0)
 args = parser.parse_args()
 rclpy.init()
 node = Node('px4_real_camera_mission_probe')
@@ -117,7 +118,7 @@ try:
             pending = None
         alert = alerts.get('uav01')
         if alert and states.get('uav01') and states['uav01'].state == DroneState.AWAITING_OPERATOR:
-            if not held or (not returned and time.monotonic() - hold_at >= 3):
+            if not held or (not returned and time.monotonic() - hold_at >= args.hold_seconds):
                 decision = (OperatorDecision.Request.RETURN if held
                             else OperatorDecision.Request.CONTINUE_HOLD)
                 pending = client.call_async(OperatorDecision.Request(

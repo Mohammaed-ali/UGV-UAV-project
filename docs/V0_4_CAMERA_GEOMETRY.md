@@ -32,7 +32,9 @@ exact pose interpolation. Receipt-age limits and a conservative configurable
 2 m localization sigma bound the demo's interpretation; they are not a claim
 of exact sensor-time alignment. The camera path is validated for one PX4
 mission and two-PX4 same-target observation/fusion on the flat ground in
-`wildlife_px4.sdf`. Two-camera fusion does not establish mission assignment.
+`wildlife_px4.sdf`. The separate two-camera mission gate also establishes one assignment,
+operator HOLD/RETURN, both landings and COMPLETE; see
+`docs/validation/px4_two_camera_mission.json`.
 
 Unit checks cover center/side pixels, yaw, vehicle and camera pitch, altitude,
 invalid rays and PX4/ROS frame conversion. A live image-to-mission run is
