@@ -1,0 +1,21 @@
+{
+  "status": "PASSED",
+  "frames": 50,
+  "errors": [],
+  "rgb_identical_frames": 50,
+  "rgb_bytes_identical": true,
+  "absolute_tolerances": {
+    "position_m": 1e-10,
+    "quaternion_component": 1e-14,
+    "secondary_projection_px": 1e-08,
+    "derived_iou": 1e-09
+  },
+  "measured_max_differences": {
+    "position_m": 1.8189894035458565e-12,
+    "quaternion_component": 3.3306690738754696e-16,
+    "quaternion_sign_changes": 58,
+    "derived_iou": 3.305800078123866e-12,
+    "secondary_projection_px": 4.172306944383308e-11
+  },
+  "comparison_note": "Commanded scenes, IDs, native boxes/labels, YOLO bytes and scenario/config/asset manifests are exact. Only realized positions, whole-sign-equivalent unit quaternions, secondary projection and derived IoU allow stated absolute roundoff. Timing fields are scheduling-dependent. RGB equality is reported separately."
+}

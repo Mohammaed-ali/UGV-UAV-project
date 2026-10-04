@@ -1,0 +1,30 @@
+{
+  "absolute_tolerances": {
+    "derived_iou": 1e-09,
+    "position_m": 1e-10,
+    "quaternion_component": 1e-14,
+    "secondary_projection_px": 1e-08
+  },
+  "capture_revision": "947cecb5ccaf607b7466ed8dff29651efe730f9f",
+  "comparison_note": "Commanded scenes, IDs, native boxes/labels, YOLO bytes and scenario/config/asset manifests are exact. Only realized positions, whole-sign-equivalent unit quaternions, secondary projection and derived IoU allow stated absolute roundoff. Timing fields are scheduling-dependent. RGB equality is reported separately.",
+  "comparison_timestamp": "2026-10-04T23:37:59.866381+00:00",
+  "diagnostics": "determinism_diagnostic.json",
+  "errors": [],
+  "frames": 50,
+  "historical_failure": "determinism_attempt2_exact_comparison.json",
+  "measured_max_differences": {
+    "derived_iou": 3.305800078123866e-12,
+    "position_m": 1.8189894035458565e-12,
+    "quaternion_component": 3.3306690738754696e-16,
+    "quaternion_sign_changes": 58,
+    "secondary_projection_px": 4.172306944383308e-11
+  },
+  "rgb_bytes_identical": true,
+  "rgb_identical_frames": 50,
+  "runs": [
+    "datasets/determinism_a2",
+    "datasets/determinism_b2"
+  ],
+  "status": "PASSED",
+  "unit_tests": 40
+}
