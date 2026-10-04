@@ -41,8 +41,9 @@ def overlay(root,r,secondary=False):
             if b: cv2.rectangle(image,tuple(map(int,b[:2])),tuple(map(int,b[2:])),(255,100,20),1)
         b=o['bbox_px']
         if not b: continue
-        cv2.rectangle(image,tuple(map(int,b[:2])),tuple(map(int,b[2:])),(40,235,50),1)
-        text=f"{o['class_name']} {o['distance_category']}"+(f" IoU {o['annotation_iou']:.2f}" if secondary else '')
+        color=(40,235,50) if o['label_state']=='labelled' else (0,165,255)
+        cv2.rectangle(image,tuple(map(int,b[:2])),tuple(map(int,b[2:])),color,1)
+        text=f"{o['class_name']} {o['distance_category']}"+(f" {o['label_state']}" if o['label_state']!='labelled' else '')+(f" IoU {o['annotation_iou']:.2f}" if secondary else '')
         cv2.putText(image,text,(int(b[0]),max(30,int(b[1])-3)),cv2.FONT_HERSHEY_SIMPLEX,.32,(255,255,255),1,cv2.LINE_AA)
     cv2.rectangle(image,(0,0),(cam['width'],24),(20,20,20),-1)
     text=f"#{r['index']} {r['split']} {r['camera']['nominal_altitude_m']}m {r['camera']['nominal_off_nadir_deg']}deg {r['lighting']['family']} {r['background']['family']} {r['kind']}"
@@ -69,6 +70,7 @@ def preview(root,count=100,audit_count=300):
     for r in records:
         for factor in factors(r): groups[factor].append(r)
     for r in selected: save_image(root/'qa/previews'/(r['frame_id']+'.jpg'),overlay(root,r))
+    for i in range(0,len(selected),25): sheet(root,selected[i:i+25],root/'qa/review_pages'/f'{i//25+1:03d}.jpg')
     for name,group in sorted(groups.items()): sheet(root,representative(group,min(12,len(group))),root/'qa/contact_sheets'/(name+'.jpg'))
     audit=representative(records,min(audit_count,len(records)),54321);observations=[]
     for r in audit:

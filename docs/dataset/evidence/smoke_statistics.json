@@ -1,0 +1,285 @@
+{
+  "bbox_area_px": {
+    "count": 600,
+    "max": 137956.0,
+    "mean": 7921.045,
+    "median": 3012.5,
+    "min": 9.0,
+    "p05": 70.0,
+    "p25": 645.75,
+    "p95": 32686.199999999997
+  },
+  "bbox_height_px": {
+    "count": 600,
+    "max": 364.0,
+    "mean": 66.35,
+    "median": 45.5,
+    "min": 3.0,
+    "p05": 7.0,
+    "p25": 24.0,
+    "p95": 182.04999999999995
+  },
+  "bbox_width_px": {
+    "count": 600,
+    "max": 561.0,
+    "mean": 76.57833333333333,
+    "median": 59.0,
+    "min": 3.0,
+    "p05": 8.0,
+    "p25": 26.0,
+    "p95": 214.39999999999964
+  },
+  "camera_yaw_histogram_30deg": [
+    22,
+    13,
+    22,
+    9,
+    23,
+    16,
+    22,
+    13,
+    19,
+    11,
+    8,
+    22
+  ],
+  "cross_tables": {
+    "altitude_x_class": {
+      "10": {
+        "bus": 28,
+        "car": 28,
+        "person": 31,
+        "truck": 42
+      },
+      "15": {
+        "bus": 33,
+        "car": 29,
+        "person": 29,
+        "truck": 41
+      },
+      "20": {
+        "bus": 23,
+        "car": 24,
+        "person": 32,
+        "truck": 33
+      },
+      "30": {
+        "bus": 39,
+        "car": 31,
+        "person": 29,
+        "truck": 29
+      },
+      "40": {
+        "bus": 17,
+        "car": 28,
+        "person": 28,
+        "truck": 29
+      }
+    },
+    "background_x_class": {
+      "dirt": {
+        "bus": 30,
+        "car": 34,
+        "person": 34,
+        "truck": 52
+      },
+      "grass": {
+        "bus": 37,
+        "car": 29,
+        "person": 37,
+        "truck": 35
+      },
+      "mixed": {
+        "bus": 37,
+        "car": 39,
+        "person": 36,
+        "truck": 41
+      },
+      "road": {
+        "bus": 36,
+        "car": 38,
+        "person": 42,
+        "truck": 46
+      }
+    },
+    "distance_x_class": {
+      "edge": {
+        "bus": 50,
+        "car": 27,
+        "person": 17,
+        "truck": 57
+      },
+      "far": {
+        "bus": 10,
+        "car": 30,
+        "person": 49,
+        "truck": 12
+      },
+      "medium": {
+        "bus": 42,
+        "car": 47,
+        "person": 47,
+        "truck": 62
+      },
+      "near": {
+        "bus": 38,
+        "car": 36,
+        "person": 36,
+        "truck": 43
+      }
+    },
+    "lighting_x_class": {
+      "evening": {
+        "bus": 32,
+        "car": 37,
+        "person": 33,
+        "truck": 41
+      },
+      "morning": {
+        "bus": 34,
+        "car": 33,
+        "person": 47,
+        "truck": 60
+      },
+      "noon": {
+        "bus": 43,
+        "car": 34,
+        "person": 32,
+        "truck": 34
+      },
+      "shadow": {
+        "bus": 31,
+        "car": 36,
+        "person": 37,
+        "truck": 39
+      }
+    },
+    "off_nadir_x_class": {
+      "0": {
+        "bus": 31,
+        "car": 26,
+        "person": 48,
+        "truck": 40
+      },
+      "10": {
+        "bus": 37,
+        "car": 37,
+        "person": 29,
+        "truck": 42
+      },
+      "20": {
+        "bus": 35,
+        "car": 40,
+        "person": 26,
+        "truck": 53
+      },
+      "30": {
+        "bus": 37,
+        "car": 37,
+        "person": 46,
+        "truck": 39
+      }
+    }
+  },
+  "frame_types": {
+    "distractor_only": 20,
+    "negative": 20,
+    "positive": 160
+  },
+  "frames": 200,
+  "frames_per_split": {
+    "test": 20,
+    "train": 160,
+    "val": 20
+  },
+  "ignored_by_reason": {
+    "ignored_occluded": 2,
+    "ignored_tiny": 1
+  },
+  "instances_per_class": {
+    "bus": 140,
+    "car": 140,
+    "person": 149,
+    "truck": 174
+  },
+  "iou": {
+    "count": 601,
+    "max": 0.9990085071048337,
+    "mean": 0.9171115562434764,
+    "median": 0.9687571786021125,
+    "min": 0.09763627003437093,
+    "p05": 0.6691594710309757,
+    "p25": 0.9058060084489193,
+    "p95": 0.9942948874796992
+  },
+  "labelled_per_class": {
+    "bus": 140,
+    "car": 140,
+    "person": 146,
+    "truck": 174
+  },
+  "marginals": {
+    "altitude": {
+      "10": 40,
+      "15": 40,
+      "20": 40,
+      "30": 40,
+      "40": 40
+    },
+    "background": {
+      "dirt": 50,
+      "grass": 50,
+      "mixed": 50,
+      "road": 50
+    },
+    "lighting": {
+      "evening": 50,
+      "morning": 50,
+      "noon": 50,
+      "shadow": 50
+    },
+    "off_nadir": {
+      "0": 50,
+      "10": 50,
+      "20": 50,
+      "30": 50
+    }
+  },
+  "object_size_counts": {
+    "large_96_squared_and_above": 137,
+    "medium_32_to_96_squared": 277,
+    "small_under_32_squared": 186
+  },
+  "object_yaw_histogram_30deg": [
+    50,
+    48,
+    51,
+    41,
+    46,
+    57,
+    43,
+    49,
+    59,
+    55,
+    54,
+    50
+  ],
+  "objects_per_image": {
+    "0": 40,
+    "1": 20,
+    "2": 33,
+    "3": 30,
+    "4": 21,
+    "5": 20,
+    "6": 18,
+    "7": 9,
+    "8": 9
+  },
+  "occlusion_requested": {
+    "mild": 14,
+    "moderate": 9,
+    "none": 177
+  },
+  "placement_shortfall": 2,
+  "truncated_objects": 148
+}
