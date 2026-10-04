@@ -116,6 +116,10 @@ class GeneratorTests(unittest.TestCase):
     def test_iou_semantics(self):
         self.assertEqual(iou([0,0,5,5],[0,0,5,5]),1);self.assertEqual(iou([0,0,1,1],[2,2,3,3]),0)
 
+    def test_distribution_order_independence(self):
+        values=[1e16,1,1]
+        self.assertEqual(distribution(values),distribution(list(reversed(values))))
+
     def test_asset_dimensions(self):
         for a in self.cfg['assets']:
             if a['category']=='background': continue

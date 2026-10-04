@@ -6,12 +6,13 @@ test_atomic_resume_and_corruption (test_generator.GeneratorTests.test_atomic_res
 test_class_order_and_mapping (test_generator.GeneratorTests.test_class_order_and_mapping) ... ok
 test_clipping (test_generator.GeneratorTests.test_clipping) ... ok
 test_distance_categories (test_generator.GeneratorTests.test_distance_categories) ... ok
+test_distribution_order_independence (test_generator.GeneratorTests.test_distribution_order_independence) ... ok
 test_gazebo_namespace (test_generator.GeneratorTests.test_gazebo_namespace) ... ok
 test_ground_footprint (test_generator.GeneratorTests.test_ground_footprint) ... ok
 test_ignored_objects_stay_accounted (test_generator.GeneratorTests.test_ignored_objects_stay_accounted) ... ok
 test_invalid_boxes (test_generator.GeneratorTests.test_invalid_boxes) ... ok
 test_iou_semantics (test_generator.GeneratorTests.test_iou_semantics) ... ok
-test_manifest_and_dataset_yaml (test_generator.GeneratorTests.test_manifest_and_dataset_yaml) ... /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/tests/test_generator.py:143: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp0g3x2n0z/manifests/scenarios.csv' mode='r' encoding='UTF-8'>
+test_manifest_and_dataset_yaml (test_generator.GeneratorTests.test_manifest_and_dataset_yaml) ... /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/tests/test_generator.py:147: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp2dq8cmt6/manifests/scenarios.csv' mode='r' encoding='UTF-8'>
   entries=list(csv.DictReader((Path(directory)/'manifests/scenarios.csv').open()));self.assertEqual(len(entries),1)
 ResourceWarning: Enable tracemalloc to get the object allocation traceback
 ok
@@ -25,7 +26,7 @@ test_seed_reproduction (test_generator.GeneratorTests.test_seed_reproduction) ..
 test_spacing_and_grounding (test_generator.GeneratorTests.test_spacing_and_grounding) ... ok
 test_split_counts (test_generator.GeneratorTests.test_split_counts) ... ok
 test_upward_rays_rejected (test_generator.GeneratorTests.test_upward_rays_rejected) ... ok
-test_validator_detects_duplicate_images_and_orphans (test_generator.GeneratorTests.test_validator_detects_duplicate_images_and_orphans) ... /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/validate_dataset.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpcwf5b1av/manifests/scenarios.csv' mode='r' encoding='UTF-8'>
+test_validator_detects_duplicate_images_and_orphans (test_generator.GeneratorTests.test_validator_detects_duplicate_images_and_orphans) ... /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/validate_dataset.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp0225nz4i/manifests/scenarios.csv' mode='r' encoding='UTF-8'>
   scenarios=list(csv.DictReader((root/'manifests/scenarios.csv').open()));actual_counts['scenario_manifest']=len(scenarios)
 ResourceWarning: Enable tracemalloc to get the object allocation traceback
 ok
@@ -35,6 +36,6 @@ test_yolo_conversion (test_generator.GeneratorTests.test_yolo_conversion) ... ok
 test_yolo_edges_positive (test_generator.GeneratorTests.test_yolo_edges_positive) ... ok
 
 ----------------------------------------------------------------------
-Ran 29 tests in 2.177s
+Ran 30 tests in 2.262s
 
 OK

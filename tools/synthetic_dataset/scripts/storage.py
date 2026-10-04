@@ -47,7 +47,8 @@ def committed_records(root):
 
 def distribution(values):
     if not values: return {'count':0}
-    x=np.asarray(values,float)
+    # Split traversal and scene traversal must produce bit-identical aggregates.
+    x=np.sort(np.asarray(values,float))
     return {'count':len(values),'min':float(x.min()),'p05':float(np.percentile(x,5)),
             'p25':float(np.percentile(x,25)),'median':float(np.median(x)),
             'p95':float(np.percentile(x,95)),'max':float(x.max()),'mean':float(x.mean())}
