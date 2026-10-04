@@ -116,6 +116,24 @@ and moving-target gates. Logs: `/tmp/wildlife-v04-continuation-build.log` and
 ## Later gates
 
 Eight-PX4 deployment/flight, QGC multi-vehicle UI inspection,
-moving-target flight, health/fault flight and deconfliction flight
+health/fault flight and deconfliction flight
 remain pending validation. Their launch/configuration presence is not evidence
 of completion.
+
+## Gate 13 — moving visual target: PASS
+
+`scripts/validate_px4_moving_target.sh` passed in 104.0 s. The YAML waypoint
+loop moves `dummy_wildlife_01` at a configured 0.35 m/s using Gazebo's
+`set_pose` service. 186 updates were accepted; one startup request failed.
+The real camera delivered 771 images and 31 OpenCV detections. Tracking
+retained one `tgt_001`, populated velocity (maximum reported 0.731 m/s), and
+the existing mission completed standoff, CONTINUE_HOLD, RETURN, measured
+landing/disarm and COMPLETE. Evidence: `validation/px4_moving_target.json`
+and `validation/moving_target_motion.json`.
+
+Velocity is a smoothed finite difference of noisy camera locations, not a
+calibrated speed measurement. The probe's `minimum_target_error_m` compares
+with the starting point (15, 8), not the contemporaneous moving-model pose;
+it must not be interpreted as moving-target localization accuracy. The UAV
+holds its original standoff point; it does not chase the target. Stale/lost
+and reacquisition behavior remains covered by regression tests.
