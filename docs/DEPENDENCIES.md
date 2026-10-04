@@ -65,4 +65,4 @@ The environment defaults ROS discovery to LOCALHOST, Gazebo transport to
 separately validated distributed setup. Do not compile or rebuild the workspace
 while a live validation is running. PX4 LandDetected publishes at 1 Hz of
 simulation time; the fleet uses a separate three-second status/landing receipt
-age while retaining a existing two-second local-position age.
+age while retaining the existing two-second local-position age.

@@ -30,7 +30,7 @@ The first probe run failed its movement threshold for uav02 because it commanded
 ## Gate 4 — two-PX4 mission flow: PASS
 
 Run: `scripts/validate_px4_two_mission.sh` with QGroundControl connected.
-Result: `validation/px4_two_mission.json` (144.4 s). The runner used the existing
+Result: `validation/px4_two_mission.json` (143.7 s). The runner used the existing
 mission graph with one configured synthetic target and separate search lanes.
 
 Both vehicles became ready, armed, entered OFFBOARD and SEARCHING. uav01 made
@@ -115,8 +115,8 @@ upstream PX4 sources and dependency pins remain unchanged.
 All nine ROS packages rebuilt. `colcon test-result --verbose` reports
 50 entries, zero errors/failures/skips, including target velocity, battery and
 stale-state assignment filters, one-shot low-battery RETURN, and motion
-interpolation. These unit checks do not establish the pending live health
-and moving-target gates. Logs: `/tmp/wildlife-v04-continuation-build.log` and
+interpolation. At that checkpoint, live health and moving-target validation
+were still pending; the later sections record their completed live gates. Logs: `/tmp/wildlife-v04-continuation-build.log` and
 `/tmp/wildlife-v04-continuation-tests.log`.
 
 ## Release gate tracking
