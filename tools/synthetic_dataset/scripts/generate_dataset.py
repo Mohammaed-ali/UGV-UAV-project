@@ -13,7 +13,7 @@ import subprocess
 import time
 import yaml
 from common import (TOOL, ROOT, load_config, canonical, digest, file_hash,
-                    git_revision, atomic_write, write_json, utc_now)
+                    git_revision, atomic_write, write_json, utc_now, acceptance_config_hash)
 from sampling import Sampler
 from storage import complete, commit_sample, summarize
 
@@ -46,7 +46,8 @@ def main():
     for required,threshold in [('smoke',200),('pilot',2000),('audit',2000)]:
         if count<=threshold: continue
         p=ROOT/f'docs/dataset/evidence/{required}_gate.json'
-        if not p.exists() or json.loads(p.read_text()).get('status')!='PASSED':
+        prior=json.loads(p.read_text()) if p.exists() else {}
+        if prior.get('status')!='PASSED' or prior.get('acceptance_configuration_sha256')!=acceptance_config_hash(cfg):
             raise RuntimeError(f'{required} acceptance gate must pass before count={count}')
     occupied=root.exists() and any(p.name!='.lock' for p in root.iterdir())
     if occupied and not args.resume: raise RuntimeError('Output already contains files; use --resume with its original config/count/seed')
@@ -67,7 +68,7 @@ def main():
                      gazebo_version=subprocess.check_output(['gz','sim','--versions'],text=True).strip(),
                      class_mapping=cfg['classes'],generation_start=utc_now(),attempted_samples=0,rejected_samples=0,
                      rejection_reasons={},asset_licenses=sorted(set(a['license'] for a in cfg['assets'])),
-                     known_limitations=['procedural imagery; no real-world accuracy claim','person variants share one template; no heldout person model',
+                     known_limitations=['synthetic mesh/PBR imagery; no real-world accuracy claim','person variants share one template; no heldout person model',
                                         'geometry cross-check is a full silhouette, native labels are visible boxes','pixel visibility fraction is not measured'],
                      host={'platform':platform.platform(),'cpu_count':os.cpu_count(),'python':platform.python_version()})
             write_json(run_path,run)

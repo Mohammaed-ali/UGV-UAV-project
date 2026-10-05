@@ -21,6 +21,17 @@ def schedule(values,count,seed):
     return result
 
 
+def quota_schedule(weights, count, seed):
+    """Largest-remainder allocation; each category is within one frame of target."""
+    total=sum(weights.values())
+    raw={k:v/total*count for k,v in weights.items()}
+    counts={k:math.floor(v) for k,v in raw.items()}
+    for k in sorted(raw,key=lambda k:-(raw[k]-counts[k]))[:count-sum(counts.values())]:counts[k]+=1
+    values=[k for k,n in counts.items() for _ in range(n)]
+    random.Random(seed).shuffle(values)
+    return values
+
+
 def split_schedule(count, fractions, seed):
     train=int(count*fractions['train']);val=int(count*fractions['val'])
     result=['train']*train+['val']*val+['test']*(count-train-val)
@@ -44,15 +55,37 @@ class Sampler:
         self.factors={key:schedule(values,count,seeded(seed,key)) for key,values in
                       [('altitude',s['altitude_buckets_m']),('angle',s['off_nadir_buckets_deg']),
                        ('lighting',list(cfg['lighting'])),('background',cfg['backgrounds'])]}
+        self.compositions=[None]*count;self.human_bands=[None]*count
         for split in cfg['split_fractions']:
             indices=[i for i,x in enumerate(self.splits) if x==split]
+            composition=quota_schedule(cfg['scene_composition'][split],len(indices),seeded(seed,'composition'+split))
+            for i,value in zip(indices,composition):self.compositions[i]=value
+            humans=[i for i in indices if self.compositions[i]=='human_positive']
+            priority=cfg['human_priority']
+            kinds=quota_schedule(priority['train_scene_counts' if split=='train' else 'evaluation_scene_counts'],len(humans),seeded(seed,'humans'+split))
+            multi=[i for i,k in zip(humans,kinds) if k=='multi']
+            counts=quota_schedule(priority['multi_count_distribution'],len(multi),seeded(seed,'crowds'+split))
+            for i,k in zip(humans,kinds):self.human_bands[i]='1' if k=='single' else None
+            for i,k in zip(multi,counts):self.human_bands[i]=k
             for key,values in [('altitude',s['altitude_buckets_m']),('angle',s['off_nadir_buckets_deg']),
                                ('lighting',list(cfg['lighting'])),('background',cfg['backgrounds'])]:
-                quota=schedule(values,len(indices),seeded(seed,key+split))
-                for i,value in zip(indices,quota): self.factors[key][i]=value
-        n=int(count*s['negative_ratio']);d=int(count*s['distractor_only_ratio'])
-        self.kinds=['negative']*n+['distractor_only']*d+['positive']*(count-n-d)
-        random.Random(seeded(seed,'kind')).shuffle(self.kinds)
+                for composition_name in cfg['scene_composition'][split]:
+                    group=[i for i in indices if self.compositions[i]==composition_name]
+                    quota=schedule(values,len(group),seeded(seed,key+split+composition_name))
+                    for i,value in zip(group,quota):self.factors[key][i]=value
+        self.kinds=[{'empty':'negative','distractor_only':'distractor_only'}.get(x,'positive') for x in self.compositions]
+        self.person_counts=[0]*count;self.person_distances={};self.mixed=[False]*count
+        for split in cfg['split_fractions']:
+            humans=[i for i in range(count) if self.splits[i]==split and self.compositions[i]=='human_positive']
+            mixed=quota_schedule({True:priority['mixed_vehicle_fraction'],False:1-priority['mixed_vehicle_fraction']},len(humans),seeded(seed,'mixed'+split))
+            for i,m in zip(humans,mixed):self.mixed[i]=m
+            for i in humans:
+                band=self.human_bands[i]
+                self.person_counts[i]=1 if band=='1' else random.Random(seeded(seed,str(i)+'count')).randint(*priority['count_ranges'][band])
+            distances=quota_schedule(priority['distance_weights'],sum(self.person_counts[i] for i in humans),seeded(seed,'person_distances'+split))
+            offset=0
+            for i in humans:
+                self.person_distances[i]=distances[offset:offset+self.person_counts[i]];offset+=self.person_counts[i]
         self.backgrounds=[a for a in cfg['assets'] if a['category']=='background']
 
     def scene(self,index):
@@ -77,19 +110,39 @@ class Sampler:
         light={'family':lighting,'elevation_deg':elev,'azimuth_deg':az,'intensity':rng.uniform(*l['intensity']),
                'color':l['color'],'direction':[-math.cos(er)*math.cos(ar),-math.cos(er)*math.sin(ar),-math.sin(er)],
                'ambient':c['world']['ambient'],'cast_shadows':True}
-        kind=self.kinds[index];objects=[];used={}
-        planned=0 if kind!='positive' else rng.choices(list(range(1,9)),weights=s['object_count_weights'],k=1)[0]
-        for j in range(planned):
-            cls=rng.choice(c['classes'])
+        kind=self.kinds[index];composition=self.compositions[index];objects=[];used={}
+        people=self.person_counts[index];priority=c['human_priority']
+        vehicles=0
+        if composition=='vehicle_only':vehicles=rng.choices(list(range(1,9)),weights=s['object_count_weights'],k=1)[0]
+        elif self.mixed[index]:vehicles=rng.randint(*priority['mixed_vehicle_count'])
+        planned_classes=[c['classes'][0]]*people;class_usage={}
+        for _ in range(vehicles):
+            available=[]
+            for cls in c['classes'][1:]:
+                eligible=[a for a in c['assets'] if a['category']==cls['name'] and split in a['eligibility'] and (split!='test' or a['held_out'])]
+                if class_usage.get(cls['name'],0)<len(eligible)*c['world']['pool_copies_per_variant']:available.append(cls)
+            if not available:raise ValueError('Insufficient vehicle pool for planned scene')
+            cls=rng.choice(available);planned_classes.append(cls);class_usage[cls['name']]=class_usage.get(cls['name'],0)+1
+        planned=len(planned_classes);grouping=weighted(rng,priority['grouping']) if people else 'scattered'
+        group_azimuths={k:rng.uniform(0,2*math.pi) for k in priority['distance_weights']}
+        for j,cls in enumerate(planned_classes):
             pool=[a for a in c['assets'] if a['category']==cls['name'] and split in a['eligibility']
+                  and (split!='test' or cls['name']=='person' or a['held_out'])
                   and used.get(a['asset_id'],0)<c['world']['pool_copies_per_variant']]
-            if not pool: break
+            if not pool:raise ValueError('Insufficient asset instances for planned composition')
             asset=rng.choice(pool);slot=used.get(asset['asset_id'],0)
             radius=math.hypot(*asset['physical_dimensions_m'][:2])/2
             placed=None
+            band=self.person_distances[index][j] if cls['name']=='person' else weighted(rng,s['distance_weights'])
             for attempt in range(s['placement_attempts']):
-                band=weighted(rng,s['distance_weights']);low,high=s['distance_bands'][band]
-                fraction=rng.uniform(low,high);azimuth=rng.uniform(0,2*math.pi);direction=np.array([math.cos(azimuth),math.sin(azimuth)])
+                low,high=s['distance_bands'][band]
+                fraction=rng.uniform(low,high)
+                # Each distance shell can contain a plausible loose group; failures
+                # widen angular spread within that shell, never redraw distance.
+                if cls['name']=='person' and grouping=='loose_groups' and attempt<100:
+                    azimuth=group_azimuths[band]+rng.uniform(-.35,.35)
+                else:azimuth=rng.uniform(0,2*math.pi)
+                direction=np.array([math.cos(azimuth),math.sin(azimuth)])
                 boundary=footprint_radius(center,direction,polygon,camera,c['camera'])
                 xy=center+direction*boundary*fraction;object_yaw=rng.uniform(*s['object_yaw_deg'])
                 pose={'position':[float(xy[0]),float(xy[1]),c['world']['ground_z']],
@@ -97,7 +150,7 @@ class Sampler:
                 if any(np.linalg.norm(xy-np.asarray(o['pose']['position'][:2])) < radius+o['footprint_radius_m']+s['min_spacing_m'] for o in objects): continue
                 box=projected_geometry(asset,pose,camera,c['camera']);clipped=clip_box(box,c['camera'])
                 if clipped is None: continue
-                if band!='edge' and (box[0]<2 or box[1]<2 or box[2]>c['camera']['width']-2 or box[3]>c['camera']['height']-2): continue
+                if cls['name']=='person' and band!='edge' and (box[0]<2 or box[1]<2 or box[2]>c['camera']['width']-2 or box[3]>c['camera']['height']-2): continue
                 placed=dict(instance_id=f"pool_{asset['asset_id']}_{slot}",asset_id=asset['asset_id'],
                             class_name=cls['name'],class_id=cls['yolo_id'],gazebo_label=cls['gazebo_label'],
                             pose=pose,yaw_deg=object_yaw,physical_dimensions_m=asset['physical_dimensions_m'],
@@ -108,6 +161,7 @@ class Sampler:
                 break
             if placed:
                 objects.append(placed);used[asset['asset_id']]=slot+1
+            elif cls['name']=='person':raise ValueError(f'Human placement failed in retained {band} band')
         if kind=='positive' and not objects:
             raise ValueError('No target fits in usable footprint')
         clutter=[]
@@ -123,8 +177,17 @@ class Sampler:
         occlusion=weighted(rng,s['occlusion_weights']) if objects else 'none'
         if objects and occlusion!='none':
             first=objects[0];x,y,_=first['pose']['position']
-            # A supported canopy above the target, no target/occluder solid intersection.
-            clutter.append({'instance_id':'canopy_'+occlusion,'pose':{'position':[x+first['physical_dimensions_m'][0]*.45,y,c['world']['ground_z']],
+            # A physically separated, supported shade roof clips part of the
+            # aerial silhouette. Human roofs are kept to the side to prevent
+            # turning the single-person quota into fully hidden targets.
+            if first['class_name']=='person':
+                center_height=first['physical_dimensions_m'][2]*.5
+                view=np.asarray(camera['position']);target=np.array([x,y,center_height+c['world']['ground_z']])
+                roof_height=5.12+c['world']['ground_z'];at_roof=view+(target-view)*(view[2]-roof_height)/(view[2]-target[2])
+                offset=(1.0 if occlusion=='mild' else 2.0)+first['physical_dimensions_m'][0]*(.20 if occlusion=='mild' else .02)
+                roof_xy=[float(at_roof[0]+offset),float(at_roof[1])]
+            else:roof_xy=[x+first['physical_dimensions_m'][0]*.45,y]
+            clutter.append({'instance_id':'canopy_'+occlusion,'pose':{'position':[*roof_xy,c['world']['ground_z']],
                                                                       'quaternion':quaternion(0,0,0)}})
         if objects and lighting=='shadow':
             for target in objects:
@@ -140,7 +203,9 @@ class Sampler:
                'background':{'family':background,'asset_id':material['asset_id'],'zone_x_m':zone,
                              'texture_rotation_deg':0,'texture_scale':1,'texture_offset':[0,0]},
                'objects':objects,'distractors':clutter,'planned_target_count':planned,
-               'placement_shortfall':planned-len(objects),'occlusion_requested':occlusion}
+               'placement_shortfall':planned-len(objects),'occlusion_requested':occlusion,
+               'composition_requested':composition,'person_count_band_requested':self.human_bands[index],
+               'planned_person_count':people,'planned_vehicle_count':vehicles,'human_grouping_requested':grouping}
         scene['scenario_sha256']=digest(canonical({k:v for k,v in scene.items() if k not in
                                                    ('frame_id','scene_id','scene_family','index','split','master_seed','scene_seed')}))
         return scene

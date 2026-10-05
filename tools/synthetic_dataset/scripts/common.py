@@ -30,6 +30,10 @@ def file_hash(path):
     return h.hexdigest()
 
 
+def acceptance_config_hash(cfg):
+    return digest(canonical({k:v for k,v in cfg.items() if k not in ('count','master_seed','output')}))
+
+
 def utc_now():
     return datetime.now(timezone.utc).isoformat()
 
@@ -104,4 +108,13 @@ def load_config(path):
         p = TOOL / asset['local_path']
         if not p.is_file() or file_hash(p) != asset['checksum']:
             raise ValueError('Missing or changed pinned asset: ' + str(p))
+        for dependency in asset.get('dependencies', []):
+            p = TOOL / dependency['local_path']
+            if not p.is_file() or file_hash(p) != dependency['checksum']:
+                raise ValueError('Missing or changed pinned asset dependency: ' + str(p))
+    for split, composition in cfg.get('scene_composition', {}).items():
+        if split not in cfg['split_fractions'] or set(composition) != {'human_positive','vehicle_only','distractor_only','empty'}:
+            raise ValueError('Invalid per-split scene composition')
+        if min(composition.values()) < 0 or abs(sum(composition.values())-1)>1e-9:
+            raise ValueError('Scene composition fractions must sum to one')
     return cfg

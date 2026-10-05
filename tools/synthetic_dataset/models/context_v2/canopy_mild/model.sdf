@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="canopy_mild">
+    <static>true</static>
+    <link name="body">
+      <visual name="roof">
+        <geometry>
+          <mesh>
+            <uri>roof.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.46 0.44 0.38 1</ambient>
+          <diffuse>0.46 0.44 0.38 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.48</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="steel">
+        <geometry>
+          <mesh>
+            <uri>steel.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.23 0.24 0.24 1</ambient>
+          <diffuse>0.23 0.24 0.24 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.48</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+    </link>
+  </model>
+</sdf>

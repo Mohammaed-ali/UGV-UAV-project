@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="clutter_0">
+    <static>true</static>
+    <link name="body">
+      <visual name="wood">
+        <geometry>
+          <mesh>
+            <uri>wood.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.42 0.32 0.2 1</ambient>
+          <diffuse>0.42 0.32 0.2 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.48</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="wood_dark">
+        <geometry>
+          <mesh>
+            <uri>wood_dark.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.25 0.19 0.12 1</ambient>
+          <diffuse>0.25 0.19 0.12 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.48</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+    </link>
+  </model>
+</sdf>

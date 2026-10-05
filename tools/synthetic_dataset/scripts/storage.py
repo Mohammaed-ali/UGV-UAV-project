@@ -93,6 +93,13 @@ def summarize(root,cfg,run):
     for split in cfg['split_fractions']:
         atomic_write(root/'metadata'/(split+'.jsonl'),''.join(canonical(r)+'\n' for r in records if r['split']==split))
     stats=statistics(records);write_json(root/'statistics.json',stats)
+    if 'human_priority' in cfg:
+        from human_qa import human_statistics, evaluation_subsets
+        write_json(root/'human_statistics.json',human_statistics(records,cfg))
+        subsets=evaluation_subsets(records,cfg)
+        for name,values in subsets.items():atomic_write(root/'manifests'/(name+'.txt'),''.join(v+'\n' for v in values))
+        write_json(root/'manifests/human_evaluation_subsets.json',{'definition':'Overlapping metadata/file-list subsets; images are never copied. Occluded/shadow subsets identify requested scene conditions, not measured per-pixel visibility.',
+                                                              'subsets':subsets})
     stream=io.StringIO();fields=['frame_id','scene_id','scene_family','scene_seed','split','scenario_sha256']
     w=csv.DictWriter(stream,fieldnames=fields,extrasaction='ignore');w.writeheader();w.writerows(records)
     atomic_write(root/'manifests/scenarios.csv',stream.getvalue())
@@ -104,7 +111,8 @@ def summarize(root,cfg,run):
         for k in ('image','label','metadata'): file_index.append({'path':str(p[k].relative_to(root)),'sha256':state['sha256'][k]})
     for p in sorted((root/'manifests').glob('*')):
         if p.is_file() and p.name!='files.sha256.json': file_index.append({'path':str(p.relative_to(root)),'sha256':file_hash(p)})
-    for name in ('statistics.json','data.yaml'): file_index.append({'path':name,'sha256':file_hash(root/name)})
+    for name in ('statistics.json','data.yaml','human_statistics.json'):
+        if (root/name).exists():file_index.append({'path':name,'sha256':file_hash(root/name)})
     write_json(root/'manifests/files.sha256.json',sorted(file_index,key=lambda x:x['path']))
     manifest=dict(run);manifest.update(accepted_samples=len(records),completed=len(records)==run['expected_count'],
                                      generation_end=utc_now(),split_counts=stats['frames_per_split'],class_counts=stats['instances_per_class'],
@@ -114,6 +122,6 @@ def summarize(root,cfg,run):
     atomic_write(root/'README.md','# Gazebo aerial detection dataset\n\nSynthetic Gazebo imagery is not equivalent to real aerial-camera imagery.\n\n'
                  'Classes: 0 person, 1 car, 2 truck, 3 bus. Native visible 2D boxes; fixed V0.4 camera.\n'
                  'See manifest.json, statistics.json and metadata/*.jsonl for provenance and factors.\n'
-                 'Original procedural assets are CC0-1.0; human variants share one template.\n'
+                 'Asset licenses and shared-template limitations are recorded in manifests/assets.json.\n'
                  'This dataset establishes no real-world detector accuracy or sim-to-real success.\n')
     return manifest

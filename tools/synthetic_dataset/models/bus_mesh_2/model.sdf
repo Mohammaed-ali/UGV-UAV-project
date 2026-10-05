@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="bus_mesh_2">
+    <static>true</static>
+    <link name="body">
+      <visual name="paint_body">
+        <geometry>
+          <mesh>
+            <uri>paint_body.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.53 0.38 0.25 1</ambient>
+          <diffuse>0.53 0.38 0.25 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0.15</metalness>
+              <roughness>.48</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="chassis">
+        <geometry>
+          <mesh>
+            <uri>chassis.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.09 0.09 0.09 1</ambient>
+          <diffuse>0.09 0.09 0.09 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.48</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="glass_windows">
+        <geometry>
+          <mesh>
+            <uri>glass_windows.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.075 0.14 0.17 1</ambient>
+          <diffuse>0.075 0.14 0.17 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.25</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="glass_front">
+        <geometry>
+          <mesh>
+            <uri>glass_front.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.07 0.13 0.16 1</ambient>
+          <diffuse>0.07 0.13 0.16 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.25</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="glass_rear">
+        <geometry>
+          <mesh>
+            <uri>glass_rear.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.07 0.13 0.16 1</ambient>
+          <diffuse>0.07 0.13 0.16 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.25</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="rubber_wheels">
+        <geometry>
+          <mesh>
+            <uri>rubber_wheels.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.045 0.045 0.045 1</ambient>
+          <diffuse>0.045 0.045 0.045 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.48</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="roof_detail">
+        <geometry>
+          <mesh>
+            <uri>roof_detail.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.24 0.26 0.25 1</ambient>
+          <diffuse>0.24 0.26 0.25 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.48</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="lamps">
+        <geometry>
+          <mesh>
+            <uri>lamps.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.86 0.82 0.63 1</ambient>
+          <diffuse>0.86 0.82 0.63 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.48</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="mirrors">
+        <geometry>
+          <mesh>
+            <uri>mirrors.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.18 0.19 0.19 1</ambient>
+          <diffuse>0.18 0.19 0.19 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.48</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+    </link>
+  </model>
+</sdf>

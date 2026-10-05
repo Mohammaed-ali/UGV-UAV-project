@@ -147,7 +147,7 @@ class Gazebo:
         light=Light(name='sun',id=self.entity_ids['sun'],type=Light.DIRECTIONAL,cast_shadows=True,intensity=scene['lighting']['intensity'])
         light.direction.x,light.direction.y,light.direction.z=scene['lighting']['direction']
         light.diffuse.r,light.diffuse.g,light.diffuse.b=scene['lighting']['color'];light.diffuse.a=1
-        light.specular.r=0;light.specular.g=0;light.specular.b=0;light.specular.a=1
+        light.specular.r=.15;light.specular.g=.15;light.specular.b=.15;light.specular.a=1
         self.request('light_config',light,Boolean)
         self.active=current
         def realized():

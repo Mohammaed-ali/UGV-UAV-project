@@ -18,7 +18,7 @@ TOLERANCES = {'position_m': 1e-10, 'quaternion_component': 1e-14,
 CAMERA_KEYS = set('position quaternion roll pitch yaw viewing_azimuth_deg nominal_altitude_m altitude_agl_m ground_reference_z nominal_off_nadir_deg actual_off_nadir_deg'.split())
 POSE_KEYS = {'position', 'quaternion'}
 SCHEMA = {
-    (): set('annotation_method background camera distractors frame_id index kind lighting master_seed native_box_count objects occlusion_requested placement_shortfall planned_target_count scenario_sha256 scene_family scene_id scene_seed split'.split()),
+    (): set('annotation_method background camera distractors frame_id index kind lighting master_seed native_box_count objects occlusion_requested placement_shortfall planned_target_count scenario_sha256 scene_family scene_id scene_seed split composition_requested person_count_band_requested planned_person_count planned_vehicle_count human_grouping_requested'.split()),
     ('camera',): CAMERA_KEYS | {'commanded_pose', 'model', 'live_camera_info'},
     ('camera', 'commanded_pose'): CAMERA_KEYS,
     ('camera', 'model'): set('convention cx cy far fx fy height horizontal_fov near noise source source_sha256 update_rate_hz vertical_fov width'.split()),
@@ -31,6 +31,8 @@ SCHEMA = {
     ('distractors', '*'): {'instance_id', 'pose'},
     ('distractors', '*', 'pose'): POSE_KEYS,
 }
+HUMAN_SCENE_FIELDS=set('composition_requested person_count_band_requested planned_person_count planned_vehicle_count human_grouping_requested'.split())
+LEGACY_ROOT=SCHEMA[()]-HUMAN_SCENE_FIELDS
 
 
 def normalized(record):
@@ -53,7 +55,8 @@ def metadata_differences(a, b, metrics=None):
         if type(x) is not type(y):
             errors.append(location + ': type differs'); return
         if isinstance(x, dict):
-            if key not in SCHEMA or set(x) != SCHEMA[key] or set(y) != SCHEMA[key]:
+            expected=LEGACY_ROOT if key==() and 'composition_requested' not in x else SCHEMA.get(key)
+            if expected is None or set(x) != expected or set(y) != expected:
                 errors.append(location + ': missing/unexpected fields'); return
             for name in sorted(x): walk(x[name], y[name], path + (name,))
             return
@@ -95,7 +98,8 @@ def metadata_differences(a, b, metrics=None):
     from validate_dataset import finite_tree
     if not finite_tree(a) or not finite_tree(b): return ['record: non-finite value']
     for record in (a,b):
-        if set(record) != SCHEMA[()] | TIMING_FIELDS: return ['record: missing/unexpected fields']
+        expected=SCHEMA[()] if 'composition_requested' in record else LEGACY_ROOT
+        if set(record) != expected | TIMING_FIELDS: return ['record: missing/unexpected fields']
         if any(type(record[k]) is not (str if k == 'generation_timestamp' else float) for k in TIMING_FIELDS):
             return ['record: invalid timing field type']
     walk(normalized(a), normalized(b))

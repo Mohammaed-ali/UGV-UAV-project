@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 from common import ROOT, TOOL, write_json, file_hash, utc_now
 from validate_dataset import validate
+from common import acceptance_config_hash
+import yaml
 
 
 def main():
@@ -26,7 +28,16 @@ def main():
         if args.gate in ('audit','full'):
             audit=json.loads((evidence/'qa/annotation_audit.json').read_text())
             if audit['audited_frames']<300 or len(index['lowest_iou_frames'])<50: raise RuntimeError('300-frame audit and 50 lowest-IoU samples required')
-        gate={'dataset_path':str(evidence),'validator':validation,'manifest_sha256':file_hash(evidence/'manifest.json')}
+        cfg=yaml.safe_load((evidence/'manifests/generation_config.yaml').read_text())
+        if 'human_priority' in cfg:
+            review=json.loads((evidence/'qa/realism_review.json').read_text())
+            criteria=['human_recognizability','vehicle_recognizability','terrain_realism','lighting_realism','shadow_realism','scene_plausibility']
+            if review.get('status')!='PASSED' or any(review.get('criteria',{}).get(k,{}).get('status')!='PASSED' for k in criteria):raise RuntimeError('Visual realism acceptance incomplete')
+            if args.gate in ('audit','full'):
+                tail=json.loads((evidence/'qa/low_iou_investigations.json').read_text())
+                if tail.get('status')!='PASSED' or len(tail.get('frames',[]))<50:raise RuntimeError('50 low-IoU investigations incomplete')
+        gate={'dataset_path':str(evidence),'validator':validation,'manifest_sha256':file_hash(evidence/'manifest.json'),
+              'acceptance_configuration_sha256':acceptance_config_hash(cfg)}
         out=ROOT/f'docs/dataset/evidence/{args.gate}_gate.json'
     gate.update(status='PASSED',visual_review=args.visual_review_note,review_timestamp=utc_now(),evidence_path=str(evidence))
     write_json(out,gate);print(str(out))

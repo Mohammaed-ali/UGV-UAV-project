@@ -66,7 +66,12 @@ class GeneratorTests(unittest.TestCase):
     def test_altitude_quotas(self):
         for split in ('train','val','test'):
             counts=Counter(r['camera']['nominal_altitude_m'] for r in self.scenes if r['split']==split)
-            self.assertEqual(set(counts),set(self.cfg['sampling']['altitude_buckets_m']));self.assertLessEqual(max(counts.values())-min(counts.values()),1)
+            self.assertEqual(set(counts),set(self.cfg['sampling']['altitude_buckets_m']));self.assertLessEqual(max(counts.values())-min(counts.values()),4)
+            for composition in self.cfg['scene_composition'][split]:
+                group=[r for r in self.scenes if r['split']==split and r['composition_requested']==composition]
+                values=Counter(r['camera']['nominal_altitude_m'] for r in group)
+                counts=[values[h] for h in self.cfg['sampling']['altitude_buckets_m']]
+                self.assertLessEqual(max(counts)-min(counts),1)
 
     def test_angle_quotas(self): self.assertEqual(set(r['camera']['nominal_off_nadir_deg'] for r in self.scenes),{0,10,20,30})
 

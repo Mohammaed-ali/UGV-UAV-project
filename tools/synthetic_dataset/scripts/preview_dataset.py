@@ -33,6 +33,16 @@ def verify_projection(stored, fresh):
 def factors(r):
     values=[f"altitude_{r['camera']['nominal_altitude_m']}",f"angle_{r['camera']['nominal_off_nadir_deg']}",
             'lighting_'+r['lighting']['family'],'background_'+r['background']['family'],r['kind']]
+    if 'composition_requested' in r:
+        from human_qa import visible_people,person_band
+        people=visible_people(r)
+        values.extend(['composition_'+r['composition_requested'],'split_'+r['split']])
+        if people:
+            values.extend(['human_focused','persons_'+person_band(len(people))])
+            values.append('single_person' if len(people)==1 else 'multi_person')
+            if any(o['class_name']!='person' and o['label_state']=='labelled' for o in r['objects']):values.append('person_vehicle')
+            if r['lighting']['family']=='shadow':values.append('person_shadow')
+            if r['occlusion_requested']!='none':values.append('person_occluded')
     if len(r['objects'])>1: values.append('multi_object')
     if r['lighting']['family']=='shadow': values.append('shadows')
     if r['occlusion_requested']!='none': values.append('occlusion')
@@ -114,7 +124,7 @@ def preview(root,count=100,audit_count=300):
                                      'distance':o['distance_category'],'label_state':o['label_state'],
                                      'iou':score,'truncated':o['truncated'],'occlusion_requested':r['occlusion_requested']})
     all_factors=sorted(set().union(*(factors(r) for r in audit)))
-    summary={'audited_frames':len(audit),'matched_instances':len(observations),'method':'native visible box vs independent realized primitive silhouette projection',
+    summary={'audited_frames':len(audit),'matched_instances':len(observations),'method':'native visible box vs independent realized mesh/primitive silhouette projection',
              'iou':distribution([o['iou'] for o in observations]),'coverage':all_factors,
              'fresh_reprojection':{'status':'PASSED','objects_checked':len(projection_deltas),
                                   'max_stored_box_delta_px':max(projection_deltas,default=0.),
@@ -136,9 +146,16 @@ def preview(root,count=100,audit_count=300):
     for r in worst: save_image(root/'qa/low_iou'/(r['frame_id']+'.png'),overlay(root,r,True))
     sheet(root,worst,root/'qa/low_iou/contact_sheet.jpg',True)
     sheet(root,selected[:24],root/'qa/representative.jpg')
+    realism_groups={name:groups.get(key,[]) for name,key in [('human_focused','human_focused'),('single_person','single_person'),('multi_person','multi_person'),('person_vehicle','person_vehicle'),('shadow','shadows'),('occluded','occlusion')]}
+    quality=lambda r:(-r['camera']['nominal_altitude_m'],r['camera']['nominal_off_nadir_deg'],len(r['objects']))
+    realism_groups['best_quality']=sorted([r for r in records if r['kind']=='positive'],key=quality,reverse=True)[:16]
+    realism_groups['lowest_fidelity']=sorted([r for r in records if r['kind']=='positive'],key=quality)[:16]
+    for name,rows in realism_groups.items():sheet(root,representative(rows,min(16,len(rows))),root/'qa/realism'/(name+'.jpg'))
     write_json(root/'qa/preview_index.json',{'previews':[r['frame_id'] for r in selected],
                                             'sheets':{k:[r['frame_id'] for r in representative(v,min(12,len(v)))] for k,v in groups.items()},
-                                            'audit_frames':[r['frame_id'] for r in audit],'lowest_iou_frames':[r['frame_id'] for r in worst]})
+                                            'audit_frames':[r['frame_id'] for r in audit],'lowest_iou_frames':[r['frame_id'] for r in worst],
+                                            'realism_sheets':{name:[r['frame_id'] for r in representative(rows,min(16,len(rows)))] for name,rows in realism_groups.items()},
+                                            'realism_selection_note':'Best/weak candidates use altitude/view/instance heuristics and require manual visual judgment; this is not an automatic realism score.'})
     return {k:v for k,v in summary.items() if k!='observations'}
 
 

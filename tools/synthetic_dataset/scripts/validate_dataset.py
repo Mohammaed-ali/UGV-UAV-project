@@ -107,6 +107,17 @@ def validate(root):
         if len({i['path'] for i in index})!=len(index): errors.append('Duplicate file index paths')
         if stats!=json.loads((root/'statistics.json').read_text()): errors.append('Statistics do not reproduce from metadata')
     except (OSError,ValueError,KeyError) as e: errors.append('Invalid file index/statistics: '+str(e))
+    if 'human_priority' in cfg:
+        from human_qa import human_statistics,evaluation_subsets
+        try:
+            human=human_statistics(records,cfg)
+            if human!=json.loads((root/'human_statistics.json').read_text()):errors.append('Human statistics do not reproduce')
+            if human['acceptance']['required_for_this_count']:errors.extend(human['acceptance']['errors'])
+            subsets=evaluation_subsets(records,cfg)
+            if subsets!=json.loads((root/'manifests/human_evaluation_subsets.json').read_text())['subsets']:errors.append('Human evaluation subsets do not reproduce')
+            for name,values in subsets.items():
+                if (root/'manifests'/(name+'.txt')).read_text().splitlines()!=values:errors.append(name+' file list differs')
+        except (OSError,ValueError,KeyError) as e:errors.append('Invalid human statistics/subsets: '+str(e))
     warnings.append('KNOWN LIMITATION: Person variants share one template; person model holdout is not claimed.')
     heldout=[a['asset_id'] for a in assets.values() if a['held_out']]
     used_test={o['asset_id'] for r in records if r['split']=='test' for o in r['objects']}|{r['background']['asset_id'] for r in records if r['split']=='test'}

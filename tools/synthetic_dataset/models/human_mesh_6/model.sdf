@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="human_mesh_6">
+    <static>true</static>
+    <link name="body">
+      <visual name="skin">
+        <geometry>
+          <mesh>
+            <uri>skin.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.79 0.58 0.43 1</ambient>
+          <diffuse>0.79 0.58 0.43 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.85</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="hair">
+        <geometry>
+          <mesh>
+            <uri>hair.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.07 0.045 0.025 1</ambient>
+          <diffuse>0.07 0.045 0.025 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.85</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="shoes">
+        <geometry>
+          <mesh>
+            <uri>shoes.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.055 0.055 0.055 1</ambient>
+          <diffuse>0.055 0.055 0.055 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.85</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="shirt">
+        <geometry>
+          <mesh>
+            <uri>shirt.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2 0.39 0.37 1</ambient>
+          <diffuse>0.2 0.39 0.37 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.85</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="trousers">
+        <geometry>
+          <mesh>
+            <uri>trousers.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.11 0.13 0.17 1</ambient>
+          <diffuse>0.11 0.13 0.17 1</diffuse>
+          <specular>.18 .18 .18 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0</metalness>
+              <roughness>.85</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+    </link>
+  </model>
+</sdf>
