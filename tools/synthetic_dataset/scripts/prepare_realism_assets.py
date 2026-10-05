@@ -82,6 +82,7 @@ def dae(path, vertices, triangles, smooth=True, texcoords=None):
 
 def mesh_asset(aid, category, vertices, face_groups, colors, provenance, held_out=False, notes=''):
     folder=TOOL/'models'/('context_v2/'+aid if category=='distractor' else aid);folder.mkdir(parents=True,exist_ok=True)
+    for stale in folder.glob('*.dae'):stale.unlink()  # Only this builder's derivative files.
     vertices=np.asarray(vertices, float).copy()
     referenced=np.unique([v for faces in face_groups.values() for f in faces for v in f])
     points=vertices[referenced];low=points.min(0);high=points.max(0)
@@ -135,6 +136,7 @@ def humans():
         groups=defaultdict(list)
         for group,corners in faces:
             f=[c[0] for c in corners];center=vertices[f].mean(0)
+            f=f[::-1]  # X=source Z, Y=-source X, Z=source Y reflects handedness.
             if group=='body':
                 # The clothed proxy covers torso/legs. Retain head and exposed hands.
                 if center[1]<5.85 and abs(center[0])<3.95:continue
@@ -166,10 +168,17 @@ def vehicles():
     for name,cls,dimensions in definitions:
         source=root/(name+'.obj');v,uv,_,faces=obj(source);scale=np.asarray(dimensions)/(v.max(0)-v.min(0))[[2,0,1]]
         vertices=v[:,[2,0,1]]*scale;groups=defaultdict(list);colors={}
+        samples=[]
         for group,corners in faces:
-            f=[c[0] for c in corners];t=uv[[c[1] for c in corners]].mean(0)
-            rgb=palette[int(np.clip((1-t[1])*palette.shape[0],0,palette.shape[0]-1)),int(np.clip(t[0]*palette.shape[1],0,palette.shape[1]-1))]/255
-            key='paint_'+'_'.join(str(round(x*255)) for x in rgb)
+            t=uv[[c[1] for c in corners]].mean(0)
+            samples.append(palette[int(np.clip((1-t[1])*palette.shape[0],0,palette.shape[0]-1)),int(np.clip(t[0]*palette.shape[1],0,palette.shape[1]-1))]/255)
+        # UV gradients do not need hundreds of separate draw calls. Preserve
+        # twelve fitted color clusters and let physical lighting provide shading.
+        cv2.setRNGSeed(1729);cv2.setNumThreads(1)
+        _,labels,centers=cv2.kmeans(np.asarray(samples,np.float32),12,None,(cv2.TERM_CRITERIA_EPS+cv2.TERM_CRITERIA_MAX_ITER,40,1e-6),1,cv2.KMEANS_PP_CENTERS)
+        for (group,corners),label in zip(faces,labels[:,0]):
+            f=[c[0] for c in corners];rgb=centers[label]
+            key='paint_'+str(int(label))
             if 'wheel' in group and max(rgb)<.35:key='rubber_'+key
             if max(rgb)-min(rgb)>.08 and rgb[2]>rgb[0]*1.3:key='glass_'+key
             # Keep source material distinctions while muting the bright kit palette.
@@ -177,7 +186,8 @@ def vehicles():
         index=sum(a['category']==cls for a in result);held_out=index==3
         result.append(mesh_asset(f'{cls}_mesh_{index}',cls,vertices,groups,colors,
                                 dict(source_uri='https://kenney.nl/assets/car-kit',provider_author='Kenney',upstream_version='Car Kit 3.1',
-                                     upstream_model=name,upstream_checksum=file_hash(source),model_scale=scale.tolist(),template_family='kenney-'+name),held_out,
+                                     upstream_model=name,upstream_checksum=file_hash(source),model_scale=scale.tolist(),template_family='kenney-'+name,
+                                     material_color_clusters=12),held_out,
                                 notes='CC0 vehicle mesh with wheels, beveled body, cabin/glazing and lights; axis-normalized to plausible full-size dimensions. Stylized geometry remains.'))
     return result
 
@@ -203,7 +213,7 @@ def buses():
             for k in range(n):a=ring*n+k;b=ring*n+(k+1)%n;c=b+n;d=a+n;tris.extend([[a,b,c],[a,c,d]])
         for ring in (0,3):
             for k in range(1,n-1):tris.append([ring*n,ring*n+k,ring*n+k+1] if ring==3 else [ring*n,ring*n+k+1,ring*n+k])
-        shape('paint_body',points,tris)
+        shape('paint_body',points,[f[::-1] for f in tris])
         box('chassis',[0,0,.6],[length*.95,width*.92,.25])
         # Side glazing retains individual pillars and door breaks.
         for x in np.arange(-length/2+.7,length/2-.6,1.1):
@@ -218,7 +228,7 @@ def buses():
                 ts=[]
                 for k in range(24):q=(k+1)%24;ts.extend([[k,q,q+24],[k,q+24,k+24]])
                 for k in range(1,23):ts.extend([[0,k+1,k],[24,24+k,24+k+1]])
-                shape('rubber_wheels',wheel,ts)
+                shape('rubber_wheels',wheel,[f[::-1] for f in ts])
         for x in (-length*.19,length*.2):box('roof_detail',[x,0,height+.08],[1.3,1.2,.16])
         for sign in (-1,1):
             box('lamps',[length/2+.025,sign*width*.34,.95],[.03,.25,.2])

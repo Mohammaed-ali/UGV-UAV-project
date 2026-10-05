@@ -145,6 +145,11 @@ class Sampler:
                 direction=np.array([math.cos(azimuth),math.sin(azimuth)])
                 boundary=footprint_radius(center,direction,polygon,camera,c['camera'])
                 xy=center+direction*boundary*fraction;object_yaw=rng.uniform(*s['object_yaw_deg'])
+                if cls['name']=='person' and grouping=='roadside' and background in ('road','mixed') and attempt<300:
+                    local_x=(xy[0]-zone+40)%80-40;local_y=(xy[1]+40)%80-40
+                    terrain_index=int(material['asset_id'].rsplit('_',1)[1])
+                    road_center=0 if background=='road' else 8*math.sin(-local_y*.07+terrain_index)+2*math.sin(-local_y*.43)
+                    if not 4<abs(local_x-road_center)<8:continue
                 pose={'position':[float(xy[0]),float(xy[1]),c['world']['ground_z']],
                       'quaternion':quaternion(0,0,math.radians(object_yaw))}
                 if any(np.linalg.norm(xy-np.asarray(o['pose']['position'][:2])) < radius+o['footprint_radius_m']+s['min_spacing_m'] for o in objects): continue
