@@ -1,0 +1,29 @@
+....................E.....E.
+======================================================================
+ERROR: setUpClass (test_generator.GeneratorTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/tests/test_generator.py", line 26, in setUpClass
+    cls.sampler=Sampler(cls.cfg,200,12345);cls.scenes=[cls.sampler.scene(i) for i in range(200)]
+                                                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/sampling.py", line 125, in scene
+    if not pool:raise ValueError('Insufficient asset instances for planned composition')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Insufficient asset instances for planned composition
+
+======================================================================
+ERROR: test_mixed_classes_and_heldout_source_restrictions (test_human_sampling.HumanSamplingTests.test_mixed_classes_and_heldout_source_restrictions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/tests/test_human_sampling.py", line 49, in test_mixed_classes_and_heldout_source_restrictions
+    scene=s.scene(i)
+          ^^^^^^^^^^
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/sampling.py", line 125, in scene
+    if not pool:raise ValueError('Insufficient asset instances for planned composition')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Insufficient asset instances for planned composition
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.895s
+
+FAILED (errors=2)

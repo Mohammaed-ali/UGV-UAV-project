@@ -1,0 +1,55 @@
+{
+  "background_extent_diagnostic": "qa/background_extent_review.json",
+  "criteria": {
+    "human_recognizability": {
+      "finding": "Native larger-human examples show clothed heads, torsos and limbs, including 14-person mixed scenes. Full sheets cover single/multi people at all factors. Far/nadir people are pixel-limited, and all eight appearances share one template.",
+      "status": "PASSED"
+    },
+    "lighting_realism": {
+      "finding": "Directional sun, subdued warm morning/evening and neutral noon produce coherent ground/object shading. No atmospheric or physically calibrated sky model is claimed.",
+      "status": "PASSED"
+    },
+    "scene_plausibility": {
+      "finding": "Targets are grounded and separated across single, crowd and mixed vehicle scenes. Layouts are simplified and do not model traffic/crowd behavior. Finite terrain and fixed far clipping expose background corners in 643/10000 frames, at most 7.045% of pixels.",
+      "status": "PASSED"
+    },
+    "shadow_realism": {
+      "finding": "Trees, vehicles, canopies and masonry walls cast localized shadows with both lit and shaded people. Shadows remain hard and some walls are deliberate occluders.",
+      "status": "PASSED"
+    },
+    "terrain_realism": {
+      "finding": "Photographic PBR grass, soil, asphalt and irregular mixed patches improve terrain fidelity. The terrain is planar and repeats mosaics; road layouts are simplified.",
+      "status": "PASSED"
+    },
+    "vehicle_recognizability": {
+      "finding": "Shaped cabins, wheels, cargo bodies and coach window/roof structure distinguish cars, trucks and buses. The retained assets remain stylized.",
+      "status": "PASSED"
+    }
+  },
+  "dedicated_contact_sheets": [
+    "best_quality",
+    "human_focused",
+    "single_person",
+    "multi_person",
+    "person_vehicle",
+    "shadow",
+    "occluded",
+    "lowest_fidelity"
+  ],
+  "judgment": "Acceptable improved simplified synthetic imagery under the revised smoke/pilot criteria. This is not photorealistic or equivalent to real aerial photography, and it supplies no real-world detector accuracy or sim-to-real evidence.",
+  "limitations_document": "docs/dataset/ASSETS_V2.md",
+  "native_images_reviewed": [
+    "scene_a61990328d99d760_009428",
+    "scene_1f3574e059db1711_007034"
+  ],
+  "review_pages": [
+    "review_pages/001.jpg",
+    "review_pages/002.jpg",
+    "review_pages/003.jpg",
+    "review_pages/004.jpg"
+  ],
+  "review_timestamp": "2026-10-05T02:14:27.587944+00:00",
+  "reviewed_previews": 100,
+  "reviewer": "Codex agent visual inspection",
+  "status": "PASSED"
+}

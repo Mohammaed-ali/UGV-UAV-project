@@ -1,0 +1,157 @@
+{
+  "asset_manifest_sha256": "93188b39639492596c2163e7a3ca06a061e9c915753bc5a3d5e1d173b330d64a",
+  "benchmark": {
+    "accepted_frames": 20,
+    "accepted_frames_per_minute": 109.85821580661916,
+    "attempted_frames": 20,
+    "attempted_frames_per_minute": 109.85821580661916,
+    "average_image_bytes": 484505.15,
+    "disk_write_bytes_per_second": 887114.5221353064,
+    "elapsed_s": 10.923170299000049,
+    "estimated_10000_image_bytes": 4845051500.0,
+    "estimated_10000_seconds": 5461.585149500024,
+    "process_metrics": [
+      {
+        "command": "ruby",
+        "cpu_percent_lifetime": 122.0,
+        "pid": 31607,
+        "rss_kib": 2190180
+      },
+      {
+        "command": "ruby",
+        "cpu_percent_lifetime": 126.0,
+        "pid": 31607,
+        "rss_kib": 2190376
+      }
+    ],
+    "samples": [
+      {
+        "image_bytes": 441677,
+        "index": 0,
+        "seconds": 0.513364480000746
+      },
+      {
+        "image_bytes": 387871,
+        "index": 1,
+        "seconds": 0.5142166250006994
+      },
+      {
+        "image_bytes": 468454,
+        "index": 2,
+        "seconds": 0.5236122179994709
+      },
+      {
+        "image_bytes": 617624,
+        "index": 3,
+        "seconds": 0.5644704120022652
+      },
+      {
+        "image_bytes": 467618,
+        "index": 4,
+        "seconds": 0.5010367200011387
+      },
+      {
+        "image_bytes": 416967,
+        "index": 5,
+        "seconds": 0.5318850359981298
+      },
+      {
+        "image_bytes": 551929,
+        "index": 6,
+        "seconds": 0.5413905910027097
+      },
+      {
+        "image_bytes": 519178,
+        "index": 7,
+        "seconds": 0.5314235740006552
+      },
+      {
+        "image_bytes": 474538,
+        "index": 8,
+        "seconds": 0.6699432700006582
+      },
+      {
+        "image_bytes": 523338,
+        "index": 9,
+        "seconds": 0.57180996399984
+      },
+      {
+        "image_bytes": 497781,
+        "index": 10,
+        "seconds": 0.5014407130001928
+      },
+      {
+        "image_bytes": 375311,
+        "index": 11,
+        "seconds": 0.4940880409994861
+      },
+      {
+        "image_bytes": 488786,
+        "index": 12,
+        "seconds": 0.5058023949968629
+      },
+      {
+        "image_bytes": 624696,
+        "index": 13,
+        "seconds": 0.4898951879986271
+      },
+      {
+        "image_bytes": 463361,
+        "index": 14,
+        "seconds": 0.5419133929972304
+      },
+      {
+        "image_bytes": 461401,
+        "index": 15,
+        "seconds": 0.5284394839982269
+      },
+      {
+        "image_bytes": 561079,
+        "index": 16,
+        "seconds": 0.5314669289982703
+      },
+      {
+        "image_bytes": 520011,
+        "index": 17,
+        "seconds": 0.5320988320017932
+      },
+      {
+        "image_bytes": 421143,
+        "index": 18,
+        "seconds": 0.5254535239982943
+      },
+      {
+        "image_bytes": 407340,
+        "index": 19,
+        "seconds": 0.4844652479987417
+      }
+    ],
+    "settings": "single generator; 640x480/10 Hz sensors; shadows; 1-8 targets and representative clutter; finite RTF 8"
+  },
+  "camera": {
+    "convention": "+X forward, -Y image right, -Z image down; world ENU",
+    "cx": 320.0,
+    "cy": 240.0,
+    "far": 100.0,
+    "fx": 269.9681840122649,
+    "fy": 269.9681840122649,
+    "height": 480,
+    "horizontal_fov": 1.74,
+    "near": 0.1,
+    "noise": null,
+    "source": "src/wildlife_simulation/models/mono_cam/model.sdf",
+    "source_sha256": "7ad6bc5ea6d3e708149246edea6219aebba80f9773e59ea9a7ca78f067a9c765",
+    "update_rate_hz": 10.0,
+    "vertical_fov": 1.453401713389793,
+    "width": 640
+  },
+  "camera_sha256": "7ad6bc5ea6d3e708149246edea6219aebba80f9773e59ea9a7ca78f067a9c765",
+  "flagged_small_cells": 26,
+  "gazebo_version": "8.15.0",
+  "generator_git_commit": "33e41e1c7eb8fb29c0550a67b69af655a6878774",
+  "headless_command": "gz sim -s -r --headless-rendering -v 2 <generated-world.sdf>",
+  "pixel_cells": 448,
+  "programmatic_alignment": "PASSED",
+  "status": "PARTIALLY VALIDATED",
+  "visual_inspection": "NOT TESTED"
+}

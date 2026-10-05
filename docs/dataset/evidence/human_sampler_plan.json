@@ -1,0 +1,37 @@
+{
+  "compositions": {
+    "train": {
+      "human_positive": 960,
+      "vehicle_only": 320,
+      "empty": 160,
+      "distractor_only": 160
+    },
+    "val": {
+      "human_positive": 60,
+      "vehicle_only": 100,
+      "distractor_only": 20,
+      "empty": 20
+    },
+    "test": {
+      "vehicle_only": 100,
+      "human_positive": 60,
+      "distractor_only": 20,
+      "empty": 20
+    }
+  },
+  "train_human_counts": {
+    "1": 432,
+    "4_6": 185,
+    "2_3": 211,
+    "11_plus": 26,
+    "7_10": 106
+  },
+  "placement_shortfall": 52,
+  "people_planned": 3404,
+  "person_distance": {
+    "medium": 1021,
+    "far": 1020,
+    "near": 1022,
+    "edge": 341
+  }
+}

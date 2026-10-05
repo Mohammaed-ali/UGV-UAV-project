@@ -1,0 +1,74 @@
+{
+  "acceptance_configuration_sha256": "ab9b0e16a93ccaa192be216badbc63e81f874d78e836515cfcfc92c49e5a446a",
+  "dataset_path": "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/datasets/gazebo_aerial_v1",
+  "evidence_path": "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/datasets/gazebo_aerial_v1",
+  "manifest_sha256": "02bba90bbe7ec6b49d2613dea890fb7c456720d5b74d8df8d31652777ed3c1c4",
+  "review_timestamp": "2026-10-05T02:16:42.447946+00:00",
+  "status": "PASSED",
+  "validator": {
+    "counts": {
+      "images": 10000,
+      "jsonl_metadata": 10000,
+      "labels": 10000,
+      "metadata": 10000,
+      "scenario_manifest": 10000,
+      "status": 10000
+    },
+    "coverage": {
+      "altitude": {
+        "10": 2000,
+        "15": 2000,
+        "20": 2000,
+        "30": 2000,
+        "40": 2000
+      },
+      "background": {
+        "dirt": 2500,
+        "grass": 2500,
+        "mixed": 2500,
+        "road": 2500
+      },
+      "lighting": {
+        "evening": 2500,
+        "morning": 2500,
+        "noon": 2500,
+        "shadow": 2500
+      },
+      "off_nadir": {
+        "0": 2500,
+        "10": 2500,
+        "20": 2500,
+        "30": 2500
+      }
+    },
+    "duplicate_frame_ids": 0,
+    "errors": [],
+    "frames_per_split": {
+      "test": 1000,
+      "train": 8000,
+      "val": 1000
+    },
+    "heldout_assets_used": [
+      "bus_mesh_2",
+      "car_mesh_3",
+      "dirt_3",
+      "grass_3",
+      "mixed_3",
+      "road_3",
+      "truck_mesh_3"
+    ],
+    "leakage_checks": [
+      "frame IDs",
+      "image SHA256",
+      "scene IDs/families",
+      "scenario specification replay",
+      "heldout assets"
+    ],
+    "status": "PASSED",
+    "unique_image_hashes": 10000,
+    "warnings": [
+      "KNOWN LIMITATION: Person variants share one template; person model holdout is not claimed."
+    ]
+  },
+  "visual_review": "Reviewed 100 representative overlays, eight dedicated realism sheets, two native larger-human images, and all 50 low-IoU native-frame/crop investigations. Six qualitative fidelity criteria pass with documented simplified assets and finite-terrain corners. The 300-frame actual-pose projection audit and independent unique-instance replay of the 50 low-tail frames pass; native labels and ignored reasons remain unchanged."
+}

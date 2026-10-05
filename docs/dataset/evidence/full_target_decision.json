@@ -1,0 +1,21 @@
+{
+  "annotation_audit_status": "PASSED",
+  "available_disk_bytes": 35249225728,
+  "decision_timestamp": "2026-10-05T01:23:12.154727+00:00",
+  "expected_generation_seconds_from_pilot": 1986.3983704049863,
+  "expected_rgb_bytes_from_pilot": 4529081280.0,
+  "expected_total_bytes_from_pilot": 5048799515.0,
+  "generator_revision": "796c48e0622f9ee70efd96e47a79a4075e9a7dbd",
+  "limitations": [
+    "Stylized meshes, static template-derived people and planar finite terrain; no real-world accuracy claim.",
+    "111/2000 pilot high/oblique frames expose environment background at corners; maximum 5.53 percent pixels. Retained difficult 30/40m,30deg conditions.",
+    "Generation forecast excludes separate full validator/manual QA/regression time."
+  ],
+  "output": "datasets/gazebo_aerial_v1",
+  "pilot_frames": 2000,
+  "pilot_manifest_sha256": "d25daedcc3459ce7f017ec6af7a682d1567c6822ae483ef484261d35dd0df07a",
+  "pilot_status": "PASSED",
+  "reason": "Revised pilot has accepted human quotas, all factor/class and heldout coverage, explicit six-criterion visual acceptance, investigated annotation low tail and practical measured throughput/storage. Retain the configured 10,000-frame planning target; no duplication or difficult-level removal.",
+  "status": "PASSED",
+  "target_accepted_frames": 10000
+}

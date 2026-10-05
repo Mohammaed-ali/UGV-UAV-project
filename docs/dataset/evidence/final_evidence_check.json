@@ -1,0 +1,20 @@
+{
+  "status": "PASSED",
+  "timestamp": "2026-10-05T02:32:55.655427+00:00",
+  "default_check": {
+    "exit_code": 2,
+    "finding": "Standard csv.writer CRLF endings flagged by default Git whitespace rules. Valid CSV line endings preserved.",
+    "csv_paths": [
+      "docs/dataset/evidence/human_realism_alignment/pixel_size_feasibility.csv",
+      "docs/dataset/evidence/human_realism_alignment_attempt1/pixel_size_feasibility.csv",
+      "docs/dataset/evidence/human_realism_alignment_v2/pixel_size_feasibility.csv"
+    ]
+  },
+  "final_check": {
+    "exit_code": 0,
+    "core_whitespace": "blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+    "finding": "No other whitespace errors."
+  },
+  "captured_data_changed": false,
+  "csv_values_changed": false
+}

@@ -1,0 +1,2084 @@
+{
+  "cause_counts": {
+    "canopy_occlusion": 19,
+    "canopy_occlusion_and_rasterization": 3,
+    "edge_clipping": 10,
+    "edge_clipping_and_canopy_occlusion": 4,
+    "edge_clipping_and_incidental_wall_occlusion": 2,
+    "edge_clipping_and_rasterization": 2,
+    "incidental_tree_occlusion": 1,
+    "incidental_wall_occlusion": 1,
+    "small_pixel_rasterization": 8
+  },
+  "decision": "No unexplained registration or instance-association defect found in the reviewed tail. Retain native visible rectangles and ignored reasons; do not enlarge labels or remove difficult samples to improve IoU.",
+  "frames": [
+    {
+      "altitude": 10,
+      "angle": 10,
+      "cause": "incidental_tree_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5",
+        "canopy_mild"
+      ],
+      "distance": "far",
+      "frame_id": "scene_155d077a56423aad_007350",
+      "full_projected_bbox_px": [
+        35.8973919461414,
+        151.09185494834162,
+        86.93267395097885,
+        179.38560219509367
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_5_0",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 7350,
+      "instance_identity_check": "PASSED",
+      "iou": 0.005540245357936032,
+      "label_state": "ignored_tiny",
+      "native_bbox_px": [
+        36.0,
+        152.0,
+        38.0,
+        156.0
+      ],
+      "rank": 1,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "Tree crown covers nearly all the full person silhouette. The remaining 2x4 px native sliver is ignored_tiny and is not exported to YOLO.",
+      "worst_instance_id": "pool_human_mesh_5_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "cause": "edge_clipping_and_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_2bec47ad20cd5e08_000375",
+      "full_projected_bbox_px": [
+        602.9676546359901,
+        -11.104386330911467,
+        613.8941496133941,
+        2.0149904947157893
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_4_0",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 375,
+      "instance_identity_check": "PASSED",
+      "iou": 0.045419895194513386,
+      "label_state": "ignored_tiny",
+      "native_bbox_px": [
+        603.0,
+        1.0,
+        604.0,
+        2.0
+      ],
+      "rank": 2,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "At the top/right boundary only a 1x1 px fragment remains. Full projected extrema extend off screen; this target is ignored_tiny.",
+      "worst_instance_id": "pool_human_mesh_4_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "cause": "edge_clipping_and_canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "canopy_moderate",
+        "shadow_wall"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_bd308fc262efd608_004869",
+      "full_projected_bbox_px": [
+        634.8673726066628,
+        226.52808873628288,
+        685.5274453109982,
+        243.19292164530495
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_3_0",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 4869,
+      "instance_identity_check": "PASSED",
+      "iou": 0.04676482250149911,
+      "label_state": "ignored_tiny",
+      "native_bbox_px": [
+        638.0,
+        228.0,
+        640.0,
+        230.0
+      ],
+      "rank": 3,
+      "requested_occlusion": "moderate",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "Right-edge clipping and canopy/support overlap leave a 2x2 px fragment, correctly ignored_tiny.",
+      "worst_instance_id": "pool_human_mesh_3_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "cause": "incidental_wall_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "shadow_wall"
+      ],
+      "distance": "near",
+      "frame_id": "scene_2ce6b9cb9af8636a_009836",
+      "full_projected_bbox_px": [
+        222.2013140066188,
+        221.3441702605914,
+        230.63063158699663,
+        229.75676261495698
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_7_0",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 9836,
+      "instance_identity_check": "PASSED",
+      "iou": 0.0641153670576565,
+      "label_state": "ignored_tiny",
+      "native_bbox_px": [
+        222.0,
+        221.0,
+        225.0,
+        223.0
+      ],
+      "rank": 4,
+      "requested_occlusion": "none",
+      "split": "val",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The white masonry shadow wall covers most of the person despite requested occlusion none. The 3x2 px fragment is ignored_tiny.",
+      "worst_instance_id": "pool_human_mesh_7_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "cause": "edge_clipping",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "canopy_moderate"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_2d0773ca5ee010f2_008009",
+      "full_projected_bbox_px": [
+        214.80981940627322,
+        474.65389369244537,
+        224.49593963045515,
+        491.8776323629848
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_6_0",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 8009,
+      "instance_identity_check": "PASSED",
+      "iou": 0.1931134640811068,
+      "label_state": "ignored_tiny",
+      "native_bbox_px": [
+        220.0,
+        475.0,
+        222.0,
+        480.0
+      ],
+      "rank": 5,
+      "requested_occlusion": "moderate",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "Bottom-edge clipping leaves a 2x5 px fragment, below the minimum width and correctly ignored_tiny.",
+      "worst_instance_id": "pool_human_mesh_6_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "canopy_moderate"
+      ],
+      "distance": "near",
+      "frame_id": "scene_06903df2cfa7d096_006498",
+      "full_projected_bbox_px": [
+        416.68371636136015,
+        221.4921909809038,
+        433.58041905070525,
+        231.99960021493
+      ],
+      "ignored_objects": [],
+      "index": 6498,
+      "instance_identity_check": "PASSED",
+      "iou": 0.2109909658050923,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        426.0,
+        222.0,
+        434.0,
+        227.0
+      ],
+      "rank": 6,
+      "requested_occlusion": "moderate",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy masks most of the full silhouette; the exposed right portion gives the 8x5 px valid native box.",
+      "worst_instance_id": "pool_human_mesh_6_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "cause": "edge_clipping",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_ebba70f71c7b6cd0_003774",
+      "full_projected_bbox_px": [
+        445.3835137089017,
+        476.07351423230335,
+        454.2923708416552,
+        488.3358792191178
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_4_0",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 3774,
+      "instance_identity_check": "PASSED",
+      "iou": 0.2235560460303021,
+      "label_state": "ignored_tiny",
+      "native_bbox_px": [
+        448.0,
+        476.0,
+        450.0,
+        480.0
+      ],
+      "rank": 7,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The person crosses the bottom boundary, leaving a 2x4 px ignored_tiny fragment.",
+      "worst_instance_id": "pool_human_mesh_4_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "cause": "canopy_occlusion_and_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5",
+        "canopy_mild"
+      ],
+      "distance": "medium",
+      "frame_id": "scene_70f884e2119c6e2f_009443",
+      "full_projected_bbox_px": [
+        452.71844694884476,
+        195.56526057118376,
+        458.52964589358965,
+        203.29661902749436
+      ],
+      "ignored_objects": [],
+      "index": 9443,
+      "instance_identity_check": "PASSED",
+      "iou": 0.2670912699516534,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        455.0,
+        196.0,
+        458.0,
+        200.0
+      ],
+      "rank": 8,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy masks the body, leaving a 3x4 px valid native fragment whose small extrema amplify pixel rounding.",
+      "worst_instance_id": "pool_human_mesh_7_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "canopy_mild"
+      ],
+      "distance": "near",
+      "frame_id": "scene_9c398a170d5bf487_001444",
+      "full_projected_bbox_px": [
+        319.2714983239503,
+        231.36322024279136,
+        323.5107610663731,
+        235.9962454834026
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_0_0",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 1444,
+      "instance_identity_check": "PASSED",
+      "iou": 0.3047412269757742,
+      "label_state": "ignored_tiny",
+      "native_bbox_px": [
+        320.0,
+        234.0,
+        323.0,
+        236.0
+      ],
+      "rank": 9,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "A canopy leaves only a 3x2 px strip of the person. Height is below threshold and the target is ignored_tiny.",
+      "worst_instance_id": "pool_human_mesh_0_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5",
+        "canopy_moderate"
+      ],
+      "distance": "far",
+      "frame_id": "scene_91364573e845b8e4_005351",
+      "full_projected_bbox_px": [
+        44.10728226017102,
+        109.01257255404204,
+        56.321840444994336,
+        119.80587425895554
+      ],
+      "ignored_objects": [],
+      "index": 5351,
+      "instance_identity_check": "PASSED",
+      "iou": 0.3051265879536702,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        49.0,
+        114.0,
+        56.0,
+        120.0
+      ],
+      "rank": 10,
+      "requested_occlusion": "moderate",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "Roof occlusion hides most of the body; the exposed lower part produces the 7x6 px native box.",
+      "worst_instance_id": "pool_human_mesh_7_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "canopy_mild"
+      ],
+      "distance": "far",
+      "frame_id": "scene_9954a95da680031b_001142",
+      "full_projected_bbox_px": [
+        68.09487318252985,
+        87.76046070279926,
+        97.15591598657014,
+        107.57120610935206
+      ],
+      "ignored_objects": [],
+      "index": 1142,
+      "instance_identity_check": "PASSED",
+      "iou": 0.3224130244701527,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        68.0,
+        88.0,
+        85.0,
+        99.0
+      ],
+      "rank": 11,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy covers part of the projected body, leaving an exposed portion with a 17x11 px native rectangle.",
+      "worst_instance_id": "pool_human_mesh_7_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "canopy_moderate"
+      ],
+      "distance": "far",
+      "frame_id": "scene_ac0d6e8d31d49a74_004127",
+      "full_projected_bbox_px": [
+        574.6501730542607,
+        138.19241049242748,
+        618.4180503365483,
+        171.03813874248124
+      ],
+      "ignored_objects": [],
+      "index": 4127,
+      "instance_identity_check": "PASSED",
+      "iou": 0.33223497248395323,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        597.0,
+        138.0,
+        618.0,
+        161.0
+      ],
+      "rank": 12,
+      "requested_occlusion": "moderate",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy hides the left/upper part of the person; the body on its right remains visible.",
+      "worst_instance_id": "pool_human_mesh_1_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "cause": "canopy_occlusion_and_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "canopy_mild"
+      ],
+      "distance": "near",
+      "frame_id": "scene_5aa9627c86382b30_008161",
+      "full_projected_bbox_px": [
+        317.57012121127906,
+        253.53001123738204,
+        324.09102800037533,
+        258.8545140244083
+      ],
+      "ignored_objects": [],
+      "index": 8161,
+      "instance_identity_check": "PASSED",
+      "iou": 0.3456162828376331,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        318.0,
+        255.0,
+        322.0,
+        258.0
+      ],
+      "rank": 13,
+      "requested_occlusion": "mild",
+      "split": "val",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "Partial canopy overlap and a 4x3 px visible footprint explain the low visible/full IoU.",
+      "worst_instance_id": "pool_human_mesh_5_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "cause": "edge_clipping",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_5ca8a13fc07acf09_009623",
+      "full_projected_bbox_px": [
+        500.9031720584539,
+        -43.98441213188812,
+        539.964076469707,
+        5.349676657890939
+      ],
+      "ignored_objects": [],
+      "index": 9623,
+      "instance_identity_check": "PASSED",
+      "iou": 0.35891485642399135,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        501.0,
+        0.0,
+        516.0,
+        5.0
+      ],
+      "rank": 14,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "Top-edge clipping leaves a 15x5 px fragment. The visible cut mesh has narrower extrema than the clipped full rectangle.",
+      "worst_instance_id": "pool_human_mesh_1_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "cause": "edge_clipping",
+      "class": "bus",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_c3f7d8058d7c16f6_005093",
+      "full_projected_bbox_px": [
+        472.9762829703709,
+        -121.08404766124539,
+        819.2709272725492,
+        50.46359339553658
+      ],
+      "ignored_objects": [],
+      "index": 5093,
+      "instance_identity_check": "PASSED",
+      "iou": 0.36542175550411743,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        552.0,
+        0.0,
+        640.0,
+        35.0
+      ],
+      "rank": 15,
+      "requested_occlusion": "none",
+      "split": "test",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The bus crosses the top/right boundaries. Its clipped rotated mesh silhouette occupies less height than the clipped full bounding rectangle; nearby tree context can also hide part.",
+      "worst_instance_id": "pool_bus_mesh_2_1",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "canopy_mild"
+      ],
+      "distance": "near",
+      "frame_id": "scene_5f85e63943b12692_008600",
+      "full_projected_bbox_px": [
+        329.66382214817685,
+        128.1894890486373,
+        338.5757593311857,
+        148.6414284278539
+      ],
+      "ignored_objects": [],
+      "index": 8600,
+      "instance_identity_check": "PASSED",
+      "iou": 0.37057164793457636,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        330.0,
+        135.0,
+        335.0,
+        149.0
+      ],
+      "rank": 16,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy removes the upper part of the person, leaving a 5x14 px visible box.",
+      "worst_instance_id": "pool_human_mesh_6_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "canopy_mild"
+      ],
+      "distance": "far",
+      "frame_id": "scene_747e9dee8a425da2_001818",
+      "full_projected_bbox_px": [
+        102.05260417334739,
+        17.189999192952087,
+        112.5425929896225,
+        29.13799892877185
+      ],
+      "ignored_objects": [],
+      "index": 1818,
+      "instance_identity_check": "PASSED",
+      "iou": 0.3724673133807009,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        102.0,
+        17.0,
+        109.0,
+        24.0
+      ],
+      "rank": 17,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "A canopy partly masks the distant body. The native 7x7 px rectangle bounds the remaining visible part.",
+      "worst_instance_id": "pool_human_mesh_7_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "canopy_mild"
+      ],
+      "distance": "medium",
+      "frame_id": "scene_31cada23bd0f60a6_005842",
+      "full_projected_bbox_px": [
+        501.62102409157797,
+        134.7092777483184,
+        521.9807599833929,
+        150.46630793630925
+      ],
+      "ignored_objects": [],
+      "index": 5842,
+      "instance_identity_check": "PASSED",
+      "iou": 0.3740543752652303,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        502.0,
+        140.0,
+        514.0,
+        150.0
+      ],
+      "rank": 18,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy cuts across the diagonal person silhouette, leaving a 12x10 px visible part.",
+      "worst_instance_id": "pool_human_mesh_6_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5",
+        "canopy_mild"
+      ],
+      "distance": "far",
+      "frame_id": "scene_ab30471299afff54_002961",
+      "full_projected_bbox_px": [
+        68.17310589230198,
+        344.00434300390157,
+        95.12295746810656,
+        353.282638206977
+      ],
+      "ignored_objects": [],
+      "index": 2961,
+      "instance_identity_check": "PASSED",
+      "iou": 0.3782005675678612,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        68.0,
+        347.0,
+        84.0,
+        353.0
+      ],
+      "rank": 19,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "Canopy occlusion leaves a horizontal 16x6 px body strip.",
+      "worst_instance_id": "pool_human_mesh_0_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "cause": "edge_clipping",
+      "class": "bus",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_63de24ce5c91bf58_006198",
+      "full_projected_bbox_px": [
+        515.6721878725406,
+        358.19656334449706,
+        904.8464724245744,
+        681.255364366826
+      ],
+      "ignored_objects": [],
+      "index": 6198,
+      "instance_identity_check": "PASSED",
+      "iou": 0.38432191655776793,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        543.0,
+        420.0,
+        640.0,
+        480.0
+      ],
+      "rank": 20,
+      "requested_occlusion": "none",
+      "split": "test",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The bus crosses the bottom/right boundaries. The remaining slanted mesh silhouette has shorter extrema than the clipped full rectangle.",
+      "worst_instance_id": "pool_bus_mesh_2_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "canopy_mild",
+        "shadow_wall"
+      ],
+      "distance": "medium",
+      "frame_id": "scene_6248f3272f8d59d0_005073",
+      "full_projected_bbox_px": [
+        175.09531496439817,
+        312.8068658163885,
+        196.28421033054406,
+        327.1124176565486
+      ],
+      "ignored_objects": [],
+      "index": 5073,
+      "instance_identity_check": "PASSED",
+      "iou": 0.3915087675989455,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        175.0,
+        316.0,
+        187.0,
+        326.0
+      ],
+      "rank": 21,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy hides the right part of the person; the exposed body has a 12x10 px native box.",
+      "worst_instance_id": "pool_human_mesh_0_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "cause": "canopy_occlusion_and_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "canopy_mild"
+      ],
+      "distance": "medium",
+      "frame_id": "scene_7993fab985a0720b_008359",
+      "full_projected_bbox_px": [
+        100.8687394057074,
+        286.54252122416926,
+        111.01672683025728,
+        291.7764985759086
+      ],
+      "ignored_objects": [],
+      "index": 8359,
+      "instance_identity_check": "PASSED",
+      "iou": 0.3953734800199357,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        101.0,
+        287.0,
+        108.0,
+        290.0
+      ],
+      "rank": 22,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "Only a 7x3 px person strip is exposed along the canopy; pixel extrema further affect visible/full IoU.",
+      "worst_instance_id": "pool_human_mesh_4_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "cause": "canopy_occlusion",
+      "class": "truck",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "canopy_moderate"
+      ],
+      "distance": "far",
+      "frame_id": "scene_56d6637dab8c5a9f_003249",
+      "full_projected_bbox_px": [
+        368.7272424863754,
+        372.4144443313411,
+        414.27053988785195,
+        449.8988639980131
+      ],
+      "ignored_objects": [],
+      "index": 3249,
+      "instance_identity_check": "PASSED",
+      "iou": 0.40078395983672915,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        369.0,
+        407.0,
+        402.0,
+        450.0
+      ],
+      "rank": 23,
+      "requested_occlusion": "moderate",
+      "split": "test",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy masks the front/upper portion of the truck. The native 33x43 px rectangle follows the visible cargo/body.",
+      "worst_instance_id": "pool_truck_mesh_3_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "cause": "small_pixel_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4"
+      ],
+      "distance": "near",
+      "frame_id": "scene_a8feb8df06a5408d_006556",
+      "full_projected_bbox_px": [
+        262.92525764743345,
+        297.658809789363,
+        268.39288786844463,
+        303.07822936301494
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_4_1",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 6556,
+      "instance_identity_check": "PASSED",
+      "iou": 0.40497604540699406,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        263.0,
+        298.0,
+        267.0,
+        301.0
+      ],
+      "rank": 24,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "An unoccluded person on terrain occupies only 4x3 px. Subpixel projection and integer raster extrema dominate this comparison.",
+      "worst_instance_id": "pool_human_mesh_2_1",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "cause": "small_pixel_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5"
+      ],
+      "distance": "near",
+      "frame_id": "scene_47cf13e9e854cb79_009290",
+      "full_projected_bbox_px": [
+        246.58694824706942,
+        216.5585642906149,
+        251.54948748993357,
+        222.42846410829839
+      ],
+      "ignored_objects": [],
+      "index": 9290,
+      "instance_identity_check": "PASSED",
+      "iou": 0.41195198778068176,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        247.0,
+        217.0,
+        250.0,
+        221.0
+      ],
+      "rank": 25,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The small nadir person has a 3x4 px native footprint. Integer pixel rounding explains the difference from continuous projected extrema.",
+      "worst_instance_id": "pool_human_mesh_1_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "canopy_moderate"
+      ],
+      "distance": "medium",
+      "frame_id": "scene_801e5c66a2b62fdd_009298",
+      "full_projected_bbox_px": [
+        135.80553156374393,
+        370.7123216573742,
+        145.8825813246925,
+        379.07515817892573
+      ],
+      "ignored_objects": [],
+      "index": 9298,
+      "instance_identity_check": "PASSED",
+      "iou": 0.4153522913291124,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        140.0,
+        371.0,
+        146.0,
+        377.0
+      ],
+      "rank": 26,
+      "requested_occlusion": "moderate",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "A canopy partially masks the person, leaving a 6x6 px visible body.",
+      "worst_instance_id": "pool_human_mesh_1_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "cause": "edge_clipping",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_ae42236783086b58_009453",
+      "full_projected_bbox_px": [
+        -67.31388556581948,
+        378.28145374645794,
+        9.666662742199037,
+        420.664181507341
+      ],
+      "ignored_objects": [],
+      "index": 9453,
+      "instance_identity_check": "PASSED",
+      "iou": 0.4321057705428821,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        0.0,
+        378.0,
+        10.0,
+        397.0
+      ],
+      "rank": 27,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The person crosses the left image boundary. The visible cut body is shorter than the clipped full projected rectangle.",
+      "worst_instance_id": "pool_human_mesh_1_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "canopy_mild"
+      ],
+      "distance": "medium",
+      "frame_id": "scene_e9d2edf68e2f9850_000782",
+      "full_projected_bbox_px": [
+        232.96614821183584,
+        52.81101096389153,
+        256.8922710896175,
+        90.54868586162135
+      ],
+      "ignored_objects": [],
+      "index": 782,
+      "instance_identity_check": "PASSED",
+      "iou": 0.4621250217300504,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        241.0,
+        64.0,
+        257.0,
+        91.0
+      ],
+      "rank": 28,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "Canopy overlap covers the upper/left body; the exposed part gives a 6x27 px native rectangle.",
+      "worst_instance_id": "pool_human_mesh_0_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "cause": "small_pixel_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "shadow_wall"
+      ],
+      "distance": "near",
+      "frame_id": "scene_962812397f22761e_008172",
+      "full_projected_bbox_px": [
+        302.5317724503169,
+        239.97724941027192,
+        306.5822631153274,
+        245.02129682380283
+      ],
+      "ignored_objects": [],
+      "index": 8172,
+      "instance_identity_check": "PASSED",
+      "iou": 0.4673395689213965,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        304.0,
+        240.0,
+        307.0,
+        244.0
+      ],
+      "rank": 29,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "An unoccluded person on terrain occupies 3x4 px; integer raster extrema explain the low IoU.",
+      "worst_instance_id": "pool_human_mesh_5_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "canopy_mild"
+      ],
+      "distance": "medium",
+      "frame_id": "scene_1b25f6001d1ce28a_007010",
+      "full_projected_bbox_px": [
+        347.2384989909936,
+        58.52933194571693,
+        360.55977092718103,
+        95.68771762278021
+      ],
+      "ignored_objects": [],
+      "index": 7010,
+      "instance_identity_check": "PASSED",
+      "iou": 0.48458322328103726,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        347.0,
+        73.0,
+        358.0,
+        96.0
+      ],
+      "rank": 30,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy hides the head/shoulders, leaving the lower body with an 11x23 px native box.",
+      "worst_instance_id": "pool_human_mesh_0_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "cause": "edge_clipping_and_incidental_wall_occlusion",
+      "class": "car",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5",
+        "shadow_wall"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_6d44f41f931a9a70_000548",
+      "full_projected_bbox_px": [
+        -63.51123439817047,
+        149.38387520018753,
+        50.83749330419312,
+        211.12508934659206
+      ],
+      "ignored_objects": [],
+      "index": 548,
+      "instance_identity_check": "PASSED",
+      "iou": 0.4933679568176685,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        3.0,
+        149.0,
+        51.0,
+        182.0
+      ],
+      "rank": 31,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The car crosses the left boundary and the masonry shadow wall masks its lower region. Requested none permits incidental context occlusion.",
+      "worst_instance_id": "pool_car_mesh_1_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "cause": "small_pixel_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4"
+      ],
+      "distance": "medium",
+      "frame_id": "scene_e5b43ab5fb5eff0b_004807",
+      "full_projected_bbox_px": [
+        296.1854072378334,
+        120.70495509127313,
+        298.5361433742256,
+        128.11915896930378
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_0_0",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 4807,
+      "instance_identity_check": "PASSED",
+      "iou": 0.4942812432770927,
+      "label_state": "ignored_tiny",
+      "native_bbox_px": [
+        296.0,
+        121.0,
+        298.0,
+        126.0
+      ],
+      "rank": 32,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The unoccluded terrain person has a 2x5 px footprint, below minimum width. It remains ignored_tiny rather than an exported label.",
+      "worst_instance_id": "pool_human_mesh_0_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "cause": "edge_clipping",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_daa508adf6634921_002003",
+      "full_projected_bbox_px": [
+        632.8553471674863,
+        183.45863734350667,
+        653.8264023324311,
+        191.3488865888138
+      ],
+      "ignored_objects": [],
+      "index": 2003,
+      "instance_identity_check": "PASSED",
+      "iou": 0.4966908713980145,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        633.0,
+        187.0,
+        640.0,
+        191.0
+      ],
+      "rank": 33,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "Right-edge clipping changes the extrema of the visible person silhouette, leaving a 7x4 px box.",
+      "worst_instance_id": "pool_human_mesh_4_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "cause": "edge_clipping",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "canopy_moderate"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_1b85f6903269859a_000527",
+      "full_projected_bbox_px": [
+        633.0588743633728,
+        22.41596517429508,
+        647.0107389811435,
+        33.841854504752064
+      ],
+      "ignored_objects": [],
+      "index": 527,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5020963781694722,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        633.0,
+        28.0,
+        640.0,
+        34.0
+      ],
+      "rank": 34,
+      "requested_occlusion": "moderate",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The person crosses the right boundary. Boundary cropping dominates the difference, with a moderate occlusion request also present.",
+      "worst_instance_id": "pool_human_mesh_5_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "canopy_mild"
+      ],
+      "distance": "medium",
+      "frame_id": "scene_046d7a59b3710672_003114",
+      "full_projected_bbox_px": [
+        125.93744404986572,
+        287.12383390993,
+        143.03327019292482,
+        302.1445803988945
+      ],
+      "ignored_objects": [],
+      "index": 3114,
+      "instance_identity_check": "PASSED",
+      "iou": 0.506246161494147,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        130.0,
+        292.0,
+        143.0,
+        302.0
+      ],
+      "rank": 35,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "A canopy masks the upper/left person; the exposed body lies along the roof edge.",
+      "worst_instance_id": "pool_human_mesh_6_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "cause": "edge_clipping_and_canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "canopy_mild"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_62646fcd822ea1a5_009208",
+      "full_projected_bbox_px": [
+        128.46371871119496,
+        470.06867845983754,
+        143.12659778393396,
+        482.93099791978796
+      ],
+      "ignored_objects": [],
+      "index": 9208,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5068438025278645,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        128.0,
+        474.0,
+        141.0,
+        480.0
+      ],
+      "rank": 36,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The bottom-edge person is partly hidden by a canopy and clipped at the image boundary.",
+      "worst_instance_id": "pool_human_mesh_0_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "cause": "edge_clipping_and_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_5a5e83550912905f_002861",
+      "full_projected_bbox_px": [
+        349.5058401155609,
+        -1.840635231232909,
+        353.5749846552254,
+        8.118568278592619
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_2_1",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 2861,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5083778475993755,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        350.0,
+        0.0,
+        354.0,
+        5.0
+      ],
+      "rank": 37,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "Top-edge cropping of the person leaves a 4x5 px fragment; cut-mesh extrema and raster rounding explain the difference.",
+      "worst_instance_id": "pool_human_mesh_6_1",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "cause": "edge_clipping_and_canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5",
+        "canopy_moderate"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_1457ed93e6320860_003965",
+      "full_projected_bbox_px": [
+        -28.13326777314552,
+        20.754253547773715,
+        37.16229161263993,
+        62.97344401285548
+      ],
+      "ignored_objects": [],
+      "index": 3965,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5090739412439594,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        5.0,
+        38.0,
+        37.0,
+        63.0
+      ],
+      "rank": 38,
+      "requested_occlusion": "moderate",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The gray canopy partly masks the person, with left-edge clipping also reducing its visible rectangle.",
+      "worst_instance_id": "pool_human_mesh_0_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "cause": "edge_clipping_and_canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "canopy_moderate"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_74ccb1f775d879b7_008730",
+      "full_projected_bbox_px": [
+        208.77102042315204,
+        -20.320147303956787,
+        223.93057581317385,
+        7.7590835708590475
+      ],
+      "ignored_objects": [],
+      "index": 8730,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5123979430667489,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        216.0,
+        0.0,
+        224.0,
+        8.0
+      ],
+      "rank": 39,
+      "requested_occlusion": "moderate",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The top-edge person is reduced to an 8x8 px fragment; a moderate canopy request and boundary crop both apply.",
+      "worst_instance_id": "pool_human_mesh_5_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "cause": "edge_clipping",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_c997edbdd0d0a6aa_004458",
+      "full_projected_bbox_px": [
+        241.666531291654,
+        -20.195040501398466,
+        254.31587037837122,
+        7.4160232632447105
+      ],
+      "ignored_objects": [],
+      "index": 4458,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5223446631522599,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        247.0,
+        0.0,
+        254.0,
+        7.0
+      ],
+      "rank": 40,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "Top-edge clipping leaves a 7x7 px body fragment, differing from the clipped full projection rectangle.",
+      "worst_instance_id": "pool_human_mesh_1_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "canopy_mild"
+      ],
+      "distance": "far",
+      "frame_id": "scene_64514a8ed50070d1_009247",
+      "full_projected_bbox_px": [
+        535.4627920682502,
+        264.36807977192717,
+        548.7802960605871,
+        273.7717562812859
+      ],
+      "ignored_objects": [],
+      "index": 9247,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5310517618072608,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        536.0,
+        267.0,
+        546.0,
+        274.0
+      ],
+      "rank": 41,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy partly masks the person, leaving a 10x7 px visible box.",
+      "worst_instance_id": "pool_human_mesh_1_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "cause": "small_pixel_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1"
+      ],
+      "distance": "near",
+      "frame_id": "scene_760a2467ea93cfd7_002884",
+      "full_projected_bbox_px": [
+        354.47094591451526,
+        218.8531252256779,
+        357.4170431694917,
+        226.18267590630364
+      ],
+      "ignored_objects": [
+        {
+          "instance_id": "pool_human_mesh_5_0",
+          "reason": "Below configured pixel threshold"
+        }
+      ],
+      "index": 2884,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5557210075821881,
+      "label_state": "ignored_tiny",
+      "native_bbox_px": [
+        355.0,
+        219.0,
+        357.0,
+        225.0
+      ],
+      "rank": 42,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "An unoccluded terrain person occupies 2x6 px and is correctly ignored_tiny. Minimum width and integer rasterization explain the tail.",
+      "worst_instance_id": "pool_human_mesh_5_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "cause": "edge_clipping",
+      "class": "truck",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_50f3369ac3992bc6_009123",
+      "full_projected_bbox_px": [
+        410.8328370892089,
+        -32.25879600771094,
+        452.3786866382465,
+        8.31079107752035
+      ],
+      "ignored_objects": [],
+      "index": 9123,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5560722462051181,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        411.0,
+        0.0,
+        435.0,
+        8.0
+      ],
+      "rank": 43,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The truck crosses the top boundary. A visible rear fragment has an 8 px height despite the larger clipped rotated-mesh rectangle.",
+      "worst_instance_id": "pool_truck_mesh_1_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "canopy_mild"
+      ],
+      "distance": "near",
+      "frame_id": "scene_1d57c0c0ef930db4_008565",
+      "full_projected_bbox_px": [
+        434.940580759166,
+        168.16004949247866,
+        441.0386562798385,
+        177.77897373032997
+      ],
+      "ignored_objects": [],
+      "index": 8565,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5671636806305472,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        435.0,
+        171.0,
+        440.0,
+        178.0
+      ],
+      "rank": 44,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "A canopy hides the upper person extrema, leaving a 5x7 px native rectangle.",
+      "worst_instance_id": "pool_human_mesh_0_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "canopy_moderate"
+      ],
+      "distance": "near",
+      "frame_id": "scene_8d0ae10a61a14662_003480",
+      "full_projected_bbox_px": [
+        206.54894543857392,
+        141.91794206633278,
+        236.97530301009505,
+        171.6208932995783
+      ],
+      "ignored_objects": [],
+      "index": 3480,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5675234263876748,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        213.0,
+        150.0,
+        237.0,
+        172.0
+      ],
+      "rank": 45,
+      "requested_occlusion": "moderate",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The moderate canopy masks the head/upper body. The exposed lower body produces the 24x22 px native box.",
+      "worst_instance_id": "pool_human_mesh_5_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "cause": "canopy_occlusion",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5",
+        "canopy_mild"
+      ],
+      "distance": "near",
+      "frame_id": "scene_015660a2ed218f72_008373",
+      "full_projected_bbox_px": [
+        329.0620667502561,
+        221.6103689676186,
+        342.48027365736306,
+        243.7530753593278
+      ],
+      "ignored_objects": [],
+      "index": 8373,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5728083210732791,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        329.0,
+        228.0,
+        340.0,
+        244.0
+      ],
+      "rank": 46,
+      "requested_occlusion": "mild",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The canopy masks the upper body, leaving an 11x16 px visible part.",
+      "worst_instance_id": "pool_human_mesh_2_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "cause": "small_pixel_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5"
+      ],
+      "distance": "near",
+      "frame_id": "scene_6f1350b7821308ac_001281",
+      "full_projected_bbox_px": [
+        352.73401513014886,
+        218.54789901886767,
+        357.5629495278697,
+        226.81193813912535
+      ],
+      "ignored_objects": [],
+      "index": 1281,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5790811911095893,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        354.0,
+        219.0,
+        357.0,
+        227.0
+      ],
+      "rank": 47,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The unoccluded person has a thin 3x8 px footprint. Pixel rounding dominates; nearby tree context does not show clear overlap.",
+      "worst_instance_id": "pool_human_mesh_4_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "cause": "edge_clipping_and_incidental_wall_occlusion",
+      "class": "bus",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "shadow_wall"
+      ],
+      "distance": "edge",
+      "frame_id": "scene_d22a41ff3cc10934_007176",
+      "full_projected_bbox_px": [
+        -235.85592572760947,
+        -57.30579481826106,
+        102.51092912727322,
+        103.44262421394507
+      ],
+      "ignored_objects": [],
+      "index": 7176,
+      "instance_identity_check": "PASSED",
+      "iou": 0.5867597399016965,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        0.0,
+        0.0,
+        102.0,
+        61.0
+      ],
+      "rank": 48,
+      "requested_occlusion": "none",
+      "split": "test",
+      "status": "PASSED",
+      "truncated": true,
+      "visual_finding": "The bus crosses the top/left boundaries and the masonry shadow wall hides its lower part. Requested occlusion none does not preclude this context overlap.",
+      "worst_instance_id": "pool_bus_mesh_2_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "cause": "small_pixel_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5"
+      ],
+      "distance": "far",
+      "frame_id": "scene_6d291f37cef543c6_000799",
+      "full_projected_bbox_px": [
+        325.8215724604457,
+        22.056288925756604,
+        328.65586810923753,
+        32.374938296884636
+      ],
+      "ignored_objects": [],
+      "index": 799,
+      "instance_identity_check": "PASSED",
+      "iou": 0.587302522456563,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        326.0,
+        23.0,
+        329.0,
+        30.0
+      ],
+      "rank": 49,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The unoccluded far person occupies 3x7 px; roughly one-pixel differences in extrema strongly affect IoU.",
+      "worst_instance_id": "pool_human_mesh_1_0",
+      "yolo_bytes_identical": true
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "cause": "small_pixel_rasterization",
+      "class": "person",
+      "context_ids": [
+        "clutter_0",
+        "clutter_1",
+        "clutter_2",
+        "clutter_3",
+        "clutter_4",
+        "clutter_5"
+      ],
+      "distance": "medium",
+      "frame_id": "scene_01c619928f61cfbf_008816",
+      "full_projected_bbox_px": [
+        402.6539452036144,
+        373.6802086610827,
+        409.4784441517555,
+        378.06959917140415
+      ],
+      "ignored_objects": [],
+      "index": 8816,
+      "instance_identity_check": "PASSED",
+      "iou": 0.6008935102088724,
+      "label_state": "labelled",
+      "native_bbox_px": [
+        403.0,
+        374.0,
+        409.0,
+        377.0
+      ],
+      "rank": 50,
+      "requested_occlusion": "none",
+      "split": "train",
+      "status": "PASSED",
+      "truncated": false,
+      "visual_finding": "The unoccluded medium-distance person projects to a small horizontal 6x3 px footprint; continuous/raster extrema explain the difference.",
+      "worst_instance_id": "pool_human_mesh_0_0",
+      "yolo_bytes_identical": true
+    }
+  ],
+  "instance_identity_evidence": "qa/instance_identity_audit.json",
+  "limitations": "These 50 investigated frames are an audit sample, not exhaustive visibility or identity certification of every full-dataset target. IoU includes ignored_tiny boxes and compares visible raster rectangles with full projected mesh rectangles, not pixel visibility fractions.",
+  "review_pages": [
+    "low_iou/review_pages/001.png",
+    "low_iou/review_pages/002.png",
+    "low_iou/review_pages/003.png",
+    "low_iou/review_pages/004.png",
+    "low_iou/review_pages/005.png"
+  ],
+  "review_timestamp": "2026-10-05T02:14:27.587944+00:00",
+  "reviewer": "Codex agent visual inspection",
+  "status": "PASSED"
+}

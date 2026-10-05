@@ -1,0 +1,36 @@
+{
+  "status": "PASSED",
+  "started_utc": "2026-10-05T02:19:10.922962+00:00",
+  "ros_log_dir": "/tmp/wildlife-v05-ros-logs",
+  "steps": [
+    {
+      "name": "prerequisites",
+      "command": "scripts/check_prereqs.sh",
+      "log": "docs/dataset/evidence/final_prerequisites.log",
+      "exit_code": 0,
+      "elapsed_s": 0.7379309390016715
+    },
+    {
+      "name": "build",
+      "command": "scripts/build_ros.sh",
+      "log": "docs/dataset/evidence/final_build.log",
+      "exit_code": 0,
+      "elapsed_s": 7.096559338999214
+    },
+    {
+      "name": "tests",
+      "command": "source scripts/environment.sh\ncolcon test --base-paths src --executor sequential",
+      "log": "docs/dataset/evidence/final_tests.log",
+      "exit_code": 0,
+      "elapsed_s": 7.679526453001017
+    },
+    {
+      "name": "test_results",
+      "command": "source scripts/environment.sh\ncolcon test-result --verbose",
+      "log": "docs/dataset/evidence/final_test_results.log",
+      "exit_code": 0,
+      "elapsed_s": 0.717657840999891
+    }
+  ],
+  "finished_utc": "2026-10-05T02:19:27.155557+00:00"
+}

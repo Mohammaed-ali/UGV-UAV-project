@@ -1,0 +1,36 @@
+{
+  "description": "Requested vehicle slots that cannot be placed within footprint/separation/pool constraints are reported. Person counts must never be dropped.",
+  "splits": {
+    "train": {
+      "shortfall_vehicle_slots": 214,
+      "affected_frames": 160,
+      "by_requested_composition": {
+        "vehicle_only": 152,
+        "human_positive": 62
+      },
+      "planned_minus_realized_persons": 0,
+      "person_count_mismatch_frames": []
+    },
+    "val": {
+      "shortfall_vehicle_slots": 51,
+      "affected_frames": 38,
+      "by_requested_composition": {
+        "vehicle_only": 44,
+        "human_positive": 7
+      },
+      "planned_minus_realized_persons": 0,
+      "person_count_mismatch_frames": []
+    },
+    "test": {
+      "shortfall_vehicle_slots": 89,
+      "affected_frames": 57,
+      "by_requested_composition": {
+        "vehicle_only": 77,
+        "human_positive": 12
+      },
+      "planned_minus_realized_persons": 0,
+      "person_count_mismatch_frames": []
+    }
+  },
+  "status": "PASSED_ACCOUNTING"
+}

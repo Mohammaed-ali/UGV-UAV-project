@@ -1,0 +1,56 @@
+{
+  "background_extent_diagnostic": "qa/background_extent_review.json",
+  "criteria": {
+    "human_recognizability": {
+      "finding": "Native #117/#264/#966 show clothed bodies, heads and limbs, with multiple static appearances/yaws. Far/nadir bodies are resolution-limited, and all eight share one template.",
+      "status": "PASSED"
+    },
+    "lighting_realism": {
+      "finding": "Directional lighting, subdued warm morning/evening and neutral noon give grounded shading; no calibrated atmospheric/sky model.",
+      "status": "PASSED"
+    },
+    "scene_plausibility": {
+      "finding": "Single, crowds and person/vehicle scenes are grounded and physically separated, with outdoor context. Layouts do not model real traffic/crowd behavior. 111/2000 high/oblique frames expose environment background at corners, at most 5.53% of image pixels.",
+      "status": "PASSED"
+    },
+    "shadow_realism": {
+      "finding": "Trees, vehicles, canopies and wall cast localized shadows. Shaded/illuminated people coexist. Shadows remain hard and some walls are deliberately artificial occluders.",
+      "status": "PASSED"
+    },
+    "terrain_realism": {
+      "finding": "Photographic PBR soil/grass/asphalt and irregular mixed transitions improve the primitive baseline. Planar mosaics, repeated/furrowed views and simplified road surfaces remain.",
+      "status": "PASSED"
+    },
+    "vehicle_recognizability": {
+      "finding": "Shaped cars and truck cabs/cargo, bus roofs/window rows/wheels distinguish classes. Buses and vehicles remain stylized, with simplified surfaces.",
+      "status": "PASSED"
+    }
+  },
+  "dedicated_contact_sheets": [
+    "best_quality",
+    "human_focused",
+    "single_person",
+    "multi_person",
+    "person_vehicle",
+    "shadow",
+    "occluded",
+    "lowest_fidelity"
+  ],
+  "judgment": "Acceptable improved simplified synthetic imagery; representative scenes are no longer overwhelmingly crude markers/blocks. This is not photorealistic or equivalent to real aerial photography.",
+  "limitations_document": "docs/dataset/ASSETS_V2.md",
+  "native_images_reviewed": [
+    "scene_50b9fbcd7ccc92e7_000117",
+    "scene_ae30f8d817374009_000264",
+    "scene_15ab27983c5b0c19_000966",
+    "scene_78b884890ec389f1_001180"
+  ],
+  "review_pages": [
+    "001.jpg",
+    "002.jpg",
+    "003.jpg",
+    "004.jpg"
+  ],
+  "review_timestamp": "2026-10-05T01:21:04.373868+00:00",
+  "reviewed_previews": 100,
+  "status": "PASSED"
+}

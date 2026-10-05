@@ -1,0 +1,11 @@
+Running prerequisites: scripts/check_prereqs.sh
+prerequisites: exit 0
+Running build: scripts/build_ros.sh
+build: exit 0
+Running tests: source scripts/environment.sh
+colcon test --base-paths src --executor sequential
+tests: exit 0
+Running test_results: source scripts/environment.sh
+colcon test-result --verbose
+test_results: exit 0
+/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/docs/dataset/evidence/final_regression_execution.json

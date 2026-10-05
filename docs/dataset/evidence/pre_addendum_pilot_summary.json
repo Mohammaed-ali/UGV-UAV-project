@@ -1,0 +1,81 @@
+{
+  "accepted_frames": 2000,
+  "dataset": "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/datasets/gazebo_aerial_pilot_v2",
+  "reason": "Legacy uniform class sampler gives 47.0625 percent TRAIN person frames and primitive asset fidelity; full generation is not authorized by the new acceptance requirements.",
+  "technical_validator": {
+    "counts": {
+      "images": 2000,
+      "jsonl_metadata": 2000,
+      "labels": 2000,
+      "metadata": 2000,
+      "scenario_manifest": 2000,
+      "status": 2000
+    },
+    "coverage": {
+      "altitude": {
+        "10": 400,
+        "15": 400,
+        "20": 400,
+        "30": 400,
+        "40": 400
+      },
+      "background": {
+        "dirt": 500,
+        "grass": 500,
+        "mixed": 500,
+        "road": 500
+      },
+      "lighting": {
+        "evening": 500,
+        "morning": 500,
+        "noon": 500,
+        "shadow": 500
+      },
+      "off_nadir": {
+        "0": 500,
+        "10": 500,
+        "20": 500,
+        "30": 500
+      }
+    },
+    "duplicate_frame_ids": 0,
+    "errors": [],
+    "frames_per_split": {
+      "test": 200,
+      "train": 1600,
+      "val": 200
+    },
+    "heldout_assets_used": [
+      "bus_2",
+      "car_3",
+      "dirt_3",
+      "grass_3",
+      "mixed_3",
+      "road_3",
+      "truck_3"
+    ],
+    "leakage_checks": [
+      "frame IDs",
+      "image SHA256",
+      "scene IDs/families",
+      "scenario specification replay",
+      "heldout assets"
+    ],
+    "status": "PASSED",
+    "unique_image_hashes": 2000,
+    "warnings": [
+      "KNOWN LIMITATION: Person variants share one template; person model holdout is not claimed."
+    ]
+  },
+  "training_frames": 1600,
+  "training_visible_person_count_histogram": {
+    "0": 847,
+    "1": 465,
+    "2": 198,
+    "3": 70,
+    "4": 18,
+    "5": 2
+  },
+  "training_visible_person_frame_percent": 47.0625,
+  "updated_acceptance_status": "FAIL_HUMAN_QUOTAS_AND_REALISM_NOT_APPROVED"
+}

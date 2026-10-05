@@ -1,5 +1,13 @@
 # V0.5-B1 Phase 0
 
+This document preserves the original baseline/primitive feasibility findings
+and historical stopping point. **V0.5-B1 is now complete: Gates 0–10 PASS.**
+The revised human quotas, licensed meshes/PBR assets, fresh mesh alignment,
+10,000-frame dataset and final regression are documented in the
+[dataset report](DATASET_REPORT.md) and [continuation results](CONTINUATION_RESULTS.md).
+Original measurements below are historical and are not the current full-run
+asset/fidelity or performance claims.
+
 Source baseline: `v0.4-final`, `949baba06fea505147b5a1cff11a53bb523827a4`.
 Work remains in the existing `wildlife_ws_ros2_jazzy_v0_3` primary repository,
 branch `codex/v0.5-synthetic-dataset`. The tag is unchanged. The original
@@ -96,14 +104,16 @@ and require normal placements to fit the image. Edge challenges explicitly
 permit truncation. Usable footprint radii include ground ray intersection and
 a conservative far-clip bound, rather than fixed metric distance bands.
 
-## Assets and scale
+## Original procedural assets and scale
 
 No mutable Fuel or internet asset download is required. The pinned pool has
 15 original procedural targets: person 4, car 4, truck 4, bus 3; 16 original
 seeded background textures; and nine original distractor/occluder structures.
 Checksums, geometry bounds, dimensions, authorship, creation date, source URI,
 license and split eligibility are recorded in
-`tools/synthetic_dataset/assets/manifests/assets.json` and `.csv`.
+the original asset manifests. The preserved copy is now
+`tools/synthetic_dataset/assets/manifests/legacy_primitive_assets.json`;
+the primary `assets.json`/CSV describe the revised licensed asset pool.
 The original assets are dedicated under CC0-1.0, separately from upstream code.
 No external model/texture is incorporated. The source builder can regenerate
 the pinned pool; ordinary generation only verifies and reads it.
@@ -149,19 +159,37 @@ actual RGB/box/pose evidence and lighting changes are validated independently.
 
 The representative 60-frame benchmark uses fixed 640×480, shadows, clutter
 and 1–8 targets, with one Gazebo process and finite requested RTF 8. Initial
-measurement: ~443 accepted/attempted frames per minute, average PNG ~200 KB,
-~1.48 MB/s image writes, ~0.9 GB RSS. Process CPU is a sampled lifetime percent,
-not whole-host CPU utilization. `evidence/phase0/benchmark.json` contains final
+measurement: ~443 accepted/attempted frames per minute. The final retained run
+measured **416.645 frames/min**, average PNG **200,392.633 bytes**,
+**1,391,542.197 bytes/s** image writes, **911,120–911,252 KiB RSS**.
+Process CPU samples were **125–177% lifetime CPU**, not whole-host utilization.
+`evidence/phase0/benchmark.json` contains final
 measurements, process samples and the extrapolation. Planning estimate for
-10,000 images: ~23 minutes/~2 GB RGB, plus metadata and QA. Pilot measurements
+10,000 images: **1,440.076 seconds (~24 minutes)/2,003,926,333 bytes RGB**,
+plus metadata and QA. Pilot measurements
 will replace this estimate before full generation. No parallel renderers are used.
 
-## Limits and next gate
+## Historical limits and stopping point
 
 **KNOWN LIMITATION:** Synthetic Gazebo imagery is not equivalent to real
 aerial-camera imagery. Procedural materials and silhouettes do not establish
 real-world accuracy, VisDrone-equivalent realism, or sim-to-real success.
 Shadow presence is demonstrated; photometric realism and a calibrated pixel
-occlusion fraction are **NOT TESTED**. The next gate is 200-frame smoke
-generation and full validation/visual QA, followed by determinism and SIGKILL
-resume tests, then the 2,000-frame pilot and independent 300-frame audit.
+occlusion fraction are **NOT TESTED**. The 200-frame smoke dataset subsequently
+passed validation and visual QA. Work stopped during Gate 4: two 50-frame runs
+have identical RGB/YOLO/scenario bytes, but exact comparison of raw readback
+metadata rejects equivalent quaternion signs and floating-point roundoff.
+Gate 4 is **PARTIALLY VALIDATED**, with its comparator repair pending.
+See [the continuation handoff](V0_5_B1_HANDOFF.md) for the precise failure,
+repository state and remaining sequence. Crash/resume, pilot, 300-frame audit,
+full dataset and final V0.4 regression have not been run.
+
+Those pending gates were subsequently completed. The original 50-frame captures
+were re-compared after a narrowly scoped quaternion-sign/roundoff repair,
+without rerendering to fix the comparison. Later human/fidelity requirements
+triggered fresh affected smoke/determinism/crash/pilot/audit gates; baseline
+and installed sensor capability work were reused. Current mesh alignment passes
+21 cases and its 448-cell geometry table retains 26 below-threshold cells.
+The final 10,000-frame run measured 298.775 accepted frames/minute, with 4.527 GB
+RGB and all gates/regressions passing. See the report for actual evidence,
+known synthetic limitations and historical failed attempts.

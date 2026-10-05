@@ -1,0 +1,118 @@
+{
+  "status": "PASSED",
+  "gate": 10,
+  "timestamp": "2026-10-05T02:22:15.091657+00:00",
+  "checked_revision": "796c48e0622f9ee70efd96e47a79a4075e9a7dbd",
+  "frozen_v04_commit": "949baba06fea505147b5a1cff11a53bb523827a4",
+  "built_packages": 9,
+  "colcon": {
+    "test_entries": 56,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "synthetic_unit_tests": {
+    "count": 59,
+    "errors": 0,
+    "failures": 0
+  },
+  "static": {
+    "baseline_parsed_files": {
+      "python": 67,
+      "shell": 24,
+      "xml_sdf": 23,
+      "yaml": 14
+    },
+    "checked_revision": "796c48e0622f9ee70efd96e47a79a4075e9a7dbd",
+    "launches": [
+      "src/wildlife_bringup/launch/gazebo.launch.py",
+      "src/wildlife_bringup/launch/px4_fleet_isolation.launch.py",
+      "src/wildlife_bringup/launch/px4_isolation.launch.py",
+      "src/wildlife_bringup/launch/px4_single.launch.py",
+      "src/wildlife_bringup/launch/px4_two_fusion.launch.py",
+      "src/wildlife_bringup/launch/simulation.launch.py",
+      "src/wildlife_bringup/launch/single_deployment.launch.py",
+      "src/wildlife_bringup/launch/split_deployment.launch.py",
+      "src/wildlife_bringup/launch/split_simulation.launch.py",
+      "src/wildlife_bringup/launch/subject1_demo.launch.py",
+      "src/wildlife_bringup/launch/subject2_demo.launch.py"
+    ],
+    "package_versions": {
+      "wildlife_bringup": "0.4.0",
+      "wildlife_core": "0.4.0",
+      "wildlife_interfaces": "0.4.0",
+      "wildlife_mission": "0.4.0",
+      "wildlife_perception": "0.4.0",
+      "wildlife_simulation": "0.4.0",
+      "wildlife_swarm": "0.4.0",
+      "wildlife_targets": "0.4.0",
+      "wildlife_vehicles": "0.4.0"
+    },
+    "runtime_src_and_scripts_unchanged_from_v04": true,
+    "source_release_commit": "949baba06fea505147b5a1cff11a53bb523827a4",
+    "status": "PASSED",
+    "tooling_parsed_files": {
+      "python": 25,
+      "xml_sdf": 53,
+      "yaml": 3
+    },
+    "typed_contracts_unchanged_from_v04": true
+  },
+  "commands": [
+    {
+      "name": "prerequisites",
+      "command": "scripts/check_prereqs.sh",
+      "log": "docs/dataset/evidence/final_prerequisites.log",
+      "exit_code": 0,
+      "elapsed_s": 0.7379309390016715
+    },
+    {
+      "name": "build",
+      "command": "scripts/build_ros.sh",
+      "log": "docs/dataset/evidence/final_build.log",
+      "exit_code": 0,
+      "elapsed_s": 7.096559338999214
+    },
+    {
+      "name": "tests",
+      "command": "source scripts/environment.sh\ncolcon test --base-paths src --executor sequential",
+      "log": "docs/dataset/evidence/final_tests.log",
+      "exit_code": 0,
+      "elapsed_s": 7.679526453001017
+    },
+    {
+      "name": "test_results",
+      "command": "source scripts/environment.sh\ncolcon test-result --verbose",
+      "log": "docs/dataset/evidence/final_test_results.log",
+      "exit_code": 0,
+      "elapsed_s": 0.717657840999891
+    }
+  ],
+  "logs": {
+    "final_prerequisites.log": {
+      "sha256": "e9b68c880bf9abe29413fda86f11694ce9bbecd6b646fe054d4e8c61dafe886e",
+      "bytes": 315
+    },
+    "final_build.log": {
+      "sha256": "58156e522d92bf3fd040ad17e120b9a01fcc12b49f39d688a1f354c0ed6f4760",
+      "bytes": 660
+    },
+    "final_tests.log": {
+      "sha256": "64def0edea51fdd0e2a7f31c52e6d2aee41b9ebd06eaa7ad2a6198ec0e73378a",
+      "bytes": 660
+    },
+    "final_test_results.log": {
+      "sha256": "a51b94961e1364be0ebc6b936b4301aad917c3290ecbc0c59a391d85bd95e0ed",
+      "bytes": 51
+    },
+    "final_static.log": {
+      "sha256": "9899c455d8ceb11d55039ab823fe8326f27e8281012f9cc02a4c692748e8488e",
+      "bytes": 1452
+    },
+    "final_synthetic_tests.log": {
+      "sha256": "eee6fcfd1075c28f42d67b8f8565911171a331d46cd1ac2a6966baa479c65419",
+      "bytes": 7447
+    }
+  },
+  "scope": "Existing V0.4 build/tests/static checks plus offline synthetic tests. No new PX4 flight, training or real-world detector validation."
+}

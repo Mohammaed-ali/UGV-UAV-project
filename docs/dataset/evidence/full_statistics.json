@@ -1,0 +1,294 @@
+{
+  "bbox_area_px": {
+    "count": 31676,
+    "max": 150654.0,
+    "mean": 4210.168834448794,
+    "median": 713.0,
+    "min": 9.0,
+    "p05": 32.0,
+    "p25": 144.0,
+    "p95": 20124.25
+  },
+  "bbox_height_px": {
+    "count": 31676,
+    "max": 470.0,
+    "mean": 44.672780654122995,
+    "median": 26.0,
+    "min": 3.0,
+    "p05": 6.0,
+    "p25": 12.0,
+    "p95": 145.0
+  },
+  "bbox_width_px": {
+    "count": 31676,
+    "max": 525.0,
+    "mean": 47.865734309887614,
+    "median": 28.0,
+    "min": 3.0,
+    "p05": 5.0,
+    "p25": 12.0,
+    "p95": 157.0
+  },
+  "camera_yaw_histogram_30deg": [
+    818,
+    787,
+    835,
+    798,
+    868,
+    838,
+    873,
+    848,
+    861,
+    813,
+    839,
+    822
+  ],
+  "cross_tables": {
+    "altitude_x_class": {
+      "10": {
+        "bus": 866,
+        "car": 990,
+        "person": 3446,
+        "truck": 881
+      },
+      "15": {
+        "bus": 951,
+        "car": 1057,
+        "person": 3451,
+        "truck": 1010
+      },
+      "20": {
+        "bus": 996,
+        "car": 1050,
+        "person": 3489,
+        "truck": 977
+      },
+      "30": {
+        "bus": 1076,
+        "car": 1056,
+        "person": 3306,
+        "truck": 1031
+      },
+      "40": {
+        "bus": 1010,
+        "car": 1072,
+        "person": 3404,
+        "truck": 1043
+      }
+    },
+    "background_x_class": {
+      "dirt": {
+        "bus": 1293,
+        "car": 1283,
+        "person": 4294,
+        "truck": 1236
+      },
+      "grass": {
+        "bus": 1192,
+        "car": 1282,
+        "person": 4245,
+        "truck": 1254
+      },
+      "mixed": {
+        "bus": 1199,
+        "car": 1296,
+        "person": 4217,
+        "truck": 1215
+      },
+      "road": {
+        "bus": 1215,
+        "car": 1364,
+        "person": 4340,
+        "truck": 1237
+      }
+    },
+    "distance_x_class": {
+      "edge": {
+        "bus": 523,
+        "car": 535,
+        "person": 1710,
+        "truck": 480
+      },
+      "far": {
+        "bus": 1485,
+        "car": 1582,
+        "person": 5128,
+        "truck": 1506
+      },
+      "medium": {
+        "bus": 1490,
+        "car": 1544,
+        "person": 5129,
+        "truck": 1546
+      },
+      "near": {
+        "bus": 1401,
+        "car": 1564,
+        "person": 5129,
+        "truck": 1410
+      }
+    },
+    "lighting_x_class": {
+      "evening": {
+        "bus": 1222,
+        "car": 1340,
+        "person": 4231,
+        "truck": 1276
+      },
+      "morning": {
+        "bus": 1229,
+        "car": 1305,
+        "person": 4310,
+        "truck": 1239
+      },
+      "noon": {
+        "bus": 1251,
+        "car": 1287,
+        "person": 4383,
+        "truck": 1227
+      },
+      "shadow": {
+        "bus": 1197,
+        "car": 1293,
+        "person": 4172,
+        "truck": 1200
+      }
+    },
+    "off_nadir_x_class": {
+      "0": {
+        "bus": 1199,
+        "car": 1302,
+        "person": 4102,
+        "truck": 1296
+      },
+      "10": {
+        "bus": 1203,
+        "car": 1323,
+        "person": 4299,
+        "truck": 1231
+      },
+      "20": {
+        "bus": 1273,
+        "car": 1278,
+        "person": 4325,
+        "truck": 1172
+      },
+      "30": {
+        "bus": 1224,
+        "car": 1322,
+        "person": 4370,
+        "truck": 1243
+      }
+    }
+  },
+  "frame_types": {
+    "distractor_only": 1000,
+    "negative": 1000,
+    "positive": 8000
+  },
+  "frames": 10000,
+  "frames_per_split": {
+    "test": 1000,
+    "train": 8000,
+    "val": 1000
+  },
+  "ignored_by_reason": {
+    "ignored_occluded": 207,
+    "ignored_tiny": 279
+  },
+  "instances_per_class": {
+    "bus": 4899,
+    "car": 5225,
+    "person": 17096,
+    "truck": 4942
+  },
+  "iou": {
+    "count": 31955,
+    "max": 0.9997975327494065,
+    "mean": 0.8992928438256992,
+    "median": 0.9534227698099812,
+    "min": 0.00022753002412631267,
+    "p05": 0.5983210928077917,
+    "p25": 0.882303663944445,
+    "p95": 0.9933871213872458
+  },
+  "labelled_per_class": {
+    "bus": 4898,
+    "car": 5208,
+    "person": 16631,
+    "truck": 4939
+  },
+  "marginals": {
+    "altitude": {
+      "10": 2000,
+      "15": 2000,
+      "20": 2000,
+      "30": 2000,
+      "40": 2000
+    },
+    "background": {
+      "dirt": 2500,
+      "grass": 2500,
+      "mixed": 2500,
+      "road": 2500
+    },
+    "lighting": {
+      "evening": 2500,
+      "morning": 2500,
+      "noon": 2500,
+      "shadow": 2500
+    },
+    "off_nadir": {
+      "0": 2500,
+      "10": 2500,
+      "20": 2500,
+      "30": 2500
+    }
+  },
+  "object_size_counts": {
+    "large_96_squared_and_above": 4109,
+    "medium_32_to_96_squared": 9845,
+    "small_under_32_squared": 17722
+  },
+  "object_yaw_histogram_30deg": [
+    2726,
+    2720,
+    2758,
+    2722,
+    2596,
+    2793,
+    2649,
+    2662,
+    2559,
+    2625,
+    2691,
+    2661
+  ],
+  "objects_per_image": {
+    "0": 2000,
+    "1": 1628,
+    "10": 135,
+    "11": 77,
+    "12": 77,
+    "13": 58,
+    "14": 36,
+    "15": 8,
+    "16": 9,
+    "17": 8,
+    "2": 1171,
+    "3": 1274,
+    "4": 1189,
+    "5": 759,
+    "6": 676,
+    "7": 362,
+    "8": 347,
+    "9": 186
+  },
+  "occlusion_requested": {
+    "mild": 1216,
+    "moderate": 411,
+    "none": 8373
+  },
+  "placement_shortfall": 354,
+  "truncated_objects": 5681
+}

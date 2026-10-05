@@ -1,0 +1,11 @@
+................................../home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/tests/test_generator.py:152: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpsehrmleo/manifests/scenarios.csv' mode='r' encoding='UTF-8'>
+  entries=list(csv.DictReader((Path(directory)/'manifests/scenarios.csv').open()));self.assertEqual(len(entries),1)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.........../home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/validate_dataset.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpjuv0j0j1/manifests/scenarios.csv' mode='r' encoding='UTF-8'>
+  scenarios=list(csv.DictReader((root/'manifests/scenarios.csv').open()));actual_counts['scenario_manifest']=len(scenarios)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..............
+----------------------------------------------------------------------
+Ran 59 tests in 2.396s
+
+OK

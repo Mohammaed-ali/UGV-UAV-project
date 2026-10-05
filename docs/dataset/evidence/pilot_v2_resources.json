@@ -1,0 +1,77 @@
+{
+  "note": "Process lifetime CPU percentages, not instantaneous or whole-host CPU load.",
+  "samples": [
+    {
+      "completed_markers": 652,
+      "ownership": {
+        "gazebo_pgid": 29801,
+        "generator_pid": 29787,
+        "partition": "wildlife-dataset-d9b9308362c74175bbb1f84c301ab67c",
+        "service_worker_pid": 29800
+      },
+      "processes": [
+        {
+          "command": "python3",
+          "cpu_percent_lifetime": 30.9,
+          "pgid": 29760,
+          "pid": 29787,
+          "ppid": 29760,
+          "rss_kib": 191140
+        },
+        {
+          "command": "python3",
+          "cpu_percent_lifetime": 2.0,
+          "pgid": 29760,
+          "pid": 29800,
+          "ppid": 29787,
+          "rss_kib": 24708
+        },
+        {
+          "command": "ruby",
+          "cpu_percent_lifetime": 192.0,
+          "pgid": 29801,
+          "pid": 29801,
+          "ppid": 29787,
+          "rss_kib": 912140
+        }
+      ],
+      "timestamp": "2026-10-05T00:00:55.409232+00:00"
+    },
+    {
+      "completed_markers": 1293,
+      "ownership": {
+        "gazebo_pgid": 29801,
+        "generator_pid": 29787,
+        "partition": "wildlife-dataset-d9b9308362c74175bbb1f84c301ab67c",
+        "service_worker_pid": 29800
+      },
+      "processes": [
+        {
+          "command": "python3",
+          "cpu_percent_lifetime": 30.6,
+          "pgid": 29760,
+          "pid": 29787,
+          "ppid": 29760,
+          "rss_kib": 191200
+        },
+        {
+          "command": "python3",
+          "cpu_percent_lifetime": 2.0,
+          "pgid": 29760,
+          "pid": 29800,
+          "ppid": 29787,
+          "rss_kib": 24848
+        },
+        {
+          "command": "ruby",
+          "cpu_percent_lifetime": 199.0,
+          "pgid": 29801,
+          "pid": 29801,
+          "ppid": 29787,
+          "rss_kib": 912144
+        }
+      ],
+      "timestamp": "2026-10-05T00:02:56.245938+00:00"
+    }
+  ]
+}

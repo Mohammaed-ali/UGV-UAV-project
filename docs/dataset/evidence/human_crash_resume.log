@@ -1,0 +1,74 @@
+{
+  "status": "PASSED",
+  "signal": "SIGKILL",
+  "committed_before_kill": 30,
+  "completed_samples_unchanged": true,
+  "expected_count": 200,
+  "resume_exit_code": 0,
+  "validator": {
+    "status": "PASSED",
+    "errors": [],
+    "warnings": [
+      "KNOWN LIMITATION: Person variants share one template; person model holdout is not claimed."
+    ],
+    "counts": {
+      "images": 200,
+      "labels": 200,
+      "metadata": 200,
+      "status": 200,
+      "scenario_manifest": 200,
+      "jsonl_metadata": 200
+    },
+    "frames_per_split": {
+      "train": 160,
+      "val": 20,
+      "test": 20
+    },
+    "heldout_assets_used": [
+      "bus_mesh_2",
+      "car_mesh_3",
+      "dirt_3",
+      "grass_3",
+      "mixed_3",
+      "road_3",
+      "truck_mesh_3"
+    ],
+    "duplicate_frame_ids": 0,
+    "unique_image_hashes": 200,
+    "coverage": {
+      "altitude": {
+        "10": 47,
+        "30": 37,
+        "20": 37,
+        "15": 42,
+        "40": 37
+      },
+      "off_nadir": {
+        "30": 46,
+        "10": 54,
+        "0": 54,
+        "20": 46
+      },
+      "lighting": {
+        "shadow": 46,
+        "morning": 54,
+        "evening": 46,
+        "noon": 54
+      },
+      "background": {
+        "mixed": 46,
+        "road": 46,
+        "dirt": 54,
+        "grass": 54
+      }
+    },
+    "leakage_checks": [
+      "frame IDs",
+      "image SHA256",
+      "scene IDs/families",
+      "scenario specification replay",
+      "heldout assets"
+    ]
+  },
+  "remaining_temporary_files": []
+}

@@ -1,0 +1,20 @@
+....................F............./home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/tests/test_generator.py:147: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp_vhb9cc3/manifests/scenarios.csv' mode='r' encoding='UTF-8'>
+  entries=list(csv.DictReader((Path(directory)/'manifests/scenarios.csv').open()));self.assertEqual(len(entries),1)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.........../home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/validate_dataset.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpygpudm0q/manifests/scenarios.csv' mode='r' encoding='UTF-8'>
+  scenarios=list(csv.DictReader((root/'manifests/scenarios.csv').open()));actual_counts['scenario_manifest']=len(scenarios)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.....
+======================================================================
+FAIL: test_altitude_quotas (test_generator.GeneratorTests.test_altitude_quotas)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/tests/test_generator.py", line 69, in test_altitude_quotas
+    self.assertEqual(set(counts),set(self.cfg['sampling']['altitude_buckets_m']));self.assertLessEqual(max(counts.values())-min(counts.values()),1)
+                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 4 not less than or equal to 1
+
+----------------------------------------------------------------------
+Ran 50 tests in 2.403s
+
+FAILED (failures=1)

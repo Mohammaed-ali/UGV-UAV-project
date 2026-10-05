@@ -1,0 +1,106 @@
+{
+  "accepted_samples": 10000,
+  "asset_licenses": [
+    "CC0-1.0"
+  ],
+  "asset_manifest": "manifests/assets.json",
+  "asset_manifest_sha256": "268cbd3617e529a8fb32307da9dfbba0a2b99f2d2c2905689aea421a6c36eb7a",
+  "attempted_samples": 10000,
+  "camera_configuration_sha256": "7ad6bc5ea6d3e708149246edea6219aebba80f9773e59ea9a7ca78f067a9c765",
+  "class_counts": {
+    "bus": 4899,
+    "car": 5225,
+    "person": 17096,
+    "truck": 4942
+  },
+  "class_mapping": [
+    {
+      "gazebo_label": 10,
+      "name": "person",
+      "yolo_id": 0
+    },
+    {
+      "gazebo_label": 20,
+      "name": "car",
+      "yolo_id": 1
+    },
+    {
+      "gazebo_label": 30,
+      "name": "truck",
+      "yolo_id": 2
+    },
+    {
+      "gazebo_label": 40,
+      "name": "bus",
+      "yolo_id": 3
+    }
+  ],
+  "completed": true,
+  "configuration_sha256": "73ce8ecf411982500c61c78a86e9326b64107ea757cd30185e6913c6b0985239",
+  "dataset_name": "gazebo_aerial_v1",
+  "dataset_version": "2-human-mesh",
+  "expected_count": 10000,
+  "factor_distributions": {
+    "altitude": {
+      "10": 2000,
+      "15": 2000,
+      "20": 2000,
+      "30": 2000,
+      "40": 2000
+    },
+    "background": {
+      "dirt": 2500,
+      "grass": 2500,
+      "mixed": 2500,
+      "road": 2500
+    },
+    "lighting": {
+      "evening": 2500,
+      "morning": 2500,
+      "noon": 2500,
+      "shadow": 2500
+    },
+    "off_nadir": {
+      "0": 2500,
+      "10": 2500,
+      "20": 2500,
+      "30": 2500
+    }
+  },
+  "file_index_sha256": "16a57f23bb7f6846d1879357d4864a10afa2bc95d7d51df3d72c79e4d6f182b6",
+  "gazebo_version": "8.15.0",
+  "generation_end": "2026-10-05T01:56:54.506455+00:00",
+  "generation_start": "2026-10-05T01:23:19.505721+00:00",
+  "generator_code_sha256": "ea23f9a3f4e2511763931b956aa5076041623d94b23867ebd434e27a29e46a40",
+  "generator_git_commit": "796c48e0622f9ee70efd96e47a79a4075e9a7dbd",
+  "host": {
+    "cpu_count": 12,
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3"
+  },
+  "known_limitations": [
+    "synthetic mesh/PBR imagery; no real-world accuracy claim",
+    "person variants share one template; no heldout person model",
+    "geometry cross-check is a full silhouette, native labels are visible boxes",
+    "pixel visibility fraction is not measured"
+  ],
+  "last_run_performance": {
+    "accepted_per_minute": 298.77481760797224,
+    "elapsed_s": 2008.2013765539996,
+    "generated_samples": 10000,
+    "python_cpu_seconds": 559.069787,
+    "python_peak_rss_kib": 197588,
+    "skipped_samples": 0
+  },
+  "master_seed": 12345,
+  "rejected_samples": 0,
+  "rejection_reasons": {},
+  "seed": 12345,
+  "source_project_release": "v0.4-final",
+  "source_release_commit": "949baba06fea505147b5a1cff11a53bb523827a4",
+  "split_counts": {
+    "test": 1000,
+    "train": 8000,
+    "val": 1000
+  }
+}

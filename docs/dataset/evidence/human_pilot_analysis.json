@@ -1,0 +1,1174 @@
+{
+  "actual_vs_commanded": {
+    "max_position_error_m": 2.0361234083326657e-12,
+    "max_sign_invariant_quaternion_error": 4.27962854499149e-14
+  },
+  "asset_usage_per_split": {
+    "test": {
+      "bus_mesh_2": 142,
+      "car_mesh_3": 143,
+      "dirt_3": 50,
+      "grass_3": 50,
+      "human_mesh_0": 20,
+      "human_mesh_1": 22,
+      "human_mesh_2": 18,
+      "human_mesh_3": 21,
+      "human_mesh_4": 13,
+      "human_mesh_5": 26,
+      "human_mesh_6": 19,
+      "human_mesh_7": 20,
+      "mixed_3": 50,
+      "road_3": 50,
+      "truck_mesh_3": 155
+    },
+    "train": {
+      "bus_mesh_0": 370,
+      "bus_mesh_1": 346,
+      "car_mesh_0": 251,
+      "car_mesh_1": 262,
+      "car_mesh_2": 252,
+      "dirt_0": 133,
+      "dirt_1": 139,
+      "dirt_2": 128,
+      "grass_0": 134,
+      "grass_1": 121,
+      "grass_2": 145,
+      "human_mesh_0": 396,
+      "human_mesh_1": 366,
+      "human_mesh_2": 388,
+      "human_mesh_3": 421,
+      "human_mesh_4": 365,
+      "human_mesh_5": 401,
+      "human_mesh_6": 365,
+      "human_mesh_7": 386,
+      "mixed_0": 147,
+      "mixed_1": 123,
+      "mixed_2": 130,
+      "road_0": 144,
+      "road_1": 118,
+      "road_2": 138,
+      "truck_mesh_0": 248,
+      "truck_mesh_1": 220,
+      "truck_mesh_2": 245
+    },
+    "val": {
+      "bus_mesh_0": 51,
+      "bus_mesh_1": 83,
+      "car_mesh_0": 56,
+      "car_mesh_1": 50,
+      "car_mesh_2": 42,
+      "dirt_0": 12,
+      "dirt_1": 17,
+      "dirt_2": 21,
+      "grass_0": 13,
+      "grass_1": 20,
+      "grass_2": 17,
+      "human_mesh_0": 19,
+      "human_mesh_1": 14,
+      "human_mesh_2": 31,
+      "human_mesh_3": 16,
+      "human_mesh_4": 18,
+      "human_mesh_5": 18,
+      "human_mesh_6": 23,
+      "human_mesh_7": 18,
+      "mixed_0": 20,
+      "mixed_1": 14,
+      "mixed_2": 16,
+      "road_0": 15,
+      "road_1": 21,
+      "road_2": 14,
+      "truck_mesh_0": 41,
+      "truck_mesh_1": 53,
+      "truck_mesh_2": 42
+    }
+  },
+  "dataset": "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/datasets/gazebo_aerial_human_pilot",
+  "disk_bytes_per_folder": {
+    ".lock": 0,
+    ".run.json": 1930,
+    ".state": 893400,
+    "README.md": 447,
+    "data.yaml": 205,
+    "human_statistics.json": 45351,
+    "images": 905816256,
+    "labels": 318000,
+    "manifest.json": 2788,
+    "manifests": 2131686,
+    "metadata": 35566809,
+    "qa": 64284710,
+    "runtime": 693283,
+    "statistics.json": 5038
+  },
+  "distance_bias_explanation": "Requested distance bands are drawn once and retained across placement retries. Human-instance quotas are explicit. Far/edge targets may be clipped or ignored by configured size/visibility rules; no difficult level is removed or relabelled. Actual labelled coverage is reported separately from all planned/realized objects.",
+  "distance_instance_percent": {
+    "edge": 9.928748451053284,
+    "far": 30.66914498141264,
+    "medium": 30.26641883519207,
+    "near": 29.135687732342006
+  },
+  "estimated_10000_base_dataset_bytes": 5048799515.0,
+  "estimated_10000_generation_seconds": 1986.3983704049863,
+  "estimated_10000_rgb_bytes": 4529081280.0,
+  "frames": 2000,
+  "generator_revision": "796c48e0622f9ee70efd96e47a79a4075e9a7dbd",
+  "heldout_assets": {
+    "bus_mesh_2": {
+      "test": 142,
+      "train": 0,
+      "val": 0
+    },
+    "car_mesh_3": {
+      "test": 143,
+      "train": 0,
+      "val": 0
+    },
+    "dirt_3": {
+      "test": 50,
+      "train": 0,
+      "val": 0
+    },
+    "grass_3": {
+      "test": 50,
+      "train": 0,
+      "val": 0
+    },
+    "mixed_3": {
+      "test": 50,
+      "train": 0,
+      "val": 0
+    },
+    "road_3": {
+      "test": 50,
+      "train": 0,
+      "val": 0
+    },
+    "truck_mesh_3": {
+      "test": 155,
+      "train": 0,
+      "val": 0
+    }
+  },
+  "ignored_objects": [
+    {
+      "class": "person",
+      "frame_id": "scene_335ca7e2961f5067_000007",
+      "instance_id": "pool_human_mesh_5_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_771e472671bca095_000021",
+      "instance_id": "pool_human_mesh_5_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_910c1e9796536328_000026",
+      "instance_id": "pool_human_mesh_1_1",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_b7c5edf7efbce6b3_000048",
+      "instance_id": "pool_human_mesh_5_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_f488e961dbcf000a_000077",
+      "instance_id": "pool_human_mesh_4_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_989d64e2b22b7e02_000083",
+      "instance_id": "pool_human_mesh_0_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_50b9fbcd7ccc92e7_000117",
+      "instance_id": "pool_human_mesh_6_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_878d7287aff96215_000189",
+      "instance_id": "pool_human_mesh_5_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_a2cf577c23bee977_000207",
+      "instance_id": "pool_human_mesh_0_1",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_a2cf577c23bee977_000207",
+      "instance_id": "pool_human_mesh_5_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_7fc91418c6602151_000254",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_64482466a24f72b2_000270",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_9909d2863b545cdd_000277",
+      "instance_id": "pool_human_mesh_1_2",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_f29e9f113cad697f_000320",
+      "instance_id": "pool_human_mesh_7_1",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_2bec47ad20cd5e08_000375",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_6202c78865651f3a_000386",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_6202c78865651f3a_000386",
+      "instance_id": "pool_human_mesh_6_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_6202c78865651f3a_000386",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_ba1961000792961a_000404",
+      "instance_id": "pool_human_mesh_4_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_ba1961000792961a_000404",
+      "instance_id": "pool_human_mesh_4_1",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_459b0efabfa473f0_000433",
+      "instance_id": "pool_human_mesh_1_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_459b0efabfa473f0_000433",
+      "instance_id": "pool_human_mesh_1_1",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_a2f4e9ce4cfc2a4a_000435",
+      "instance_id": "pool_human_mesh_6_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "car",
+      "frame_id": "scene_b7441af225a86aa8_000461",
+      "instance_id": "pool_car_mesh_3_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_43252e96719e2df4_000472",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_7e65a4f2b05e8403_000474",
+      "instance_id": "pool_human_mesh_1_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_396c3a2f9ea37a50_000531",
+      "instance_id": "pool_human_mesh_4_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_1d9a7d1814849e39_000542",
+      "instance_id": "pool_human_mesh_5_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_e82cb3f6d92b2903_000566",
+      "instance_id": "pool_human_mesh_1_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_4a602785beb6c716_000596",
+      "instance_id": "pool_human_mesh_5_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_fa4e0dcde497081e_000606",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_6c85641bed5a48a6_000642",
+      "instance_id": "pool_human_mesh_6_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_0eb46acbc61be3bc_000659",
+      "instance_id": "pool_human_mesh_0_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_f4b2aabeff3078ed_000700",
+      "instance_id": "pool_human_mesh_0_1",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_979f8dd7cda4c5ad_000701",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_fb2c09f26cdd4b29_000703",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_cf6b3d629e68dee2_000707",
+      "instance_id": "pool_human_mesh_0_1",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_cf6b3d629e68dee2_000707",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_cf6b3d629e68dee2_000707",
+      "instance_id": "pool_human_mesh_6_1",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_ff2eb6f2a3c2e4e0_000712",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_8eea20ae7eceb53d_000729",
+      "instance_id": "pool_human_mesh_1_1",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_8eea20ae7eceb53d_000729",
+      "instance_id": "pool_human_mesh_1_2",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_8eea20ae7eceb53d_000729",
+      "instance_id": "pool_human_mesh_0_1",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_a85090aa33ff9e52_000739",
+      "instance_id": "pool_human_mesh_4_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_05350185870dbc36_000756",
+      "instance_id": "pool_human_mesh_3_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_05350185870dbc36_000756",
+      "instance_id": "pool_human_mesh_6_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_05350185870dbc36_000756",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_44f59dcce07ffeec_000767",
+      "instance_id": "pool_human_mesh_0_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_ac4bd478d7b657b6_000776",
+      "instance_id": "pool_human_mesh_6_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_ac4bd478d7b657b6_000776",
+      "instance_id": "pool_human_mesh_1_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_f6f0987e583e7f70_000807",
+      "instance_id": "pool_human_mesh_0_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_d90145042b1d9adf_000852",
+      "instance_id": "pool_human_mesh_0_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_37416184807db828_000855",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_14f976c138e5b151_000886",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_8ac761b81f8b96cd_000958",
+      "instance_id": "pool_human_mesh_0_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_21d0101ba9e7ef60_000984",
+      "instance_id": "pool_human_mesh_3_1",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_b427eda9fa44e5a3_001001",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_20dc0210e006f819_001002",
+      "instance_id": "pool_human_mesh_1_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_6a50c7d7782e04be_001090",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_d37e334a61e36d29_001176",
+      "instance_id": "pool_human_mesh_1_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_6a37deddc41866ba_001401",
+      "instance_id": "pool_human_mesh_0_1",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "bus",
+      "frame_id": "scene_86cd2cffaba5ff82_001415",
+      "instance_id": "pool_bus_mesh_0_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_1b7e2b92a3a5ed1e_001485",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_6bcddc9ddae255e7_001511",
+      "instance_id": "pool_human_mesh_4_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_6bcddc9ddae255e7_001511",
+      "instance_id": "pool_human_mesh_2_2",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_b15ecd39660023d3_001518",
+      "instance_id": "pool_human_mesh_2_1",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_d538337b46fb03c1_001552",
+      "instance_id": "pool_human_mesh_0_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_d538337b46fb03c1_001552",
+      "instance_id": "pool_human_mesh_5_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_cf47ec060d37216a_001564",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_f3bdbd6358a40344_001566",
+      "instance_id": "pool_human_mesh_7_2",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_9948d040f46bd3d1_001607",
+      "instance_id": "pool_human_mesh_6_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_c4793e7442c07df1_001622",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_08dc35bc1954160e_001630",
+      "instance_id": "pool_human_mesh_4_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_4c6e61926544e9ec_001636",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_0f3f787de6b781b6_001642",
+      "instance_id": "pool_human_mesh_0_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_909d42c615bd998b_001655",
+      "instance_id": "pool_human_mesh_5_1",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_4f8954d04b4ae441_001681",
+      "instance_id": "pool_human_mesh_0_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_4f8954d04b4ae441_001681",
+      "instance_id": "pool_human_mesh_1_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_caae06411acada61_001699",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_3176364b31410fcc_001714",
+      "instance_id": "pool_human_mesh_1_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_4f7d790124b57a2e_001716",
+      "instance_id": "pool_human_mesh_6_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_cec171868963ff20_001740",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_66129b8f637f8dab_001745",
+      "instance_id": "pool_human_mesh_1_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_66129b8f637f8dab_001745",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_40cc4f5dbe0ce3cf_001747",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_b568c97ef952b068_001749",
+      "instance_id": "pool_human_mesh_3_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_b5d1166df396821b_001813",
+      "instance_id": "pool_human_mesh_3_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_30192059ecdf29c3_001856",
+      "instance_id": "pool_human_mesh_1_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_356de2405937dcbc_001862",
+      "instance_id": "pool_human_mesh_4_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_88d6e116bf593307_001864",
+      "instance_id": "pool_human_mesh_5_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_fc7b032d4eb661e1_001876",
+      "instance_id": "pool_human_mesh_3_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_a1a6df05fde399d6_001936",
+      "instance_id": "pool_human_mesh_2_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_a1a6df05fde399d6_001936",
+      "instance_id": "pool_human_mesh_0_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_5fa03c382d8ab4c7_001941",
+      "instance_id": "pool_human_mesh_4_0",
+      "reason": "Below configured pixel threshold",
+      "state": "ignored_tiny"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_5fa03c382d8ab4c7_001941",
+      "instance_id": "pool_human_mesh_5_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    },
+    {
+      "class": "person",
+      "frame_id": "scene_85eaa415ff61b88e_001994",
+      "instance_id": "pool_human_mesh_7_0",
+      "reason": "No native visible box; no visible simulator pixels",
+      "state": "ignored_occluded"
+    }
+  ],
+  "image_bytes_distribution": {
+    "count": 2000,
+    "max": 660200.0,
+    "mean": 452908.128,
+    "median": 448312.0,
+    "min": 268851.0,
+    "p05": 351263.95,
+    "p25": 411385.5,
+    "p95": 567670.6
+  },
+  "intended_positive_frames_without_exported_labels": [
+    "scene_878d7287aff96215_000189",
+    "scene_7e65a4f2b05e8403_000474",
+    "scene_4a602785beb6c716_000596",
+    "scene_979f8dd7cda4c5ad_000701",
+    "scene_20dc0210e006f819_001002",
+    "scene_08dc35bc1954160e_001630",
+    "scene_40cc4f5dbe0ce3cf_001747",
+    "scene_b568c97ef952b068_001749"
+  ],
+  "limitations": [
+    "Pinned synthetic assets; consult manifest for actual source/template/fidelity limitations.",
+    "Distance categories use optical-center ground footprint fraction, not absolute slant range; truncation/visibility can change labelled-instance balance.",
+    "Requested occlusion is not measured pixel visibility.",
+    "Shadow wall presence does not measure calibrated shadow fraction.",
+    "CPU resource samples are recorded separately; generation timing includes startup/rendering/per-frame export/shutdown, and excludes aggregate rebuild/validation/QA."
+  ],
+  "manifest_sha256": "d25daedcc3459ce7f017ec6af7a682d1567c6822ae483ef484261d35dd0df07a",
+  "performance": {
+    "accepted_per_minute": 302.05421477348085,
+    "attempted_per_minute": 302.05421477348085,
+    "attempted_samples": 2000,
+    "average_image_bytes": 452908.128,
+    "elapsed_s": 397.2796740809972,
+    "generated_samples": 2000,
+    "image_write_bytes_per_second": 2280046.8161261193,
+    "python_cpu_seconds": 111.771525,
+    "python_peak_rss_kib": 194484,
+    "rejected_samples": 0,
+    "rejection_reasons": {},
+    "skipped_samples": 0
+  },
+  "same_class_multi_target_frames": 1043,
+  "shadow_wall_presence": {
+    "evening_without_wall": 500,
+    "morning_without_wall": 500,
+    "noon_without_wall": 500,
+    "shadow_with_wall": 298,
+    "shadow_without_wall": 202
+  },
+  "statistics": {
+    "bbox_area_px": {
+      "count": 6360,
+      "max": 129390.0,
+      "mean": 4242.541509433962,
+      "median": 713.0,
+      "min": 9.0,
+      "p05": 32.0,
+      "p25": 144.0,
+      "p95": 20945.04999999997
+    },
+    "bbox_height_px": {
+      "count": 6360,
+      "max": 437.0,
+      "mean": 44.79732704402516,
+      "median": 27.0,
+      "min": 3.0,
+      "p05": 6.0,
+      "p25": 13.0,
+      "p95": 146.0
+    },
+    "bbox_width_px": {
+      "count": 6360,
+      "max": 465.0,
+      "mean": 48.29858490566038,
+      "median": 28.0,
+      "min": 3.0,
+      "p05": 5.0,
+      "p25": 12.0,
+      "p95": 157.0
+    },
+    "camera_yaw_histogram_30deg": [
+      174,
+      153,
+      154,
+      148,
+      184,
+      184,
+      176,
+      165,
+      168,
+      161,
+      171,
+      162
+    ],
+    "cross_tables": {
+      "altitude_x_class": {
+        "10": {
+          "bus": 178,
+          "car": 209,
+          "person": 696,
+          "truck": 171
+        },
+        "15": {
+          "bus": 181,
+          "car": 229,
+          "person": 705,
+          "truck": 210
+        },
+        "20": {
+          "bus": 205,
+          "car": 195,
+          "person": 637,
+          "truck": 205
+        },
+        "30": {
+          "bus": 215,
+          "car": 191,
+          "person": 675,
+          "truck": 209
+        },
+        "40": {
+          "bus": 213,
+          "car": 232,
+          "person": 691,
+          "truck": 209
+        }
+      },
+      "background_x_class": {
+        "dirt": {
+          "bus": 239,
+          "car": 252,
+          "person": 853,
+          "truck": 238
+        },
+        "grass": {
+          "bus": 254,
+          "car": 251,
+          "person": 823,
+          "truck": 250
+        },
+        "mixed": {
+          "bus": 248,
+          "car": 280,
+          "person": 832,
+          "truck": 267
+        },
+        "road": {
+          "bus": 251,
+          "car": 273,
+          "person": 896,
+          "truck": 249
+        }
+      },
+      "distance_x_class": {
+        "edge": {
+          "bus": 97,
+          "car": 102,
+          "person": 341,
+          "truck": 101
+        },
+        "far": {
+          "bus": 292,
+          "car": 329,
+          "person": 1020,
+          "truck": 339
+        },
+        "medium": {
+          "bus": 310,
+          "car": 342,
+          "person": 1021,
+          "truck": 281
+        },
+        "near": {
+          "bus": 293,
+          "car": 283,
+          "person": 1022,
+          "truck": 283
+        }
+      },
+      "lighting_x_class": {
+        "evening": {
+          "bus": 228,
+          "car": 260,
+          "person": 772,
+          "truck": 269
+        },
+        "morning": {
+          "bus": 247,
+          "car": 264,
+          "person": 887,
+          "truck": 238
+        },
+        "noon": {
+          "bus": 252,
+          "car": 257,
+          "person": 908,
+          "truck": 256
+        },
+        "shadow": {
+          "bus": 265,
+          "car": 275,
+          "person": 837,
+          "truck": 241
+        }
+      },
+      "off_nadir_x_class": {
+        "0": {
+          "bus": 219,
+          "car": 259,
+          "person": 819,
+          "truck": 257
+        },
+        "10": {
+          "bus": 270,
+          "car": 257,
+          "person": 867,
+          "truck": 234
+        },
+        "20": {
+          "bus": 253,
+          "car": 285,
+          "person": 782,
+          "truck": 251
+        },
+        "30": {
+          "bus": 250,
+          "car": 255,
+          "person": 936,
+          "truck": 262
+        }
+      }
+    },
+    "frame_types": {
+      "distractor_only": 200,
+      "negative": 200,
+      "positive": 1600
+    },
+    "frames": 2000,
+    "frames_per_split": {
+      "test": 200,
+      "train": 1600,
+      "val": 200
+    },
+    "ignored_by_reason": {
+      "ignored_occluded": 45,
+      "ignored_tiny": 51
+    },
+    "instances_per_class": {
+      "bus": 992,
+      "car": 1056,
+      "person": 3404,
+      "truck": 1004
+    },
+    "iou": {
+      "count": 6411,
+      "max": 0.9992156079494285,
+      "mean": 0.9023660649529419,
+      "median": 0.954425227447593,
+      "min": 0.0024392807231095864,
+      "p05": 0.612903295073034,
+      "p25": 0.8861587410573558,
+      "p95": 0.9934302272299433
+    },
+    "labelled_per_class": {
+      "bus": 991,
+      "car": 1055,
+      "person": 3310,
+      "truck": 1004
+    },
+    "marginals": {
+      "altitude": {
+        "10": 400,
+        "15": 400,
+        "20": 400,
+        "30": 400,
+        "40": 400
+      },
+      "background": {
+        "dirt": 500,
+        "grass": 500,
+        "mixed": 500,
+        "road": 500
+      },
+      "lighting": {
+        "evening": 500,
+        "morning": 500,
+        "noon": 500,
+        "shadow": 500
+      },
+      "off_nadir": {
+        "0": 500,
+        "10": 500,
+        "20": 500,
+        "30": 500
+      }
+    },
+    "object_size_counts": {
+      "large_96_squared_and_above": 825,
+      "medium_32_to_96_squared": 1988,
+      "small_under_32_squared": 3547
+    },
+    "object_yaw_histogram_30deg": [
+      513,
+      526,
+      553,
+      534,
+      531,
+      523,
+      535,
+      543,
+      522,
+      553,
+      543,
+      580
+    ],
+    "objects_per_image": {
+      "0": 400,
+      "1": 299,
+      "10": 39,
+      "11": 15,
+      "12": 14,
+      "13": 14,
+      "14": 7,
+      "15": 1,
+      "16": 5,
+      "2": 251,
+      "3": 266,
+      "4": 259,
+      "5": 149,
+      "6": 118,
+      "7": 65,
+      "8": 67,
+      "9": 31
+    },
+    "occlusion_requested": {
+      "mild": 243,
+      "moderate": 77,
+      "none": 1680
+    },
+    "placement_shortfall": 59,
+    "truncated_objects": 1147
+  },
+  "status": "ANALYSIS_COMPLETE",
+  "synchronization": {
+    "max_delta_s": 0.0,
+    "minimum_settling_sim_seconds": 0.3000000000000007
+  },
+  "total_disk_bytes": 1009759903
+}

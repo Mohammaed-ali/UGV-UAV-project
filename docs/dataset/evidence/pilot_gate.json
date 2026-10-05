@@ -1,0 +1,74 @@
+{
+  "acceptance_configuration_sha256": "ab9b0e16a93ccaa192be216badbc63e81f874d78e836515cfcfc92c49e5a446a",
+  "dataset_path": "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/datasets/gazebo_aerial_human_pilot",
+  "evidence_path": "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/datasets/gazebo_aerial_human_pilot",
+  "manifest_sha256": "d25daedcc3459ce7f017ec6af7a682d1567c6822ae483ef484261d35dd0df07a",
+  "review_timestamp": "2026-10-05T01:21:31.859798+00:00",
+  "status": "PASSED",
+  "validator": {
+    "counts": {
+      "images": 2000,
+      "jsonl_metadata": 2000,
+      "labels": 2000,
+      "metadata": 2000,
+      "scenario_manifest": 2000,
+      "status": 2000
+    },
+    "coverage": {
+      "altitude": {
+        "10": 400,
+        "15": 400,
+        "20": 400,
+        "30": 400,
+        "40": 400
+      },
+      "background": {
+        "dirt": 500,
+        "grass": 500,
+        "mixed": 500,
+        "road": 500
+      },
+      "lighting": {
+        "evening": 500,
+        "morning": 500,
+        "noon": 500,
+        "shadow": 500
+      },
+      "off_nadir": {
+        "0": 500,
+        "10": 500,
+        "20": 500,
+        "30": 500
+      }
+    },
+    "duplicate_frame_ids": 0,
+    "errors": [],
+    "frames_per_split": {
+      "test": 200,
+      "train": 1600,
+      "val": 200
+    },
+    "heldout_assets_used": [
+      "bus_mesh_2",
+      "car_mesh_3",
+      "dirt_3",
+      "grass_3",
+      "mixed_3",
+      "road_3",
+      "truck_mesh_3"
+    ],
+    "leakage_checks": [
+      "frame IDs",
+      "image SHA256",
+      "scene IDs/families",
+      "scenario specification replay",
+      "heldout assets"
+    ],
+    "status": "PASSED",
+    "unique_image_hashes": 2000,
+    "warnings": [
+      "KNOWN LIMITATION: Person variants share one template; person model holdout is not claimed."
+    ]
+  },
+  "visual_review": "100 previews, all eight dedicated realism sheets and four native examples inspected; six visual criteria pass with stylized/finite-terrain limitations explicitly recorded."
+}
