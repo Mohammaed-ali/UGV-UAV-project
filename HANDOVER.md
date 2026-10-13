@@ -112,9 +112,17 @@ python3 export/restore_datasets.py
 
 The helper verifies archive and member hashes, refuses mismatching existing files
 unless `--overwrite` is explicit, and reconstructs `datasets/` beneath this
-repository root. Budget approximately 8 GB for the export files and another
-8 GB if restoring all datasets; dependency checkouts/builds need additional space.
+repository root. Budget approximately 17 GB for a full clone, including the Git
+LFS cache, and another 8 GB if restoring all datasets. Dependency checkouts/builds
+need additional space.
 The export validation streamed all 69,053 archived files and checked their hashes.
+
+The preserved `data.yaml` contains the original absolute Ubuntu `path:`. A future
+consumer on another installation should use a separate configuration copy with
+its local dataset root. Original manifests, metadata and completion hashes should
+remain intact. Generator resume identity also checks the recorded code revision
+and Git HEAD; the export commit is a new commit, so it must not be presented as
+the original capture revision when resuming an incomplete historical run.
 
 ## Reconstruct Linux prerequisites and dependencies
 

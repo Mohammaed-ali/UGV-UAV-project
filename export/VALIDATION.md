@@ -15,11 +15,13 @@ was staged in `/tmp/UGV-UAV-project`; the original checkouts were retained.
 | Original checkouts | PASS | Original HEAD and full porcelain status matched the inspection records in `git-history.json` immediately before export commit |
 | Credential checks | PASS with reviewed scanner candidates | Credentials/sharing logs omitted, private-link text sanitized, OAuth device code removed. Known local access key absent from 5,986 textual tracked export files. History scanner's 96 candidates are checksum fields; final directory scanner's 495 candidates are 100 SHA256 values, 10 Python keyword expressions, one paper identifier and 384 local IPC/filesystem paths; no unclassified candidates. See `secret-scan-review.json` |
 | Windows filenames | PASS | No invalid Windows names; longest repository-relative path is 144 characters. Two absolute dependency symlinks omitted and documented; `windows-path-audit.json` |
-| Restore helper | PASS | Stream verification exercised the archive reader and checksum checks for all datasets; source compiled successfully |
+| Restore helper | PASS | Stream verification exercised all datasets; a six-file pilot dataset restored successfully and a second run verified existing files; source compiled successfully |
 | New dependency setup helper | PASS for syntax | `bash -n export/setup_pinned_dependencies.sh`; clean clone/build on Windows/WSL remains untested |
 | Preserved access-control source fixtures | PASS | Exported `Simulation/tests/test_access.py`: four passed, one Starlette deprecation warning. Initial sandbox run stalled in HTTP TestClient; cancelled and repeated with a 30-second timeout outside socket restrictions, passing in 0.31 seconds |
 | New flight, tracking or dataset-generation acceptance | NOT RUN | Existing release evidence retained; export does not repeat or extend those runtime claims |
 | Windows/WSL runtime | NOT RUN | Proposed startup route and staged validation instructions in `HANDOVER.md` |
+| Remote Git refs | PASS | Seven branches and three tags matched their local object IDs after the atomic push; `remote-verification.json` records the data-export commit |
+| Remote LFS availability | PASS | All 136 objects offer downloads, totaling 8,168,842,582 bytes. A 6,087-byte archive downloaded from GitHub matches its SHA256; `remote-verification.json` |
 
 Local transcripts: 46, including archived project/review chats. Cloud reader
 snapshots: 10. One linked conversation is unavailable; three cloud message items
@@ -28,3 +30,6 @@ returned. Detailed export limits are in `chats.json` and `../chats/README.md`.
 
 The active export chat transcript ends at the assembly snapshot. Final upload
 and remote verification are reported in the final chat response and Git refs.
+The first remote verification request containing all 136 objects was rejected
+with HTTP 413; checks repeated in batches of 32 passed. The final documentation
+commit adds this report and handover corrections without changing exported data.
