@@ -1,0 +1,88 @@
+{
+  "passed": false,
+  "mission": {
+    "version": 1,
+    "name": "Perimeter survey",
+    "wheels": 6,
+    "seed": 42,
+    "terrain": "proving_ground",
+    "population": 18,
+    "traffic": 10,
+    "target_present": true,
+    "target_class": "person",
+    "ugv_speed": 1.5,
+    "altitude": 9,
+    "flight_speed": 2,
+    "launch_interval": 5,
+    "search_timeout": 40,
+    "no_target_policy": "loiter",
+    "loiter_seconds": 20,
+    "loiter_radius": 5,
+    "observation_seconds": 15,
+    "standoff": 8,
+    "confidence": 0.4,
+    "landing_retries": 2,
+    "battery_return": 25,
+    "wind": 0,
+    "graphics_quality": "balanced",
+    "living_city": true,
+    "city_scenario": "custom",
+    "walking_speed": 1.2,
+    "traffic_speed": 1.6,
+    "flight_boundary": 116.0,
+    "tracking_seconds": 90,
+    "reacquire_seconds": 35,
+    "tracking_altitude": 12,
+    "tracking_distance": 2.0,
+    "reacquire_confidence": 0.8,
+    "early_selection": false,
+    "tracking_uav": "auto",
+    "tracking_enabled": false,
+    "start": {
+      "x": -28.0,
+      "y": -22.0
+    },
+    "stops": [
+      {
+        "x": -12.0,
+        "y": -22.0,
+        "id": "a",
+        "label": "Alpha",
+        "drones": [],
+        "search_radius": 12,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      },
+      {
+        "x": 28.0,
+        "y": -22.0,
+        "id": "b",
+        "label": "Bravo",
+        "drones": [],
+        "search_radius": 12,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      },
+      {
+        "x": 30.0,
+        "y": 34.5,
+        "id": "c",
+        "label": "Charlie",
+        "drones": [],
+        "search_radius": 12,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      }
+    ]
+  },
+  "thresholds": {
+    "maximum_lane_error_m": 1.0,
+    "minimum_actor_travel_m": 3.0,
+    "carrier_contact_count": 0
+  },
+  "wheels": 6,
+  "pause_displacement": 0.0
+}

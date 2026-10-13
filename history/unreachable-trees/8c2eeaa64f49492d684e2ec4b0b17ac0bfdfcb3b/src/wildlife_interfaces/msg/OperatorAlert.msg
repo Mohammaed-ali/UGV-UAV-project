@@ -1,0 +1,12 @@
+std_msgs/Header header
+string alert_id
+string drone_id
+string target_id
+string target_class
+float32 confidence
+geometry_msgs/Point target_position
+string alert_message
+uint8 severity
+uint8 INFO=0
+uint8 WARNING=1
+uint8 ACTION_REQUIRED=2

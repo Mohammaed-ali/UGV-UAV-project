@@ -1,0 +1,181 @@
+Continue from the V0.3 work you have already done in this project. Do NOT discard, reset, or replace your existing V0.3 implementation with the newly supplied V0.3 reference workspace.
+
+I am giving you `wildlife_ws_v0_3_complete.zip` and its documentation as a REFERENCE IMPLEMENTATION / GAP CHECKLIST, not as a command to overwrite your current repository.
+
+The repository you are currently working on remains the source of truth for all V0.3 work you have already implemented and verified.
+
+Your task is:
+
+1. Inspect your current V0.3 repository first.
+2. Inspect the supplied V0.3 reference workspace.
+3. Compare them feature-by-feature and file-by-file where relevant.
+4. KEEP everything you have already implemented correctly.
+5. DO NOT reimplement features that already exist and work.
+6. DO NOT replace your implementation merely because the reference version is different.
+7. Identify only:
+   - V0.3 work you have not started yet;
+   - incomplete V0.3 work;
+   - actual bugs or integration gaps;
+   - missing tests, launch wiring, parameters, dependencies, or documentation;
+   - useful reference features that improve correctness or reliability.
+8. Implement only those missing or necessary pieces into your existing repository.
+9. If your existing implementation is better or more advanced than the supplied reference, KEEP YOUR VERSION.
+10. If both implementations solve the same problem differently, inspect and test them and choose the implementation that best fits the existing architecture. Do not blindly copy either one.
+11. Preserve all working V0.3 progress and git history.
+
+Treat the supplied files as a checklist/reference for the intended V0.3 end state.
+
+Important V0.3 areas to compare against your existing work include:
+
+- PX4 SITL integration
+- `px4_msgs` integration
+- Micro XRCE-DDS Agent setup
+- PX4 vehicle adapter architecture
+- ROS `DroneCommand` -> PX4 high-level command mapping
+- PX4 telemetry -> existing `DroneState`
+- NED <-> ROS ENU/map conversion
+- TAKEOFF
+- OFFBOARD control
+- HOLD
+- RESUME
+- RETURN_HOME / PX4 RTL
+- LAND
+- arming/offboard startup sequencing and retry behavior
+- vehicle-state readiness before deployment
+- PX4 battery/state/landing feedback
+- preservation of the existing UAV mission FSM semantics
+- lawnmower search using real PX4 movement
+- target assignment -> PX4 standoff movement
+- operator RETURN / CONTINUE_HOLD behavior
+- operator alert generation
+- correct mission completion after operator decision and return
+- no-target search timeout -> return -> mission completion
+- one-UAV configuration
+- two-UAV configuration
+- eight-UAV scalable configuration
+- per-UAV DDS namespaces (`uav01`, `uav02`, etc.)
+- PX4 instance / MAV system ID mapping
+- Gazebo spawn origin mapping
+- avoidance of duplicate logical/PX4 `DroneState` publishers
+- sensible initial altitude separation for multi-UAV testing
+- QGroundControl compatibility
+- custom Gazebo/PX4 world integration
+- PX4 model/plugin/world search paths
+- deterministic `detector_sim`
+- optional Gazebo camera/OpenCV path
+- map-frame OpenCV detections using actual UAV position
+- preservation of the existing `Detection` interface
+- preservation of target tracking/fusion and swarm assignment
+- RViz state visualization
+- UGV Gazebo odometry/yaw control
+- deployment readiness
+- SINGLE deployment
+- SPLIT deployment, including the second deployment waypoint
+- docking totals based on active/expected vehicles
+- YAML actually applying to dynamically named UAV nodes
+- launch-file parameter propagation
+- package dependency metadata
+- versioned PX4 DDS topic handling where required
+- clean 1 -> 2 -> 8 vehicle validation procedure
+- static/unit/integration tests
+- installation and dependency documentation
+
+Also examine the fixes present in the supplied reference, but only apply them if your current repository still needs them. In particular, verify rather than blindly copy:
+
+- SPLIT mode actually generates both deployment events.
+- Per-UAV YAML settings are genuinely loaded rather than silently falling back to Python defaults.
+- Deployment does not lose a LAUNCH command because PX4 telemetry was not ready.
+- OFFBOARD/arming commands are retried until vehicle state confirms them.
+- PX4-backed vehicles do not run alongside competing logical UAV managers for the same UAV.
+- Mission state can leave `AWAITING_OPERATOR` after RETURN/HOLD decisions.
+- Missions can eventually reach `COMPLETE`.
+- UGV heading control uses actual odometry orientation rather than treating world bearing as yaw error.
+- deterministic simulation remains available independently of PX4.
+- camera/YOLO functionality is not claimed unless it actually works.
+
+Do NOT add unnecessary architecture changes.
+
+Keep the existing package structure unless there is a demonstrated reason to modify it:
+
+`wildlife_interfaces`
+`wildlife_core`
+`wildlife_perception`
+`wildlife_targets`
+`wildlife_swarm`
+`wildlife_mission`
+`wildlife_vehicles`
+`wildlife_simulation`
+`wildlife_bringup`
+
+and any V0.3 PX4 integration package you have already created.
+
+Preserve these architectural contracts:
+
+`detector -> Detection -> tracking/fusion -> Target -> assignment -> UAV mission behavior`
+
+and:
+
+`mission/UAV behavior -> PX4 adapter -> PX4`
+
+with telemetry returning:
+
+`PX4 -> adapter -> DroneState`
+
+PX4 should continue to own low-level attitude/rate/motor control.
+
+Do not introduce weapons, attack logic, payload release, terminal guidance, harmful autonomous behavior, or similar functionality.
+
+Do not add micro-ROS, Nav2, advanced swarm optimization, or YOLO simply to increase project complexity. Add them only if the actual project requirements justify them.
+
+WORKFLOW:
+
+First produce a concise comparison:
+
+A. ALREADY DONE IN YOUR CURRENT V0.3  
+B. PARTIALLY DONE  
+C. NOT STARTED  
+D. REFERENCE ITEMS THAT ARE NOT NEEDED BECAUSE YOUR IMPLEMENTATION ALREADY SOLVES THEM  
+E. REAL BUGS / BLOCKERS FOUND  
+
+Then continue implementation immediately.
+
+For each missing V0.3 area:
+- preserve existing code;
+- make the smallest coherent addition/fix;
+- build/test it;
+- report PASS/FAIL;
+- continue to the next missing item.
+
+Do not stop merely because something differs from the supplied reference.
+
+The goal is to MERGE THE INTENT AND MISSING FUNCTIONALITY of the reference into your existing V0.3 work, not replace your work with mine.
+
+When implementation is complete, perform validation in this order:
+
+1. logic-only deterministic demo
+2. one PX4 UAV
+3. one-UAV takeoff / search / detection / assignment / standoff / operator decision / RTL or LAND
+4. QGroundControl telemetry
+5. two PX4 UAVs
+6. namespace/instance isolation
+7. multi-UAV search
+8. eight-UAV structural/runtime test
+9. RViz/Gazebo/state synchronization
+10. optional camera/OpenCV pipeline
+
+Do not move to a higher vehicle count until the lower-count test is working reliably.
+
+Use `CODEX_HANDOFF_V0_3.md`, `V0_3_BUILD_REPORT.md`, `docs/V0_3_VALIDATION.md`, `docs/DEPENDENCIES.md`, and the reference source itself as supporting material, but again: your CURRENT V0.3 repository wins wherever work is already correct and more advanced.
+
+At the end, give me:
+
+- what existing V0.3 work you preserved;
+- what you added from the reference;
+- what you deliberately did NOT copy and why;
+- bugs you fixed;
+- build/test results;
+- current 1-UAV / 2-UAV / 8-UAV status;
+- remaining runtime limitations;
+- exact next development milestone.
+
+Do not restart V0.3 from scratch.

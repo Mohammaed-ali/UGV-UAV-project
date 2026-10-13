@@ -1,84 +1,40 @@
-# Wildlife ROS 2 Jazzy — V0.4
+# UAV / UGV project — complete local export
 
-Academic, non-contact wildlife observation with one logical UGV and up to eight
-PX4 SITL UAVs. This continues the verified `v0.3-final` baseline in
-`/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3`, on
-`codex/v0.4-development`. The nine-package architecture and typed interfaces
-are preserved. V0.2 remains frozen separately.
+Start with [HANDOVER.md](HANDOVER.md) for the inspected state, Windows access,
+dependency reconstruction, startup and remaining validation limits.
 
-The mission follows deployment → physical search → Detection → persistent
-Target → one observer assignment → standoff → operator HOLD/RETURN → PX4 RTL
-→ measured landing/disarm → configured docking total → COMPLETE.
-PX4 owns flight control and native failsafes. ROS owns mission intent and the
-existing `/operator/decision` service remains the operator authority.
+This repository preserves the original ROS Git history and adds the local
+Fieldlab browser simulation, legacy versions, documents, assets, all available
+dataset files, and readable project chat transcripts. The source projects on
+Ubuntu were retained.
 
-## Build and test
+| Location | Contents |
+| --- | --- |
+| `src/`, `scripts/`, `docs/`, `tools/synthetic_dataset/` | ROS workspace and completed V0.5 offline dataset tooling |
+| `Simulation/` | Independent Fieldlab browser, Gazebo, PX4 and physical carrier prototype |
+| `archives/datasets/` | 37 Git LFS archive parts covering final, pilot, smoke, determinism and failed/resumed datasets |
+| `legacy/` | V0.1/V0.2 folder snapshots, original ZIPs and complete-source/stage-1 archives |
+| `history/` | All-ref Git bundles and recovered dangling Git trees |
+| `documents/`, `assets/project-concept-videos/` | Course proposal/template and available concept videos |
+| `chats/` | 46 local transcripts, tool records, 10 cloud reader snapshots and available attachments |
+| `export/` | File and dependency inventories, checksums, chat limitations and restore tools |
 
-```bash
-scripts/check_prereqs.sh
-scripts/build_ros.sh
-source scripts/environment.sh
-colcon test --base-paths src --executor sequential
-colcon test-result --verbose
+Install Git LFS before cloning. In Windows PowerShell:
+
+```powershell
+git lfs install
+git -c core.longpaths=true clone https://github.com/Mohammaed-ali/UGV-UAV-project.git
+cd UGV-UAV-project
+git config core.longpaths true
+git lfs pull
 ```
 
-Use the pinned dependencies in [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md).
-ROS logs default to `/tmp`; local transport uses loopback. Run one PX4
-scenario at a time and do not rebuild during flight. Start QGroundControl
-with `scripts/start_qgc.sh` before flight; this PX4 profile requires its GCS
-link for preflight readiness.
+For a small source-only download, set `$env:GIT_LFS_SKIP_SMUDGE="1"` before the
+clone and remove it afterwards with `Remove-Item Env:GIT_LFS_SKIP_SMUDGE`. Then
+fetch the required LFS paths when needed. Files still containing LFS pointers
+cannot be used as assets or archives.
 
-## Demonstrations
-
-```bash
-# Independent logic demo: eight logical UAVs; no PX4 or camera required.
-source scripts/environment.sh
-ros2 launch wildlife_bringup subject1_demo.launch.py
-
-# Interactive single-PX4 mission, synthetic detector.
-scripts/start_px4_single.sh
-
-# Real Gazebo down-camera and OpenCV, with RViz.
-scripts/start_px4_camera.sh detector_backend:=opencv show_rviz:=true
-```
-
-Camera operator terminals must use ROS domain 86. Read `/operator/alerts`
-for target/UAV IDs. `/operator/decision` accepts `decision: 1` for
-CONTINUE_HOLD and `decision: 0` for RETURN. A held observer remains available
-for a later RETURN. The automated acceptance helpers simulate these same
-typed operator decisions.
-
-[docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) provides the complete commands for
-single/two-PX4 missions, four/eight structural checks, two-camera fusion and
-mission, moving-target observation, low battery, vehicle unavailability,
-two targets, SPLIT eight-aircraft flight and the visible examiner demo.
-
-## Validated scope
-
-Single-PX4 target and no-target missions, independent two-PX4 control, two-UAV
-missions, stationary four/eight structure, two real-camera fusion and full
-mission, moving dummy observation, battery/mode-loss recovery and reassignment,
-and eight-PX4 SPLIT deployment/search/return/COMPLETE have passed live probes.
-The eight-aircraft profile uses separated cells and altitude bands with no
-cameras; measured minimum horizontal separation was 4.21 m in its accepted
-run. QGC displayed distinct Vehicle 1/2 identities and flight states.
-
-Real cameras use the workspace-local **640×480, 10 Hz** model. Retain this
-profile: the original 1280×960/30 Hz two-camera attempt overloaded telemetry.
-OpenCV projects camera rays through measured PX4 pose onto a flat ground
-plane. Two-camera assignment waits for both witnesses before selecting one
-observer. Synthetic and single-camera profiles need one witness.
-
-The logical UGV controls deployment timing. Its Gazebo body is a display
-proxy, with no physical navigation, tray contact or collision authority.
-DOCKED means measured landing/disarm at the simulated home. Tracking velocity
-is descriptive; exact image/pose synchronization and calibrated moving-target
-accuracy remain unverified. The moving scenario uses a bounded observation
-point, with no pursuit. YOLO, eight-camera flight and general collision
-avoidance are not implemented or validated.
-
-See [ARCHITECTURE.md](ARCHITECTURE.md), [docs/V0_4_SCOPE.md](docs/V0_4_SCOPE.md),
-[docs/V0_4_VALIDATION.md](docs/V0_4_VALIDATION.md),
-[docs/V0_4_CAMERA_GEOMETRY.md](docs/V0_4_CAMERA_GEOMETRY.md),
-[V0_4_BUILD_REPORT.md](V0_4_BUILD_REPORT.md), and
-[V0_4_TEST_RESULTS.md](V0_4_TEST_RESULTS.md) for release evidence and limits.
+The root ROS overview is retained in [README_ROS.md](README_ROS.md). Fieldlab's
+startup and measured limits are in [Simulation/README.md](Simulation/README.md).
+The [chat index](chats/README.md) explicitly identifies unavailable or bounded
+history. Transcripts do not automatically become live Codex conversations.

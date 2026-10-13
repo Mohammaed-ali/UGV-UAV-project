@@ -1,0 +1,134 @@
+[0.037s] Invoking command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup': AMENT_PREFIX_PATH=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_simulation:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_vehicles:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_targets:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_swarm:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_perception:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_mission:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_core:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_bringup:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces:/home/mohammed-ali/Downloads/wildlife_px4_dependencies/msgs-install/px4_msgs:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib:/home/mohammed-ali/Downloads/wildlife_px4_dependencies/agent-build:/home/mohammed-ali/Downloads/wildlife_px4_dependencies/msgs-install/px4_msgs/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib /usr/bin/ctest -C Release -D ExperimentalTest --no-compress-output -V --force-new-ctest-process
+[0.048s] UpdateCTestConfiguration  from :/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/CTestConfiguration.ini
+[0.048s] Parse Config file:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/CTestConfiguration.ini
+[0.048s]    Site: mohammed-ali-Nitro-ANV15-51
+[0.048s]    Build name: (empty)
+[0.048s]  Add coverage exclude regular expressions.
+[0.048s] Create new tag: 20261005-0219 - Experimental
+[0.049s] UpdateCTestConfiguration  from :/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/CTestConfiguration.ini
+[0.049s] Parse Config file:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/CTestConfiguration.ini
+[0.049s] Test project /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup
+[0.049s] Constructing a list of tests
+[0.049s] Done constructing a list of tests
+[0.049s] Updating test list for fixtures
+[0.049s] Added 0 tests to meet fixture requirements
+[0.049s] Checking test dependency graph...
+[0.049s] Checking test dependency graph end
+[0.050s] test 1
+[0.050s]     Start 1: wildlife_regressions
+[0.050s] 
+[0.050s] 1: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/wildlife_regressions.xunit.xml" "--package-name" "wildlife_bringup" "--output-file" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/wildlife_regressions.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_regressions.py" "-o" "cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/wildlife_regressions/.cache" "--junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/wildlife_regressions.xunit.xml" "--junit-prefix=wildlife_bringup"
+[0.050s] 1: Working Directory: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup
+[0.050s] 1: Test timeout computed to be: 60
+[0.111s] 1: -- run_test.py: invoking following command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup':
+[0.112s] 1:  - /usr/bin/python3 -u -m pytest /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_regressions.py -o cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/wildlife_regressions/.cache --junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/wildlife_regressions.xunit.xml --junit-prefix=wildlife_bringup
+[0.350s] 1: ============================= test session starts ==============================
+[0.350s] 1: platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+[0.353s] 1: cachedir: build/wildlife_bringup/ament_cmake_pytest/wildlife_regressions/.cache
+[0.353s] 1: rootdir: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3
+[0.353s] 1: plugins: ament-pep257-0.17.5, ament-xmllint-0.17.5, launch-testing-3.4.11, ament-copyright-0.17.5, ament-flake8-0.17.5, launch-testing-ros-0.26.12, ament-lint-0.17.5, colcon-core-0.21.3, cov-4.1.0
+[0.658s] 1: collected 22 items
+[0.658s] 1: 
+[0.935s] 1: ../../tests/test_regressions.py ......................                   [100%]
+[0.935s] 1: 
+[0.935s] 1: - generated xml file: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/wildlife_regressions.xunit.xml -
+[0.935s] 1: ============================== 22 passed in 0.59s ==============================
+[1.111s] 1: -- run_test.py: return code 0
+[1.111s] 1: -- run_test.py: verify result file '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/wildlife_regressions.xunit.xml'
+[1.128s] 1/5 Test #1: wildlife_regressions .............   Passed    1.08 sec
+[1.128s] test 2
+[1.128s]     Start 2: camera_geometry
+[1.128s] 
+[1.128s] 2: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/camera_geometry.xunit.xml" "--package-name" "wildlife_bringup" "--output-file" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/camera_geometry.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_camera_geometry.py" "-o" "cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/camera_geometry/.cache" "--junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/camera_geometry.xunit.xml" "--junit-prefix=wildlife_bringup"
+[1.128s] 2: Working Directory: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup
+[1.128s] 2: Test timeout computed to be: 60
+[1.186s] 2: -- run_test.py: invoking following command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup':
+[1.186s] 2:  - /usr/bin/python3 -u -m pytest /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_camera_geometry.py -o cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/camera_geometry/.cache --junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/camera_geometry.xunit.xml --junit-prefix=wildlife_bringup
+[1.422s] 2: ============================= test session starts ==============================
+[1.422s] 2: platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+[1.425s] 2: cachedir: build/wildlife_bringup/ament_cmake_pytest/camera_geometry/.cache
+[1.425s] 2: rootdir: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3
+[1.425s] 2: plugins: ament-pep257-0.17.5, ament-xmllint-0.17.5, launch-testing-3.4.11, ament-copyright-0.17.5, ament-flake8-0.17.5, launch-testing-ros-0.26.12, ament-lint-0.17.5, colcon-core-0.21.3, cov-4.1.0
+[1.428s] 2: collected 7 items
+[1.428s] 2: 
+[1.435s] 2: ../../tests/test_camera_geometry.py .......                              [100%]
+[1.435s] 2: 
+[1.435s] 2: - generated xml file: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/camera_geometry.xunit.xml -
+[1.435s] 2: ============================== 7 passed in 0.01s ===============================
+[1.471s] 2: -- run_test.py: return code 0
+[1.471s] 2: -- run_test.py: verify result file '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/camera_geometry.xunit.xml'
+[1.479s] 2/5 Test #2: camera_geometry ..................   Passed    0.35 sec
+[1.479s] test 3
+[1.479s]     Start 3: opencv_px4
+[1.479s] 
+[1.479s] 3: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/opencv_px4.xunit.xml" "--package-name" "wildlife_bringup" "--output-file" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/opencv_px4.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_opencv_px4.py" "-o" "cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/opencv_px4/.cache" "--junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/opencv_px4.xunit.xml" "--junit-prefix=wildlife_bringup"
+[1.479s] 3: Working Directory: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup
+[1.479s] 3: Test timeout computed to be: 60
+[1.533s] 3: -- run_test.py: invoking following command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup':
+[1.533s] 3:  - /usr/bin/python3 -u -m pytest /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_opencv_px4.py -o cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/opencv_px4/.cache --junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/opencv_px4.xunit.xml --junit-prefix=wildlife_bringup
+[1.764s] 3: ============================= test session starts ==============================
+[1.764s] 3: platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+[1.767s] 3: cachedir: build/wildlife_bringup/ament_cmake_pytest/opencv_px4/.cache
+[1.767s] 3: rootdir: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3
+[1.767s] 3: plugins: ament-pep257-0.17.5, ament-xmllint-0.17.5, launch-testing-3.4.11, ament-copyright-0.17.5, ament-flake8-0.17.5, launch-testing-ros-0.26.12, ament-lint-0.17.5, colcon-core-0.21.3, cov-4.1.0
+[2.186s] 3: collected 1 item
+[2.186s] 3: 
+[2.194s] 3: ../../tests/test_opencv_px4.py .                                         [100%]
+[2.194s] 3: 
+[2.194s] 3: - generated xml file: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/opencv_px4.xunit.xml -
+[2.194s] 3: ============================== 1 passed in 0.43s ===============================
+[2.281s] 3: -- run_test.py: return code 0
+[2.281s] 3: -- run_test.py: verify result file '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/opencv_px4.xunit.xml'
+[2.288s] 3/5 Test #3: opencv_px4 .......................   Passed    0.81 sec
+[2.288s] test 4
+[2.288s]     Start 4: target_motion
+[2.288s] 
+[2.288s] 4: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/target_motion.xunit.xml" "--package-name" "wildlife_bringup" "--output-file" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/target_motion.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_target_motion.py" "-o" "cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/target_motion/.cache" "--junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/target_motion.xunit.xml" "--junit-prefix=wildlife_bringup"
+[2.288s] 4: Working Directory: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup
+[2.288s] 4: Test timeout computed to be: 60
+[2.351s] 4: -- run_test.py: invoking following command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup':
+[2.351s] 4:  - /usr/bin/python3 -u -m pytest /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_target_motion.py -o cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/target_motion/.cache --junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/target_motion.xunit.xml --junit-prefix=wildlife_bringup
+[2.585s] 4: ============================= test session starts ==============================
+[2.585s] 4: platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+[2.588s] 4: cachedir: build/wildlife_bringup/ament_cmake_pytest/target_motion/.cache
+[2.588s] 4: rootdir: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3
+[2.588s] 4: plugins: ament-pep257-0.17.5, ament-xmllint-0.17.5, launch-testing-3.4.11, ament-copyright-0.17.5, ament-flake8-0.17.5, launch-testing-ros-0.26.12, ament-lint-0.17.5, colcon-core-0.21.3, cov-4.1.0
+[2.591s] 4: collected 2 items
+[2.591s] 4: 
+[2.596s] 4: ../../tests/test_target_motion.py ..                                     [100%]
+[2.596s] 4: 
+[2.596s] 4: - generated xml file: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/target_motion.xunit.xml -
+[2.596s] 4: ============================== 2 passed in 0.01s ===============================
+[2.638s] 4: -- run_test.py: return code 0
+[2.638s] 4: -- run_test.py: verify result file '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/target_motion.xunit.xml'
+[2.646s] 4/5 Test #4: target_motion ....................   Passed    0.36 sec
+[2.646s] test 5
+[2.647s]     Start 5: px4_adapter_regressions
+[2.647s] 
+[2.647s] 5: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/px4_adapter_regressions.xunit.xml" "--package-name" "wildlife_bringup" "--output-file" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/px4_adapter_regressions.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_px4_adapter.py" "-o" "cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/px4_adapter_regressions/.cache" "--junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/px4_adapter_regressions.xunit.xml" "--junit-prefix=wildlife_bringup"
+[2.647s] 5: Working Directory: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup
+[2.647s] 5: Test timeout computed to be: 60
+[2.697s] 5: -- run_test.py: invoking following command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup':
+[2.697s] 5:  - /usr/bin/python3 -u -m pytest /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_px4_adapter.py -o cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/px4_adapter_regressions/.cache --junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/px4_adapter_regressions.xunit.xml --junit-prefix=wildlife_bringup
+[2.935s] 5: ============================= test session starts ==============================
+[2.935s] 5: platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+[2.938s] 5: cachedir: build/wildlife_bringup/ament_cmake_pytest/px4_adapter_regressions/.cache
+[2.938s] 5: rootdir: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3
+[2.938s] 5: plugins: ament-pep257-0.17.5, ament-xmllint-0.17.5, launch-testing-3.4.11, ament-copyright-0.17.5, ament-flake8-0.17.5, launch-testing-ros-0.26.12, ament-lint-0.17.5, colcon-core-0.21.3, cov-4.1.0
+[3.201s] 5: collected 19 items
+[3.201s] 5: 
+[3.491s] 5: ../../tests/test_px4_adapter.py ...................                      [100%]
+[3.491s] 5: 
+[3.491s] 5: - generated xml file: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/px4_adapter_regressions.xunit.xml -
+[3.491s] 5: ============================== 19 passed in 0.56s ==============================
+[3.682s] 5: -- run_test.py: return code 0
+[3.682s] 5: -- run_test.py: verify result file '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/px4_adapter_regressions.xunit.xml'
+[3.697s] 5/5 Test #5: px4_adapter_regressions ..........   Passed    1.05 sec
+[3.698s] 
+[3.698s] 100% tests passed, 0 tests failed out of 5
+[3.698s] 
+[3.698s] Label Time Summary:
+[3.698s] pytest    =   3.65 sec*proc (5 tests)
+[3.698s] 
+[3.698s] Total Test time (real) =   3.65 sec
+[3.703s] Invoked command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup' returned '0': AMENT_PREFIX_PATH=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_simulation:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_vehicles:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_targets:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_swarm:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_perception:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_mission:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_core:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_bringup:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces:/home/mohammed-ali/Downloads/wildlife_px4_dependencies/msgs-install/px4_msgs:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib:/home/mohammed-ali/Downloads/wildlife_px4_dependencies/agent-build:/home/mohammed-ali/Downloads/wildlife_px4_dependencies/msgs-install/px4_msgs/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib /usr/bin/ctest -C Release -D ExperimentalTest --no-compress-output -V --force-new-ctest-process

@@ -1,0 +1,9 @@
+std_msgs/Header header
+string drone_id
+string detection_id
+string target_class
+float32 confidence
+geometry_msgs/Point position_world
+float32 covariance_xx
+float32 covariance_yy
+float32 distance_from_drone

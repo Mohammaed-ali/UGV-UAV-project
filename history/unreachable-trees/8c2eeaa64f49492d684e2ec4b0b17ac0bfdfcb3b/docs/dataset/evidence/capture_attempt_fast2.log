@@ -1,0 +1,10 @@
+READY {'width': 640, 'height': 480, 'K': [269.96816635131836, 0.0, 320.0, 0.0, 269.9681854248047, 240.0, 0.0, 0.0, 1.0]}
+Traceback (most recent call last):
+  File "/tmp/v05_capture_probe.py", line 13, in <module>
+    image,label,meta=g.capture(scene)
+                     ^^^^^^^^^^^^^^^^
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/gazebo_backend.py", line 107, in capture
+    self.request('set_pose_vector',req,Boolean)
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/gazebo_backend.py", line 89, in request
+    raise RuntimeError('Gazebo service failed: '+suffix)
+RuntimeError: Gazebo service failed: set_pose_vector

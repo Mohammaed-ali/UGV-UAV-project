@@ -1,0 +1,1722 @@
+UpdateCTestConfiguration  from :/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/CTestConfiguration.ini
+Parse Config file:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/CTestConfiguration.ini
+   Site: mohammed-ali-Nitro-ANV15-51
+   Build name: (empty)
+ Add coverage exclude regular expressions.
+Create new tag: 20261003-2225 - Experimental
+UpdateCTestConfiguration  from :/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/CTestConfiguration.ini
+Parse Config file:/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/CTestConfiguration.ini
+Test project /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: wildlife_regressions
+
+1: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/wildlife_regressions.xunit.xml" "--package-name" "wildlife_bringup" "--output-file" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/wildlife_regressions.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_regressions.py" "-o" "cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/wildlife_regressions/.cache" "--junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/wildlife_regressions.xunit.xml" "--junit-prefix=wildlife_bringup"
+1: Working Directory: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup
+1: Test timeout computed to be: 60
+1: -- run_test.py: invoking following command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup':
+1:  - /usr/bin/python3 -u -m pytest /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_regressions.py -o cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/wildlife_regressions/.cache --junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/wildlife_regressions.xunit.xml --junit-prefix=wildlife_bringup
+1: ============================= test session starts ==============================
+1: platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+1: cachedir: build/wildlife_bringup/ament_cmake_pytest/wildlife_regressions/.cache
+1: rootdir: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3
+1: plugins: ament-pep257-0.17.5, ament-xmllint-0.17.5, launch-testing-3.4.11, ament-copyright-0.17.5, ament-flake8-0.17.5, launch-testing-ros-0.26.12, ament-lint-0.17.5, colcon-core-0.21.3, cov-4.1.0
+1: collected 16 items
+1: 
+1: ../../tests/test_regressions.py EEEEEEEEEEEEEEEE                         [100%]
+1: 
+1: ==================================== ERRORS ====================================
+1: ____ ERROR at setup of RegressionTests.test_adapter_stops_without_telemetry ____
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_assignment_reserves_target_before_registry_feedback _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _____ ERROR at setup of RegressionTests.test_deployment_pause_resume_abort _____
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_heading_uses_current_yaw_and_shortest_turn _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_hold_then_return_and_invalid_decision _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_late_deployment_subscriber_receives_waypoint_zero _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: __ ERROR at setup of RegressionTests.test_launch_search_standoff_return_dock ___
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_mission_completes_and_override_not_lost_to_alert _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_mission_recovers_from_missed_ugv_deploying_edge _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_pause_restores_takeoff_return_and_operator_wait _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_px4_deployment_requires_recent_ready_and_filters_active_ids _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_seeded_detector_repeats_measurements_and_ids _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_single_and_split_deployment_deduplicate _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_target_lifecycle_survives_measurement _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _ ERROR at setup of RegressionTests.test_tracker_association_expiry_and_monotonic_ids _
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: _____ ERROR at setup of RegressionTests.test_ugv_waypoint_index_and_split ______
+1: 
+1: cls = <class 'test_regressions.RegressionTests'>
+1: 
+1:     @classmethod
+1:     def setUpClass(cls):
+1: >       rclpy.init(args=['--ros-args', '-p', 'input_enabled:=false'])
+1: 
+1: ../../tests/test_regressions.py:38: 
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+1:     context.init(args, domain_id=domain_id)
+1: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+1: 
+1: self = <rclpy.context.Context object at 0x70d6702185f0>
+1: args = ['--ros-args', '-p', 'input_enabled:=false']
+1: 
+1:     def init(self,
+1:              args: Optional[List[str]] = None,
+1:              *,
+1:              initialize_logging: bool = True,
+1:              domain_id: Optional[int] = None) -> None:
+1:         """
+1:         Initialize ROS communications for a given context.
+1:     
+1:         :param args: List of command line arguments.
+1:         """
+1:         # imported locally to avoid loading extensions on module import
+1:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+1:     
+1:         global g_logging_ref_count
+1:         with self._lock:
+1:             if domain_id is not None and domain_id < 0:
+1:                 raise RuntimeError(
+1:                     'Domain id ({}) should not be lower than zero.'
+1:                     .format(domain_id))
+1:     
+1:             if self.__context is not None:
+1:                 raise RuntimeError('Context.init() must only be called once')
+1:     
+1:             self.__context = _rclpy.Context(
+1:                 args if args is not None else sys.argv,
+1:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+1:             if initialize_logging and not self._logging_initialized:
+1:                 with g_logging_configure_lock:
+1:                     g_logging_ref_count += 1
+1:                     if g_logging_ref_count == 1:
+1: >                       _rclpy.rclpy_logging_configure(self.__context)
+1: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_149_1791066327345.log for writing: Read-only file system
+1: 
+1: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+1: - generated xml file: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/wildlife_regressions.xunit.xml -
+1: =========================== short test summary info ============================
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_adapter_stops_without_telemetry
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_assignment_reserves_target_before_registry_feedback
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_deployment_pause_resume_abort
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_heading_uses_current_yaw_and_shortest_turn
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_hold_then_return_and_invalid_decision
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_late_deployment_subscriber_receives_waypoint_zero
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_launch_search_standoff_return_dock
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_mission_completes_and_override_not_lost_to_alert
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_mission_recovers_from_missed_ugv_deploying_edge
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_pause_restores_takeoff_return_and_operator_wait
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_px4_deployment_requires_recent_ready_and_filters_active_ids
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_seeded_detector_repeats_measurements_and_ids
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_single_and_split_deployment_deduplicate
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_target_lifecycle_survives_measurement
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_tracker_association_expiry_and_monotonic_ids
+1: ERROR ../../tests/test_regressions.py::RegressionTests::test_ugv_waypoint_index_and_split
+1: ============================== 16 errors in 0.53s ==============================
+1: -- run_test.py: return code 1
+1: -- run_test.py: verify result file '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/wildlife_regressions.xunit.xml'
+1/2 Test #1: wildlife_regressions .............***Failed    0.95 sec
+test 2
+    Start 2: px4_adapter_regressions
+
+2: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/px4_adapter_regressions.xunit.xml" "--package-name" "wildlife_bringup" "--output-file" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/px4_adapter_regressions.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_px4_adapter.py" "-o" "cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/px4_adapter_regressions/.cache" "--junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/px4_adapter_regressions.xunit.xml" "--junit-prefix=wildlife_bringup"
+2: Working Directory: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup
+2: Test timeout computed to be: 60
+2: -- run_test.py: invoking following command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup':
+2:  - /usr/bin/python3 -u -m pytest /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_bringup/../../tests/test_px4_adapter.py -o cache_dir=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/ament_cmake_pytest/px4_adapter_regressions/.cache --junit-xml=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/px4_adapter_regressions.xunit.xml --junit-prefix=wildlife_bringup
+2: ============================= test session starts ==============================
+2: platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+2: cachedir: build/wildlife_bringup/ament_cmake_pytest/px4_adapter_regressions/.cache
+2: rootdir: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3
+2: plugins: ament-pep257-0.17.5, ament-xmllint-0.17.5, launch-testing-3.4.11, ament-copyright-0.17.5, ament-flake8-0.17.5, launch-testing-ros-0.26.12, ament-lint-0.17.5, colcon-core-0.21.3, cov-4.1.0
+2: collected 16 items
+2: 
+2: ../../tests/test_px4_adapter.py EEEEEEEEEEEEEEEE                         [100%]
+2: 
+2: ==================================== ERRORS ====================================
+2: __ ERROR at setup of AdapterTests.test_abort_before_readiness_cancels_launch ___
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: _ ERROR at setup of AdapterTests.test_fault_cannot_resume_when_telemetry_is_stale _
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: __ ERROR at setup of AdapterTests.test_frame_conversion_and_versioned_topics ___
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: _ ERROR at setup of AdapterTests.test_fresh_fault_publishes_paused_and_explicit_return_can_dock _
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: ____ ERROR at setup of AdapterTests.test_invalid_position_rejects_commands _____
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: _ ERROR at setup of AdapterTests.test_launch_is_queued_until_telemetry_recovers _
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: ____ ERROR at setup of AdapterTests.test_origin_reset_faults_after_takeoff _____
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: _ ERROR at setup of AdapterTests.test_other_command_sources_do_not_fault_adapter _
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: _ ERROR at setup of AdapterTests.test_pause_before_readiness_latches_until_resume _
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: _____ ERROR at setup of AdapterTests.test_prestream_before_offboard_or_arm _____
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: ____ ERROR at setup of AdapterTests.test_rejected_command_and_bounds_fault _____
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: _ ERROR at setup of AdapterTests.test_return_uses_px4_rtl_and_measured_landing _
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: ________ ERROR at setup of AdapterTests.test_search_lanes_stay_bounded _________
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: _ ERROR at setup of AdapterTests.test_spawn_origin_applies_in_both_directions __
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: _____ ERROR at setup of AdapterTests.test_stale_telemetry_stops_heartbeat ______
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: ___ ERROR at setup of AdapterTests.test_telemetry_is_only_position_authority ___
+2: 
+2: cls = <class 'test_px4_adapter.AdapterTests'>
+2: 
+2:     @classmethod
+2: >   def setUpClass(cls): rclpy.init(args=['--ros-args','-p','sitl_enabled:=true'])
+2: 
+2: ../../tests/test_px4_adapter.py:17: 
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py:88: in init
+2:     context.init(args, domain_id=domain_id)
+2: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2: 
+2: self = <rclpy.context.Context object at 0x78cef0820e60>
+2: args = ['--ros-args', '-p', 'sitl_enabled:=true']
+2: 
+2:     def init(self,
+2:              args: Optional[List[str]] = None,
+2:              *,
+2:              initialize_logging: bool = True,
+2:              domain_id: Optional[int] = None) -> None:
+2:         """
+2:         Initialize ROS communications for a given context.
+2:     
+2:         :param args: List of command line arguments.
+2:         """
+2:         # imported locally to avoid loading extensions on module import
+2:         from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+2:     
+2:         global g_logging_ref_count
+2:         with self._lock:
+2:             if domain_id is not None and domain_id < 0:
+2:                 raise RuntimeError(
+2:                     'Domain id ({}) should not be lower than zero.'
+2:                     .format(domain_id))
+2:     
+2:             if self.__context is not None:
+2:                 raise RuntimeError('Context.init() must only be called once')
+2:     
+2:             self.__context = _rclpy.Context(
+2:                 args if args is not None else sys.argv,
+2:                 domain_id if domain_id is not None else _rclpy.RCL_DEFAULT_DOMAIN_ID)
+2:             if initialize_logging and not self._logging_initialized:
+2:                 with g_logging_configure_lock:
+2:                     g_logging_ref_count += 1
+2:                     if g_logging_ref_count == 1:
+2: >                       _rclpy.rclpy_logging_configure(self.__context)
+2: E                       RuntimeError: Failed opening file /home/mohammed-ali/.ros/log/python3_155_1791066328286.log for writing: Read-only file system
+2: 
+2: /opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py:106: RuntimeError
+2: - generated xml file: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/px4_adapter_regressions.xunit.xml -
+2: =========================== short test summary info ============================
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_abort_before_readiness_cancels_launch
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_fault_cannot_resume_when_telemetry_is_stale
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_frame_conversion_and_versioned_topics
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_fresh_fault_publishes_paused_and_explicit_return_can_dock
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_invalid_position_rejects_commands
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_launch_is_queued_until_telemetry_recovers
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_origin_reset_faults_after_takeoff
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_other_command_sources_do_not_fault_adapter
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_pause_before_readiness_latches_until_resume
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_prestream_before_offboard_or_arm
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_rejected_command_and_bounds_fault
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_return_uses_px4_rtl_and_measured_landing
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_search_lanes_stay_bounded
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_spawn_origin_applies_in_both_directions
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_stale_telemetry_stops_heartbeat
+2: ERROR ../../tests/test_px4_adapter.py::AdapterTests::test_telemetry_is_only_position_authority
+2: ============================== 16 errors in 0.49s ==============================
+2: -- run_test.py: return code 1
+2: -- run_test.py: verify result file '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_bringup/test_results/wildlife_bringup/px4_adapter_regressions.xunit.xml'
+2/2 Test #2: px4_adapter_regressions ..........***Failed    0.92 sec
+
+0% tests passed, 2 tests failed out of 2
+
+Label Time Summary:
+pytest    =   1.87 sec*proc (2 tests)
+
+Total Test time (real) =   1.87 sec
+
+The following tests FAILED:
+	  1 - wildlife_regressions (Failed)
+	  2 - px4_adapter_regressions (Failed)

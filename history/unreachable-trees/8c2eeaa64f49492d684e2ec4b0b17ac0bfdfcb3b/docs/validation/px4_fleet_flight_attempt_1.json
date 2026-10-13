@@ -1,0 +1,233 @@
+{
+  "result": "FAIL",
+  "failure": "Stopped after uav03 remained unready with missing IMU/barometer data; launched uav01/uav02 had docked.",
+  "performance_samples": [],
+  "validation_profile": {
+    "minimum_horizontal_separation_m": 3.0,
+    "state_max_receipt_age_s": 0.5,
+    "deadline_s": 300.0
+  },
+  "elapsed_s": 208.4,
+  "readiness": {
+    "uav01": true,
+    "uav02": true,
+    "uav03": false,
+    "uav04": true,
+    "uav05": true,
+    "uav06": true,
+    "uav07": true,
+    "uav08": true
+  },
+  "flight": {
+    "uav01": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav02": {
+      "gcs": true,
+      "armed": true,
+      "offboard": true
+    },
+    "uav03": {
+      "gcs": true,
+      "armed": false,
+      "offboard": false
+    },
+    "uav04": {
+      "gcs": true,
+      "armed": false,
+      "offboard": false
+    },
+    "uav05": {
+      "gcs": true,
+      "armed": false,
+      "offboard": false
+    },
+    "uav06": {
+      "gcs": true,
+      "armed": false,
+      "offboard": false
+    },
+    "uav07": {
+      "gcs": true,
+      "armed": false,
+      "offboard": false
+    },
+    "uav08": {
+      "gcs": true,
+      "armed": false,
+      "offboard": false
+    }
+  },
+  "states": {
+    "uav01": 9,
+    "uav02": 9,
+    "uav03": null,
+    "uav04": 0,
+    "uav05": 0,
+    "uav06": 0,
+    "uav07": 0,
+    "uav08": 0
+  },
+  "state_histories": {
+    "uav01": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ],
+    "uav02": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ],
+    "uav03": [],
+    "uav04": [
+      0
+    ],
+    "uav05": [
+      0
+    ],
+    "uav06": [
+      0
+    ],
+    "uav07": [
+      0
+    ],
+    "uav08": [
+      0
+    ]
+  },
+  "launches": [
+    "uav01",
+    "uav02"
+  ],
+  "deployment_events": [
+    {
+      "waypoint": 0,
+      "mode": "SPLIT"
+    },
+    {
+      "waypoint": 1,
+      "mode": "SPLIT"
+    }
+  ],
+  "phases": [
+    "DEPLOYING",
+    "SEARCHING"
+  ],
+  "premature_complete": false,
+  "max_simultaneous_search": 0,
+  "separation_samples": 0,
+  "minimum_horizontal_separation_m": null,
+  "minimum_3d_separation_m": null,
+  "minimum_pair": null,
+  "landed": {
+    "uav01": true,
+    "uav02": true,
+    "uav03": true,
+    "uav04": true,
+    "uav05": true,
+    "uav06": true,
+    "uav07": true,
+    "uav08": true
+  },
+  "disarmed": {
+    "uav01": true,
+    "uav02": true,
+    "uav03": true,
+    "uav04": true,
+    "uav05": true,
+    "uav06": true,
+    "uav07": true,
+    "uav08": true
+  },
+  "commands": {
+    "uav01": [
+      {
+        "command": 176,
+        "system": 1
+      },
+      {
+        "command": 400,
+        "system": 1
+      },
+      {
+        "command": 20,
+        "system": 1
+      }
+    ],
+    "uav02": [
+      {
+        "command": 176,
+        "system": 2
+      },
+      {
+        "command": 400,
+        "system": 2
+      },
+      {
+        "command": 20,
+        "system": 2
+      }
+    ],
+    "uav03": [],
+    "uav04": [],
+    "uav05": [],
+    "uav06": [],
+    "uav07": [],
+    "uav08": []
+  },
+  "acknowledgements": {
+    "uav01": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav02": [
+      {
+        "command": 176,
+        "result": 0
+      },
+      {
+        "command": 400,
+        "result": 0
+      },
+      {
+        "command": 20,
+        "result": 0
+      }
+    ],
+    "uav03": [],
+    "uav04": [],
+    "uav05": [],
+    "uav06": [],
+    "uav07": [],
+    "uav08": []
+  },
+  "px4_process_sample": [
+    "292287 31.3 21248",
+    " 292372 31.4 21264",
+    " 292483 16.2 20776",
+    " 292643 32.2 21176",
+    " 292809 32.7 21496",
+    " 292991 33.0 21276",
+    " 293149 33.2 21196",
+    " 293277 33.1 21176"
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "run_id": "58849088-5b4d-4f65-b40e-be60a3b0f67f",
+  "passed": true,
+  "wall_seconds": 194.53,
+  "sim_time": 180.32,
+  "launch_order": [
+    {
+      "id": "uav01",
+      "time": 27.88
+    },
+    {
+      "id": "uav02",
+      "time": 108.83
+    }
+  ],
+  "docking_order": [
+    {
+      "id": "uav01",
+      "time": 80.08
+    },
+    {
+      "id": "uav02",
+      "time": 159.8
+    }
+  ],
+  "carousel_events": [
+    {
+      "id": 22,
+      "time": 87.6,
+      "message": "Carousel indexing \u00b7 original lower tray moving to flight deck",
+      "kind": "info",
+      "drone": null
+    },
+    {
+      "id": 23,
+      "time": 108.06,
+      "message": "Carousel locked \u00b7 original lower tray at flight deck",
+      "kind": "info",
+      "drone": null
+    },
+    {
+      "id": 38,
+      "time": 159.6,
+      "message": "Carousel indexing \u00b7 original upper tray moving to flight deck",
+      "kind": "info",
+      "drone": null
+    },
+    {
+      "id": 39,
+      "time": 180.03,
+      "message": "Carousel locked \u00b7 original upper tray at flight deck",
+      "kind": "info",
+      "drone": null
+    }
+  ],
+  "maximum_measured_carriage_offset_m": 2.1516291802620007,
+  "moving_samples": 83,
+  "unlatched_or_armed_stored_aircraft_during_indexing": [],
+  "maximum_landing_image_age_s": 0.14999999999999147,
+  "final_landings": [
+    {
+      "id": "uav01",
+      "state": "DOCKED",
+      "armed": false,
+      "latched": true,
+      "tag_error": 0.0023039255112111967,
+      "detection_latency": null,
+      "physical_xy_offset_m": 0.016584181829397245
+    },
+    {
+      "id": "uav02",
+      "state": "DOCKED",
+      "armed": false,
+      "latched": true,
+      "tag_error": 0.010398318940859942,
+      "detection_latency": null,
+      "physical_xy_offset_m": 0.011837651594022676
+    }
+  ],
+  "detected_targets": 0,
+  "maximum_airborne_telemetry_age_s": 0.03,
+  "stops_observed": [
+    {
+      "stop_index": 0,
+      "first_observed_time": 0.0,
+      "carrier_position": [
+        -28.0,
+        -22.0,
+        0.74
+      ]
+    },
+    {
+      "stop_index": 1,
+      "first_observed_time": 80.08,
+      "carrier_position": [
+        -24.39948748597745,
+        -22.000000000003723,
+        0.7399999022682573
+      ]
+    }
+  ]
+}

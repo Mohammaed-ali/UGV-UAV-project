@@ -1,0 +1,72 @@
+{
+  "result": "PASS",
+  "failure": "",
+  "elapsed_s": 143.7,
+  "states": {
+    "uav01": 9,
+    "uav02": 9
+  },
+  "state_histories": {
+    "uav01": [
+      0,
+      2,
+      3,
+      5,
+      6,
+      7,
+      9
+    ],
+    "uav02": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      10
+    ]
+  },
+  "ready": {
+    "uav01": true,
+    "uav02": true
+  },
+  "flight": {
+    "uav01": {
+      "offboard": true,
+      "armed": true,
+      "gcs": true
+    },
+    "uav02": {
+      "offboard": true,
+      "armed": true,
+      "gcs": true
+    }
+  },
+  "landed": {
+    "uav01": true,
+    "uav02": true
+  },
+  "disarmed": {
+    "uav01": true,
+    "uav02": true
+  },
+  "detections": {
+    "uav01": 2,
+    "uav02": 0
+  },
+  "assignments": {
+    "tgt_001": [
+      "uav01"
+    ]
+  },
+  "second_searched_during_assignment": true,
+  "held": true,
+  "returned": true,
+  "phases": [
+    "DEPLOYING",
+    "SEARCHING",
+    "TARGET_FOUND",
+    "AWAITING_OPERATOR",
+    "RESOLVING",
+    "COMPLETE"
+  ]
+}

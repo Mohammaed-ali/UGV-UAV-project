@@ -1,0 +1,13 @@
+# The pinned PX4 x500_mono_cam_down model names its single instance with _0.
+# This is the actual Gazebo sensor topic observed in wildlife_px4, not the
+# V0.2 logical-uav camera topic in bridge.yaml.
+- ros_topic_name: /drones/uav01/camera/image_raw
+  gz_topic_name: /world/wildlife_px4/model/x500_mono_cam_down_0/link/camera_link/sensor/imager/image
+  ros_type_name: sensor_msgs/msg/Image
+  gz_type_name: gz.msgs.Image
+  direction: GZ_TO_ROS
+- ros_topic_name: /drones/uav01/camera/camera_info
+  gz_topic_name: /world/wildlife_px4/model/x500_mono_cam_down_0/link/camera_link/sensor/imager/camera_info
+  ros_type_name: sensor_msgs/msg/CameraInfo
+  gz_type_name: gz.msgs.CameraInfo
+  direction: GZ_TO_ROS

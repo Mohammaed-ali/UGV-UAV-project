@@ -1,0 +1,18 @@
+{
+  "passed": false,
+  "fault": "UAV02 native latch acknowledgement timed out after physical pad contact and disarm",
+  "observed": {
+    "landed_body_height_above_pad_m": 0.225,
+    "xy_offset_from_pad_m": 0.0475,
+    "final_tag_error_m": 0.0064134,
+    "phase_timeout_sim_seconds": 120,
+    "mission_state": "FAULT",
+    "ugv_actor_contacts": 0,
+    "actor_actor_contacts": 0,
+    "maximum_sidewalk_footprint_excess_m": 8.75984,
+    "median_rtf": 0.37
+  },
+  "interpretation": "The stock detachable-joint system emits one transition message and ignores repeated attach commands once attached. The available trace does not prove whether the joint failed to form or its transition acknowledgement was lost. A read-only periodic native joint observer was added to resolve and report actual joint component state. City steering also moved next to physics to eliminate feedback based on delayed Python pose callbacks.",
+  "source": "https://github.com/gazebosim/gz-sim/blob/gz-sim8/src/systems/detachable_joint/DetachableJoint.cc",
+  "next_gate": "Single aircraft, then both full-fleet wheel configurations; retain this failed result."
+}

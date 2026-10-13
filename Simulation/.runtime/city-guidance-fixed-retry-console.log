@@ -1,0 +1,7 @@
+{"sim_time": 0.0, "state": "INITIALIZING", "max_lane_error": 0, "rtf": 0}
+Traceback (most recent call last):
+  File "/home/mohammed-ali/Downloads/gpt /Simulation/scripts/validate_city.py", line 54, in main
+    moving=[o['id'] for o in engine.city.layout['objects'] if o['kind']!='building' and not o['parked']]
+                             ^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'layout'
+EVIDENCE /home/mohammed-ali/Downloads/gpt /Simulation/artifacts/living-city/city-0c41c353-41e0-4b89-9ff8-32272a61d9f6 FAIL

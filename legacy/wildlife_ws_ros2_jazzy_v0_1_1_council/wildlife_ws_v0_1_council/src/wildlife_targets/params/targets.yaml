@@ -1,0 +1,15 @@
+detection_mux:
+  ros__parameters:
+    queue_depth: 50
+
+target_tracker:
+  ros__parameters:
+    gate_radius: 3.0
+    alpha: 0.25
+    stale_timeout: 15.0
+    minimum_confidence: 0.50
+    report_period: 5.0
+
+target_manager:
+  ros__parameters:
+    report_period: 5.0

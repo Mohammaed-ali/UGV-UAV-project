@@ -1,0 +1,2102 @@
+{
+  "passed": false,
+  "mission": {
+    "version": 1,
+    "name": "Perimeter survey",
+    "wheels": 6,
+    "seed": 42,
+    "terrain": "proving_ground",
+    "population": 18,
+    "traffic": 10,
+    "target_present": true,
+    "target_class": "person",
+    "ugv_speed": 1.5,
+    "altitude": 9,
+    "flight_speed": 2,
+    "launch_interval": 5,
+    "search_timeout": 40,
+    "no_target_policy": "loiter",
+    "loiter_seconds": 20,
+    "loiter_radius": 5,
+    "observation_seconds": 15,
+    "standoff": 8,
+    "confidence": 0.4,
+    "landing_retries": 2,
+    "battery_return": 25,
+    "wind": 0,
+    "graphics_quality": "balanced",
+    "living_city": true,
+    "city_scenario": "custom",
+    "walking_speed": 1.2,
+    "traffic_speed": 1.6,
+    "flight_boundary": 116.0,
+    "tracking_seconds": 90,
+    "reacquire_seconds": 35,
+    "tracking_altitude": 12,
+    "tracking_distance": 2.0,
+    "reacquire_confidence": 0.8,
+    "early_selection": false,
+    "tracking_uav": "auto",
+    "tracking_enabled": false,
+    "aerial_vehicles": true,
+    "start": {
+      "x": -28.0,
+      "y": -22.0
+    },
+    "stops": [
+      {
+        "x": -12.0,
+        "y": -22.0,
+        "id": "a",
+        "label": "Alpha",
+        "drones": [],
+        "search_radius": 12,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      },
+      {
+        "x": 28.0,
+        "y": -22.0,
+        "id": "b",
+        "label": "Bravo",
+        "drones": [],
+        "search_radius": 12,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      },
+      {
+        "x": 30.0,
+        "y": 34.5,
+        "id": "c",
+        "label": "Charlie",
+        "drones": [],
+        "search_radius": 12,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      }
+    ]
+  },
+  "thresholds": {
+    "maximum_lane_error_m": 1.0,
+    "minimum_actor_travel_m": 3.0,
+    "carrier_contact_count": 0
+  },
+  "wheels": 6,
+  "pause_displacement": 0.0,
+  "final": {
+    "run_id": "41a0ef60-bd28-4e95-885e-308dac6d0ad7",
+    "state": "COMPLETE",
+    "hold": false,
+    "sim_time": 600.1,
+    "stop_index": 2,
+    "runtime": {
+      "state": "running",
+      "progress": "Physics online \u00b7 waiting for mission start",
+      "error": null,
+      "processes": {
+        "gazebo": "running"
+      }
+    },
+    "physics": {
+      "real_time_factor": 1.0,
+      "paused": false,
+      "age": 0.03
+    },
+    "carrier": {
+      "position": [
+        30.002679356815094,
+        34.05150142292998,
+        0.7399999428382443
+      ],
+      "quaternion": [
+        -2.428812423028663e-10,
+        2.4139494040454893e-10,
+        0.7092118574484828,
+        0.704995419314532
+      ],
+      "yaw": 1.576759279623148,
+      "time": 600.096,
+      "received": 134036.434486553,
+      "speed": 0.0
+    },
+    "carousel": {
+      "active_level": "upper",
+      "requested_level": "upper",
+      "moving": false,
+      "phase": "locked",
+      "angle": 0.0,
+      "error": null,
+      "trays": {
+        "upper": {
+          "y": 6.945403150244915e-17,
+          "z": 2.2499999999999942
+        },
+        "lower": {
+          "y": 6.927500306720406e-17,
+          "z": 0.7799999999999943
+        }
+      }
+    },
+    "wheel_angles": {
+      "wheel_left_m1_1_joint": 290.43293806184215,
+      "wheel_right_m1_1_joint": 307.3965429420688,
+      "wheel_left_0_joint": 290.43293807033484,
+      "wheel_right_0_joint": 307.3965429335832,
+      "wheel_left_1_1_joint": 290.43293806281474,
+      "wheel_right_1_1_joint": 307.39654294303574
+    },
+    "drones": [
+      {
+        "id": "uav01",
+        "bay": 1,
+        "level": "upper",
+        "tag_id": 1,
+        "state": "STORED",
+        "position": [
+          29.318636630512923,
+          34.727434549715866,
+          3.3249992203052665
+        ],
+        "quaternion": [
+          -8.814672688823477e-18,
+          -2.6468608365241475e-17,
+          0.7092118574484828,
+          0.704995419314532
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 6.945403150244915e-17,
+        "tray_position": [
+          29.31863666219954,
+          34.727434549757696,
+          3.094499942838239
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 600.1,
+        "vision": null
+      },
+      {
+        "id": "uav02",
+        "bay": 1,
+        "level": "lower",
+        "tag_id": 2,
+        "state": "STORED",
+        "position": [
+          29.3186366305853,
+          34.7274345497163,
+          1.8549992203052665
+        ],
+        "quaternion": [
+          -8.814672688823477e-18,
+          -2.6468608365241475e-17,
+          0.7092118574484828,
+          0.704995419314532
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 6.927500306720406e-17,
+        "tray_position": [
+          29.31863666219954,
+          34.727434549757696,
+          1.6244999428382385
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 600.1,
+        "vision": null
+      },
+      {
+        "id": "uav03",
+        "bay": 2,
+        "level": "upper",
+        "tag_id": 3,
+        "state": "STORED",
+        "position": [
+          30.678612451956194,
+          34.7355441175037,
+          3.3249992203052665
+        ],
+        "quaternion": [
+          -8.814672688823477e-18,
+          -2.6468608365241475e-17,
+          0.7092118574484828,
+          0.704995419314532
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 6.945403150244915e-17,
+        "tray_position": [
+          30.678612483642812,
+          34.73554411754554,
+          3.094499942838239
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 600.1,
+        "vision": null
+      },
+      {
+        "id": "uav04",
+        "bay": 2,
+        "level": "lower",
+        "tag_id": 4,
+        "state": "STORED",
+        "position": [
+          30.67861245202857,
+          34.73554411750413,
+          1.8549992203052665
+        ],
+        "quaternion": [
+          -8.814672688823477e-18,
+          -2.6468608365241475e-17,
+          0.7092118574484828,
+          0.704995419314532
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 6.927500306720406e-17,
+        "tray_position": [
+          30.678612483642812,
+          34.73554411754554,
+          1.6244999428382385
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 600.1,
+        "vision": null
+      },
+      {
+        "id": "uav05",
+        "bay": 3,
+        "level": "upper",
+        "tag_id": 5,
+        "state": "STORED",
+        "position": [
+          29.326746198300757,
+          33.3674587282726,
+          3.3249992203052665
+        ],
+        "quaternion": [
+          -8.814672688823477e-18,
+          -2.6468608365241475e-17,
+          0.7092118574484828,
+          0.704995419314532
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 6.945403150244915e-17,
+        "tray_position": [
+          29.326746229987375,
+          33.367458728314425,
+          3.094499942838239
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 600.1,
+        "vision": null
+      },
+      {
+        "id": "uav06",
+        "bay": 3,
+        "level": "lower",
+        "tag_id": 6,
+        "state": "STORED",
+        "position": [
+          29.326746198373133,
+          33.367458728273036,
+          1.8549992203052665
+        ],
+        "quaternion": [
+          -8.814672688823477e-18,
+          -2.6468608365241475e-17,
+          0.7092118574484828,
+          0.704995419314532
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 6.927500306720406e-17,
+        "tray_position": [
+          29.326746229987375,
+          33.367458728314425,
+          1.6244999428382385
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 600.1,
+        "vision": null
+      },
+      {
+        "id": "uav07",
+        "bay": 4,
+        "level": "upper",
+        "tag_id": 7,
+        "state": "STORED",
+        "position": [
+          30.68672201974403,
+          33.375568296060436,
+          3.3249992203052665
+        ],
+        "quaternion": [
+          -8.814672688823477e-18,
+          -2.6468608365241475e-17,
+          0.7092118574484828,
+          0.704995419314532
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 6.945403150244915e-17,
+        "tray_position": [
+          30.686722051430646,
+          33.375568296102266,
+          3.094499942838239
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 600.1,
+        "vision": null
+      },
+      {
+        "id": "uav08",
+        "bay": 4,
+        "level": "lower",
+        "tag_id": 8,
+        "state": "STORED",
+        "position": [
+          30.686722019816404,
+          33.37556829606087,
+          1.8549992203052665
+        ],
+        "quaternion": [
+          -8.814672688823477e-18,
+          -2.6468608365241475e-17,
+          0.7092118574484828,
+          0.704995419314532
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 6.927500306720406e-17,
+        "tray_position": [
+          30.686722051430646,
+          33.375568296102266,
+          1.6244999428382385
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 600.1,
+        "vision": null
+      }
+    ],
+    "tracks": [],
+    "city": {
+      "actors": [
+        {
+          "id": "person_0",
+          "kind": "person",
+          "position": [
+            -47.9573624849108,
+            -27.999999999999485,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -2.14643118056132e-13,
+            1.0
+          ],
+          "yaw": -4.29286236112264e-13,
+          "time": 600.096,
+          "speed": 0.988,
+          "walk_phase": 2888.6880003133438,
+          "wheel_angle": 1149.3724357502779,
+          "yaw_rate": 0.0,
+          "distance": 574.6862178751389,
+          "steering": 0.0,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_1",
+          "kind": "person",
+          "position": [
+            92.71234969608011,
+            -112.00064114253064,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.9999999990297734,
+            4.405057403691702e-05
+          ],
+          "yaw": 3.141504552441691,
+          "time": 600.096,
+          "speed": 0.973,
+          "walk_phase": 2387.253441807799,
+          "wheel_angle": 949.8579641921289,
+          "yaw_rate": -0.001267152216334421,
+          "distance": 474.92898209606443,
+          "steering": -0.003283883984932827,
+          "lane_error": 0.001,
+          "parked": false
+        },
+        {
+          "id": "person_2",
+          "kind": "person",
+          "position": [
+            77.87347144642294,
+            -9.000000000291372,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            1.0,
+            3.357431572002932e-11
+          ],
+          "yaw": 3.1415926535226446,
+          "time": 600.096,
+          "speed": 1.176,
+          "walk_phase": 3361.130665703432,
+          "wheel_angle": 1337.3513995611352,
+          "yaw_rate": -5.048653802709744e-10,
+          "distance": 668.6756997805676,
+          "steering": -1.1490452538492844e-09,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_3",
+          "kind": "person",
+          "position": [
+            -39.69857897379264,
+            -27.999999999903203,
+            0.020001984897360454
+          ],
+          "quaternion": [
+            1.2122034578862775e-07,
+            -5.678795621158264e-08,
+            4.024402591356951e-10,
+            0.999999999999991
+          ],
+          "yaw": 8.048667505600109e-10,
+          "time": 600.096,
+          "speed": 1.006,
+          "walk_phase": 2551.350136190159,
+          "wheel_angle": 1015.1499643321104,
+          "yaw_rate": -2.3709624007686367e-09,
+          "distance": 507.5749821660552,
+          "steering": -6.772176562691629e-09,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_4",
+          "kind": "person",
+          "position": [
+            89.13480846279958,
+            -111.99999830828536,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.9999999999917621,
+            4.059026989683538e-06
+          ],
+          "yaw": 3.141584535535814,
+          "time": 600.096,
+          "speed": 0.989,
+          "walk_phase": 2383.642535780528,
+          "wheel_angle": 948.4212303339275,
+          "yaw_rate": 2.561178376217963e-05,
+          "distance": 474.21061516696375,
+          "steering": 7.407875202895807e-05,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_5",
+          "kind": "person",
+          "position": [
+            36.00000000000129,
+            -69.67268647612745,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.7071067811866482,
+            0.7071067811864469
+          ],
+          "yaw": 1.5707963267951812,
+          "time": 600.096,
+          "speed": 1.127,
+          "walk_phase": 2388.985142538424,
+          "wheel_angle": 950.5469860202159,
+          "yaw_rate": 2.250336669143162e-12,
+          "distance": 475.2734930101079,
+          "steering": 5.4157655853288726e-12,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_6",
+          "kind": "person",
+          "position": [
+            -42.70883773103383,
+            -28.00000000075721,
+            0.019998381105536714
+          ],
+          "quaternion": [
+            -1.3502891670215646e-07,
+            5.458241593475886e-08,
+            8.152280586250609e-10,
+            0.9999999999999893
+          ],
+          "yaw": 1.630441376841125e-09,
+          "time": 600.096,
+          "speed": 0.966,
+          "walk_phase": 2901.327653890219,
+          "wheel_angle": 1154.4015941146001,
+          "yaw_rate": -2.577480963703058e-09,
+          "distance": 577.2007970573001,
+          "steering": -7.405591765258126e-09,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_7",
+          "kind": "person",
+          "position": [
+            76.24228923888306,
+            -112.00000000000341,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.9999999999999999,
+            1.0143609876375005e-12
+          ],
+          "yaw": 3.1415926535877645,
+          "time": 600.096,
+          "speed": 0.914,
+          "walk_phase": 2091.0581389683052,
+          "wheel_angle": 832.005597773363,
+          "yaw_rate": -2.6389147277618107e-12,
+          "distance": 416.0027988866815,
+          "steering": -6.5671342457696535e-12,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_8",
+          "kind": "person",
+          "position": [
+            71.24794581978303,
+            -8.999999999999943,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            1.0,
+            -1.2840301398662548e-13
+          ],
+          "yaw": -3.1415926535895364,
+          "time": 600.096,
+          "speed": 1.151,
+          "walk_phase": 3379.497576275503,
+          "wheel_angle": 1344.6593610783148,
+          "yaw_rate": -5.337610695311106e-13,
+          "distance": 672.3296805391574,
+          "steering": -1.4011608395095284e-12,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_9",
+          "kind": "person",
+          "position": [
+            -36.57159053623475,
+            -28.094051701351116,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -0.03121359220812725,
+            0.9995127371181743
+          ],
+          "yaw": -0.06243732587616579,
+          "time": 600.096,
+          "speed": 0.983,
+          "walk_phase": 2904.04433564757,
+          "wheel_angle": 1155.482527440825,
+          "yaw_rate": -0.007034317011529359,
+          "distance": 577.7412637204125,
+          "steering": -0.02078827506918032,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_10",
+          "kind": "person",
+          "position": [
+            96.24094173121875,
+            -111.9185808133355,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.9993842049837707,
+            -0.03508861395034986
+          ],
+          "yaw": -3.0714010172108988,
+          "time": 600.096,
+          "speed": 0.947,
+          "walk_phase": 2404.5061087123017,
+          "wheel_angle": 956.7225822405527,
+          "yaw_rate": -0.012474415590259674,
+          "distance": 478.36129112027635,
+          "steering": -0.034659070675813544,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_11",
+          "kind": "person",
+          "position": [
+            114.16664755147151,
+            3.5186172925586083,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -0.8412221816130613,
+            0.5406895977935601
+          ],
+          "yaw": -1.9990793522519492,
+          "time": 600.096,
+          "speed": 1.025,
+          "walk_phase": 2781.1976730249417,
+          "wheel_angle": 1106.6033934439909,
+          "yaw_rate": -0.0472097769007053,
+          "distance": 553.3016967219954,
+          "steering": -0.13704894935957945,
+          "lane_error": 0.014,
+          "parked": false
+        },
+        {
+          "id": "person_12",
+          "kind": "person",
+          "position": [
+            -17.000000000000192,
+            -77.54659806577794,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -0.7071067811864982,
+            0.7071067811865969
+          ],
+          "yaw": -1.5707963267947571,
+          "time": 600.096,
+          "speed": 1.078,
+          "walk_phase": 3184.4228153830604,
+          "wheel_angle": 1267.0415799070604,
+          "yaw_rate": 0.0,
+          "distance": 633.5207899535302,
+          "steering": 1.4578767489288581e-13,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_13",
+          "kind": "person",
+          "position": [
+            73.23793177132502,
+            -112.00000000000134,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            1.0,
+            5.462909604555344e-13
+          ],
+          "yaw": 3.1415926535887007,
+          "time": 600.096,
+          "speed": 1.009,
+          "walk_phase": 2446.8240281612975,
+          "wheel_angle": 973.5603473947336,
+          "yaw_rate": 0.0,
+          "distance": 486.7801736973668,
+          "steering": -1.5578885218100563e-13,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_14",
+          "kind": "person",
+          "position": [
+            61.21343718289728,
+            -9.000000000000018,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            1.0,
+            -3.3919014138328368e-15
+          ],
+          "yaw": -3.1415926535897865,
+          "time": 600.096,
+          "speed": 1.155,
+          "walk_phase": 3403.5335400887175,
+          "wheel_angle": 1354.2229672104422,
+          "yaw_rate": 0.0,
+          "distance": 677.1114836052211,
+          "steering": -1.4197629511977722e-13,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "person_15",
+          "kind": "person",
+          "position": [
+            -56.36003305549507,
+            -45.9324602263847,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.968459723879533,
+            0.2491701491414622
+          ],
+          "yaw": 2.6379460864567386,
+          "time": 600.096,
+          "speed": 0.0,
+          "walk_phase": 2396.912205506173,
+          "wheel_angle": 953.7010641590108,
+          "yaw_rate": 0.0,
+          "distance": 476.8505320795054,
+          "steering": 0.0,
+          "lane_error": 0.068,
+          "parked": false
+        },
+        {
+          "id": "person_16",
+          "kind": "person",
+          "position": [
+            113.51738830942652,
+            -39.1732137740536,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -0.5194678165145242,
+            0.8544900160947655
+          ],
+          "yaw": -1.0924560487867463,
+          "time": 600.096,
+          "speed": 1.261,
+          "walk_phase": 3331.4507142861257,
+          "wheel_angle": 1325.5421221141562,
+          "yaw_rate": -0.05057266596042116,
+          "distance": 662.7710610570781,
+          "steering": -0.11739778802536688,
+          "lane_error": 0.001,
+          "parked": false
+        },
+        {
+          "id": "person_17",
+          "kind": "person",
+          "position": [
+            54.00454979000403,
+            -49.21521015180026,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -0.7282190461747707,
+            0.6853444541165465
+          ],
+          "yaw": -1.6314394484555563,
+          "time": 600.096,
+          "speed": 1.138,
+          "walk_phase": 2919.5722376595577,
+          "wheel_angle": 1161.6608833434611,
+          "yaw_rate": 0.14962199582422758,
+          "distance": 580.8304416717306,
+          "steering": 0.36629807687236543,
+          "lane_error": 0.005,
+          "parked": false
+        },
+        {
+          "id": "vehicle_0",
+          "kind": "car",
+          "position": [
+            -90.50012224287175,
+            -85.41174886731292,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.7071053653607536,
+            0.7071081970095064
+          ],
+          "yaw": 1.5707923222388265,
+          "time": 600.096,
+          "speed": 1.392,
+          "walk_phase": 3488.0481745950688,
+          "wheel_angle": 1982.6432454623846,
+          "yaw_rate": -0.00016120401164364278,
+          "distance": 693.9251359118346,
+          "steering": -0.0003156919499803099,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "vehicle_1",
+          "kind": "truck",
+          "position": [
+            109.49999964185733,
+            -61.14912222555416,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -0.7071066358275613,
+            0.7071069265455039
+          ],
+          "yaw": -1.5707959156576394,
+          "time": 600.096,
+          "speed": 1.243,
+          "walk_phase": 3195.335435348322,
+          "wheel_angle": 1271.3835734309469,
+          "yaw_rate": -6.084368351022666e-07,
+          "distance": 635.6917867154734,
+          "steering": -1.4357434653690665e-06,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "vehicle_2",
+          "kind": "bus",
+          "position": [
+            42.501370845559364,
+            16.573514144773192,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.7075098994482978,
+            0.7067034329778366
+          ],
+          "yaw": 1.5719368426768368,
+          "time": 600.096,
+          "speed": 1.171,
+          "walk_phase": 3407.357263183146,
+          "wheel_angle": 1355.7443782891746,
+          "yaw_rate": -0.0011641805694244084,
+          "distance": 677.8721891445873,
+          "steering": -0.002988300030600432,
+          "lane_error": 0.001,
+          "parked": false
+        },
+        {
+          "id": "vehicle_3",
+          "kind": "car",
+          "position": [
+            -90.50000000000071,
+            -58.95802467816158,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.7071067811864078,
+            0.7071067811866872
+          ],
+          "yaw": 1.5707963267945013,
+          "time": 600.096,
+          "speed": 1.265,
+          "walk_phase": 3546.465847483688,
+          "wheel_angle": 2015.848464762917,
+          "yaw_rate": 0.0,
+          "distance": 705.5469626670209,
+          "steering": 2.4301194829410074e-13,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "vehicle_4",
+          "kind": "truck",
+          "position": [
+            109.50000000000735,
+            -72.2352769495735,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -0.707106781188838,
+            0.7071067811842571
+          ],
+          "yaw": -1.570796326801375,
+          "time": 600.096,
+          "speed": 1.243,
+          "walk_phase": 3178.526366543553,
+          "wheel_angle": 1264.69545745832,
+          "yaw_rate": 7.23353001428561e-12,
+          "distance": 632.34772872916,
+          "steering": 1.735260675997683e-11,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "vehicle_5",
+          "kind": "bus",
+          "position": [
+            -23.499999999999815,
+            50.875724302008386,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -0.7071067811865893,
+            0.7071067811865057
+          ],
+          "yaw": -1.5707963267950147,
+          "time": 600.096,
+          "speed": 1.261,
+          "walk_phase": 3422.111275520913,
+          "wheel_angle": 1361.6148132741605,
+          "yaw_rate": 0.0,
+          "distance": 680.8074066370802,
+          "steering": 1.5715302982834037e-13,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "vehicle_6",
+          "kind": "car",
+          "position": [
+            -22.674903324240223,
+            -38.7078037148556,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.8819212643483552,
+            0.47139673682599736
+          ],
+          "yaw": 2.1598449493429834,
+          "time": 600.096,
+          "speed": 0.0,
+          "walk_phase": 0.0,
+          "wheel_angle": 0.0,
+          "yaw_rate": 0.0,
+          "distance": 0.0,
+          "steering": 0.0,
+          "lane_error": 0.0,
+          "parked": true
+        },
+        {
+          "id": "vehicle_7",
+          "kind": "truck",
+          "position": [
+            109.50000000000196,
+            -84.38188864044251,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -0.7071067811868816,
+            0.7071067811862133
+          ],
+          "yaw": -1.5707963267958416,
+          "time": 600.096,
+          "speed": 1.234,
+          "walk_phase": 3156.2630718294777,
+          "wheel_angle": 1255.837173950178,
+          "yaw_rate": 0.0,
+          "distance": 627.918586975089,
+          "steering": -2.213868762235747e-13,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "vehicle_8",
+          "kind": "bus",
+          "position": [
+            84.13426987771467,
+            104.50000000000267,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -2.260307623430804e-13,
+            1.0
+          ],
+          "yaw": -4.520615246861608e-13,
+          "time": 600.096,
+          "speed": 1.514,
+          "walk_phase": 3952.151823781204,
+          "wheel_angle": 1572.5112465110697,
+          "yaw_rate": -2.4980018054055973e-12,
+          "distance": 786.2556232555348,
+          "steering": -4.489789530227215e-12,
+          "lane_error": 0.0,
+          "parked": false
+        },
+        {
+          "id": "vehicle_9",
+          "kind": "car",
+          "position": [
+            -23.49999999999377,
+            -74.00567308800825,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            -0.7071067811873247,
+            0.7071067811857703
+          ],
+          "yaw": -1.5707963267970948,
+          "time": 600.096,
+          "speed": 1.388,
+          "walk_phase": 3976.6115539130237,
+          "wheel_angle": 2260.347805577146,
+          "yaw_rate": -2.8267986242367615e-12,
+          "distance": 791.121731952001,
+          "steering": -5.084261591555457e-12,
+          "lane_error": 0.0,
+          "parked": false
+        }
+      ],
+      "violations": {},
+      "minimum_carrier_gap": 2.721780744937993,
+      "contact_events": [],
+      "actor_contacts": [
+        {
+          "time": 583.632,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.632,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.636,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.636,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.64,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.64,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.644,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.644,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.648,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.648,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.652,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.652,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.656,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.656,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.66,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.66,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.664,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.664,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.668,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.668,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.672,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.672,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.676,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.676,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.68,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.68,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.684,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.684,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.688,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.688,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.692,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.692,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.696,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.696,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.7,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.7,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.704,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.704,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.708,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.708,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.712,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.712,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.716,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.716,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.72,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.72,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.724,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.724,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.728,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.728,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.732,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.732,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.736,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.736,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.74,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.74,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.744,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.744,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.748,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.748,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.752,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.752,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.756,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.756,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.76,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.76,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.764,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.764,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.768,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.768,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.772,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.772,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.776,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.776,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.78,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.78,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.784,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.784,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.788,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.788,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.792,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.792,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.796,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.796,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.8,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.8,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.804,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.804,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.808,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.808,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.812,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.812,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.816,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.816,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.82,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.82,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.824,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.824,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        },
+        {
+          "time": 583.828,
+          "collisions": [
+            "person_6::body::person_6_occupancy",
+            "person_3::body::person_3_occupancy"
+          ]
+        },
+        {
+          "time": 583.828,
+          "collisions": [
+            "person_3::body::person_3_occupancy",
+            "person_6::body::person_6_occupancy"
+          ]
+        }
+      ],
+      "crossings": [
+        {
+          "id": "crossing-0",
+          "x": -57.0,
+          "y": -37.0,
+          "pedestrian_entry": false,
+          "vehicle_green": true,
+          "owner": null,
+          "occupants": [],
+          "state": "vehicles"
+        },
+        {
+          "id": "crossing-1",
+          "x": 76.0,
+          "y": -37.0,
+          "pedestrian_entry": false,
+          "vehicle_green": true,
+          "owner": null,
+          "occupants": [],
+          "state": "vehicles"
+        },
+        {
+          "id": "crossing-2",
+          "x": -57.0,
+          "y": 102.0,
+          "pedestrian_entry": false,
+          "vehicle_green": true,
+          "owner": null,
+          "occupants": [],
+          "state": "vehicles"
+        },
+        {
+          "id": "crossing-3",
+          "x": 76.0,
+          "y": 102.0,
+          "pedestrian_entry": false,
+          "vehicle_green": true,
+          "owner": null,
+          "occupants": [],
+          "state": "vehicles"
+        }
+      ],
+      "crossing_passes": 12,
+      "crossing_violations": []
+    },
+    "catalogue": [],
+    "tracking": {
+      "state": "IDLE",
+      "target_id": null,
+      "drone_id": null,
+      "timeline": [],
+      "candidates": []
+    },
+    "tracking_events": [],
+    "events": [
+      {
+        "id": 1,
+        "time": 0.0,
+        "message": "Mission configuration saved",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 2,
+        "time": 0.0,
+        "message": "Initializing Gazebo and PX4",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 3,
+        "time": 0.3,
+        "message": "Simulation ready \u00b7 physical telemetry connected",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 4,
+        "time": 0.3,
+        "message": "Mission started \u00b7 following route",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 5,
+        "time": 17.42,
+        "message": "Arrived at Alpha \u00b7 0 drones scheduled",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 6,
+        "time": 17.42,
+        "message": "Recovery complete \u00b7 proceeding to next stop",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 7,
+        "time": 50.77,
+        "message": "Arrived at Bravo \u00b7 0 drones scheduled",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 8,
+        "time": 50.77,
+        "message": "Recovery complete \u00b7 proceeding to next stop",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 9,
+        "time": 108.22,
+        "message": "Arrived at Charlie \u00b7 0 drones scheduled",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 10,
+        "time": 108.22,
+        "message": "Mission complete \u00b7 all deployed aircraft docked",
+        "kind": "success",
+        "drone": null
+      }
+    ],
+    "perception": {
+      "detector_ready": true,
+      "tag_ready": true,
+      "error": null,
+      "aerial_ready": false,
+      "aerial_error": null,
+      "visual_tracking": {},
+      "performance": {}
+    }
+  },
+  "wall_seconds": 621.58,
+  "maximum_lane_errors": {
+    "person_0": 0.039,
+    "person_1": 0.045,
+    "person_2": 0.041,
+    "person_3": 0.272,
+    "person_4": 0.043,
+    "person_5": 0.269,
+    "person_6": 0.049,
+    "person_7": 0.316,
+    "person_8": 0.035,
+    "person_9": 0.038,
+    "person_10": 0.047,
+    "person_11": 0.286,
+    "person_12": 0.044,
+    "person_13": 0.039,
+    "person_14": 0.032,
+    "person_15": 0.294,
+    "person_16": 0.039,
+    "person_17": 0.278,
+    "vehicle_0": 0.107,
+    "vehicle_1": 0.127,
+    "vehicle_2": 0.107,
+    "vehicle_3": 0.105,
+    "vehicle_4": 0.108,
+    "vehicle_5": 0.094,
+    "vehicle_6": 0,
+    "vehicle_7": 0.107,
+    "vehicle_8": 0.096,
+    "vehicle_9": 0.091
+  },
+  "actor_travel_m": {
+    "person_0": 574.4026269846065,
+    "person_1": 474.6457675125039,
+    "person_2": 668.3381490630086,
+    "person_3": 507.2862636307132,
+    "person_4": 473.9266279572169,
+    "person_5": 474.95012959225267,
+    "person_6": 576.9191204998232,
+    "person_7": 415.70775293208754,
+    "person_8": 671.9993693405329,
+    "person_9": 577.4592072403639,
+    "person_10": 478.0849848052387,
+    "person_11": 553.0073715825863,
+    "person_12": 633.2113999251948,
+    "person_13": 486.4906455813649,
+    "person_14": 676.7799750898239,
+    "person_15": 476.8505320795054,
+    "person_16": 662.4090686968182,
+    "person_17": 580.5040380123021,
+    "vehicle_0": 693.5256513326401,
+    "vehicle_1": 635.3348986150905,
+    "vehicle_2": 677.5359301804012,
+    "vehicle_3": 705.1838142358392,
+    "vehicle_4": 631.9908286153054,
+    "vehicle_5": 680.4455183512969,
+    "vehicle_6": 0.0,
+    "vehicle_7": 627.5642573988915,
+    "vehicle_8": 785.821016589051,
+    "vehicle_9": 790.7232838889757
+  },
+  "maximum_footprint_excess_m": {
+    "person_0": 0.0,
+    "person_1": 0.0,
+    "person_2": 0.0,
+    "person_3": 0.0,
+    "person_4": 0.0,
+    "person_5": 0.0,
+    "person_6": 0.0,
+    "person_7": 0.0,
+    "person_8": 0.0,
+    "person_9": 0.0,
+    "person_10": 0.0,
+    "person_11": 0.0,
+    "person_12": 0.0,
+    "person_13": 0.0,
+    "person_14": 0.0,
+    "person_15": 0.0,
+    "person_16": 0.0,
+    "person_17": 0.0,
+    "vehicle_0": 0.0,
+    "vehicle_1": 0.0,
+    "vehicle_2": 0.0,
+    "vehicle_3": 0.0,
+    "vehicle_4": 0.0,
+    "vehicle_5": 0.0,
+    "vehicle_7": 0.0,
+    "vehicle_8": 0.0,
+    "vehicle_9": 0.0
+  },
+  "median_rtf": 1.0,
+  "destination_error_m": 0.4485065803160245
+}

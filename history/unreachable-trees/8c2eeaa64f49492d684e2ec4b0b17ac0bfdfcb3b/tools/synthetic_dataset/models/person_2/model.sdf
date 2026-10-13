@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="person_2">
+    <static>true</static>
+    <link name="body">
+      <visual name="torso">
+        <pose>0.0 0.0 1.1829999999999998 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.273 0.4448888888888889 0.6268888888888888</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.85 0.77 0.47 1</ambient>
+          <diffuse>0.85 0.77 0.47 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="head">
+        <pose>0.0 0.0 1.7037222222222221 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.13144444444444445</radius>
+            <length>0.23255555555555554</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.62 0.39 0.25 1</ambient>
+          <diffuse>0.62 0.39 0.25 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="leg_l">
+        <pose>0.0 0.13144444444444445 0.3943333333333333 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.14155555555555557 0.15166666666666664 0.7886666666666666</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.06 0.07 0.08 1</ambient>
+          <diffuse>0.06 0.07 0.08 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="leg_r">
+        <pose>0.0 -0.13144444444444445 0.3943333333333333 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.14155555555555557 0.15166666666666664 0.7886666666666666</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.06 0.07 0.08 1</ambient>
+          <diffuse>0.06 0.07 0.08 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="arm_l">
+        <pose>0.0 0.3134444444444444 1.1425555555555553 0.3 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.13144444444444445 0.13144444444444445 0.637</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.85 0.77 0.47 1</ambient>
+          <diffuse>0.85 0.77 0.47 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="arm_r">
+        <pose>0.0 -0.3134444444444444 1.1425555555555553 -0.24 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.13144444444444445 0.13144444444444445 0.637</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.85 0.77 0.47 1</ambient>
+          <diffuse>0.85 0.77 0.47 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+    </link>
+  </model>
+</sdf>

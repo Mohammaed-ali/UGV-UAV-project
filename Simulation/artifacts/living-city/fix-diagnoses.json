@@ -1,0 +1,154 @@
+[
+  {
+    "issue": "Intermediate UGV junction treated as destination",
+    "failure": "city-2973c21a-e412-4825-b0c3-fd7b72c7ceed",
+    "finding": "Intermediate waypoint advance threshold was 0.4 m while arrival threshold was 0.45 m; the carrier could complete at the junction 56.5 m before the destination.",
+    "correction": "Advance the intermediate waypoint at 0.5 m and validate measured final destination distance.",
+    "regression": "test_service_junction_is_waypoint_not_final_arrival; subsequent measured city destination error 0.449 m."
+  },
+  {
+    "issue": "Native city path parser loaded one waypoint",
+    "failure": "gateway-validation-aea49508-24ba-4f34-a8fc-feeaff5575a0",
+    "finding": "GetNextElement sibling traversal requires its cloned SDF parent to remain alive; a temporary clone lost that parent.",
+    "correction": "Retain cloned configuration while reading every waypoint and articulated visual part. Add local guidance with path-progress continuity."
+  },
+  {
+    "issue": "City contacts absent from recorded topic",
+    "finding": "Gazebo Contact reads its transport override from sensor/contact/topic. The city generated only sensor/topic. Previous city contact counts do not establish zero contacts.",
+    "correction": "Set both fields and subscribe to the actual contact topic; canonicalize collision pair order.",
+    "failure": "city-fd214046-7f2c-44e9-80a1-c187f9ebd0c4",
+    "regression": "Native sensor now records physical person_3/person_6 contact at 583.48 s instead of missing it; test_contact_topic_is_configured_for_native_contact_system verifies generated SDF."
+  },
+  {
+    "issue": "Pedestrian merge clearance",
+    "failure": "city-fd214046-7f2c-44e9-80a1-c187f9ebd0c4",
+    "finding": "A person turning off the crossing reached a queued sidewalk pedestrian while body orientation expanded its occupied footprint.",
+    "correction": "Increase cross-branch measured forward reservation to 2.2 m with anticipation out to 3.5 m. Collision geometry remains solid."
+  },
+  {
+    "issue": "Latch transition acknowledgement lost under fleet load",
+    "failure": "gateway-validation-239e8d76-1ee9-4dcc-98d1-d772c72012f4",
+    "finding": "A lower aircraft remained LATCHING after measured contact and disarm. The old trace cannot prove missing joint versus missing acknowledgement.",
+    "correction": "Publish read-only measured DetachableJoint presence every 0.2 simulation seconds; built-in Gazebo actuator remains authoritative.",
+    "regression": "Subsequent fleet run physically docked UAV02; single UAV04 confirmed contact/disarm/native latch."
+  },
+  {
+    "issue": "UAV04 landing target moved with delayed image",
+    "failure": "gateway-validation-aea49508-24ba-4f34-a8fc-feeaff5575a0",
+    "finding": "Camera-relative tag displacement was being added to the current PX4 position even though the image was captured before that position changed.",
+    "correction": "Use timestamp-synchronized PX4 camera-capture pose and attitude for a stable estimated-frame tag goal; retain assigned tag, freshness, velocity, contact, disarm and joint gates.",
+    "regression": "gateway-validation-b4bd26d8-d79a-4edb-9947-7836d5a47562/landing-gate.json: PASS, 13.25 mm tag error, 0.14 s maximum descent image age; parent survey FAIL because no matching target was seen."
+  },
+  {
+    "issue": "Deliberate fault-injection request blocked the mission observer",
+    "failure": "city-1d691864-e053-4f93-8f38-6d1c2992fa9a",
+    "finding": "A synchronous 2 s transport request could leave Gazebo advancing while this validator was waiting, adding artificial delay before measured intrusion was handled.",
+    "correction": "Bound the test request wait to 50 ms; actual actor pose intrusion still triggers the normal safety hold.",
+    "regression": "city-1059191b-5e18-4a96-acac-d551c4bdad51 PASS: 0.1044 m stop displacement, zero measured UGV contacts; request acknowledgement was absent but physical pose intrusion was measured."
+  },
+  {
+    "issue": "Single person left the survey radius before aircraft launch",
+    "failure": "tracking-40f37c97-7ddc-45a0-b1c3-c347e15bfd58",
+    "finding": "The protected-lane UGV turn plus takeoff delayed survey until the walking actor was beyond the assigned radius. No visual target was seen; aircraft safely returned and docked.",
+    "correction": "Named pedestrian scenarios use a deterministic initial approach placement. The actor still moves normally from startup; custom city placement is unchanged.",
+    "status": "PASS: tracking-e731ce3e-723d-4a4c-83f3-12bdac8849e0, post-survey relaunch, explicit candidate confirmation, 75 fresh samples, 0.841 geometric visible coverage, physical docking."
+  },
+  {
+    "issue": "Car image track broken during flight reorientation",
+    "failures": [
+      "tracking-8f7c0a40-7c12-4823-8019-dcdfde63f6e2",
+      "tracking-4a5cd094-8da3-4c1e-911c-9d92ae1135e9"
+    ],
+    "finding": "An edge-of-image detection was lost while the aircraft turned and slowed to maintain the previous trailing offset. Seed-only compensation recovered some observations but did not meet continuity criteria.",
+    "correction": "Reproject preceding tracker images using timestamped PX4 poses without changing the original appearance signature; retain launch heading for the nadir camera and reserve image coverage for class-wide body size and aircraft tilt.",
+    "regression": "tracking-30c68526-6afb-472a-90b8-28b06d3b0f0b PASS: 50 fresh tracking samples, median distance 3.534 m, geometric visible coverage 0.685, zero resolved identity switches or false reacquisitions, native contact/disarm/latch at 157.93 s. Visual gaps remain."
+  },
+  {
+    "issue": "Lookalike encounter missed by one-sided site scan",
+    "failure": "tracking-96254b49-f3d5-4589-90bc-cd47993da374",
+    "finding": "Two similar people passed 1.025 m apart near the survey centre, but the positive-only public-path scan saw only one after they separated. Following and recovery passed, but the intended ambiguity gate did not occur.",
+    "correction": "Check the nearest public path first, scan both directions and revisit the centre; all goals use public map geometry and assigned site radius only.",
+    "status": "PASS: tracking-368d5973-4ac3-407d-ae46-eb1545889191 exercised ambiguity and physical recovery; following continuity is a separate gate."
+  },
+  {
+    "issue": "Optical identity switched during a lookalike encounter",
+    "failure": "tracking-0f74283c-d3f7-4a6c-ab50-eb725365a11d",
+    "finding": "The selected image tracker followed the other similarly dressed person while the second detector score was below catalogue confirmation. One ground-truth identity switch was measured.",
+    "correction": "Challenge nearby separate same-colour image regions; use low-score rival detections for ambiguity, freeze the selected unresolved ID, and require explicit candidate confirmation.",
+    "regression": "tracking-368d5973-4ac3-407d-ae46-eb1545889191 PASS: 1.004 m closest encounter, 3 confirmed visual IDs, 158 ambiguous samples, zero resolved identity switches/false reacquisitions/unconfirmed ID changes, physical docking at 135.94 s. This does not claim continuous tracking."
+  },
+  {
+    "issue": "Crowded single-bay city exposed physical actor contacts",
+    "failure": "gateway-validation-9c858300-5824-4848-9889-2754c9994b8a",
+    "finding": "16 native actor contacts, including a queued car/bus and two pedestrian pairs. UGV contact count remained zero. Earlier three-site acceptance did not expose this crowd concentration.",
+    "correction": "Continuous comfort-gap braking plus a native 50 Hz oriented-rectangle motion forecast with physical clearance; retain solid occupancy and crossing permissions. Initial broad-corridor guards were interrupted after unnecessary bus braking beside parking.",
+    "status": "Extended crowded-city repeat running; full-fleet acceptance remains pending."
+  },
+  {
+    "issue": "UAV02 landing oscillation under fleet load",
+    "failure": "gateway-validation-9c858300-5824-4848-9889-2754c9994b8a",
+    "finding": "Assigned tag was visible in fresh images, but capture alignment labeled estimated poses with asynchronous callback arrival time. The DDS bridge also translated sensor timestamps to wall-clock time by default. The run stopped when the assigned tag remained outside view.",
+    "correction": "Use actual PX4 timestamp_sample and closest sampled attitude; disable DDS wall-time timestamp translation in each owned SITL startup before starting its client. Preserve tag identity, freshness, contact, disarm and native joint gates.",
+    "status": "Focused lower-UAV02 and loaded fleet repeats queued after the city gate."
+  },
+  {
+    "issue": "single_person_false_ambiguity",
+    "failed_evidence": "tracking-4339a1d7-86d6-46df-a448-0384c02c35cc",
+    "measured_coverage": 0.3382352941176471,
+    "physical_recovery_passed": true,
+    "identity_switches": 0,
+    "cause": "Disputed older IDs competed with a confirmed replacement for one current detection. An optical box displaced onto pavement could challenge the actual pedestrian as a separate colour region.",
+    "correction": "All disputed hypotheses remain quarantined until operator confirmation. A clothing-colour challenge requires matching foreground pixels inside the current optical box; otherwise the lock is lost without claiming two people.",
+    "current_regression": "running"
+  },
+  {
+    "issue": "Nadir pavement dominated person appearance",
+    "failure": "tracking-ad8c7caf-3fa7-409a-a728-116c31470a6b",
+    "finding": "55 fresh samples and physical docking, but only 0.605 visible coverage; low-score shadow detections shared the pavement histogram and challenged real people.",
+    "correction": "Person identity cues use saturated foreground clothing pixels. Too few pixels provide no identity cue. Cars keep their existing descriptor. Original follow thresholds remain unchanged.",
+    "regression": "running"
+  },
+  {
+    "issue": "Tentative duplicate competition and abrupt follow correction",
+    "failure": "tracking-9b7cc8ef-8899-41ad-becb-05419b4a135f",
+    "finding": "66 fresh samples, median follow distance 3.09 m and zero switches; coverage 0.699 remained below the unchanged 0.8 threshold.",
+    "correction": "Continuing confirmed hypotheses take precedence over one-frame tentative duplicates. Same-frame separate lookalikes still challenge identity. Follow-goal changes are bounded by configured flight speed; weak person observations require foreground identity cues. High-score class detections can still confirm monochrome candidates from short continuous geometry.",
+    "regression": "running"
+  },
+  {
+    "issue": "Loaded carousel budget expired while making physical progress",
+    "failure": "gateway-validation-ccd0b2e6-9651-4664-a968-68d446eacb16",
+    "finding": "All eight launched, all four lower aircraft physically docked, zero city contacts/swept excess. Return index still advanced from 0.536 m lateral displacement at 460.61 s to 0.240 m at 464.78 s when the old 80 s limit expired.",
+    "correction": "Both measured gondola phases must continue advancing. A 20 s physical stall guard and 180 s maximum budget replace the fixed 80 s timeout. Indexed position/settling gates are unchanged.",
+    "focused_native_regression": "loaded-carousel-96d6ad5a-2388-4e6f-b7b0-10fcdbc11de9 PASS with all eight attached; half indexes 20.34 s and 20.384 s",
+    "fleet_regression": "running"
+  },
+  {
+    "failed_evidence": "artifacts/gateway-validation-93813841-5e84-4474-a2ff-8726c25dd744",
+    "reason": "UAV04 ALIGNING timeout at 420.55 simulation seconds; assigned tag remained visible; tag_error remained 0.10908 after approximately 344 seconds although image-relative offsets later fell below 0.07 m. Loaded carousel indexed successfully. Zero actor/UGV contacts.",
+    "correction": "Resolve independent PX4 position and attitude samples at image use time rather than freezing attitude association at position callback. Added capture synchronization diagnostics. Strict limits unchanged.",
+    "status": "Callback-order regression passes; focused UAV04 and fleet physical verification pending."
+  },
+  {
+    "failed_evidence": "artifacts/gateway-validation-5cccc9fa-fc62-41e9-89de-2c28ba30acde",
+    "reason": "UAV02 TAG_ACQUIRE timeout; assigned tag visible but capture timestamp fell outside retained estimator histories; descent correctly refused.",
+    "measured_sync_check": {
+      "image_time": 394.1,
+      "nearest_retained_position": 395.276,
+      "nearest_retained_attitude": 396.768,
+      "error_seconds": 2.668
+    },
+    "correction": "Bound display pose/joint subscriber rates to 30 Hz, subscribe native Gazebo clock at 20 Hz and never rewind it from delayed stats; increase separate estimator histories to 2000 positions/5000 attitudes; defer quaternion conversion to image use and convert pixels outside shared transport lock. Raw sample times and freshness thresholds unchanged.",
+    "verification": "Focused physical UAV02 gate PASS at artifacts/gateway-validation-5cdb2500-6647-4c48-8131-26abe00026e2; final tag error 17.28 mm; eight-aircraft gate underway."
+  },
+  {
+    "evidence": "artifacts/gateway-validation-891ea8f7-bb29-44f3-84d3-24d849c76fe2",
+    "status": "PASS",
+    "scope": "Eight-aircraft six-wheel physical launch/recovery, loaded carousel, crowded-city contacts and measured footprint sweep.",
+    "final_sim_seconds": 514.34,
+    "wall_seconds": 936.9,
+    "contacts": 0,
+    "maximum_recording_gap_seconds": 1.68,
+    "corrections_verified": "PX4 independent capture alignment; bounded display callbacks/native clock/history; progress-monitored carousel; asynchronous changed-phase camera capture and bounded compact authority logs. Prior failed reports remain failed."
+  }
+]

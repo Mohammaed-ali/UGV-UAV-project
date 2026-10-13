@@ -1,0 +1,206 @@
+IMPORTANT CONTEXT-WINDOW / HANDOFF INSTRUCTION
+
+This conversation is approaching its context limit.
+
+Do not wait until important implementation context is lost.
+
+Once the current immediate operation is at a safe stopping point, produce a detailed continuation handoff for a fresh Codex/chat session.
+
+Do NOT restart the project or repeat completed work merely to create the handoff.
+
+The handoff must be based on the ACTUAL repository, commands, edits, evidence and results from this session.
+
+Create/update a repository handoff document if appropriate, preferably something like:
+
+`docs/dataset/V0_5_B1_HANDOFF.md`
+
+and also give me a copyable chat summary.
+
+The handoff must contain:
+
+1. REPOSITORY STATE
+   - primary workspace path
+   - current Git branch
+   - current HEAD commit
+   - `v0.4-final` commit
+   - working-tree status
+   - commits created during this work
+   - any uncommitted changes
+
+2. EXACT TASK
+   - V0.5-B1 Synthetic Gazebo Aerial Detection Dataset Generator
+   - scope boundaries
+   - important instructions from the master prompt
+   - explicitly note that YOLO training, VisDrone download/training, PX4 flight capture and ROS YOLO integration are out of scope
+
+3. COMPLETED GATES
+   For every completed gate state:
+   - PASS / FAIL / PARTIALLY VALIDATED
+   - commands used
+   - evidence files
+   - important measured results
+
+4. CURRENT GATE
+   Explain exactly where work stopped and what remains to complete it.
+
+5. FILES CREATED / MODIFIED
+   List every relevant path and explain its purpose.
+
+6. IMPLEMENTATION ARCHITECTURE
+   Summarize the actual implemented dataset pipeline, including:
+   - Gazebo world/tooling layout
+   - camera setup
+   - annotation method
+   - secondary annotation QA method
+   - scene randomization
+   - object pool
+   - backgrounds
+   - lighting
+   - metadata
+   - YOLO export
+   - validation
+   - preview/QA tooling
+
+7. VERIFIED GAZEBO CAPABILITIES
+   Record the actual installed Gazebo version and tested support for:
+   - visible 2D boxes
+   - full 2D boxes
+   - 3D boxes
+   - semantic segmentation
+   - instance segmentation
+   - headless RGB
+   - model labels
+
+8. CAMERA VALUES
+   Record the exact repository-derived values currently used, including:
+   - resolution
+   - update rate
+   - horizontal FOV
+   - clipping
+   - calculated/live intrinsics
+   - altitude buckets
+   - note the additional V0.4 operational altitude if one was added
+
+9. ASSETS
+   Record:
+   - number of person/car/truck/bus variants
+   - background texture/material variants
+   - provenance strategy
+   - physical scaling strategy
+   - any diversity limitations, especially variants derived from a common template
+   - held-out-asset implications
+
+10. ANNOTATION DESIGN
+    Record:
+    - authoritative annotation source
+    - independent cross-check method
+    - class/Gazebo-label mapping
+    - tiny-object handling
+    - ignored-object metadata behavior
+    - clipping/truncation rules
+
+11. CAPTURE INTEGRITY
+    Explain:
+    - pose readback
+    - settling behavior
+    - timestamp freshness checks
+    - RGB/annotation synchronization
+    - why the earlier service-call failures occurred
+    - the final reliable service-client architecture
+
+12. FAILED ATTEMPTS / LESSONS
+    Preserve failures, including:
+    - sandbox/local-socket issue
+    - light entity-ID problem
+    - pose service request failures
+    - service/subscriber blocking interaction
+    - any other failed attempts
+    - how each was resolved
+    - evidence paths
+
+13. PHASE-0 RESULTS
+    Include actual measured results such as:
+    - alignment cases
+    - pixel-size feasibility table size
+    - headless generation throughput
+    - average PNG size
+    - Gazebo memory use
+    - estimated full-dataset size/time
+    - difficult/tiny box treatment
+
+14. SMOKE DATASET STATUS
+    Record:
+    - requested/accepted frame count
+    - image/label/metadata status
+    - validator result
+    - the numeric-histogram JSON string-key issue
+    - exact fix made
+    - regression test added
+    - whether smoke validation has subsequently passed
+    - whether visual QA/contact sheets have been completed
+
+15. CONFIGURATION
+    List important current configuration values:
+    - classes
+    - altitude buckets
+    - off-nadir buckets
+    - distance bands
+    - lighting modes
+    - backgrounds
+    - negative-frame fraction
+    - distractor-only fraction
+    - object count
+    - minimum-box rules
+    - seeds
+    - split policy
+    - held-out asset policy
+
+16. TEST STATUS
+    Record:
+    - V0.4 baseline result
+    - synthetic-dataset unit tests
+    - validator tests
+    - static checks
+    - exact number of tests if known
+
+17. NEXT STEPS IN EXACT ORDER
+    State the next actions required by the master prompt.
+
+    Do not jump ahead.
+
+    Expected broad sequence is:
+    - finish Gate 3 smoke validation + visual QA
+    - Gate 4 deterministic rerun
+    - Gate 5 crash/resume test
+    - Gate 6 ~2,000-frame pilot
+    - Gate 7 >=300-frame independent annotation cross-validation and IoU analysis
+    - decide/confirm final dataset size from evidence
+    - Gate 8 full dataset
+    - Gate 9 full validation
+    - Gate 10 complete V0.4 regression
+
+18. IMPORTANT DO-NOT-REDO ITEMS
+    Explicitly identify work the next session must NOT repeat unless verification shows it is necessary.
+
+19. KNOWN LIMITATIONS / OPEN QUESTIONS
+    Separate:
+    - actual bugs
+    - expected limitations
+    - decisions still pending
+
+20. EXACT CONTINUATION COMMAND
+    Give the first command or commands the next session should run.
+
+IMPORTANT:
+
+Do not compress this into a vague paragraph.
+
+The next session must be able to continue implementation without needing access to this conversation.
+
+If context capacity becomes critically low before the work reaches a natural stopping point, prioritize producing this handoff over beginning another large gate.
+
+At the end, include a concise section titled:
+
+`COPY THIS INTO THE NEW CHAT`
+
+containing a self-contained continuation summary.

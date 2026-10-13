@@ -1,0 +1,67 @@
+{
+  "result": "PASS",
+  "stages": [],
+  "failures": [],
+  "elapsed_s": 84.1,
+  "ready": {
+    "uav01": true,
+    "uav02": true
+  },
+  "states": {
+    "uav01": 9,
+    "uav02": 9
+  },
+  "state_histories": {
+    "uav01": [
+      0,
+      2,
+      3,
+      7,
+      9,
+      11
+    ],
+    "uav02": [
+      0,
+      2,
+      3,
+      7,
+      9
+    ]
+  },
+  "flight": {
+    "uav01": {
+      "offboard": true,
+      "armed": true,
+      "gcs": true,
+      "min_x": -30.883075714111328,
+      "max_x": 30.143321990966797
+    },
+    "uav02": {
+      "offboard": true,
+      "armed": true,
+      "gcs": true,
+      "min_x": -0.06391878426074982,
+      "max_x": 27.383316040039062
+    }
+  },
+  "command_counts": {
+    "uav01": 3,
+    "uav02": 3
+  },
+  "ack_counts": {
+    "uav01": 4,
+    "uav02": 4
+  },
+  "raw_topics": {
+    "uav01": [
+      "/uav01/fmu/out/vehicle_status_v1",
+      "/uav01/fmu/out/vehicle_local_position_v1",
+      "/uav01/fmu/out/vehicle_command_ack"
+    ],
+    "uav02": [
+      "/uav02/fmu/out/vehicle_status_v1",
+      "/uav02/fmu/out/vehicle_local_position_v1",
+      "/uav02/fmu/out/vehicle_command_ack"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "camera_frame": "tracking-12d7012c-c89f-4402-8e30-56a7bc822566/70.43-raw.jpg",
+  "yolox_car_score": 0.000117987,
+  "yolox_rotation90_car_score": 0.002522837,
+  "aerial_model": {
+    "source": "https://huggingface.co/Shashank022002/beach-person-detector-yolov8m",
+    "revision": "682cd2ffc0160a04e708c7628232ad771898177c",
+    "sha256": "5ab89bb0c97d6d107e3943d68feba8b1ec6a77722e1c52b3eedb089d643344f6",
+    "license": "AGPL-3.0",
+    "inference_ms": [
+      1353.5,
+      844.1,
+      880.1
+    ],
+    "car_score": 0.0002603897,
+    "bus_score": 0.8779783
+  },
+  "truth_use": "Offline evaluation only; no class remapping, identity correction or target position supplied to the detector or controller.",
+  "original_trial_decision": "Keep YOLOX; the evaluated aerial model misclassified the known evaluation car as bus and was not integrated.",
+  "decision": "Retain YOLOX primary; add the pinned aerial detector at <=0.5 Hz globally for generic vehicle discovery. Keep raw subclasses provisional and operator-visible. Correct the visual car model and compensate camera motion for selected CSRT continuity.",
+  "textured_car_flight": {
+    "evidence": "tracking-6e866c9b-d081-47ff-8528-9716e6c17e18/result.json",
+    "passed": true,
+    "actual_evaluation_class": "car",
+    "detected_class": "car",
+    "fresh_tracking_samples": 51,
+    "median_follow_distance_m": 4.2642230203970355,
+    "geometric_visible_tracking_coverage": 0.5915492957746479,
+    "identity_switches": 0,
+    "limit": "This single-car trial does not validate reliable car/truck/bus subclass recognition throughout the city."
+  }
+}

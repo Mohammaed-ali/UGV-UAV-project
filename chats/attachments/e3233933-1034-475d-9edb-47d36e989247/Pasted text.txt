@@ -1,0 +1,479 @@
+Build the next stage of my existing browser-based UGV/UAV simulation:
+a living city with autonomous pedestrian and vehicle movement, camera-based
+target discovery, and user-selected tracking of one moving target.
+
+
+1. Workspace and existing functionality
+
+Work exclusively inside:
+  /home/mohammed-ali/Downloads/gpt /Simulation
+
+Do not modify, build, launch, or add files to:
+  /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3
+
+Inspect and extend the existing standalone simulation. Preserve its working
+Gazebo/PX4 integration, browser interface, access controls, mission configuration,
+camera detection, AprilTag landing, and validation evidence.
+
+Preserve these mechanical requirements:
+- Eight UAVs on two square trays, with four UAVs in a 2×2 arrangement per tray.
+- The existing vertical carousel deployment and recovery sequence.
+- The UGV chassis sized to support the square trays.
+- Both four-wheel and six-wheel UGV configurations.
+- Correct wheel orientation and rotation.
+- Physical landing, contact verification, disarming and docking.
+
+Do not replace physical simulation with browser-only movement or scripted
+aircraft animations.
+
+2. Overall mission workflow
+
+Implement this workflow:
+
+A. Configure the city, traffic, pedestrians, UGV route and deployment stops.
+B. The UGV follows its dedicated lane to each deployment bay.
+C. Assigned UAVs launch and survey that site's visible surroundings.
+D. Actual camera detections populate a live catalogue of observed people
+   and vehicles.
+E. UAVs recover according to the existing carousel sequence.
+F. After all configured sites have been surveyed, present the target catalogue.
+G. I select one particular detected person or vehicle.
+H. An available UAV launches, reacquires that target if necessary, and follows it.
+I. Tracking ends when I stop it, the duration expires, the target is lost beyond
+   the configured search period, or the aircraft must return.
+J. The UAV returns, detects its assigned AprilTag, lands, disarms and docks.
+
+Allow an optional mode in which I select a target before the full survey ends.
+Keep “survey all sites, then select” as the default.
+
+The catalogue must contain objects actually observed by cameras. Do not populate
+it with every actor that exists in the simulated city.
+
+3. City layout and separate movement networks
+
+Create three explicit movement networks:
+
+- Pedestrian sidewalk network.
+- Vehicle road and lane network.
+- Dedicated UGV service-lane network.
+
+The UGV service lane must be geometrically separated from normal traffic and
+pedestrian paths throughout the default mission.
+
+Avoid shared intersections between the UGV corridor and other movement networks
+in the default city. Design the street layout around this requirement.
+
+Use the current city as the starting point. Improve connectivity, sidewalks,
+road markings, intersections and deployment bays before increasing map size.
+
+Keep buildings and terrain computationally economical. Preserve realistic scale,
+ground contact, camera-visible geometry and physical obstruction.
+
+Provide a route overlay that distinguishes:
+- Vehicle lanes and travel directions.
+- Pedestrian paths.
+- The protected UGV lane.
+- Deployment bays and prohibited stopping areas.
+
+UGV stops must lie in valid deployment bays. Snap route edits to valid lane
+positions or show a clear validation message.
+
+The UGV must follow connected lane segments and appropriate turns instead of
+driving straight between arbitrary points through buildings or traffic lanes.
+
+4. UGV clearance and collision prevention
+
+Calculate clearance from actual model dimensions, including:
+- Chassis and wheels.
+- Loaded aircraft.
+- Tray supports.
+- Maximum carousel movement envelope.
+- Swept footprint during turns.
+
+Deployment bays need additional clearance for carousel indexing and UAV approach
+and departure.
+
+Keep pedestrians, parked vehicles and moving traffic outside both the protected
+travel corridor and active deployment areas.
+
+Use physical collision geometry and measured body movement. Do not solve
+collisions by disabling collisions, making obstacles transparent to physics,
+or moving an obstructing actor away after contact.
+
+Retain the existing stalled-carrier protection. If actual body progress stops,
+hold the mission and explain the cause.
+
+Normal scenarios must demonstrate zero UGV contacts with pedestrians or vehicles.
+Deliberate fault scenarios must demonstrate a controlled stop.
+
+5. Autonomous pedestrian behaviour
+
+Give each pedestrian a route on the connected sidewalk network.
+
+Include:
+- Continuous walking with suitable walking animation.
+- Different walking speeds, approximately 1.0–1.6 m/s initially.
+- Pauses at corners, benches or building entrances.
+- Changes of direction and route choice.
+- Local spacing so pedestrians do not continually overlap.
+- Some stationary people who later start walking.
+
+Pedestrians must stay on sidewalks and designated public areas. They must not
+walk through buildings, vehicles or the protected UGV corridor.
+
+Introduce crossings only at designated locations on the normal traffic network.
+Coordinate crossing access with traffic signals or intersection reservations.
+
+Align walking animation, heading and foot placement with measured movement.
+Avoid sliding feet, floating bodies and models embedded in the ground.
+
+Standard Gazebo animated actors alone are insufficient evidence of physical
+collision behaviour. If used for appearance, synchronize them with an appropriate
+physical representation and validate visual/collision alignment.
+
+Document whether pedestrians use controlled kinematic collision bodies or
+dynamic bodies. Do not describe either as a full biomechanics simulation.
+
+6. Autonomous vehicle behaviour
+
+Give every moving vehicle a valid route through directed lanes.
+
+Include:
+- Cars, buses and trucks where supported by existing assets.
+- Lane following.
+- Smooth acceleration and braking.
+- Suitable turning paths and turning radii.
+- Following distance.
+- Queuing behind slower or stopped vehicles.
+- Traffic signals or conflict-free intersection reservations.
+- Occasional stops and a mixture of parked and moving vehicles.
+
+Vehicles must not cut across sidewalks, buildings, deployment bays or the UGV lane.
+
+Use wheel-actuated physical vehicle models where practical. If some background
+vehicles use controlled kinematic motion, state that explicitly and preserve
+their physical occupancy and camera-visible movement.
+
+Wheel rotation and steering must agree with actual motion.
+
+Start with modest traffic speeds that the validated UAV tracking capability
+can follow. Measure aircraft closing-speed margin before raising target speeds.
+
+A faster vehicle may legitimately escape tracking. Do not teleport the UAV,
+slow the target secretly, or use an unlimited aircraft speed to conceal this.
+
+7. Simulation authority and synchronization
+
+Gazebo must remain authoritative for world motion and aircraft physics.
+
+Use simulation time for actor movement, traffic decisions, tracking timestamps
+and mission timers.
+
+Pausing the world must pause pedestrian and vehicle movement consistently.
+Resetting a mission must clean up only this simulation's owned processes.
+
+Send measured actor poses and animation states to the browser. Interpolate
+between updates for smooth rendering, but do not create a separate browser world
+whose movement disagrees with Gazebo or the camera images.
+
+Keep units, coordinate frames and timestamps explicit.
+
+8. Camera-based detection and tracking
+
+Retain the existing YOLOX detector initially. Add a tracking layer rather than
+replacing the entire perception stack without evidence.
+
+Support the existing detectable classes:
+- Person.
+- Car.
+- Truck.
+- Bus.
+
+Evaluate a lightweight multi-object tracker such as ByteTrack as the baseline.
+Account for camera motion using synchronized camera calibration, aircraft pose
+estimates and suitable image-motion compensation.
+
+Evaluate appearance-assisted association only where needed to reduce identity
+switches or support reacquisition. Measure its processing cost before enabling
+it across multiple aircraft.
+
+Operational perception must use:
+- Actual camera pixels.
+- Detector outputs.
+- Camera calibration.
+- Timestamped aircraft pose estimates.
+- Previous visual observations.
+
+Do not feed simulator actor names, hidden actor IDs, exact target poses,
+planned actor routes or future destinations into detection, identity association,
+target selection or follow control.
+
+Keep simulator ground truth in a separate evaluation path. It may drive the city
+and measure accuracy, but must not make tracking appear more capable.
+
+Maintain the existing 640×480, 10 Hz camera configuration as the initial baseline.
+Increase resolution or inference demand only after measured performance tests.
+
+9. Target identity and the discovery catalogue
+
+Create a session-scoped target registry.
+
+Each entry should contain:
+- A perception-generated target ID, such as Person-007 or Vehicle-012.
+- Detected class and class confidence.
+- A recent camera crop or thumbnail.
+- First-seen and last-seen timestamps.
+- Time since the last observation.
+- Observing UAV and survey site.
+- Observation history.
+- Estimated position, speed and heading when available.
+- Position uncertainty.
+- Identity confidence, separate from class confidence.
+- Current state: visible, temporarily occluded, stale, lost or archived.
+
+Require repeated observations before confirming a candidate.
+
+Avoid duplicate entries for the same continuing observation. For observations
+from different UAVs, associate candidates using time, estimated position and
+visual evidence.
+
+Do not assume two similar-looking people are the same individual. When evidence
+is insufficient, retain separate candidates or mark the association uncertain.
+
+A catalogue entry is an observed track, not a guarantee that the system can
+identify that individual permanently across arbitrary camera gaps.
+
+Keep historical detections available after surveying, but clearly mark stale
+entries. Selecting a stale target must trigger reacquisition before tracking
+is declared active.
+
+10. Browser target-selection interface
+
+Add a “Detected targets” panel that updates during the survey.
+
+Provide:
+- Thumbnail cards or a compact table.
+- Person/vehicle class filters.
+- Moving/stationary filters based on estimated movement.
+- Sorting by recency, confidence or survey site.
+- Last-seen age.
+- Visible, stale and lost status.
+- A target detail view with observation history.
+- “Select target”, “Reacquire”, “Start tracking” and “Stop tracking” controls.
+
+Clicking a detection box in a camera view should select the corresponding
+catalogue entry. Selecting a catalogue entry should highlight its current
+observation when available.
+
+Distinguish:
+- Observed target locations.
+- Estimated locations during short gaps.
+- Predicted search areas.
+
+Do not show predicted positions as confirmed sightings.
+
+When I choose a target, display its latest thumbnail and observation age before
+starting the follow mission.
+
+Only one target is selected for active following at a time.
+
+11. Closed-loop following behaviour
+
+Implement explicit states such as:
+- SELECTED.
+- REACQUIRING.
+- TRACKING.
+- OCCLUDED.
+- SEARCHING.
+- LOST.
+- RETURNING.
+- DOCKED.
+
+The tracking UAV must follow the selected target through actual PX4 control.
+
+Use filtered target movement estimates and bounded prediction to:
+- Keep the target within a useful part of the camera image.
+- Maintain suitable altitude and observation distance.
+- Avoid unnecessary oscillation.
+- Anticipate short-term movement without knowing the actor's scripted route.
+
+Use the current downward camera honestly. Determine its usable coverage from
+field of view, altitude and target size. Do not claim immediate detection
+through buildings or outside the camera view.
+
+Plan aircraft movement around building volumes and flight boundaries. Do not
+command direct flight through obstacles when a target turns behind a building.
+
+For the first tracking release, keep the UGV stationary in a designated bay
+while the tracking UAV is airborne. Moving-carrier recovery should remain a
+separate later capability unless independently validated.
+
+12. Occlusion, target loss and reacquisition
+
+When the selected target disappears:
+- Preserve its last confirmed observation.
+- Predict movement only for a bounded time.
+- Increase uncertainty as observation age increases.
+- Search a bounded area based on the last estimated position and velocity.
+- Use observed appearance and movement continuity to assess candidates.
+
+If several plausible candidates exist, show the ambiguity and request target
+reconfirmation instead of silently following another person or vehicle.
+
+Never switch to the nearest object of the same class merely to keep tracking
+active.
+
+Provide configurable:
+- Tracking duration.
+- Lost-target search duration.
+- Reacquisition confidence.
+- Follow altitude and distance.
+- Return reserve.
+- Behaviour when the target leaves the permitted operating area.
+
+On failure to reacquire, report LOST and execute the configured loiter/return
+policy.
+
+13. Aircraft allocation and optional handoff
+
+Use one primary tracking UAV by default.
+
+Optionally support one reserve UAV after single-aircraft tracking is validated.
+
+A handoff must include overlapping camera observations and evidence that both
+aircraft are observing the same selected target.
+
+If handoff identity is uncertain, report that uncertainty. Do not transfer
+identity using hidden simulator IDs.
+
+Preserve carousel accessibility and recovery order when choosing aircraft.
+Do not assume every loaded bay is independently available.
+
+Use bounded mission duration and realistic return requirements. Do not create
+unlimited battery endurance.
+
+Unneeded UAVs should remain stored or return and dock. Keep perception active
+only where needed to manage processing demand.
+
+14. Scenario controls and useful additions
+
+Expose browser parameters for:
+- Pedestrian count.
+- Vehicle count.
+- Walking and traffic speeds.
+- Traffic density.
+- Deterministic scenario seed.
+- Tracking duration.
+- Reacquisition timeout.
+- Primary and optional reserve UAV.
+- Target-class filters.
+
+Provide reproducible scenarios:
+- One walking person.
+- One moving vehicle.
+- Two similar people crossing paths.
+- A vehicle stopping and turning.
+- Brief building occlusion followed by reappearance.
+- A target leaving the operating area.
+- Optional two-UAV handoff.
+
+Add a tracking timeline showing sightings, occlusions, reacquisition,
+identity uncertainty and return decisions.
+
+A useful optional addition is a target-quality indicator explaining whether
+tracking quality is limited by visibility, image age, target size, association
+ambiguity or aircraft range.
+
+Do not add facial recognition or number-plate recognition to this stage.
+Selecting and following a visually observed individual is the required goal.
+
+15. Performance and storage
+
+Begin with the current city population and scale gradually.
+
+Use economical buildings, shared geometry, appropriate levels of detail,
+bounded message rates and controlled camera demand.
+
+Prioritize fresh images over processing an accumulating backlog.
+
+Measure:
+- Gazebo real-time factor.
+- Browser frame rate.
+- CPU/GPU and memory usage.
+- Detector/tracker throughput.
+- Camera age.
+- Aircraft telemetry age.
+- Storage growth.
+
+Preserve the existing bounded native-run archive policy. Give target crops
+and optional clips their own bounded retention policy.
+
+Keep compact validation reports and failure summaries. Do not let continuous
+camera recording fill the disk.
+
+16. Implementation and validation gates
+
+After approval, proceed in stages:
+
+Gate A — Inspect the current project and record the working baseline.
+
+Gate B — Build and validate the separated movement networks, deployment bays,
+         pedestrian movement and traffic movement without adding airborne load.
+
+Gate C — Validate camera detection and identity tracking on one moving person,
+         then one moving vehicle.
+
+Gate D — Implement and validate the live catalogue and individual target selection.
+
+Gate E — Validate actual PX4 following, loss handling, reacquisition and physical
+         return/docking with one UAV.
+
+Gate F — Validate similar-target ambiguity and optional two-UAV handoff.
+
+Gate G — Regress the full eight-UAV carousel mission with the living city active,
+         including both UGV wheel configurations.
+
+Gate H — Validate the local and existing internet browser access, configuration
+         persistence, reset and storage limits.
+
+Use measured evidence rather than successful state transitions alone.
+
+Evidence must include:
+- Actual actor and UGV movement.
+- Lane and sidewalk compliance using swept footprints.
+- UGV/actor contact counts.
+- Camera frames containing moving targets.
+- Persistent visual track identities.
+- Identity-switch and false-reacquisition results.
+- Visible-target tracking coverage.
+- Follow distance and image-centering error.
+- Loss and reacquisition timing.
+- Image and telemetry freshness.
+- Physical aircraft motion.
+- Landing contact, disarming and docking.
+- Performance and storage measurements.
+
+Use ground truth only to calculate evaluation metrics.
+
+Run an extended living-city scenario to check traffic queues, pedestrian movement,
+carrier progress and mission recovery over time.
+
+Set numerical tracking thresholds from the measured baseline before declaring
+the relevant gate passed. Report failed and untested scenarios clearly.
+
+17. Deliverables
+
+Provide:
+- The implemented standalone simulation.
+- Updated browser controls and target catalogue.
+- Reproducible scenario configurations.
+- Relevant tests and physical validation scripts.
+- A concise architecture explanation.
+- Validation reports with measured results and remaining limitations.
+- Updated startup and browser-access instructions.
+- Confirmation that the primary wildlife workspace was not modified.
+
+Do not claim uninterrupted tracking, perfect recognition or collision-free
+operation without the corresponding evidence.
+
+Begin implementation only after I approve this prompt.

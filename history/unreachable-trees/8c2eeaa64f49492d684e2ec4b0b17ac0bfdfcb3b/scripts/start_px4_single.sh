@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+source "$(dirname "$0")/environment.sh"
+export ROS_DOMAIN_ID="${ROS_DOMAIN_ID:-83}"
+export ROS_LOG_DIR="${ROS_LOG_DIR:-/tmp/wildlife-v03-logs}"
+export GZ_PARTITION="${GZ_PARTITION:-wildlife-v03-single}"
+source "$WILDLIFE_DEPS_DIR/PX4-Autopilot/build/px4_sitl_default/rootfs/gz_env.sh"
+exec python3 "$WILDLIFE_WORKSPACE_DIR/scripts/run_px4_single.py" "$@"

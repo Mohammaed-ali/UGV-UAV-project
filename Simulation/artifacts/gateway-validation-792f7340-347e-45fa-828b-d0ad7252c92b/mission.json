@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "name": "Carousel validation \u00b7 1 aircraft",
+  "wheels": 6,
+  "seed": 42,
+  "terrain": "proving_ground",
+  "population": 18,
+  "traffic": 10,
+  "target_present": true,
+  "target_class": "person",
+  "ugv_speed": 1.5,
+  "altitude": 9.0,
+  "flight_speed": 2.0,
+  "launch_interval": 5.0,
+  "search_timeout": 30,
+  "no_target_policy": "loiter",
+  "loiter_seconds": 5,
+  "loiter_radius": 5.0,
+  "observation_seconds": 8,
+  "standoff": 8.0,
+  "confidence": 0.4,
+  "landing_retries": 2,
+  "battery_return": 25.0,
+  "wind": 0,
+  "graphics_quality": "balanced",
+  "living_city": true,
+  "city_scenario": "custom",
+  "walking_speed": 1.2,
+  "traffic_speed": 1.6,
+  "flight_boundary": 116.0,
+  "tracking_seconds": 90.0,
+  "reacquire_seconds": 35.0,
+  "tracking_altitude": 12.0,
+  "tracking_distance": 2.0,
+  "reacquire_confidence": 0.8,
+  "early_selection": false,
+  "tracking_uav": "auto",
+  "tracking_enabled": false,
+  "aerial_vehicles": true,
+  "start": {
+    "x": -28.0,
+    "y": -22.0
+  },
+  "stops": [
+    {
+      "id": "regression",
+      "label": "Landing check",
+      "x": -24.0,
+      "y": -22.0,
+      "drones": [
+        "uav01"
+      ],
+      "search_radius": 12
+    }
+  ]
+}

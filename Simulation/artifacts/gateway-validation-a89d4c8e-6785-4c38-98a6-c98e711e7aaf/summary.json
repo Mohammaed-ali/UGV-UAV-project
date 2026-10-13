@@ -1,0 +1,136 @@
+{
+  "run_id": "a89d4c8e-6785-4c38-98a6-c98e711e7aaf",
+  "passed": false,
+  "wall_seconds": null,
+  "sim_time": 511.41,
+  "launch_order": [
+    {
+      "id": "uav01",
+      "time": 82.1
+    },
+    {
+      "id": "uav03",
+      "time": 94.27
+    },
+    {
+      "id": "uav05",
+      "time": 106.59
+    },
+    {
+      "id": "uav07",
+      "time": 118.63
+    },
+    {
+      "id": "uav02",
+      "time": 151.14
+    }
+  ],
+  "docking_order": [],
+  "carousel_events": [
+    {
+      "id": 27,
+      "time": 129.75,
+      "message": "Carousel indexing \u00b7 original lower tray moving to flight deck",
+      "kind": "info",
+      "drone": null
+    },
+    {
+      "id": 32,
+      "time": 150.22,
+      "message": "Carousel locked \u00b7 original lower tray at flight deck",
+      "kind": "info",
+      "drone": null
+    }
+  ],
+  "maximum_measured_carriage_offset_m": 2.152058352334481,
+  "moving_samples": 74,
+  "unlatched_or_armed_stored_aircraft_during_indexing": [],
+  "maximum_landing_image_age_s": null,
+  "final_landings": [
+    {
+      "id": "uav01",
+      "state": "RETURNING",
+      "armed": true,
+      "latched": false,
+      "tag_error": null,
+      "detection_latency": 14.34,
+      "physical_xy_offset_m": 7.386613236359115
+    },
+    {
+      "id": "uav02",
+      "state": "DOCKED",
+      "armed": false,
+      "latched": true,
+      "tag_error": 0.012641736229425823,
+      "detection_latency": null,
+      "physical_xy_offset_m": 0.02075487358303334
+    },
+    {
+      "id": "uav03",
+      "state": "RETURNING",
+      "armed": true,
+      "latched": false,
+      "tag_error": null,
+      "detection_latency": null,
+      "physical_xy_offset_m": 8.688104024247044
+    },
+    {
+      "id": "uav04",
+      "state": "TAG_ACQUIRE",
+      "armed": true,
+      "latched": false,
+      "tag_error": 1.4035196044741587,
+      "detection_latency": null,
+      "physical_xy_offset_m": 1.1178154610327615
+    },
+    {
+      "id": "uav05",
+      "state": "RETURNING",
+      "armed": true,
+      "latched": false,
+      "tag_error": null,
+      "detection_latency": null,
+      "physical_xy_offset_m": 7.362379001107013
+    },
+    {
+      "id": "uav06",
+      "state": "RETURNING",
+      "armed": true,
+      "latched": false,
+      "tag_error": null,
+      "detection_latency": null,
+      "physical_xy_offset_m": 8.187260403944853
+    },
+    {
+      "id": "uav07",
+      "state": "RETURNING",
+      "armed": true,
+      "latched": false,
+      "tag_error": null,
+      "detection_latency": null,
+      "physical_xy_offset_m": 7.385585458775469
+    },
+    {
+      "id": "uav08",
+      "state": "SEARCHING",
+      "armed": true,
+      "latched": false,
+      "tag_error": null,
+      "detection_latency": null,
+      "physical_xy_offset_m": 11.680768617228496
+    }
+  ],
+  "detected_targets": 1,
+  "maximum_airborne_telemetry_age_s": 0.11,
+  "stops_observed": [
+    {
+      "stop_index": 0,
+      "first_observed_time": 0.0,
+      "carrier_position": [
+        -28.0,
+        -22.0,
+        0.74
+      ]
+    }
+  ]
+}

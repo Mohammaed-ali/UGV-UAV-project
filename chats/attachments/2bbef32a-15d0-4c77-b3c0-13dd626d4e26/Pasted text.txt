@@ -1,0 +1,1534 @@
+Below is a **Codex handoff prompt** you can paste directly into the Linux Codex application after uploading the V0.1 and V0.2 folders. I’ve written it so Codex can continue the project without needing this chat history.
+
+The most important instruction is: **the uploaded repository is the source of truth**. Some things discussed in chat were planned, reviewed, or later revised, so Codex should inspect the actual files before modifying anything.
+
+---
+
+## Master prompt for Codex
+
+```text
+You are continuing an existing academic ROS 2 robotics project.
+
+PROJECT NAME:
+Wildlife Multi-UAV/UGV Simulation
+
+PRIMARY PLATFORM:
+- Ubuntu 24.04 LTS
+- ROS 2 Jazzy
+- Gazebo Harmonic
+- Python / rclpy
+- ros_gz_sim
+- ros_gz_bridge
+- RViz2
+
+I will upload two source folders:
+1. V0.1 / V0.1.1 — earlier architecture and logic baseline
+2. V0.2 — current latest implementation
+
+IMPORTANT SOURCE-OF-TRUTH RULE:
+Treat the uploaded V0.2 filesystem as the authoritative implementation.
+Do NOT assume something exists merely because this prompt says it was discussed.
+Inspect the actual files first.
+Use V0.1 only to understand history or recover something intentionally lost.
+Do not regress V0.2 back toward V0.1.
+
+==================================================
+1. PROJECT PURPOSE
+==================================================
+
+This is an academic multi-robot wildlife simulation.
+
+The system consists of:
+- 1 UGV
+- 8 UAVs
+- UAVs stored on the UGV in four tray slots
+- each tray slot contains an upper and lower UAV
+- simulated wildlife/dummy targets
+- human-in-the-loop operator decision
+- ROS 2 orchestration, perception, tracking, assignment, mission control,
+  visualization and simulation
+
+The intended demonstration flow is:
+
+UGV
+ -> deployment request
+ -> UAV launch
+ -> UAV takeoff
+ -> search
+ -> target detection
+ -> target tracking/fusion
+ -> UAV assignment
+ -> standoff
+ -> operator notification
+ -> operator chooses RETURN or CONTINUE HOLD
+ -> UAV returns
+ -> docking
+
+The project must remain a NON-CONTACT wildlife monitoring/simulation system.
+
+DO NOT implement:
+- weapons
+- attack logic
+- projectile guidance
+- payload release
+- terminal guidance
+- target destruction
+- impact logic
+- harmful autonomous behavior
+
+Allowed behavior:
+- search
+- detection
+- tracking
+- target association/fusion
+- assignment
+- safe standoff
+- operator decision
+- hold/loiter
+- return-to-home
+- docking
+- simulation and visualization
+
+==================================================
+2. DEVELOPMENT PHILOSOPHY
+==================================================
+
+Do NOT rewrite the whole project.
+
+Preserve the working layered ROS architecture.
+
+Before making any change:
+
+1. Inspect the current V0.2 repository.
+2. Build a package/node/topic/interface map.
+3. Identify what already works.
+4. Identify actual build/runtime defects.
+5. Make the smallest coherent change.
+6. Build/test it.
+7. Continue incrementally.
+
+Prefer correctness and demonstrability over unnecessary complexity.
+
+Avoid introducing dependencies simply because they are interesting.
+
+Any new dependency must have a clear role.
+
+Keep:
+- typed ROS interfaces
+- YAML parameterization
+- deterministic demo capability
+- package separation
+- operator-in-the-loop decision
+- stable Detection/Target contracts
+
+Do not bring back String-based operational protocols such as:
+"LAUNCH:uav01:..."
+"DECISION:uav01:..."
+
+Operational commands should remain typed ROS messages/services/actions.
+
+==================================================
+3. ARCHITECTURE
+==================================================
+
+Current high-level package architecture is expected to look approximately like:
+
+wildlife_ws/
+└── src/
+    ├── wildlife_interfaces/
+    ├── wildlife_core/
+    ├── wildlife_perception/
+    ├── wildlife_targets/
+    ├── wildlife_swarm/
+    ├── wildlife_mission/
+    ├── wildlife_vehicles/
+    ├── wildlife_simulation/
+    └── wildlife_bringup/
+
+Responsibilities:
+
+wildlife_interfaces
+- Custom ROS 2 messages
+- services
+- actions
+- stable contracts between packages
+
+wildlife_core
+- common utilities
+- geometry/math
+- visualization
+- shared non-domain-specific helpers
+
+wildlife_perception
+- deterministic detector_sim
+- OpenCV camera detector
+- later YOLO backend
+
+wildlife_targets
+- detection aggregation
+- tracking
+- target association
+- target lifecycle/registry
+- fusion-related logic
+
+wildlife_swarm
+- UAV-to-target assignment
+- coordination
+- future deconfliction
+
+wildlife_mission
+- overall mission state
+- operator interaction
+- pause/resume/abort/reset
+- human-in-the-loop flow
+
+wildlife_vehicles
+- UGV logical state
+- UAV logical state/FSM
+- deployment
+- docking
+
+wildlife_simulation
+- Gazebo world
+- UGV model
+- UAV models
+- bridges
+- simulation adapters
+- scenario support
+
+wildlife_bringup
+- launch orchestration
+- RViz config
+- demo launch files
+
+Do NOT recreate a separate wildlife_tracking package.
+Tracking was intentionally merged into wildlife_targets.
+
+==================================================
+4. IMPORTANT ROS INTERFACES
+==================================================
+
+Inspect the actual definitions before changing anything.
+
+Expected important interfaces include approximately:
+
+Messages:
+- DroneState.msg
+- UGVState.msg
+- Detection.msg
+- Target.msg
+- DroneCommand.msg
+- TraySlot.msg
+- OperatorAlert.msg
+- DeploymentRequest.msg
+
+Services:
+- OperatorDecision.srv
+- DeployDrone.srv
+- MissionControl.srv
+
+Actions:
+- NavigateWaypoints.action
+- SearchArea.action
+
+The key architectural contract is:
+
+camera/detector
+    -> Detection
+    -> tracking/fusion
+    -> Target
+    -> swarm assignment
+    -> UAV mission behavior
+    -> operator decision
+
+Detector implementation must NOT leak into downstream mission logic.
+
+A future YOLO backend should continue publishing the same Detection message.
+
+==================================================
+5. UAV STATE MACHINE
+==================================================
+
+The logical UAV manager currently uses states approximately like:
+
+STORED
+LAUNCHING
+TAKEOFF
+SEARCHING
+TARGET_DETECTED
+STANDOFF
+AWAITING_OPERATOR
+RETURNING
+DOCKING
+DOCKED
+LOITERING
+PAUSED
+
+Expected conceptual transitions:
+
+STORED
+ -> LAUNCHING
+ -> TAKEOFF
+ -> SEARCHING
+
+SEARCHING
+ -> TARGET_DETECTED
+ -> STANDOFF
+ -> AWAITING_OPERATOR
+
+Operator decision:
+RETURN
+ -> RETURNING
+ -> DOCKING
+ -> DOCKED
+
+CONTINUE_HOLD
+ -> STANDOFF
+ -> AWAITING_OPERATOR as appropriate
+
+Search timeout may result in:
+SEARCHING
+ -> LOITERING
+ -> RETURNING
+
+PAUSE:
+active state -> PAUSED
+
+RESUME:
+PAUSED -> appropriate previous/search/standoff behavior
+
+ABORT:
+active drones -> RETURN_HOME
+
+Do not casually change these semantics.
+If they need improvement, document why.
+
+==================================================
+6. UGV + DEPLOYMENT
+==================================================
+
+The UGV has a waypoint-based logical manager.
+
+The deployment tray is:
+
+Slot 1:
+- uav01 upper
+- uav02 lower
+
+Slot 2:
+- uav03 upper
+- uav04 lower
+
+Slot 3:
+- uav05 upper
+- uav06 lower
+
+Slot 4:
+- uav07 upper
+- uav08 lower
+
+Deployment modes currently include:
+
+SINGLE
+- deploy all UAVs at the intended first deployment point
+
+SPLIT
+- deploy part of the tray at one waypoint
+- deploy the remaining UAVs at another waypoint
+
+Deployment must use typed:
+DeploymentRequest
+DroneCommand
+
+Do not replace this with command strings.
+
+IMPORTANT:
+Inspect the exact semantics of UGVState.current_waypoint_index before touching
+the Gazebo UGV adapter.
+
+Historically this value represented the last completed waypoint while the UGV
+manager internally held the next target index.
+
+Do not apply a blind +1/-1 fix without tracing the real code.
+
+If the semantics are ambiguous, improve/document the interface instead of
+introducing an off-by-one bug.
+
+==================================================
+7. PERCEPTION
+==================================================
+
+There are two perception paths.
+
+A. detector_sim
+This is intentionally retained.
+
+Purpose:
+- deterministic academic demo
+- does not require camera or neural network
+- detects predefined dummy targets based on distance/probability
+- publishes Detection messages
+
+Do not remove it.
+
+B. OpenCV detector
+Purpose:
+- prove the real Image -> cv_bridge -> OpenCV -> Detection pipeline
+- currently intended as a simple dummy-object/blob detector
+- NOT equivalent to YOLO
+
+Future:
+Ultralytics YOLO may become another detector backend.
+
+YOLO must publish the existing Detection contract so:
+tracking
+mission
+swarm
+operator logic
+do not need to change.
+
+==================================================
+8. TARGET TRACKING
+==================================================
+
+Current target tracking concept:
+
+detections from all UAVs
+ -> /detections/all
+ -> tracker
+ -> persistent target IDs
+ -> target manager/registry
+
+Tracking currently uses concepts like:
+- spatial gating
+- target class matching
+- alpha smoothing
+- detecting drone/witness list
+- stale track timeout
+- confidence
+- covariance estimate
+
+The target manager preserves lifecycle fields such as:
+- assigned drone
+- status
+- operator_notified
+
+when a fresh tracker update arrives.
+
+Do not reset an assigned target back to UNASSIGNED merely because the tracker
+publishes another position update.
+
+==================================================
+9. SWARM ASSIGNMENT
+==================================================
+
+Current logic is intentionally simple and defensible.
+
+Typical behavior:
+- consume unassigned targets
+- consider SEARCHING UAVs
+- skip already assigned UAVs
+- use distance/cost
+- enforce maximum assignment distance
+- publish /targets/assigned
+
+Do NOT prematurely introduce Hungarian assignment, auctions, distributed swarm
+consensus, reinforcement learning, etc. unless there is a concrete requirement.
+
+A straightforward assignment algorithm is appropriate for the current academic
+stage.
+
+==================================================
+10. HUMAN-IN-THE-LOOP OPERATOR
+==================================================
+
+The system must retain explicit human decision authority.
+
+Operator alert should contain information such as:
+- UAV
+- target ID
+- target class
+- confidence
+- target position
+- action-required severity
+
+The operator can respond through a ROS service and potentially terminal input.
+
+Current decisions are conceptually:
+
+RETURN
+CONTINUE_HOLD
+
+The service should remain the reliable machine interface even if a GUI is added
+later.
+
+A future UI may be added, but it should call the existing service rather than
+introducing a new mission-control pathway.
+
+==================================================
+11. MISSION MANAGER
+==================================================
+
+Expected mission-level states include concepts like:
+
+INIT
+DEPLOYING
+SEARCHING
+TARGET_FOUND
+AWAITING_OPERATOR
+RESOLVING
+COMPLETE
+PAUSED
+ABORTED
+
+MissionControl should support roughly:
+START
+PAUSE
+ABORT
+RESET
+
+Preserve human override capability.
+
+==================================================
+12. RVIZ
+==================================================
+
+RViz is important for the academic deliverable.
+
+Visualization should use standard ROS visualization messages, currently
+MarkerArray.
+
+Expected visualization includes:
+- UAV positions
+- UAV labels
+- UGV
+- targets
+- target standoff radius
+
+The fixed frame should be consistent, normally "map".
+
+One requirement from previous review was to confirm that the RViz MarkerArray
+pipeline genuinely works.
+
+Do not merely assume the RViz file is valid.
+
+Test:
+ros2 topic echo /visualization/markers
+and run RViz.
+
+If Gazebo model positions are not yet synchronized with logical UAV state,
+document this explicitly.
+
+==================================================
+13. GAZEBO V0.2 STATUS
+==================================================
+
+V0.2 introduced the first Gazebo layer.
+
+Current intended V0.2 scope:
+
+- Gazebo Harmonic world
+- UGV model
+- eight UAV proxy models
+- ros_gz_sim spawning
+- ros_gz_bridge
+- Gazebo UGV adapter
+- optional camera/OpenCV path
+- RViz alongside ROS logical states
+
+IMPORTANT:
+V0.2 UAVs were originally visual proxy vehicles.
+
+They are NOT yet full PX4 simulated aircraft.
+
+This is intentional.
+
+Do not pretend that visual Gazebo boxes equal flight dynamics.
+
+The final source may contain later camera additions.
+Inspect the actual SDF.
+
+If the uploaded V0.2 UAV SDF is static or lacks a camera:
+state that fact accurately.
+
+If a camera has already been added:
+verify that its Gazebo topic and ros_gz_bridge mapping actually work.
+
+==================================================
+14. KNOWN V0.2 REVIEW ITEMS
+==================================================
+
+A previous code review identified the following.
+
+Treat these as things to VERIFY in the uploaded source, not assumptions:
+
+1. wildlife_simulation/package.xml
+Historically:
+- rclpy was missing
+- ros2launch was incorrectly used as a rosdep dependency
+- launch and launch_ros were recommended instead
+
+Check whether this is already fixed.
+
+2. simulation.launch.py
+Historically:
+- central YAML was loaded by some nodes
+- individual UAVs and perception nodes were launched with only:
+  {'drone_id': did}
+- therefore UAV behavior could silently use Python defaults instead of YAML
+
+Verify current launch files.
+
+Every UAV should receive the appropriate YAML plus its per-instance overrides.
+
+Example desired pattern conceptually:
+
+parameters=[
+    vehicle_yaml,
+    {
+        'drone_id': did,
+        'slot_id': ...,
+        'is_upper_position': ...
+    }
+]
+
+and perception nodes should receive:
+parameters=[
+    perception_yaml,
+    {'drone_id': did}
+]
+
+3. UGV Gazebo adapter
+Historically waypoint semantics were potentially confusing.
+
+Trace:
+- UGV internal idx
+- published current_waypoint_index
+- adapter target selection
+
+before changing anything.
+
+4. UGV yaw control
+Earlier implementation used:
+yaw = atan2(target_y-y, target_x-x)
+angular.z = K * yaw
+
+This does NOT properly account for current vehicle heading if yaw is interpreted
+as absolute world bearing.
+
+For a correct controller, use current UGV orientation from odometry and compute:
+
+desired_yaw = atan2(dy, dx)
+yaw_error = normalize_angle(desired_yaw - current_yaw)
+
+Then:
+angular.z = clamp(k_yaw * yaw_error)
+
+Potentially reduce/stop linear velocity for large yaw errors.
+
+If the adapter currently does not consume odometry orientation, this is a good
+candidate for correction.
+
+5. OpenCV camera path
+Historically the OpenCV node subscribed to:
+
+/drones/<id>/camera/image_raw
+
+but the original proxy UAV SDF had no camera sensor.
+
+Verify actual V0.2.
+
+Do not declare camera perception functional until:
+- Gazebo camera exists
+- image topics exist
+- ros_gz_bridge exposes them as sensor_msgs/Image
+- OpenCV node receives the image
+
+6. RViz/Gazebo synchronization
+The ROS UAV manager may move its own logical x/y/z values while the Gazebo proxy
+stays stationary.
+
+This is acceptable for the V0.2 academic architecture ONLY if explicitly
+documented.
+
+PX4/Gazebo vehicle-state synchronization belongs to V0.3.
+
+==================================================
+15. YAML PARAMETERIZATION
+==================================================
+
+Parameters should remain in YAML rather than being scattered across Python.
+
+Expected parameter files include roughly:
+
+wildlife_vehicles/params/vehicles.yaml
+wildlife_perception/params/perception.yaml
+wildlife_targets/params/targets.yaml
+wildlife_swarm/params/swarm.yaml
+wildlife_mission/params/mission.yaml
+
+Launch files must actually load them.
+
+Do not have YAML documentation that is silently ignored.
+
+Per-drone identifiers and slot-specific values may be launch overrides.
+
+==================================================
+16. DEMONSTRATION MODES
+==================================================
+
+Keep multiple useful demo modes.
+
+A. Logic-only deterministic demo
+
+Goal:
+prove ROS architecture independently of Gazebo.
+
+Typical command:
+ros2 launch wildlife_bringup subject1_demo.launch.py
+
+Expected flow:
+UGV/deployment
+ -> UAV FSM
+ -> detector_sim
+ -> tracker
+ -> target assignment
+ -> operator alert
+ -> decision
+ -> return/docking
+ -> RViz visualization if configured
+
+B. Gazebo demo
+
+Typical command:
+ros2 launch wildlife_bringup subject2_demo.launch.py
+
+Goal:
+show Gazebo world + ROS architecture.
+
+Do not make the logic demo depend on PX4.
+
+C. Possible future perception demo
+Gazebo camera -> ros_gz_bridge -> OpenCV/YOLO -> Detection
+
+Keep this separable until reliable.
+
+==================================================
+17. DEPENDENCY ROADMAP
+==================================================
+
+Integrated/current dependencies should remain approximately:
+
+NOW:
+- ROS 2 Jazzy
+- Gazebo Harmonic
+- ros_gz_sim
+- ros_gz_bridge
+- RViz2
+- OpenCV
+- cv_bridge
+
+PLANNED V0.3:
+- PX4 SITL
+- px4_msgs / ROS 2 PX4 integration
+- QGroundControl
+- later Ultralytics YOLO
+
+ONLY IF NEEDED:
+- micro-ROS Agent
+
+Do not add micro-ROS merely because it exists.
+It is relevant only if an embedded/microcontroller node is introduced.
+
+QGroundControl is primarily paired with PX4.
+It does not need to become a ROS package.
+
+==================================================
+18. V0.3 DIRECTION
+==================================================
+
+Once V0.2 is verified and frozen, V0.3 should focus on REAL SIMULATED VEHICLE
+INTEGRATION rather than another architecture rewrite.
+
+Primary V0.3 objectives:
+
+Phase 1:
+- freeze working V0.2 interfaces
+- create branch/tag for V0.3
+- verify clean baseline build
+
+Phase 2:
+- integrate ONE PX4 SITL UAV first
+- make one simulated UAV fly correctly
+- connect PX4 state into ROS 2
+- expose high-level mission commands to the PX4 adapter
+- verify takeoff / waypoint / hold / return
+
+Phase 3:
+- connect QGroundControl
+- validate telemetry
+- validate vehicle IDs/namespaces
+
+Phase 4:
+- integrate Gazebo camera for one UAV
+- bridge image
+- OpenCV detection
+- then optionally YOLO
+
+Phase 5:
+- scale from 1 PX4 UAV to 2
+- solve namespaces/ports/instances
+- then scale to all 8
+
+Phase 6:
+- replace logical UAV position integration with real PX4/Gazebo vehicle state
+
+Phase 7:
+- preserve existing mission and target stack:
+  Detection
+   -> tracking
+   -> Target
+   -> assignment
+   -> high-level standoff request
+   -> PX4 adapter
+   -> actual simulated flight
+
+PX4 should own low-level flight control.
+Do NOT duplicate attitude/rate/motor controllers in the ROS mission stack.
+
+==================================================
+19. DESIRED V0.3 VEHICLE LAYER
+==================================================
+
+Introduce an adapter boundary rather than rewriting UAV mission logic.
+
+Conceptually:
+
+Mission/UAV behavior layer
+        |
+        | high-level commands
+        v
+PX4 vehicle adapter
+        |
+        v
+px4_msgs / PX4 ROS 2 bridge
+        |
+        v
+PX4 SITL
+        |
+        v
+Gazebo aircraft
+
+Return telemetry:
+
+PX4/Gazebo
+   -> position/velocity/vehicle state
+   -> PX4 adapter
+   -> DroneState
+
+The rest of the project should continue to consume DroneState.
+
+This allows the logical controller to be replaced progressively.
+
+==================================================
+20. SOFTWARE QUALITY REQUIREMENTS
+==================================================
+
+Before declaring a revision complete:
+
+BUILD:
+source /opt/ros/jazzy/setup.bash
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --symlink-install
+
+TEST:
+colcon test
+colcon test-result --verbose
+
+Also perform:
+
+- Python syntax check
+- XML/package.xml validation
+- YAML parse validation
+- launch file import/syntax validation
+- check executable entry points
+- check rosdep keys
+- verify installed data files
+- verify package dependencies
+- check duplicated node names
+- check duplicate topic publishers that could conflict
+- check timer duplication
+- check namespace collisions
+- check for stale String command protocols
+
+Use ROS diagnostics:
+
+ros2 node list
+ros2 topic list
+ros2 service list
+ros2 action list
+ros2 param list
+ros2 topic info <topic>
+ros2 interface show <interface>
+
+For important topics:
+ros2 topic hz
+ros2 topic echo
+
+==================================================
+21. CODING STYLE
+==================================================
+
+Improve readability of the current compressed Python where useful.
+
+Some current V0.2 files may contain many statements on one line.
+
+When editing such files:
+- convert touched sections into normal readable Python
+- use meaningful variable names
+- keep behavior unchanged unless intentionally fixing something
+- use type hints where helpful
+- use docstrings/comments for non-obvious ROS contracts
+
+Do NOT perform a giant formatting-only rewrite of every package.
+
+==================================================
+22. TEST STRATEGY
+==================================================
+
+Add tests incrementally.
+
+Highest-value initial tests:
+
+A. target tracker
+- stable IDs
+- spatial association
+- class mismatch handling
+- stale timeout
+- no ID counter reset
+
+B. target manager
+- assignment survives new tracker update
+- operator status survives tracker update
+
+C. deployment manager
+- SINGLE deployment
+- SPLIT deployment
+- no duplicate launch command
+
+D. UAV state machine
+- launch
+- search
+- target/standoff
+- RETURN
+- HOLD
+- return/dock
+- pause/resume
+
+E. UGV waypoint semantics
+- no off-by-one deployment
+- correct completion behavior
+
+F. launch/YAML
+- prove nodes receive configured values rather than Python defaults
+
+==================================================
+23. IMPORTANT ACADEMIC DEMO PRINCIPLE
+==================================================
+
+The examiner should be able to understand what is happening.
+
+Prefer visible status output and RViz markers.
+
+A good final demo should make the following obvious:
+
+1. UGV begins mission.
+2. deployment is triggered.
+3. UAVs become active.
+4. UAVs search.
+5. detection appears.
+6. target receives persistent ID.
+7. UAV gets assigned.
+8. UAV goes to standoff.
+9. operator receives alert.
+10. operator chooses RETURN/HOLD.
+11. UAV reacts.
+12. mission state changes.
+13. UAV returns/docks.
+
+Do not hide all meaningful behavior in debug logs.
+
+==================================================
+24. YOUR FIRST TASK
+==================================================
+
+Before writing code, inspect BOTH uploaded V0.1 and V0.2 folders.
+
+Produce a concise repository audit containing:
+
+A. Current V0.2 package tree
+
+B. ROS graph:
+- nodes
+- publishers
+- subscribers
+- services
+- actions
+- important parameters
+
+C. Compare V0.1 -> V0.2:
+- what changed
+- what was removed
+- what was intentionally retained
+- any accidental regression
+
+D. Verify the previous V0.2 review items:
+- simulation/package.xml dependencies
+- YAML loading in simulation.launch.py
+- per-UAV YAML loading
+- perception YAML loading
+- UGV waypoint-index contract
+- yaw controller correctness
+- Gazebo UAV static/dynamic status
+- camera sensor presence
+- camera bridge presence
+- RViz MarkerArray functionality
+
+E. Build readiness:
+- missing dependencies
+- rosdep issues
+- Python/import errors
+- package metadata errors
+
+F. Recommend ONLY:
+1. blockers
+2. important correctness fixes
+3. V0.3 work
+
+Do not suggest aesthetic refactoring unless it directly improves reliability.
+
+After giving the audit, begin with the smallest necessary fixes to make the
+current V0.2 baseline clean.
+
+Do not jump directly to eight PX4 UAVs.
+
+==================================================
+25. FIRST V0.3 IMPLEMENTATION MILESTONE
+==================================================
+
+Once the V0.2 baseline passes:
+
+Implement a SINGLE-UAV PX4 SITL proof of concept.
+
+Success criteria:
+
+- PX4 SITL launches reliably
+- Gazebo contains one real simulated UAV
+- QGroundControl can see that UAV
+- ROS 2 receives PX4 vehicle state
+- a ROS 2 adapter maps PX4 telemetry to DroneState
+- ROS 2 can request:
+  TAKEOFF
+  HOLD
+  RETURN/LAND
+  using a safe high-level interface
+- existing wildlife mission packages do not need major changes
+- no weapons/payload behavior
+- deterministic detector_sim continues to work independently
+
+Do NOT scale to eight UAVs until the single-UAV version works reliably.
+
+==================================================
+26. WORKFLOW WITH ME
+==================================================
+
+For each implementation stage:
+
+1. Tell me what you inspected.
+2. Tell me the actual problem.
+3. Tell me the minimum fix.
+4. Show which files you will modify.
+5. Make the modifications.
+6. Run relevant checks/build/tests.
+7. Report:
+   - PASS
+   - FAIL
+   - warnings
+   - remaining limitation
+8. Only then move to the next stage.
+
+If the repository contradicts this prompt:
+THE REPOSITORY WINS.
+
+If V0.2 already contains a fix described here:
+DO NOT implement it twice.
+
+If a dependency is unavailable on Ubuntu 24.04 / ROS 2 Jazzy:
+verify the current official installation method rather than guessing.
+
+Do not delete the deterministic simulation path while integrating PX4.
+
+END OF PROJECT HANDOFF.
+```
+
+---
+
+# Context summary from the project and this chat
+
+The project started as a Python prototype with modules such as `core`, `vision`, `mission`, and `swarm`. During review, the architecture was converted into proper ROS 2 packages because the original prototype depended heavily on simulated coordinate changes, ad-hoc communication, and String-based protocols. The current project goal is a ROS 2 Jazzy academic multi-UAV/UGV simulation whose complete high-level flow is **UGV → deployment → UAV search → detection → target tracking/fusion → assignment → standoff → operator RETURN/HOLD → return/docking**. That exact flow is also stated in the V0.2 README. combined_workspace_text_Entire\_…
+
+The resulting architecture separated interfaces, vehicles, perception, targets, swarm coordination, mission management, visualization/core utilities, simulation assets, and bringup. Tracking was deliberately consolidated into `wildlife_targets`; the system is built around a stable detector-independent `Detection` contract. combined_workspace_text_Entire\_…
+
+## Evolution from prototype to V0.1
+
+The original project roughly looked like:
+
+```text
+wildlife_ws/
+├── app.py
+├── config.py
+├── modules/
+│   ├── core/
+│   ├── mission/
+│   ├── swarm/
+│   └── vision/
+├── simulator/
+├── static/
+├── templates/
+└── logs/
+```
+
+Important weaknesses identified in that early implementation were:
+
+- mission expected fused detections but there was not a proper fusion implementation;
+- “YOLO” behavior was actually synthetic distance/probability logic rather than image inference;
+- multiple commands were encoded as strings;
+- target assignment was simplistic;
+- UGV/deployment responsibilities were mixed;
+- vehicle motion consisted mainly of coordinate updates rather than real simulated dynamics;
+- the architecture did not yet cleanly separate interfaces, simulation and vehicle integration.
+
+The architecture was therefore reorganized into ROS packages with typed messages/services/actions.
+
+V0.1 introduced the first full ROS 2 package scaffold, including:
+
+```text
+wildlife_interfaces
+wildlife_core
+wildlife_perception
+wildlife_tracking
+wildlife_targets
+wildlife_swarm
+wildlife_mission
+wildlife_vehicles
+wildlife_simulation
+wildlife_bringup
+```
+
+It implemented a logic-level simulation, not a finished Gazebo/PX4 stack.
+
+---
+
+# V0.1.1 council revision
+
+A later review recommended reducing unnecessary package fragmentation and strengthening the academic deliverable.
+
+The accepted V0.1.1 changes included:
+
+- merging `wildlife_tracking` into `wildlife_targets`;
+- typed `DeploymentRequest`;
+- typed `OperatorAlert`;
+- typed `OperatorDecision`;
+- `MissionControl` service;
+- `DroneCommand.RESUME`;
+- YAML parameters;
+- RViz MarkerArray visualization;
+- Subject 1 and Subject 2 launch profiles;
+- corrected tracker association;
+- preservation of target assignment/lifecycle across tracker updates;
+- stronger Python package installation;
+- Gazebo bridge placeholder for future expansion.
+
+Those ideas are reflected in V0.2. For example, the V0.2 scope explicitly says tracking was merged into `wildlife_targets`, typed deployment/operator/mission interfaces replaced String parsing, YAML and RViz were retained, and Gazebo was introduced. combined_workspace_text_Entire\_…
+
+---
+
+# Current V0.2 architecture
+
+The intended current architecture is:
+
+```text
+wildlife_interfaces
+        |
+        +--> wildlife_vehicles
+        |       UGV / deployment / UAV / docking
+        |
+        +--> wildlife_perception
+        |       detector_sim / OpenCV detector
+        |
+        +--> wildlife_targets
+        |       detection mux / tracking / target manager
+        |
+        +--> wildlife_swarm
+        |       assignment
+        |
+        +--> wildlife_mission
+        |       mission FSM / operator interaction
+        |
+        +--> wildlife_core
+        |       visualization / utilities
+        |
+        +--> wildlife_simulation
+        |       Gazebo / bridge / adapter
+        |
+        +--> wildlife_bringup
+                launch profiles / RViz
+```
+
+The external integration boundary was deliberately designed as:
+
+```text
+Gazebo -> ros_gz_bridge -> ROS 2
+
+Camera -> detector -> Detection
+
+PX4 SITL -> ROS 2/PX4 integration          [V0.3]
+
+QGroundControl -> PX4                      [V0.3]
+```
+
+This is explicitly documented in the V0.2 architecture. combined_workspace_text_Entire\_…
+
+---
+
+# V0.2 scope
+
+V0.2 was intended to add **the first simulation layer without prematurely coupling the project to PX4**.
+
+Its documented included scope was:
+
+- tracking merged into targets;
+- typed ROS interfaces;
+- YAML parameters;
+- RViz;
+- separate demo launches;
+- Gazebo world;
+- UGV;
+- eight UAV proxy models;
+- `ros_gz_sim`;
+- basic `ros_gz_bridge`;
+- optional OpenCV camera plumbing;
+- retained deterministic detector simulator.
+
+Not claimed complete at that stage:
+
+- PX4 flight dynamics;
+- QGroundControl integration;
+- YOLO;
+- Nav2 autonomous UGV navigation;
+- full Gazebo/ROS synchronization of every UAV. combined_workspace_text_Entire\_…
+
+That distinction is important in Codex. **Do not let Codex interpret a static proxy as a bug that requires rewriting V0.2.** It was an intentional stepping stone.
+
+---
+
+# Dependencies already discussed
+
+For V0.2, the dependency plan was:
+
+```text
+Integrated:
+ROS 2 Jazzy
+Gazebo Harmonic
+ros_gz_sim
+ros_gz_bridge
+OpenCV
+cv_bridge
+
+Deferred:
+PX4 SITL
+QGroundControl
+Ultralytics YOLO
+
+Conditional:
+micro-ROS Agent
+```
+
+The repository documentation explains that PX4 was deliberately deferred so the ROS mission architecture remained buildable independently, QGroundControl should be introduced alongside PX4, micro-ROS only makes sense if an embedded node is added, and YOLO should keep publishing the existing `Detection` interface. combined_workspace_text_Entire\_…
+
+That remains a good design principle.
+
+---
+
+# Existing ROS interfaces
+
+Current V0.2 contains typed interfaces including:
+
+```text
+Messages
+├── DroneState
+├── UGVState
+├── Detection
+├── Target
+├── DroneCommand
+├── TraySlot
+├── OperatorAlert
+└── DeploymentRequest
+
+Services
+├── OperatorDecision
+├── DeployDrone
+└── MissionControl
+
+Actions
+├── NavigateWaypoints
+└── SearchArea
+```
+
+The interface build file confirms those definitions. combined_workspace_text_Entire\_…
+
+One of the most important long-term design decisions is that `Detection.msg` acts as the perception boundary:
+
+```text
+string drone_id
+string detection_id
+string target_class
+float32 confidence
+geometry_msgs/Point position_world
+...
+```
+
+combined_workspace_text_Entire\_…
+
+Therefore:
+
+```text
+detector_sim
+OpenCV
+future YOLO
+```
+
+should all feed the same downstream tracking pipeline.
+
+---
+
+# Current UAV behavior
+
+The V0.2 `UAVNode` is still a **logical vehicle model**, not a PX4 controller. It holds internal `x/y/z`, battery, state and assigned target. It reacts to typed commands, performs lawnmower search, moves toward a standoff position, generates an operator alert, then returns/docks according to the decision. combined_workspace_text_Entire\_…
+
+This is exactly what should eventually be separated into:
+
+```text
+mission-level behavior
+        |
+        v
+PX4 adapter
+        |
+        v
+PX4 SITL
+```
+
+rather than throwing the UAV state machine away.
+
+---
+
+# Current deployment implementation
+
+The tray currently represents:
+
+```text
+slot 1 = uav01 / uav02
+slot 2 = uav03 / uav04
+slot 3 = uav05 / uav06
+slot 4 = uav07 / uav08
+```
+
+and deployment uses typed `DeploymentRequest` and `DroneCommand`. combined_workspace_text_Entire\_…
+
+The previous String command protocol was intentionally eliminated and should never return.
+
+---
+
+# Current tracking and target lifecycle
+
+The tracker does:
+
+```text
+Detection
+    ↓
+spatial gate
+    ↓
+class match
+    ↓
+persistent track
+    ↓
+alpha-smoothed position
+    ↓
+Target
+```
+
+and maintains a target ID counter, confidence, covariance, detection count and witness drones. combined_workspace_text_Entire\_…
+
+The target manager preserves status, assigned UAV and operator state when updated measurements arrive. combined_workspace_text_Entire\_…
+
+That was an important fix from the earlier versions.
+
+---
+
+# Current swarm assignment
+
+The coordinator currently chooses among available SEARCHING UAVs and applies a cost based mostly on distance, subject to a maximum assignment distance. combined_workspace_text_Entire\_…
+
+For the academic project this simplicity is intentional.
+
+There is no need yet for:
+
+```text
+Hungarian optimization
+auction algorithms
+distributed consensus
+AI task allocation
+```
+
+unless later project requirements justify them.
+
+---
+
+# Human-in-the-loop design
+
+The operator node receives `OperatorAlert`, prints actionable information and exposes `/operator/decision`.
+
+The supported decisions are:
+
+```text
+RETURN
+CONTINUE HOLD
+```
+
+and the result is republished as an updated `Target`. combined_workspace_text_Entire\_…
+
+This human authority is an intentional design feature, not something that should be automated away.
+
+---
+
+# Mission management
+
+The mission manager tracks high-level phases including:
+
+```text
+INIT
+DEPLOYING
+SEARCHING
+TARGET_FOUND
+AWAITING_OPERATOR
+RESOLVING
+COMPLETE
+PAUSED
+ABORTED
+```
+
+and handles START/PAUSE/ABORT/RESET through a typed service. combined_workspace_text_Entire\_…
+
+---
+
+# RViz
+
+V0.2 has an RViz configuration that subscribes to:
+
+```text
+/visualization/markers
+```
+
+with `map` as the fixed frame. combined_workspace_text_Entire\_…
+
+The visualization node publishes UAVs, targets, standoff circles and UGV state using `MarkerArray`. combined_workspace_text_Entire\_…
+
+One of the council's remaining V0.2 concerns was to **actually verify this pipeline at runtime**, rather than merely confirming that files exist.
+
+---
+
+# Important discrepancy Codex should inspect
+
+The uploaded source represented in this chat appears to be the **V0.2 revised** tree, not necessarily the later "V0.2 final" zip discussed afterward.
+
+For example, this source still shows:
+
+```xml
+<exec_depend>ros2launch</exec_depend>
+```
+
+inside `wildlife_simulation/package.xml`. combined_workspace_text_Entire\_…
+
+The same source also shows `simulation.launch.py` giving individual UAV managers only:
+
+```python
+parameters=[{'drone_id': did}]
+```
+
+rather than passing `vehicles.yaml`, and the detector simulator similarly gets only the ID. combined_workspace_text_Entire\_…
+
+It also shows the original static UAV proxy with **no camera sensor** in that particular source tree. combined_workspace_text_Entire\_…
+
+And the UGV adapter in that source uses:
+
+```python
+i = current_waypoint_index + 1
+yaw = atan2(...)
+angular.z = k * yaw
+```
+
+without using actual vehicle orientation. combined_workspace_text_Entire\_…
+
+This is exactly why the Codex prompt says:
+
+> **inspect the uploaded V0.2 files first and let the filesystem win.**
+
+If you upload the later **V0.2 Final** folder instead, some or all of those may already be fixed.
+
+---
+
+# Recommended continuation after handoff
+
+Once Codex verifies V0.2, I would continue in this order:
+
+```text
+V0.2 freeze
+   ↓
+verify build + demo
+   ↓
+one PX4 SITL UAV
+   ↓
+QGroundControl connection
+   ↓
+PX4 ROS telemetry adapter
+   ↓
+DroneState from real simulated vehicle
+   ↓
+takeoff / hold / return
+   ↓
+one Gazebo camera
+   ↓
+OpenCV detector
+   ↓
+YOLO backend
+   ↓
+two PX4 UAVs
+   ↓
+solve namespaces/ports
+   ↓
+8 PX4 UAVs
+   ↓
+full state synchronization
+```
+
+The critical principle is **one PX4 UAV first**. Starting eight SITL instances immediately would mix PX4 configuration, DDS/ROS namespaces, Gazebo spawning, ports, QGroundControl, camera topics, and mission logic into one debugging problem.
+
+---
+
+## Short handoff statement you can give Codex with the folders
+
+You can also put this at the very beginning when you open the repository:
+
+> **I am giving you V0.1 and V0.2 of an academic ROS 2 Jazzy multi-UAV/UGV wildlife simulation. V0.2 is the authoritative baseline; V0.1 is historical context only. First audit the actual repository before changing code. Preserve the typed interfaces, deterministic detector simulator, tracking/target architecture, human-in-the-loop RETURN/HOLD workflow, RViz visualization and package boundaries. Verify the remaining V0.2 council issues, make only necessary fixes, freeze V0.2, then begin V0.3 with ONE PX4 SITL UAV before scaling to eight. PX4 should own low-level flight control; existing ROS mission logic should communicate through an adapter and continue consuming/publishing the established DroneState/Detection/Target contracts. Do not implement any weapon, attack, projectile, payload-release or harmful behavior.**
+
+That plus the large prompt above should give Codex enough **architectural history, design intent, current-state context, known issues, safety scope, dependency roadmap, and next implementation sequence** to continue almost exactly from where this conversation ends.

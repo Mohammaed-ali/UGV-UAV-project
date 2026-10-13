@@ -1,0 +1,15 @@
+export type Vec3 = [number,number,number];
+export type Stop = {id:string;label:string;x:number;y:number;drones:string[];search_radius:number;target_class:string|null;search_timeout:number|null;loiter_seconds:number|null};
+export type Mission = {version:1;name:string;wheels:4|6;seed:number;terrain:'field'|'proving_ground';population:number;traffic:number;target_present:boolean;target_class:string;ugv_speed:number;altitude:number;flight_speed:number;launch_interval:number;search_timeout:number;no_target_policy:'return'|'hover'|'loiter';loiter_seconds:number;loiter_radius:number;observation_seconds:number;standoff:number;confidence:number;landing_retries:number;battery_return:number;wind:number;graphics_quality:'low'|'balanced'|'high';start:{x:number;y:number};stops:Stop[]};
+export type Detection={class:string;confidence:number;box:number[];position:Vec3|null};
+export type Vision={time:number;sync_error:number;detections:Detection[];tags:{id:number;margin:number;position:Vec3|null}[];latency_ms:number;received:number};
+export type Drone={id:string;bay:number;level:string;tag_id:number;state:string;position:Vec3;quaternion:[number,number,number,number];measured:boolean;battery:number|null;ready:boolean;armed:boolean;mode:number|null;telemetry_age:number|null;target:Detection|null;reason:string|null;extension:number;latched:boolean;tag_error:number|null;phase_seconds:number;vision?:Vision};
+export type Snapshot={run_id:string;state:string;hold:boolean;sim_time:number;stop_index:number;runtime:{state:string;progress:string;error:string|null;processes:Record<string,string>};physics:{real_time_factor:number;paused:boolean;age:number|null};carrier:{position:Vec3;quaternion:[number,number,number,number];yaw:number;speed:number};drones:Drone[];tracks:(Detection&{id:string;drone:string})[];events:{id:number;time:number;message:string;kind:string;drone:string|null}[];perception:{detector_ready:boolean;tag_ready:boolean;error:string|null}};
+export type SceneObject={id:string;kind:string;x:number;y:number;z:number;sx?:number;sy?:number;sz?:number;yaw:number;variant?:number};
+export type Scene={name:string;size:number;objects:SceneObject[];slots:{id:string;bay:number;level:string;tag_id:number;x:number;y:number;z:number;side:number}[]};
+export type AssetManifest=Record<string,{file:string;color:[number,number,number]}[]>;
+export type ViewMode='orbit'|'top'|'carrier'|'drone'|'dock';
+export const DRONE_IDS=Array.from({length:8},(_,i)=>`uav${String(i+1).padStart(2,'0')}`);
+export const displayState=(state:string)=>state.toLowerCase().replaceAll('_',' ');
+export function formatTime(seconds:number){return `${Math.floor(seconds/60).toString().padStart(2,'0')}:${Math.floor(seconds%60).toString().padStart(2,'0')}`;}
+export const droneColor=(state:string)=>state==='DOCKED'?'#91c9a8':['FAULT','ERROR'].includes(state)?'#e8a089':state==='STORED'?'#9facab':state.includes('LAND')||state.includes('TAG')||state==='ALIGNING'?'#e7c075':'#d5ee86';

@@ -1,0 +1,1566 @@
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/README.md ===
+# Wildlife ROS 2 — v0.2
+
+ROS 2 Jazzy + Ubuntu 24.04 academic multi-UAV/UGV simulation baseline.
+
+## Demo flow
+
+`UGV -> typed deployment -> UAV search -> dummy/OpenCV detection -> target tracking/fusion -> assignment -> standoff -> operator RETURN/HOLD -> return/docking`
+
+The project is intentionally scoped to non-contact search, detection, tracking, standoff and return/docking behaviors.
+
+## Build
+
+```bash
+source /opt/ros/jazzy/setup.bash
+cd ~/wildlife_ws
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --symlink-install
+source install/setup.bash
+```
+
+## Logic-only demo
+
+```bash
+ros2 launch wildlife_bringup subject1_demo.launch.py
+```
+
+## Gazebo demo
+
+Install the Gazebo/bridge packages described in `docs/DEPENDENCIES.md`, then:
+
+```bash
+ros2 launch wildlife_bringup subject2_demo.launch.py
+```
+
+The Gazebo UAVs in v0.2 are visual proxy vehicles. PX4 SITL is deliberately deferred to v0.3.
+
+## Operator decision
+
+```bash
+ros2 service call /operator/decision wildlife_interfaces/srv/OperatorDecision \
+"{target_id: target_001, assigned_drone_id: uav01, decision: 0, operator_notes: 'return'}"
+```
+
+`0 = RETURN`, `1 = CONTINUE_HOLD`.
+
+See `ARCHITECTURE.md`, `docs/V0_2_SCOPE.md`, and `docs/DEPENDENCIES.md`.
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/ARCHITECTURE.md ===
+# v0.2 architecture
+
+```text
+wildlife_interfaces
+        |
+        +--> wildlife_vehicles ---- UGV / deployment / UAV / docking
+        |
+        +--> wildlife_perception -- dummy detector / optional OpenCV detector
+        |             |
+        |             v
+        +--> wildlife_targets ---- mux / tracker / target manager
+        |             |
+        |             v
+        +--> wildlife_swarm ------- assignment / deconfliction
+        |             |
+        |             v
+        +--> wildlife_mission ---- mission FSM / standoff / operator service
+        |
+        +--> wildlife_core -------- visualization / math / state
+        |
+        +--> wildlife_simulation -- Gazebo assets / ros_gz bridge / adapters
+        |
+        +--> wildlife_bringup ----- Subject 1 and Subject 2 launch profiles
+```
+
+### External integration boundary
+
+`Gazebo -> ros_gz_bridge -> ROS 2`
+
+`PX4 SITL -> ROS 2/PX4 bridge (v0.3)`
+
+`QGroundControl -> PX4 telemetry/vehicle control (v0.3)`
+
+`Camera -> OpenCV/YOLO -> Detection`.
+
+The rest of the project consumes `Detection` and does not depend on the detector implementation.
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/docs/V0_2_SCOPE.md ===
+# Wildlife ROS 2 v0.2 scope
+
+v0.2 implements the council changes from v0.1.1 and adds the first Gazebo layer.
+
+### Included
+1. `wildlife_tracking` is merged into `wildlife_targets`.
+2. Typed deployment/operator/mission interfaces are used instead of String command parsing.
+3. YAML parameter files are installed with the packages.
+4. RViz visualization and dedicated Subject 1 / Subject 2 demo launches are retained.
+5. Gazebo world + UGV + 8 UAV visual proxy models are included.
+6. `ros_gz_sim` spawning and a minimal `ros_gz_bridge` configuration are included.
+7. OpenCV camera detection plumbing is available as an optional backend.
+8. The existing dummy detector remains available for deterministic demonstrations.
+9. PX4 SITL/QGroundControl/micro-ROS/YOLO are documented as later integration layers.
+
+### Not claimed as complete in v0.2
+- PX4 flight dynamics or PX4 offboard control.
+- QGroundControl mission control integration.
+- YOLO inference.
+- Nav2 autonomous UGV navigation.
+- Full Gazebo-to-ROS synchronization for every UAV state.
+
+These are intentionally staged for v0.3 rather than making v0.2 depend on a large external stack.
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/docs/DEPENDENCIES.md ===
+# v0.2 dependency plan
+
+## Integrated now
+- ROS 2 Jazzy
+- Gazebo Harmonic / `gz sim` (visual simulation layer)
+- `ros_gz_sim` + `ros_gz_bridge` (Gazebo spawn/bridge)
+- OpenCV + `cv_bridge` (optional camera detector executable)
+
+## Deliberately deferred
+- **PX4 SITL:** not hard-wired into v0.2. The UAV model is a simple Gazebo visual proxy so the ROS mission logic remains buildable without a PX4 checkout. v0.3 will replace the proxy with PX4 SITL vehicle instances and `px4_msgs`/offboard integration.
+- **QGroundControl:** desktop ground-control application; no ROS package is required. Use it alongside PX4 SITL once PX4 is integrated.
+- **micro-ROS Agent:** deferred until a microcontroller/embedded node is introduced.
+- **Ultralytics YOLO:** deferred until the camera/image pipeline is validated. The intended contract is to keep publishing the existing `wildlife_interfaces/Detection` message, so the detector can be swapped without changing tracking/mission code.
+
+## Ubuntu 24.04 setup
+
+Core ROS/Gazebo packages should be installed through the ROS 2 Jazzy apt repository. Python OpenCV is optional for the camera detector:
+
+```bash
+sudo apt install ros-jazzy-ros-gz-sim ros-jazzy-ros-gz-bridge ros-jazzy-cv-bridge python3-opencv
+```
+
+If you do not want camera processing yet, you can omit OpenCV/cv_bridge and run the `detector_sim` backend.
+
+## PX4 integration boundary
+
+The project deliberately uses a stable ROS-side interface:
+
+`camera -> Detection -> tracking/fusion -> Target -> assignment -> standoff -> operator decision`
+
+PX4 should own vehicle flight/autopilot behavior. The mission layer should send high-level flight intent, not duplicate PX4's inner-loop controller.
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/launch/subject1_demo.launch.py ===
+from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_ros.substitutions import FindPackageShare
+from launch.substitutions import PathJoinSubstitution
+
+def generate_launch_description():
+    return LaunchDescription([IncludeLaunchDescription(PythonLaunchDescriptionSource(PathJoinSubstitution([FindPackageShare('wildlife_bringup'),'launch','simulation.launch.py'])))])
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/launch/gazebo.launch.py ===
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, ExecuteProcess, TimerAction
+from launch.conditions import IfCondition
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+
+def generate_launch_description():
+    sim=LaunchConfiguration('use_gazebo')
+    world=PathJoinSubstitution([FindPackageShare('wildlife_simulation'),'worlds','wildlife_field.sdf'])
+    bridge=PathJoinSubstitution([FindPackageShare('wildlife_simulation'),'config','bridge.yaml'])
+    ugv=PathJoinSubstitution([FindPackageShare('wildlife_simulation'),'models','ugv','model.sdf'])
+    uav=PathJoinSubstitution([FindPackageShare('wildlife_simulation'),'models','uav','model.sdf'])
+    actions=[DeclareLaunchArgument('use_gazebo',default_value='true')]
+    actions.append(ExecuteProcess(cmd=['gz','sim','-r',world],output='screen',condition=IfCondition(sim)))
+    actions.append(Node(package='wildlife_simulation',executable='ugv_gazebo_adapter',name='ugv_gazebo_adapter',output='screen'))
+    actions.append(TimerAction(period=2.0,actions=[Node(package='ros_gz_bridge',executable='parameter_bridge',arguments=['--ros-args','-p',f'config_file:={bridge}'],output='screen')]))
+    actions.append(TimerAction(period=3.0,actions=[Node(package='ros_gz_sim',executable='create',arguments=['-name','ugv','-file',ugv,'-x','0','-y','0','-z','0.25'],output='screen')]))
+    for i in range(1,9):
+        x=((i-1)%4)*3.0+2.0; y=((i-1)//4)*4.0-2.0
+        actions.append(TimerAction(period=4.0+i*0.15,actions=[Node(package='ros_gz_sim',executable='create',arguments=['-name',f'uav{i:02d}','-file',uav,'-x',str(x),'-y',str(y),'-z','0.25'],output='screen')]))
+    return LaunchDescription(actions)
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/launch/split_simulation.launch.py ===
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(package="wildlife_vehicles", executable="ugv_node", name="ugv_manager",
+             parameters=[{"deployment_mode":"SPLIT","waypoints":[0.0,0.0,20.0,0.0,20.0,20.0]}], output="screen"),
+        Node(package="wildlife_vehicles", executable="deployment_node", name="deployment_manager",
+             parameters=[{"deployment_mode":"SPLIT","inter_drone_delay":2.0}], output="screen"),
+        Node(package="wildlife_targets", executable="detection_mux", name="detection_mux", output="screen"),
+        Node(package="wildlife_targets", executable="tracker", name="target_tracker", output="screen"),
+        Node(package="wildlife_targets", executable="target_manager", name="target_manager", output="screen"),
+        Node(package="wildlife_swarm", executable="coordinator", name="swarm_coordinator", output="screen"),
+        Node(package="wildlife_mission", executable="mission_manager", name="mission_manager", output="screen"),
+        Node(package="wildlife_mission", executable="operator_interface", name="operator_interface", output="screen"),
+    ] + [
+        Node(package="wildlife_vehicles", executable="uav_node", name=f"uav{i:02d}_manager",
+             parameters=[{"drone_id":f"uav{i:02d}"}], output="screen")
+        for i in range(1,9)
+    ] + [
+        Node(package="wildlife_perception", executable="detector_sim", name=f"uav{i:02d}_perception",
+             parameters=[{"drone_id":f"uav{i:02d}"}], output="screen")
+        for i in range(1,9)
+    ])
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/launch/single_deployment.launch.py ===
+import os
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
+from ament_index_python.packages import get_package_share_directory
+
+def generate_launch_description():
+    vh=get_package_share_directory('wildlife_vehicles'); ph=get_package_share_directory('wildlife_perception'); th=get_package_share_directory('wildlife_targets'); sh=get_package_share_directory('wildlife_swarm'); mh=get_package_share_directory('wildlife_mission'); ch=get_package_share_directory('wildlife_core'); bh=get_package_share_directory('wildlife_bringup')
+    vp=os.path.join(vh,'params','vehicles.yaml'); pp=os.path.join(ph,'params','perception.yaml'); tp=os.path.join(th,'params','targets.yaml'); sp=os.path.join(sh,'params','swarm.yaml'); mp=os.path.join(mh,'params','mission.yaml'); rv=os.path.join(bh,'rviz','wildlife.rviz')
+    mode=LaunchConfiguration('deployment_mode'); show_rviz=LaunchConfiguration('show_rviz')
+    nodes=[
+      Node(package='wildlife_vehicles',executable='ugv_node',name='ugv_manager',parameters=[vp,{'deployment_mode':mode}],output='screen'),
+      Node(package='wildlife_vehicles',executable='deployment_node',name='deployment_manager',parameters=[vp,{'deployment_mode':mode}],output='screen'),
+      Node(package='wildlife_vehicles',executable='docking_node',name='docking_manager',parameters=[vp],output='screen'),
+      Node(package='wildlife_targets',executable='detection_mux',name='detection_mux',parameters=[tp],output='screen'),
+      Node(package='wildlife_targets',executable='tracker',name='target_tracker',parameters=[tp],output='screen'),
+      Node(package='wildlife_targets',executable='target_manager',name='target_manager',parameters=[tp],output='screen'),
+      Node(package='wildlife_swarm',executable='coordinator',name='swarm_coordinator',parameters=[sp],output='screen'),
+      Node(package='wildlife_mission',executable='mission_manager',name='mission_manager',parameters=[mp],output='screen'),
+      Node(package='wildlife_mission',executable='operator_interface',name='operator_interface',parameters=[mp],output='screen'),
+      Node(package='wildlife_core',executable='visualization_node',name='wildlife_visualization',parameters=[{'standoff_radius':12.0}],output='screen'),
+    ]
+    tray=[(1,1,True),(1,2,False),(2,3,True),(2,4,False),(3,5,True),(3,6,False),(4,7,True),(4,8,False)]
+    for slot,num,upper in tray:
+      did=f'uav{num:02d}'
+      nodes.append(Node(package='wildlife_vehicles',executable='uav_node',name=f'{did}_manager',parameters=[vp,{'drone_id':did,'slot_id':slot,'is_upper_position':upper}],output='screen'))
+      nodes.append(Node(package='wildlife_perception',executable='detector_sim',name=f'{did}_perception',parameters=[pp,{'drone_id':did}],output='screen'))
+    nodes.append(Node(package='rviz2',executable='rviz2',name='rviz2',arguments=['-d',rv],condition=__import__('launch.conditions',fromlist=['IfCondition']).IfCondition(show_rviz),output='screen'))
+    return LaunchDescription([DeclareLaunchArgument('deployment_mode',default_value='SINGLE'),DeclareLaunchArgument('show_rviz',default_value='true')]+nodes)
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/launch/split_deployment.launch.py ===
+import os
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
+from ament_index_python.packages import get_package_share_directory
+
+def generate_launch_description():
+    vh=get_package_share_directory('wildlife_vehicles'); ph=get_package_share_directory('wildlife_perception'); th=get_package_share_directory('wildlife_targets'); sh=get_package_share_directory('wildlife_swarm'); mh=get_package_share_directory('wildlife_mission'); ch=get_package_share_directory('wildlife_core'); bh=get_package_share_directory('wildlife_bringup')
+    vp=os.path.join(vh,'params','vehicles.yaml'); pp=os.path.join(ph,'params','perception.yaml'); tp=os.path.join(th,'params','targets.yaml'); sp=os.path.join(sh,'params','swarm.yaml'); mp=os.path.join(mh,'params','mission.yaml'); rv=os.path.join(bh,'rviz','wildlife.rviz')
+    mode=LaunchConfiguration('deployment_mode'); show_rviz=LaunchConfiguration('show_rviz')
+    nodes=[
+      Node(package='wildlife_vehicles',executable='ugv_node',name='ugv_manager',parameters=[vp,{'deployment_mode':mode}],output='screen'),
+      Node(package='wildlife_vehicles',executable='deployment_node',name='deployment_manager',parameters=[vp,{'deployment_mode':mode}],output='screen'),
+      Node(package='wildlife_vehicles',executable='docking_node',name='docking_manager',parameters=[vp],output='screen'),
+      Node(package='wildlife_targets',executable='detection_mux',name='detection_mux',parameters=[tp],output='screen'),
+      Node(package='wildlife_targets',executable='tracker',name='target_tracker',parameters=[tp],output='screen'),
+      Node(package='wildlife_targets',executable='target_manager',name='target_manager',parameters=[tp],output='screen'),
+      Node(package='wildlife_swarm',executable='coordinator',name='swarm_coordinator',parameters=[sp],output='screen'),
+      Node(package='wildlife_mission',executable='mission_manager',name='mission_manager',parameters=[mp],output='screen'),
+      Node(package='wildlife_mission',executable='operator_interface',name='operator_interface',parameters=[mp],output='screen'),
+      Node(package='wildlife_core',executable='visualization_node',name='wildlife_visualization',parameters=[{'standoff_radius':12.0}],output='screen'),
+    ]
+    tray=[(1,1,True),(1,2,False),(2,3,True),(2,4,False),(3,5,True),(3,6,False),(4,7,True),(4,8,False)]
+    for slot,num,upper in tray:
+      did=f'uav{num:02d}'
+      nodes.append(Node(package='wildlife_vehicles',executable='uav_node',name=f'{did}_manager',parameters=[vp,{'drone_id':did,'slot_id':slot,'is_upper_position':upper}],output='screen'))
+      nodes.append(Node(package='wildlife_perception',executable='detector_sim',name=f'{did}_perception',parameters=[pp,{'drone_id':did}],output='screen'))
+    nodes.append(Node(package='rviz2',executable='rviz2',name='rviz2',arguments=['-d',rv],condition=__import__('launch.conditions',fromlist=['IfCondition']).IfCondition(show_rviz),output='screen'))
+    return LaunchDescription([DeclareLaunchArgument('deployment_mode',default_value='SPLIT'),DeclareLaunchArgument('show_rviz',default_value='true')]+nodes)
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/launch/simulation.launch.py ===
+from launch import LaunchDescription
+from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
+from launch.substitutions import PathJoinSubstitution
+
+def generate_launch_description():
+    nodes=[
+      Node(package='wildlife_vehicles',executable='ugv_node',name='ugv_manager',parameters=[PathJoinSubstitution([FindPackageShare('wildlife_vehicles'),'params','vehicles.yaml'])],output='screen'),
+      Node(package='wildlife_vehicles',executable='deployment_node',name='deployment_manager',parameters=[PathJoinSubstitution([FindPackageShare('wildlife_vehicles'),'params','vehicles.yaml'])],output='screen'),
+      Node(package='wildlife_targets',executable='detection_mux',name='detection_mux',output='screen'),
+      Node(package='wildlife_targets',executable='tracker',name='target_tracker',parameters=[PathJoinSubstitution([FindPackageShare('wildlife_targets'),'params','targets.yaml'])],output='screen'),
+      Node(package='wildlife_targets',executable='target_manager',name='target_manager',parameters=[PathJoinSubstitution([FindPackageShare('wildlife_targets'),'params','targets.yaml'])],output='screen'),
+      Node(package='wildlife_swarm',executable='coordinator',name='swarm_coordinator',parameters=[PathJoinSubstitution([FindPackageShare('wildlife_swarm'),'params','swarm.yaml'])],output='screen'),
+      Node(package='wildlife_mission',executable='mission_manager',name='mission_manager',parameters=[PathJoinSubstitution([FindPackageShare('wildlife_mission'),'params','mission.yaml'])],output='screen'),
+      Node(package='wildlife_mission',executable='operator_interface',name='operator_interface',output='screen'),
+      Node(package='wildlife_core',executable='visualization_node',name='visualization',output='screen')]
+    for i in range(1,9):
+      did=f'uav{i:02d}'
+      nodes += [Node(package='wildlife_vehicles',executable='uav_node',name=f'{did}_manager',parameters=[{'drone_id':did}],output='screen'),Node(package='wildlife_perception',executable='detector_sim',name=f'{did}_perception',parameters=[{'drone_id':did}],output='screen')]
+    return LaunchDescription(nodes)
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/launch/subject2_demo.launch.py ===
+from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_ros.substitutions import FindPackageShare
+from launch.substitutions import PathJoinSubstitution
+
+def generate_launch_description():
+    return LaunchDescription([IncludeLaunchDescription(PythonLaunchDescriptionSource(PathJoinSubstitution([FindPackageShare('wildlife_bringup'),'launch','gazebo.launch.py']))),IncludeLaunchDescription(PythonLaunchDescriptionSource(PathJoinSubstitution([FindPackageShare('wildlife_bringup'),'launch','simulation.launch.py'])))])
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/rviz/wildlife.rviz ===
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 1
+      Plane: XY
+      Plane Cell Count: 40
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Wildlife Markers
+      Enabled: true
+      Topic: /visualization/markers
+  Global Options:
+    Fixed Frame: map
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 45
+      Pitch: 0.9
+      Yaw: 0.8
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/CMakeLists.txt ===
+cmake_minimum_required(VERSION 3.8)
+project(wildlife_bringup)
+find_package(ament_cmake REQUIRED)
+install(DIRECTORY launch params rviz DESTINATION share/${PROJECT_NAME})
+ament_package()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/package.xml ===
+<?xml version="1.0"?><package format="3"><name>wildlife_bringup</name><version>0.2.0</version><description>Launch files for logic and Gazebo demonstrations.</description><maintainer email="student@university.edu">Student</maintainer><license>Apache-2.0</license><buildtool_depend>ament_cmake</buildtool_depend><exec_depend>ros_gz_bridge</exec_depend><exec_depend>ros_gz_sim</exec_depend><exec_depend>wildlife_simulation</exec_depend><export><build_type>ament_cmake</build_type></export></package>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_bringup/params/demo.yaml ===
+# Central examiner-facing overrides. Keep package YAML files as defaults.
+# Launch files may override these values without changing Python.
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_vehicles/wildlife_vehicles/uav_node.py ===
+import math, time
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import DroneCommand, DroneState, Target, OperatorAlert
+
+class UAVNode(Node):
+    def __init__(self):
+        super().__init__('uav_manager')
+        for name,default in {
+            'drone_id':'uav01','slot_id':1,'is_upper_position':True,'search_altitude':10.0,'standoff_distance':12.0,
+            'search_speed':1.2,'loiter_duration':20.0,'search_timeout':90.0,'battery_drain_per_second':0.15,
+            'lane_spacing':5.0,'search_half_width':30.0,'standoff_altitude_offset':3.0,'motion_tolerance':0.5,'home_x':0.0,'home_y':0.0}.items(): self.declare_parameter(name,default)
+        g=lambda k:self.get_parameter(k).value
+        self.id=str(g('drone_id')); self.slot_id=int(g('slot_id')); self.is_upper=bool(g('is_upper_position')); self.alt=float(g('search_altitude')); self.standoff=float(g('standoff_distance')); self.speed=float(g('search_speed')); self.loiter=float(g('loiter_duration')); self.timeout=float(g('search_timeout')); self.drain=float(g('battery_drain_per_second')); self.lane=float(g('lane_spacing')); self.half_width=float(g('search_half_width')); self.alt_offset=float(g('standoff_altitude_offset')); self.tol=float(g('motion_tolerance')); self.home_x=float(g('home_x')); self.home_y=float(g('home_y'))
+        self.state=DroneState.STORED; self.x=self.y=self.z=0.; self.battery=100.; self.target=None; self.search_start=None; self.loiter_start=None; self.last=time.monotonic(); self.lane_dir=1.; self.hold_position=False; self.alerted_target=None
+        self.state_pub=self.create_publisher(DroneState,'/drones/state',20); self.alert_pub=self.create_publisher(OperatorAlert,'/operator/alerts',20)
+        self.create_subscription(DroneCommand,'/deployment/commands',self.command_cb,20); self.create_subscription(DroneCommand,'/mission/drone_commands',self.command_cb,20); self.create_subscription(Target,'/targets/assigned',self.target_cb,20); self.create_subscription(Target,'/targets/operator_decision',self.decision_cb,20)
+        self.create_timer(0.1,self.tick)
+    def command_cb(self,m):
+        if m.drone_id!=self.id: return
+        if m.command==DroneCommand.LAUNCH and self.state==DroneState.STORED: self.state=DroneState.LAUNCHING; self.hold_position=False
+        elif m.command==DroneCommand.RETURN_HOME and self.state not in (DroneState.STORED,DroneState.DOCKED): self.state=DroneState.RETURNING; self.hold_position=False
+        elif m.command==DroneCommand.HOLD_POSITION and self.state not in (DroneState.STORED,DroneState.DOCKED): self.state=DroneState.PAUSED; self.hold_position=True
+        elif m.command==DroneCommand.GO_TO_STANDOFF and self.target: self.state=DroneState.STANDOFF; self.hold_position=False
+        elif m.command==DroneCommand.RESUME and self.state==DroneState.PAUSED: self.state=DroneState.SEARCHING if self.target is None else DroneState.STANDOFF; self.hold_position=False
+    def target_cb(self,m):
+        if m.assigned_drone_id==self.id and m.target_id and self.state==DroneState.SEARCHING: self.target=m; self.state=DroneState.TARGET_DETECTED; self.alerted_target=None
+    def decision_cb(self,m):
+        if m.assigned_drone_id!=self.id or m.target_id!=(self.target.target_id if self.target else ''): return
+        if self.state!=DroneState.AWAITING_OPERATOR: return
+        if m.status==Target.CLEARED: self.state=DroneState.RETURNING
+        elif m.status==Target.STANDOFF_HOLD: self.state=DroneState.STANDOFF
+    def tick(self):
+        self.drain_battery(); s=self.state
+        if s==DroneState.LAUNCHING: self.state=DroneState.TAKEOFF
+        elif s==DroneState.TAKEOFF:
+            self.z=min(self.alt,self.z+self.speed*0.1)
+            if self.z>=self.alt: self.state=DroneState.SEARCHING; self.search_start=time.monotonic()
+        elif s==DroneState.SEARCHING:
+            self.lawnmower_step()
+            if self.search_start and time.monotonic()-self.search_start>=self.timeout: self.state=DroneState.LOITERING; self.loiter_start=time.monotonic()
+        elif s==DroneState.LOITERING:
+            if self.loiter_start and time.monotonic()-self.loiter_start>=self.loiter: self.state=DroneState.RETURNING
+        elif s==DroneState.TARGET_DETECTED: self.state=DroneState.STANDOFF
+        elif s==DroneState.STANDOFF and self.target:
+            if self.move_to_standoff(): self.state=DroneState.AWAITING_OPERATOR; self.send_alert_once()
+        elif s==DroneState.RETURNING:
+            if self.move_toward(self.home_x,self.home_y,0.): self.state=DroneState.DOCKING
+        elif s==DroneState.DOCKING:
+            self.z=max(0.,self.z-self.speed*0.1)
+            if self.z<=0.: self.state=DroneState.DOCKED
+        self.publish()
+    def lawnmower_step(self):
+        self.x+=self.lane_dir*self.speed*0.1
+        if abs(self.x)>=self.half_width: self.lane_dir*=-1.; self.y+=self.lane
+    def move_to_standoff(self):
+        if not self.target: return False
+        p=self.target.pose.pose.position; return self.move_toward(p.x,p.y+self.standoff,self.alt+self.alt_offset)
+    def move_toward(self,tx,ty,tz):
+        dx,dy,dz=tx-self.x,ty-self.y,tz-self.z; d=math.sqrt(dx*dx+dy*dy+dz*dz)
+        if d<=self.tol: self.x,self.y,self.z=tx,ty,tz; return True
+        step=min(self.speed*0.1,d); self.x+=step*dx/d; self.y+=step*dy/d; self.z+=step*dz/d; return False
+    def send_alert_once(self):
+        if not self.target or self.alerted_target==self.target.target_id: return
+        a=OperatorAlert(); a.header.stamp=self.get_clock().now().to_msg(); a.alert_id=f'alert_{self.id}_{self.target.target_id}'; a.drone_id=self.id; a.target_id=self.target.target_id; a.target_class=self.target.target_class; a.confidence=self.target.confidence; a.target_position=self.target.pose.pose.position; a.alert_message=f'{self.id} is holding standoff on {self.target.target_class}; operator decision required.'; a.severity=OperatorAlert.ACTION_REQUIRED; self.alert_pub.publish(a); self.alerted_target=self.target.target_id
+    def drain_battery(self):
+        now=time.monotonic(); dt=now-self.last; self.last=now
+        if self.state not in (DroneState.STORED,DroneState.DOCKED): self.battery=max(0.,self.battery-self.drain*dt)
+    def publish(self):
+        m=DroneState(); m.header.stamp=self.get_clock().now().to_msg(); m.drone_id=self.id; m.state=self.state; m.pose.pose.position.x=self.x; m.pose.pose.position.y=self.y; m.pose.pose.position.z=self.z; m.battery_percent=self.battery; m.standoff_distance=self.standoff; m.slot_id=self.slot_id; m.is_upper_position=self.is_upper; m.assigned_target_id=self.target.target_id if self.target else ''; self.state_pub.publish(m)
+
+def main(args=None):
+    rclpy.init(args=args); n=UAVNode(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_vehicles/wildlife_vehicles/ugv_node.py ===
+import math
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import UGVState, DroneState, DeploymentRequest
+
+class UGVNode(Node):
+    def __init__(self):
+        super().__init__('ugv_manager')
+        self.declare_parameter('deployment_mode','SINGLE'); self.declare_parameter('waypoints',[0.,0.,20.,0.,20.,20.])
+        self.declare_parameter('speed',1.5); self.declare_parameter('arrival_tolerance',0.5)
+        self.declare_parameter('deploy_at_waypoint_indices',[0]); self.declare_parameter('publish_rate_hz',10.0)
+        flat=list(self.get_parameter('waypoints').value); self.waypoints=list(zip(flat[::2],flat[1::2]))
+        self.mode=str(self.get_parameter('deployment_mode').value); self.speed=float(self.get_parameter('speed').value)
+        self.tol=float(self.get_parameter('arrival_tolerance').value); self.deploy_at=set(int(x) for x in self.get_parameter('deploy_at_waypoint_indices').value)
+        self.rate=float(self.get_parameter('publish_rate_hz').value)
+        self.x,self.y=self.waypoints[0] if self.waypoints else (0.,0.); self.idx=0; self.state=UGVState.IDLE; self.deployment_sent=set()
+        self.deployed=set(); self.docked=set()
+        self.state_pub=self.create_publisher(UGVState,'/ugv/state',20); self.deploy_pub=self.create_publisher(DeploymentRequest,'/ugv/deployment_request',10)
+        self.create_subscription(DroneState,'/drones/state',self.drone_cb,50); self.create_timer(1.0/self.rate,self.tick)
+    def drone_cb(self,m):
+        if m.state in (DroneState.LAUNCHING,DroneState.TAKEOFF,DroneState.SEARCHING,DroneState.TARGET_DETECTED,DroneState.STANDOFF,DroneState.AWAITING_OPERATOR,DroneState.RETURNING,DroneState.DOCKING,DroneState.DOCKED): self.deployed.add(m.drone_id)
+        if m.state==DroneState.DOCKED: self.docked.add(m.drone_id)
+    def tick(self):
+        if not self.waypoints: self.state=UGVState.MISSION_COMPLETE; self.publish(); return
+        if self.idx>=len(self.waypoints): self.state=UGVState.MISSION_COMPLETE; self.publish(); return
+        tx,ty=self.waypoints[self.idx]; d=math.hypot(tx-self.x,ty-self.y)
+        if d<=self.tol:
+            self.x,self.y=tx,ty
+            if self.idx in self.deploy_at and self.idx not in self.deployment_sent:
+                req=DeploymentRequest(); req.header.stamp=self.get_clock().now().to_msg(); req.waypoint_index=self.idx; req.deployment_mode=self.mode
+                req.slot_ids=[]; self.deploy_pub.publish(req); self.deployment_sent.add(self.idx); self.state=UGVState.DEPLOYING
+            else: self.state=UGVState.ARRIVED
+            if self.idx < len(self.waypoints)-1: self.idx+=1
+            else: self.idx+=1
+        else:
+            self.state=UGVState.MOVING; step=min(self.speed/self.rate,d); self.x+=step*(tx-self.x)/d; self.y+=step*(ty-self.y)/d
+        self.publish()
+    def publish(self):
+        m=UGVState(); m.header.stamp=self.get_clock().now().to_msg(); m.state=self.state; m.pose.pose.position.x=self.x; m.pose.pose.position.y=self.y
+        m.current_waypoint_index=max(0,self.idx-1); m.drones_deployed=len(self.deployed); m.drones_docked=len(self.docked); m.deployment_mode=self.mode; self.state_pub.publish(m)
+
+def main(args=None):
+    rclpy.init(args=args); n=UGVNode(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_vehicles/wildlife_vehicles/deployment_node.py ===
+import time
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import DroneCommand, UGVState, DeploymentRequest, TraySlot
+
+TRAY={1:('uav01','uav02'),2:('uav03','uav04'),3:('uav05','uav06'),4:('uav07','uav08')}
+
+class DeploymentNode(Node):
+    def __init__(self):
+        super().__init__('deployment_manager')
+        self.declare_parameter('inter_drone_delay',3.0); self.declare_parameter('deployment_mode','SINGLE')
+        self.delay=float(self.get_parameter('inter_drone_delay').value); self.default_mode=str(self.get_parameter('deployment_mode').value)
+        self.cmd_pub=self.create_publisher(DroneCommand,'/deployment/commands',20); self.status_pub=self.create_publisher(TraySlot,'/deployment/status',20)
+        self.create_subscription(DeploymentRequest,'/ugv/deployment_request',self.request_cb,10)
+        self.sent=set(); self.pending=[]; self.last_send=0.0; self.active_slots=set(); self.create_timer(0.1,self.tick)
+    def request_cb(self,msg):
+        mode=msg.deployment_mode or self.default_mode; wp=int(msg.waypoint_index)
+        if mode=='SINGLE' and wp==0: slots=[1,2,3,4]
+        elif mode=='SPLIT' and wp==0: slots=[1,2]
+        elif mode=='SPLIT' and wp==1: slots=[3,4]
+        else: slots=[]
+        for slot in slots:
+            u,l=TRAY[slot]
+            for did,upper in ((u,True),(l,False)):
+                if did not in self.sent and did not in self.pending: self.pending.append((did,slot,upper))
+        self.get_logger().info(f'Deployment request WP{wp} mode={mode}: {slots}')
+    def tick(self):
+        if not self.pending or time.monotonic()-self.last_send < self.delay: return
+        did,slot,upper=self.pending.pop(0)
+        if did in self.sent: return
+        cmd=DroneCommand(); cmd.drone_id=did; cmd.command=DroneCommand.LAUNCH; self.cmd_pub.publish(cmd); self.sent.add(did); self.active_slots.add(slot); self.last_send=time.monotonic()
+        self.publish_slot(slot); self.get_logger().info(f'Launch command: {did} slot={slot} {"UPPER" if upper else "LOWER"}')
+    def publish_slot(self,slot):
+        u,l=TRAY[slot]; m=TraySlot(); m.slot_id=slot; m.upper_drone=u; m.lower_drone=l; m.upper_launched=u in self.sent; m.lower_launched=l in self.sent; self.status_pub.publish(m)
+
+def main(args=None):
+    rclpy.init(args=args); n=DeploymentNode(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_vehicles/wildlife_vehicles/__init__.py ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_vehicles/wildlife_vehicles/docking_node.py ===
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import DroneState, TraySlot
+TRAY={1:('uav01','uav02'),2:('uav03','uav04'),3:('uav05','uav06'),4:('uav07','uav08')}
+class DockingNode(Node):
+    def __init__(self):
+        super().__init__('docking_manager'); self.declare_parameter('report_period',5.0); self.docked=set(); self.states={}
+        self.pub=self.create_publisher(TraySlot,'/docking/status',10); self.create_subscription(DroneState,'/drones/state',self.cb,50); self.create_timer(float(self.get_parameter('report_period').value),self.report)
+    def cb(self,m): self.states[m.drone_id]=m; self.docked.add(m.drone_id) if m.state==DroneState.DOCKED else None
+    def report(self):
+        for slot,(u,l) in TRAY.items():
+            m=TraySlot(); m.slot_id=slot; m.upper_drone=u; m.lower_drone=l; m.upper_docked=u in self.docked; m.lower_docked=l in self.docked; self.pub.publish(m)
+        self.get_logger().info(f'Docked total: {len(self.docked)}/8')
+def main(args=None):
+    rclpy.init(args=args); n=DockingNode(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_vehicles/package.xml ===
+<?xml version="1.0"?><package format="3"><name>wildlife_vehicles</name><version>0.2.0</version>
+<description>UGV, UAV, deployment and docking managers.</description><maintainer email="student@university.edu">Student</maintainer><license>Apache-2.0</license>
+<buildtool_depend>ament_python</buildtool_depend><depend>rclpy</depend><depend>geometry_msgs</depend><depend>wildlife_interfaces</depend>
+<export><build_type>ament_python</build_type></export></package>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_vehicles/setup.py ===
+from glob import glob
+from setuptools import find_packages, setup
+
+package_name = 'wildlife_vehicles'
+
+setup(
+    name=package_name,
+    version='0.2.0',
+    packages=find_packages(exclude=['test']),
+    data_files=[
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/params', glob('params/*.yaml')),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    entry_points={
+        'console_scripts': [
+            'ugv_node = wildlife_vehicles.ugv_node:main',
+            'deployment_node = wildlife_vehicles.deployment_node:main',
+            'uav_node = wildlife_vehicles.uav_node:main',
+            'docking_node = wildlife_vehicles.docking_node:main',
+        ],
+    },
+)
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_vehicles/resource/wildlife_vehicles ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_vehicles/params/vehicles.yaml ===
+ugv_manager:
+  ros__parameters:
+    deployment_mode: "SINGLE"
+    waypoints: [0.0, 0.0, 20.0, 0.0, 20.0, 20.0]
+    speed: 1.5
+    arrival_tolerance: 0.5
+    deploy_at_waypoint_indices: [0]
+    publish_rate_hz: 10.0
+
+deployment_manager:
+  ros__parameters:
+    inter_drone_delay: 3.0
+    deployment_mode: "SINGLE"
+
+docking_manager:
+  ros__parameters:
+    report_period: 5.0
+
+uav_defaults:
+  ros__parameters:
+    search_altitude: 10.0
+    standoff_distance: 12.0
+    search_speed: 1.2
+    loiter_duration: 20.0
+    search_timeout: 90.0
+    battery_drain_per_second: 0.15
+    lane_spacing: 5.0
+    search_half_width: 30.0
+    standoff_altitude_offset: 3.0
+    motion_tolerance: 0.5
+    home_x: 0.0
+    home_y: 0.0
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_vehicles/setup.cfg ===
+[develop]
+script_dir=$base/lib/wildlife_vehicles
+[install]
+install_scripts=$base/lib/wildlife_vehicles
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_mission/wildlife_mission/operator_interface.py ===
+import threading, datetime
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import Target, OperatorAlert
+from wildlife_interfaces.srv import OperatorDecision
+class OperatorInterface(Node):
+    def __init__(self):
+        super().__init__('operator_interface'); self.declare_parameter('input_enabled',True); self.pending={}; self.pub=self.create_publisher(Target,'/targets/operator_decision',20); self.create_service(OperatorDecision,'/operator/decision',self.service_cb); self.create_subscription(OperatorAlert,'/operator/alerts',self.alert_cb,20)
+        if bool(self.get_parameter('input_enabled').value): threading.Thread(target=self.keyboard_loop,daemon=True).start()
+        self.get_logger().info('Operator interface ready: r <drone_id> = RETURN; h <drone_id> = CONTINUE HOLD')
+    def alert_cb(self,a):
+        if a.severity!=OperatorAlert.ACTION_REQUIRED: return
+        self.pending[a.drone_id]=a
+        print(
+            f"\n[OPERATOR ACTION] drone={a.drone_id} target={a.target_id} "
+            f"class={a.target_class} confidence={a.confidence:.0%} "
+            f"position=({a.target_position.x:.1f},{a.target_position.y:.1f})\n"
+            f"  r {a.drone_id} -> RETURN\n"
+            f"  h {a.drone_id} -> CONTINUE HOLD\n"
+        )
+    def keyboard_loop(self):
+        while rclpy.ok():
+            try: parts=input().strip().split()
+            except EOFError: return
+            if len(parts)==2 and parts[0].lower() in ('r','h'): self.apply(parts[1],OperatorDecision.Request.RETURN if parts[0].lower()=='r' else OperatorDecision.Request.CONTINUE_HOLD)
+    def service_cb(self,req,res):
+        ok=self.apply(req.assigned_drone_id,req.decision,req.target_id); res.accepted=ok; res.message='Decision applied' if ok else 'No pending alert for drone/target'; res.timestamp=datetime.datetime.now(datetime.timezone.utc).isoformat(); return res
+    def apply(self,drone_id,decision,target_id=''):
+        a=self.pending.get(drone_id)
+        if a is None or (target_id and a.target_id!=target_id): self.get_logger().warning(f'No pending alert for {drone_id} target={target_id}'); return False
+        t=Target(); t.header.stamp=self.get_clock().now().to_msg(); t.target_id=a.target_id; t.assigned_drone_id=drone_id; t.operator_notified=True; t.status=Target.CLEARED if decision==OperatorDecision.Request.RETURN else Target.STANDOFF_HOLD; self.pub.publish(t); self.pending.pop(drone_id,None); self.get_logger().info(f'Operator decision {drone_id}: {"RETURN" if t.status==Target.CLEARED else "CONTINUE HOLD"}'); return True
+def main(args=None):
+    rclpy.init(args=args); n=OperatorInterface(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_mission/wildlife_mission/mission_manager.py ===
+import time
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import DroneState, UGVState, Target, OperatorAlert, DroneCommand
+from wildlife_interfaces.srv import MissionControl
+class Phase:
+    INIT='INIT'; DEPLOYING='DEPLOYING'; SEARCHING='SEARCHING'; TARGET_FOUND='TARGET_FOUND'; AWAITING_OPERATOR='AWAITING_OPERATOR'; RESOLVING='RESOLVING'; COMPLETE='COMPLETE'; PAUSED='PAUSED'; ABORTED='ABORTED'
+class MissionManager(Node):
+    def __init__(self):
+        super().__init__('mission_manager'); self.declare_parameter('status_period',1.0); self.declare_parameter('expected_drones',8); self.phase=Phase.INIT; self.mission_id=f'M_{int(time.time())}'; self.drones={}; self.targets={}
+        self.status_pub=self.create_publisher(__import__('std_msgs.msg',fromlist=['String']).String,'/mission/status',10); self.cmd_pub=self.create_publisher(DroneCommand,'/mission/drone_commands',20)
+        self.create_service(MissionControl,'/mission/control',self.control_cb); self.create_subscription(UGVState,'/ugv/state',self.ugv_cb,20); self.create_subscription(DroneState,'/drones/state',self.drone_cb,50); self.create_subscription(Target,'/targets/assigned',self.target_cb,20); self.create_subscription(OperatorAlert,'/operator/alerts',self.alert_cb,20); self.create_subscription(Target,'/targets/operator_decision',self.decision_cb,20); self.create_timer(float(self.get_parameter('status_period').value),self.status)
+    def control_cb(self,req,res):
+        if req.command==MissionControl.Request.START: self.phase=Phase.DEPLOYING; self.broadcast(DroneCommand.RESUME)
+        elif req.command==MissionControl.Request.PAUSE: self.phase=Phase.PAUSED; self.broadcast(DroneCommand.HOLD_POSITION)
+        elif req.command==MissionControl.Request.ABORT: self.phase=Phase.ABORTED; self.broadcast(DroneCommand.RETURN_HOME)
+        elif req.command==MissionControl.Request.RESET: self.phase=Phase.INIT; self.drones.clear(); self.targets.clear()
+        else: res.accepted=False; res.mission_id=self.mission_id; res.message='Unknown command'; return res
+        res.accepted=True; res.mission_id=self.mission_id; res.message=f'Command {req.command} applied'; return res
+    def broadcast(self,cmd):
+        for did,d in self.drones.items():
+            if d.state not in (DroneState.STORED,DroneState.DOCKED):
+                m=DroneCommand(); m.drone_id=did; m.command=cmd; self.cmd_pub.publish(m)
+    def ugv_cb(self,m):
+        if m.state==UGVState.DEPLOYING and self.phase==Phase.INIT: self.phase=Phase.DEPLOYING
+    def drone_cb(self,m):
+        self.drones[m.drone_id]=m
+        if self.phase==Phase.DEPLOYING and any(d.state==DroneState.SEARCHING for d in self.drones.values()): self.phase=Phase.SEARCHING
+        if self.phase==Phase.ABORTED and all(d.state in (DroneState.DOCKED,DroneState.STORED) for d in self.drones.values()): self.phase=Phase.COMPLETE
+    def target_cb(self,m): self.targets[m.target_id]=m; self.phase=Phase.TARGET_FOUND if self.phase==Phase.SEARCHING else self.phase
+    def alert_cb(self,m):
+        if m.severity==OperatorAlert.ACTION_REQUIRED: self.phase=Phase.AWAITING_OPERATOR
+    def decision_cb(self,m):
+        if m.target_id in self.targets: self.targets[m.target_id].status=m.status
+        if not any(d.state==DroneState.AWAITING_OPERATOR for d in self.drones.values()) and self.phase==Phase.AWAITING_OPERATOR: self.phase=Phase.RESOLVING
+    def status(self):
+        s=sum(d.state==DroneState.SEARCHING for d in self.drones.values()); w=sum(d.state==DroneState.AWAITING_OPERATOR for d in self.drones.values()); r=sum(d.state==DroneState.RETURNING for d in self.drones.values()); k=sum(d.state==DroneState.DOCKED for d in self.drones.values()); line=f'[{self.mission_id}] Phase={self.phase} Targets={len(self.targets)} Searching={s} Awaiting={w} Returning={r} Docked={k}/{int(self.get_parameter("expected_drones").value)}'; self.get_logger().info(line); from std_msgs.msg import String; m=String(); m.data=line; self.status_pub.publish(m)
+def main(args=None):
+    rclpy.init(args=args); n=MissionManager(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_mission/wildlife_mission/__init__.py ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_mission/package.xml ===
+<?xml version="1.0"?><package format="3"><name>wildlife_mission</name><version>0.2.0</version><description>Mission lifecycle and human-in-the-loop operator interface.</description><maintainer email="student@university.edu">Student</maintainer><license>Apache-2.0</license><buildtool_depend>ament_python</buildtool_depend><depend>rclpy</depend><depend>std_msgs</depend><depend>wildlife_interfaces</depend><export><build_type>ament_python</build_type></export></package>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_mission/setup.py ===
+from glob import glob
+from setuptools import find_packages, setup
+
+package_name = 'wildlife_mission'
+
+setup(
+    name=package_name,
+    version='0.2.0',
+    packages=find_packages(exclude=['test']),
+    data_files=[
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/params', glob('params/*.yaml')),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    entry_points={
+        'console_scripts': [
+            'mission_manager = wildlife_mission.mission_manager:main',
+            'operator_interface = wildlife_mission.operator_interface:main',
+        ],
+    },
+)
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_mission/resource/wildlife_mission ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_mission/params/mission.yaml ===
+mission_manager:
+  ros__parameters:
+    status_period: 1.0
+    expected_drones: 8
+operator_interface:
+  ros__parameters:
+    input_enabled: true
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_mission/setup.cfg ===
+[develop]
+script_dir=$base/lib/wildlife_mission
+[install]
+install_scripts=$base/lib/wildlife_mission
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_core/package.xml ===
+<?xml version="1.0"?><package format="3">
+<name>wildlife_core</name><version>0.2.0</version>
+<description>Shared geometry, visualization and common ROS 2 utilities.</description>
+<maintainer email="student@university.edu">Student</maintainer><license>Apache-2.0</license>
+<buildtool_depend>ament_python</buildtool_depend>
+<depend>rclpy</depend><depend>geometry_msgs</depend><depend>visualization_msgs</depend><depend>wildlife_interfaces</depend>
+<export><build_type>ament_python</build_type></export></package>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_core/wildlife_core/visualization_node.py ===
+import math
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Point
+from visualization_msgs.msg import Marker, MarkerArray
+from wildlife_interfaces.msg import DroneState, UGVState, Target
+
+class VisualizationNode(Node):
+    """Publish standard RViz MarkerArray from custom project state topics."""
+    def __init__(self):
+        super().__init__('wildlife_visualization')
+        self.declare_parameter('standoff_radius', 12.0)
+        self.declare_parameter('drone_marker_scale', 0.8)
+        self.declare_parameter('target_marker_scale', 1.0)
+        self.standoff_radius=float(self.get_parameter('standoff_radius').value)
+        self.drone_scale=float(self.get_parameter('drone_marker_scale').value)
+        self.target_scale=float(self.get_parameter('target_marker_scale').value)
+        self.drones={}; self.targets={}; self.ugv=None
+        self.pub=self.create_publisher(MarkerArray,'/visualization/markers',10)
+        self.create_subscription(DroneState,'/drones/state',self.drone_cb,50)
+        self.create_subscription(Target,'/targets/registry',self.target_cb,20)
+        self.create_subscription(UGVState,'/ugv/state',self.ugv_cb,20)
+        self.create_timer(0.2,self.publish_markers)
+    def drone_cb(self,m): self.drones[m.drone_id]=m
+    def target_cb(self,m): self.targets[m.target_id]=m
+    def ugv_cb(self,m): self.ugv=m
+    def marker(self, mid, ns, mtype, x,y,z, sx,sy,sz):
+        m=Marker(); m.header.frame_id='map'; m.header.stamp=self.get_clock().now().to_msg()
+        m.ns=ns; m.id=mid; m.type=mtype; m.action=Marker.ADD
+        m.pose.position.x=x; m.pose.position.y=y; m.pose.position.z=z
+        m.pose.orientation.w=1.0; m.scale.x=sx; m.scale.y=sy; m.scale.z=sz
+        m.color.a=0.85
+        return m
+    def publish_markers(self):
+        arr=MarkerArray(); idx=0
+        for did,d in sorted(self.drones.items()):
+            p=d.pose.pose.position
+            m=self.marker(idx,'drones',Marker.CUBE,p.x,p.y,p.z,self.drone_scale,self.drone_scale,self.drone_scale)
+            arr.markers.append(m); idx+=1
+            t=Marker(); t.header=m.header; t.ns='drone_labels'; t.id=idx; t.type=Marker.TEXT_VIEW_FACING; t.action=Marker.ADD
+            t.pose.position.x=p.x; t.pose.position.y=p.y; t.pose.position.z=p.z+1.0; t.scale.z=0.6; t.color.a=1.0; t.text=did; arr.markers.append(t); idx+=1
+        for tid,t in sorted(self.targets.items()):
+            p=t.pose.pose.position
+            m=self.marker(idx,'targets',Marker.SPHERE,p.x,p.y,p.z+0.2,self.target_scale,self.target_scale,self.target_scale)
+            arr.markers.append(m); idx+=1
+            c=self.marker(idx,'standoff',Marker.CYLINDER,p.x,p.y,p.z+0.02,self.standoff_radius*2,self.standoff_radius*2,0.05)
+            arr.markers.append(c); idx+=1
+        if self.ugv:
+            p=self.ugv.pose.pose.position
+            arr.markers.append(self.marker(idx,'ugv',Marker.CUBE,p.x,p.y,p.z+0.5,2.0,1.4,1.0))
+        self.pub.publish(arr)
+
+def main(args=None):
+    rclpy.init(args=args); n=VisualizationNode(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_core/wildlife_core/math_utils.py ===
+import math
+import rclpy
+from rclpy.node import Node
+
+def distance_xy(a, b):
+    return math.hypot(a.x - b.x, a.y - b.y)
+
+class CoreHeartbeat(Node):
+    def __init__(self):
+        super().__init__("wildlife_core_heartbeat")
+        self.timer = self.create_timer(5.0, lambda: self.get_logger().info("core online"))
+
+def main():
+    rclpy.init()
+    n = CoreHeartbeat()
+    rclpy.spin(n)
+    n.destroy_node()
+    rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_core/wildlife_core/__init__.py ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_core/setup.py ===
+from glob import glob
+from setuptools import find_packages, setup
+
+package_name = 'wildlife_core'
+
+setup(
+    name=package_name,
+    version='0.2.0',
+    packages=find_packages(exclude=['test']),
+    data_files=[
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/config', glob('params/*.yaml')),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    entry_points={
+        'console_scripts': [
+            'visualization_node = wildlife_core.visualization_node:main',
+        ],
+    },
+)
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_core/resource/wildlife_core ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_core/setup.cfg ===
+[develop]
+script_dir=$base/lib/wildlife_core
+[install]
+install_scripts=$base/lib/wildlife_core
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_perception/package.xml ===
+<?xml version="1.0"?><package format="3"><name>wildlife_perception</name><version>0.2.0</version><description>Simulation and optional OpenCV perception pipeline.</description><maintainer email="student@university.edu">Student</maintainer><license>Apache-2.0</license><buildtool_depend>ament_python</buildtool_depend><depend>rclpy</depend><depend>wildlife_interfaces</depend><exec_depend>sensor_msgs</exec_depend><exec_depend>cv_bridge</exec_depend><export><build_type>ament_python</build_type></export></package>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_perception/setup.py ===
+from glob import glob
+from setuptools import find_packages, setup
+
+package_name = 'wildlife_perception'
+
+setup(
+    name=package_name,
+    version='0.2.0',
+    packages=find_packages(exclude=['test']),
+    data_files=[
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/params', glob('params/*.yaml')),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    entry_points={
+        'console_scripts': [
+            'detector_sim = wildlife_perception.detector_sim:main',
+            'opencv_detector = wildlife_perception.opencv_detector:main',
+        ],
+    },
+)
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_perception/resource/wildlife_perception ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_perception/wildlife_perception/opencv_detector.py ===
+"""Optional OpenCV detector for the v0.2 camera path.
+
+This is intentionally a lightweight dummy-target detector: it looks for a saturated
+colored blob in an incoming image and publishes a Detection. It provides the real
+camera/OpenCV plumbing without pretending YOLO is already integrated.
+"""
+import math
+import cv2
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+from wildlife_interfaces.msg import Detection
+from geometry_msgs.msg import Point
+
+class OpenCVDetector(Node):
+    def __init__(self):
+        super().__init__('opencv_detector')
+        self.declare_parameter('drone_id','uav01')
+        self.declare_parameter('target_class','dummy_animal')
+        self.declare_parameter('min_area',250.0)
+        self.declare_parameter('camera_height_m',10.0)
+        self.declare_parameter('hfov_deg',78.0)
+        self.did=self.get_parameter('drone_id').value
+        self.cls=self.get_parameter('target_class').value
+        self.bridge=CvBridge(); self.seq=0
+        self.pub=self.create_publisher(Detection,f'/drones/{self.did}/detections',10)
+        self.sub=self.create_subscription(Image,f'/drones/{self.did}/camera/image_raw',self.image_cb,10)
+        self.get_logger().info(f'OpenCV camera detector ready for {self.did}')
+    def image_cb(self,msg):
+        try: frame=self.bridge.imgmsg_to_cv2(msg,desired_encoding='bgr8')
+        except Exception as exc:
+            self.get_logger().warning(f'cv_bridge: {exc}'); return
+        hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
+        mask=cv2.inRange(hsv,(0,80,80),(35,255,255))
+        contours,_=cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+        if not contours:return
+        c=max(contours,key=cv2.contourArea); area=cv2.contourArea(c)
+        if area<float(self.get_parameter('min_area').value):return
+        x,y,w,h=cv2.boundingRect(c); cx=x+w/2.0
+        fov=math.radians(float(self.get_parameter('hfov_deg').value)); bearing=((cx/frame.shape[1])-0.5)*fov
+        d=Detection(); d.header=msg.header; d.drone_id=self.did; d.detection_id=f'{self.did}_cv_{self.seq:06d}'; self.seq+=1
+        d.target_class=self.cls; d.confidence=min(0.99,0.5+area/(frame.shape[0]*frame.shape[1]))
+        # Camera-frame bearing is preserved as a simple local/world demo convention.
+        d.position_world=Point(x=float(self.get_parameter('camera_height_m').value)*math.tan(bearing),y=0.0,z=0.0)
+        d.covariance_xx=4.0; d.covariance_yy=4.0; d.distance_from_drone=float(self.get_parameter('camera_height_m').value)
+        self.pub.publish(d)
+
+def main():
+    rclpy.init(); n=OpenCVDetector(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_perception/wildlife_perception/detector_sim.py ===
+import math, random, time
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import Detection, DroneState
+class DetectorSim(Node):
+    def __init__(self):
+        super().__init__('perception_detector')
+        for k,v in {'drone_id':'uav01','detection_range':18.0,'detection_probability':0.55,'confidence_noise_sigma':0.03,'position_noise_sigma':0.25,'confidence_threshold':0.50,'publish_period':1.0,'target_positions':[15.,12.,25.,8.],'target_classes':['dummy_animal','dummy_animal']}.items(): self.declare_parameter(k,v)
+        g=lambda k:self.get_parameter(k).value; self.id=str(g('drone_id')); self.range=float(g('detection_range')); self.prob=float(g('detection_probability')); self.csig=float(g('confidence_noise_sigma')); self.psig=float(g('position_noise_sigma')); self.thr=float(g('confidence_threshold')); self.x=self.y=self.z=0.; self.state=DroneState.STORED
+        flat=list(g('target_positions')); classes=list(g('target_classes')); self.targets=[(f'dummy_{i+1:03d}',classes[i] if i<len(classes) else 'dummy_animal',float(x),float(y)) for i,(x,y) in enumerate(zip(flat[::2],flat[1::2]))]
+        self.pub=self.create_publisher(Detection,f'/drones/{self.id}/detections',20); self.create_subscription(DroneState,'/drones/state',self.state_cb,50); self.create_timer(float(g('publish_period')),self.tick)
+    def state_cb(self,m):
+        if m.drone_id==self.id: self.x=m.pose.pose.position.x; self.y=m.pose.pose.position.y; self.z=m.pose.pose.position.z; self.state=m.state
+    def tick(self):
+        if self.state not in (DroneState.SEARCHING,DroneState.STANDOFF): return
+        for tid,cls,tx,ty in self.targets:
+            d=math.hypot(tx-self.x,ty-self.y)
+            if d>self.range or random.random()>self.prob: continue
+            conf=max(0.,min(1.,1.-d/self.range+random.gauss(0,self.csig)))
+            if conf<self.thr: continue
+            m=Detection(); m.header.stamp=self.get_clock().now().to_msg(); m.drone_id=self.id; m.detection_id=f'{self.id}_{tid}_{time.time_ns()}'; m.target_class=cls; m.confidence=conf; m.position_world.x=tx+random.gauss(0,self.psig); m.position_world.y=ty+random.gauss(0,self.psig); m.position_world.z=0.; m.covariance_xx=self.psig**2; m.covariance_yy=self.psig**2; m.distance_from_drone=d; self.pub.publish(m)
+def main(args=None):
+    rclpy.init(args=args); n=DetectorSim(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_perception/wildlife_perception/__init__.py ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_perception/params/perception.yaml ===
+/**:
+  ros__parameters:
+    detector_backend: sim
+    confidence_threshold: 0.65
+    camera_topic_suffix: /camera/image_raw
+    opencv:
+      min_area: 250.0
+      camera_height_m: 10.0
+      hfov_deg: 78.0
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_perception/setup.cfg ===
+[develop]
+script_dir=$base/lib/wildlife_perception
+[install]
+install_scripts=$base/lib/wildlife_perception
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_targets/package.xml ===
+<?xml version="1.0"?><package format="3"><name>wildlife_targets</name><version>0.2.0</version><description>Detection aggregation, tracking, target fusion and lifecycle registry.</description><maintainer email="student@university.edu">Student</maintainer><license>Apache-2.0</license><buildtool_depend>ament_python</buildtool_depend><depend>rclpy</depend><depend>wildlife_interfaces</depend><export><build_type>ament_python</build_type></export></package>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_targets/setup.py ===
+from glob import glob
+from setuptools import find_packages, setup
+
+package_name = 'wildlife_targets'
+
+setup(
+    name=package_name,
+    version='0.2.0',
+    packages=find_packages(exclude=['test']),
+    data_files=[
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/params', glob('params/*.yaml')),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    entry_points={
+        'console_scripts': [
+            'detection_mux = wildlife_targets.detection_mux:main',
+            'tracker = wildlife_targets.tracker:main',
+            'target_manager = wildlife_targets.target_manager:main',
+        ],
+    },
+)
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_targets/resource/wildlife_targets ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_targets/wildlife_targets/tracker.py ===
+import math, time
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import Detection, Target
+class Track:
+    def __init__(self,det,tid,alpha):
+        self.tid=tid; self.cls=det.target_class; self.x=det.position_world.x; self.y=det.position_world.y; self.conf=det.confidence; self.covx=det.covariance_xx; self.covy=det.covariance_yy; self.witnesses={det.drone_id}; self.count=1; self.last=time.monotonic(); self.alpha=alpha
+    def update(self,det):
+        self.x=(1-self.alpha)*self.x+self.alpha*det.position_world.x; self.y=(1-self.alpha)*self.y+self.alpha*det.position_world.y; self.conf=max(self.conf,det.confidence); self.covx=max(.01,self.covx*.95); self.covy=max(.01,self.covy*.95); self.witnesses.add(det.drone_id); self.count+=1; self.last=time.monotonic()
+class Tracker(Node):
+    def __init__(self):
+        super().__init__('target_tracker'); self.declare_parameter('gate_radius',3.0); self.declare_parameter('alpha',.25); self.declare_parameter('stale_timeout',15.0); self.declare_parameter('minimum_confidence',.5); self.declare_parameter('report_period',5.0)
+        self.gate=float(self.get_parameter('gate_radius').value); self.alpha=float(self.get_parameter('alpha').value); self.timeout=float(self.get_parameter('stale_timeout').value); self.min_conf=float(self.get_parameter('minimum_confidence').value); self.tracks={}; self.next_id=1; self.pub=self.create_publisher(Target,'/targets/tracked',20); self.create_subscription(Detection,'/detections/all',self.cb,50); self.create_timer(float(self.get_parameter('report_period').value),self.expire)
+    def cb(self,d):
+        if d.confidence<self.min_conf: return
+        t=self.associate(d)
+        if t is None: t=Track(d,f'tgt_{self.next_id:03d}',self.alpha); self.next_id+=1; self.tracks[t.tid]=t
+        else: t.update(d)
+        self.publish(t,d.header.stamp)
+    def associate(self,d):
+        best=None; bd=self.gate
+        for t in self.tracks.values():
+            dist=math.hypot(t.x-d.position_world.x,t.y-d.position_world.y)
+            if dist<bd and t.cls==d.target_class: best,bd=t,dist
+        return best
+    def publish(self,t,stamp):
+        m=Target(); m.header.stamp=stamp; m.target_id=t.tid; m.target_class=t.cls; m.confidence=t.conf; m.pose.pose.position.x=t.x; m.pose.pose.position.y=t.y; m.detecting_drones=list(sorted(t.witnesses)); m.status=Target.UNASSIGNED; m.detection_count=t.count; m.fused_covariance_xx=t.covx; m.fused_covariance_yy=t.covy; self.pub.publish(m)
+    def expire(self):
+        now=time.monotonic()
+        for t in list(self.tracks.values()):
+            if now-t.last>self.timeout:
+                m=Target(); m.header.stamp=self.get_clock().now().to_msg(); m.target_id=t.tid; m.target_class=t.cls; m.confidence=t.conf; m.pose.pose.position.x=t.x; m.pose.pose.position.y=t.y; m.detecting_drones=list(sorted(t.witnesses)); m.status=Target.LOST; m.detection_count=t.count; m.fused_covariance_xx=t.covx; m.fused_covariance_yy=t.covy; self.pub.publish(m); del self.tracks[t.tid]
+def main(args=None):
+    rclpy.init(args=args); n=Tracker(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_targets/wildlife_targets/target_manager.py ===
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import Target
+class TargetManager(Node):
+    def __init__(self):
+        super().__init__('target_manager'); self.declare_parameter('report_period',5.0); self.db={}; self.registry_pub=self.create_publisher(Target,'/targets/registry',20); self.unassigned_pub=self.create_publisher(Target,'/targets/unassigned',20); self.create_subscription(Target,'/targets/tracked',self.tracked_cb,30); self.create_subscription(Target,'/targets/assigned',self.assigned_cb,20); self.create_subscription(Target,'/targets/operator_decision',self.decision_cb,20); self.create_timer(float(self.get_parameter('report_period').value),self.report)
+    def tracked_cb(self,t):
+        old=self.db.get(t.target_id)
+        if old and t.status != Target.LOST:
+            t.status=old.status; t.assigned_drone_id=old.assigned_drone_id; t.operator_notified=old.operator_notified
+        self.db[t.target_id]=t; self.publish(t)
+    def assigned_cb(self,t):
+        cur=self.db.get(t.target_id,t); cur.assigned_drone_id=t.assigned_drone_id; cur.status=Target.ASSIGNED; self.db[t.target_id]=cur; self.publish(cur)
+    def decision_cb(self,t):
+        if t.target_id not in self.db: return
+        cur=self.db[t.target_id]; cur.status=t.status; cur.assigned_drone_id=t.assigned_drone_id or cur.assigned_drone_id; cur.operator_notified=True; self.db[t.target_id]=cur; self.publish(cur)
+    def publish(self,t):
+        self.registry_pub.publish(t)
+        if t.status==Target.UNASSIGNED: self.unassigned_pub.publish(t)
+    def report(self):
+        counts={}
+        for t in self.db.values(): counts[t.status]=counts.get(t.status,0)+1
+        self.get_logger().info(f'Target registry: {len(self.db)} targets | {counts}')
+def main(args=None):
+    rclpy.init(args=args); n=TargetManager(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_targets/wildlife_targets/__init__.py ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_targets/wildlife_targets/detection_mux.py ===
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import Detection
+class DetectionMux(Node):
+    def __init__(self):
+        super().__init__('detection_mux'); self.declare_parameter('queue_depth',50); q=int(self.get_parameter('queue_depth').value); self.pub=self.create_publisher(Detection,'/detections/all',q); self.subs=[]
+        for i in range(1,9): self.subs.append(self.create_subscription(Detection,f'/drones/uav{i:02d}/detections',self.cb,q))
+    def cb(self,m): self.pub.publish(m)
+def main(args=None):
+    rclpy.init(args=args); n=DetectionMux(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_targets/params/targets.yaml ===
+detection_mux:
+  ros__parameters:
+    queue_depth: 50
+
+target_tracker:
+  ros__parameters:
+    gate_radius: 3.0
+    alpha: 0.25
+    stale_timeout: 15.0
+    minimum_confidence: 0.50
+    report_period: 5.0
+
+target_manager:
+  ros__parameters:
+    report_period: 5.0
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_targets/setup.cfg ===
+[develop]
+script_dir=$base/lib/wildlife_targets
+[install]
+install_scripts=$base/lib/wildlife_targets
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/CMakeLists.txt ===
+cmake_minimum_required(VERSION 3.8)
+project(wildlife_interfaces)
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/DroneState.msg"
+  "msg/UGVState.msg"
+  "msg/Detection.msg"
+  "msg/Target.msg"
+  "msg/DroneCommand.msg"
+  "msg/TraySlot.msg"
+  "msg/OperatorAlert.msg"
+  "msg/DeploymentRequest.msg"
+  "srv/OperatorDecision.srv"
+  "srv/DeployDrone.srv"
+  "srv/MissionControl.srv"
+  "action/NavigateWaypoints.action"
+  "action/SearchArea.action"
+  DEPENDENCIES std_msgs geometry_msgs
+)
+ament_package()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/action/NavigateWaypoints.action ===
+geometry_msgs/PoseStamped[] waypoints
+float32 speed
+---
+bool success
+uint32 waypoints_completed
+---
+uint32 current_waypoint
+float32 distance_to_next
+geometry_msgs/PoseStamped current_pose
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/action/SearchArea.action ===
+geometry_msgs/Polygon search_area
+float32 altitude
+float32 search_speed
+string pattern
+---
+bool target_found
+string target_id
+geometry_msgs/Point target_position
+---
+float32 coverage_percent
+geometry_msgs/Point current_position
+uint32 detections_count
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/package.xml ===
+<?xml version="1.0"?>
+<package format="3">
+  <name>wildlife_interfaces</name><version>0.2.0</version>
+  <description>Typed ROS 2 interfaces for the academic multi-UAV/UGV simulation.</description>
+  <maintainer email="student@university.edu">Student</maintainer><license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+  <depend>std_msgs</depend><depend>geometry_msgs</depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+  <export><build_type>ament_cmake</build_type></export>
+</package>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/srv/OperatorDecision.srv ===
+string target_id
+string assigned_drone_id
+uint8 decision
+uint8 RETURN=0
+uint8 CONTINUE_HOLD=1
+string operator_notes
+---
+bool accepted
+string message
+string timestamp
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/srv/DeployDrone.srv ===
+string drone_id
+uint8 slot_id
+bool is_upper
+geometry_msgs/Pose launch_pose
+---
+bool success
+string message
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/srv/MissionControl.srv ===
+uint8 command
+uint8 START=0
+uint8 PAUSE=1
+uint8 ABORT=2
+uint8 RESET=3
+string operator_id
+---
+bool accepted
+string mission_id
+string message
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/msg/Target.msg ===
+std_msgs/Header header
+string target_id
+string target_class
+float32 confidence
+geometry_msgs/PoseStamped pose
+geometry_msgs/Twist velocity_estimate
+string[] detecting_drones
+string assigned_drone_id
+uint8 status
+uint8 UNASSIGNED=0
+uint8 ASSIGNED=1
+uint8 STANDOFF_HOLD=2
+uint8 AWAITING_OPERATOR=3
+uint8 CLEARED=4
+uint8 LOST=5
+bool operator_notified
+uint32 detection_count
+float32 fused_covariance_xx
+float32 fused_covariance_yy
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/msg/OperatorAlert.msg ===
+std_msgs/Header header
+string alert_id
+string drone_id
+string target_id
+string target_class
+float32 confidence
+geometry_msgs/Point target_position
+string alert_message
+uint8 severity
+uint8 INFO=0
+uint8 WARNING=1
+uint8 ACTION_REQUIRED=2
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/msg/DeploymentRequest.msg ===
+std_msgs/Header header
+uint32 waypoint_index
+string deployment_mode
+uint8[] slot_ids
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/msg/Detection.msg ===
+std_msgs/Header header
+string drone_id
+string detection_id
+string target_class
+float32 confidence
+geometry_msgs/Point position_world
+float32 covariance_xx
+float32 covariance_yy
+float32 distance_from_drone
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/msg/DroneCommand.msg ===
+string drone_id
+uint8 command
+uint8 LAUNCH=0
+uint8 RETURN_HOME=1
+uint8 HOLD_POSITION=2
+uint8 GO_TO_STANDOFF=3
+uint8 RESUME=4
+geometry_msgs/Point target_position
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/msg/TraySlot.msg ===
+uint8 slot_id
+string upper_drone
+string lower_drone
+bool upper_launched
+bool lower_launched
+bool upper_docked
+bool lower_docked
+geometry_msgs/Pose dock_pose_upper
+geometry_msgs/Pose dock_pose_lower
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/msg/UGVState.msg ===
+std_msgs/Header header
+uint8 state
+uint8 IDLE=0
+uint8 MOVING=1
+uint8 ARRIVED=2
+uint8 DEPLOYING=3
+uint8 WAITING=4
+uint8 MISSION_COMPLETE=5
+geometry_msgs/PoseStamped pose
+uint32 current_waypoint_index
+uint32 drones_deployed
+uint32 drones_docked
+string deployment_mode
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_interfaces/msg/DroneState.msg ===
+std_msgs/Header header
+string drone_id
+uint8 state
+uint8 STORED=0
+uint8 LAUNCHING=1
+uint8 TAKEOFF=2
+uint8 SEARCHING=3
+uint8 TARGET_DETECTED=4
+uint8 STANDOFF=5
+uint8 AWAITING_OPERATOR=6
+uint8 RETURNING=7
+uint8 DOCKING=8
+uint8 DOCKED=9
+uint8 LOITERING=10
+uint8 PAUSED=11
+geometry_msgs/PoseStamped pose
+float32 battery_percent
+string assigned_target_id
+float32 standoff_distance
+uint8 slot_id
+bool is_upper_position
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/config/bridge.yaml ===
+# ros_gz_bridge parameter file for v0.2. Topic names stay stable so PX4 can be added later.
+- ros_topic_name: /clock
+  gz_topic_name: /clock
+  ros_type_name: rosgraph_msgs/msg/Clock
+  gz_type_name: gz.msgs.Clock
+  direction: GZ_TO_ROS
+- ros_topic_name: /ugv/cmd_vel
+  gz_topic_name: /ugv/cmd_vel
+  ros_type_name: geometry_msgs/msg/Twist
+  gz_type_name: gz.msgs.Twist
+  direction: ROS_TO_GZ
+- ros_topic_name: /ugv/odom
+  gz_topic_name: /ugv/odom
+  ros_type_name: nav_msgs/msg/Odometry
+  gz_type_name: gz.msgs.Odometry
+  direction: GZ_TO_ROS
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/package.xml ===
+<?xml version="1.0"?><package format="3"><name>wildlife_simulation</name><version>0.2.0</version><description>Gazebo Harmonic assets and simulation orchestration for the wildlife project.</description><maintainer email="student@university.edu">Student</maintainer><license>Apache-2.0</license><buildtool_depend>ament_python</buildtool_depend><exec_depend>ros2launch</exec_depend><exec_depend>geometry_msgs</exec_depend><export><build_type>ament_python</build_type></export></package>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/setup.py ===
+from setuptools import setup
+package_name='wildlife_simulation'
+setup(name=package_name, version='0.2.0', packages=[package_name], data_files=[('share/ament_index/resource_index/packages',['resource/'+package_name]),('share/'+package_name,['package.xml']),('share/'+package_name+'/worlds',['worlds/wildlife_field.sdf']),('share/'+package_name+'/config',['config/bridge.yaml']),('share/'+package_name+'/models/ugv',['models/ugv/model.sdf']),('share/'+package_name+'/models/uav',['models/uav/model.sdf'])], install_requires=['setuptools'], zip_safe=True, entry_points={'console_scripts':['scenario_manager = wildlife_simulation.scenario_manager:main', 'ugv_gazebo_adapter = wildlife_simulation.ugv_gazebo_adapter:main']})
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/resource/wildlife_simulation ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/models/uav/model.sdf ===
+<?xml version="1.0"?>
+<sdf version="1.9"><model name="uav"><static>true</static><link name="base"><inertial><mass>1.0</mass></inertial><collision name="c"><geometry><box><size>0.5 0.5 0.12</size></box></geometry></collision><visual name="v"><geometry><box><size>0.5 0.5 0.12</size></box></geometry></visual></link><link name="mast"><pose>0 0 0.2 0 0 0</pose><visual name="v"><geometry><cylinder><radius>0.03</radius><length>0.4</length></cylinder></geometry></visual></link></model></sdf>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/models/ugv/model.sdf ===
+<?xml version="1.0"?>
+<sdf version="1.9"><model name="ugv"><pose>0 0 0.25 0 0 0</pose><link name="base"><inertial><mass>25</mass></inertial><collision name="c"><geometry><box><size>1.2 0.8 0.4</size></box></geometry></collision><visual name="v"><geometry><box><size>1.2 0.8 0.4</size></box></geometry></visual></link><plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive"><left_joint>left_wheel_joint</left_joint><right_joint>right_wheel_joint</right_joint><wheel_separation>0.7</wheel_separation><wheel_radius>0.18</wheel_radius><topic>/ugv/cmd_vel</topic><odom_topic>/ugv/odom</odom_topic></plugin><link name="left_wheel"><pose>0 0.43 0 1.5708 0 0</pose><visual name="v"><geometry><cylinder><radius>0.18</radius><length>0.08</length></cylinder></geometry></visual></link><link name="right_wheel"><pose>0 -0.43 0 1.5708 0 0</pose><visual name="v"><geometry><cylinder><radius>0.18</radius><length>0.08</length></cylinder></geometry></visual></link><joint name="left_wheel_joint" type="revolute"><parent>base</parent><child>left_wheel</child><axis><xyz>0 1 0</xyz></axis></joint><joint name="right_wheel_joint" type="revolute"><parent>base</parent><child>right_wheel</child><axis><xyz>0 1 0</xyz></axis></joint></model></sdf>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/setup.cfg ===
+[develop]
+script_dir=$base/lib/wildlife_simulation
+[install]
+install_scripts=$base/lib/wildlife_simulation
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/wildlife_simulation/scenario_manager.py ===
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+
+class ScenarioManager(Node):
+    def __init__(self):
+        super().__init__('scenario_manager')
+        self.pub=self.create_publisher(String,'/simulation/scenario',10)
+        self.declare_parameter('scenario','search_demo')
+        self.create_timer(2.0,self.tick)
+    def tick(self):
+        m=String(); m.data=self.get_parameter('scenario').value; self.pub.publish(m)
+
+def main():
+    rclpy.init(); n=ScenarioManager(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/wildlife_simulation/__init__.py ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/wildlife_simulation/ugv_gazebo_adapter.py ===
+import math
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Twist
+from wildlife_interfaces.msg import UGVState
+
+class UGVGazeboAdapter(Node):
+    def __init__(self):
+        super().__init__('ugv_gazebo_adapter')
+        self.declare_parameter('waypoints',[0.,0.,20.,0.,20.,20.])
+        self.declare_parameter('linear_speed',1.2); self.declare_parameter('yaw_gain',1.8)
+        flat=list(self.get_parameter('waypoints').value); self.wps=list(zip(flat[::2],flat[1::2]))
+        self.speed=float(self.get_parameter('linear_speed').value); self.k=float(self.get_parameter('yaw_gain').value)
+        self.state=None; self.pub=self.create_publisher(Twist,'/ugv/cmd_vel',10)
+        self.create_subscription(UGVState,'/ugv/state',self.cb,10); self.create_timer(0.05,self.tick)
+    def cb(self,msg): self.state=msg
+    def tick(self):
+        if self.state is None or self.state.state not in (UGVState.MOVING,): self.pub.publish(Twist()); return
+        i=self.state.current_waypoint_index+1
+        if i>=len(self.wps): self.pub.publish(Twist()); return
+        tx,ty=self.wps[i]; x=self.state.pose.pose.position.x; y=self.state.pose.pose.position.y
+        yaw=math.atan2(ty-y,tx-x)
+        t=Twist(); t.linear.x=self.speed; t.angular.z=max(-1.5,min(1.5,self.k*yaw)); self.pub.publish(t)
+
+def main():
+    rclpy.init(); n=UGVGazeboAdapter(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_simulation/worlds/wildlife_field.sdf ===
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <world name="wildlife_field">
+    <gravity>0 0 -9.81</gravity>
+    <physics name="default_physics" type="ode"><max_step_size>0.004</max_step_size><real_time_factor>1.0</real_time_factor></physics>
+    <scene><ambient>0.5 0.5 0.5 1</ambient><grid>true</grid></scene>
+    <light name="sun" type="directional"><cast_shadows>true</cast_shadows><pose>0 0 30 0 0 0</pose><direction>-0.3 0.2 -1</direction></light>
+    <model name="ground"><static>true</static><link name="link"><collision name="collision"><geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry></collision><visual name="visual"><geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry></visual></link></model>
+  </world>
+</sdf>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_swarm/package.xml ===
+<?xml version="1.0"?><package format="3"><name>wildlife_swarm</name><version>0.2.0</version><description>Swarm assignment and deconfliction.</description><maintainer email="student@university.edu">Student</maintainer><license>Apache-2.0</license><buildtool_depend>ament_python</buildtool_depend><depend>rclpy</depend><depend>wildlife_interfaces</depend><export><build_type>ament_python</build_type></export></package>
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_swarm/setup.py ===
+from glob import glob
+from setuptools import find_packages, setup
+
+package_name = 'wildlife_swarm'
+
+setup(
+    name=package_name,
+    version='0.2.0',
+    packages=find_packages(exclude=['test']),
+    data_files=[
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/params', glob('params/*.yaml')),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    entry_points={
+        'console_scripts': [
+            'coordinator = wildlife_swarm.coordinator:main',
+        ],
+    },
+)
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_swarm/resource/wildlife_swarm ===
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_swarm/params/swarm.yaml ===
+swarm_coordinator:
+  ros__parameters:
+    assignment_period: 1.0
+    max_assignment_distance: 50.0
+    distance_weight: 1.0
+    target_confidence_weight: 0.0
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_swarm/setup.cfg ===
+[develop]
+script_dir=$base/lib/wildlife_swarm
+[install]
+install_scripts=$base/lib/wildlife_swarm
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_swarm/wildlife_swarm/coordinator.py ===
+import math
+import rclpy
+from rclpy.node import Node
+from wildlife_interfaces.msg import Target, DroneState
+class Coordinator(Node):
+    def __init__(self):
+        super().__init__('swarm_coordinator'); self.declare_parameter('assignment_period',1.0); self.declare_parameter('max_assignment_distance',50.0); self.declare_parameter('distance_weight',1.0); self.declare_parameter('target_confidence_weight',0.0)
+        self.drones={}; self.assigned=set(); self.pub=self.create_publisher(Target,'/targets/assigned',20); self.create_subscription(Target,'/targets/unassigned',self.target_cb,20); self.create_subscription(DroneState,'/drones/state',self.drone_cb,50); self.create_timer(float(self.get_parameter('assignment_period').value),self.report)
+    def drone_cb(self,m):
+        self.drones[m.drone_id]=m
+        if m.state in (DroneState.RETURNING,DroneState.DOCKING,DroneState.DOCKED,DroneState.PAUSED): self.assigned.discard(m.drone_id)
+    def target_cb(self,t):
+        if t.status!=Target.UNASSIGNED or t.assigned_drone_id: return
+        cands=[d for d in self.drones.values() if d.state==DroneState.SEARCHING and d.drone_id not in self.assigned]
+        if not cands: return
+        dw=float(self.get_parameter('distance_weight').value); cw=float(self.get_parameter('target_confidence_weight').value); maxd=float(self.get_parameter('max_assignment_distance').value)
+        def cost(d):
+            dist=math.hypot(d.pose.pose.position.x-t.pose.pose.position.x,d.pose.pose.position.y-t.pose.pose.position.y); return dw*dist+cw*(1.-t.confidence)
+        best=min(cands,key=cost); dist=math.hypot(best.pose.pose.position.x-t.pose.pose.position.x,best.pose.pose.position.y-t.pose.pose.position.y)
+        if dist>maxd: return
+        t.assigned_drone_id=best.drone_id; t.status=Target.ASSIGNED; self.assigned.add(best.drone_id); self.pub.publish(t); self.get_logger().info(f'Assigned {t.target_id} -> {best.drone_id} cost={cost(best):.2f}')
+    def report(self): self.get_logger().debug(f'Coordinator: {sum(d.state==DroneState.SEARCHING for d in self.drones.values())} searching | {len(self.assigned)} assigned')
+def main(args=None):
+    rclpy.init(args=args); n=Coordinator(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+
+
+=== FILE: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_2_revised/wildlife_ws/src/wildlife_swarm/wildlife_swarm/__init__.py ===
+
+

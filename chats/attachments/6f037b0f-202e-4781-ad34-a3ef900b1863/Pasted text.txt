@@ -1,0 +1,1860 @@
+You are continuing an existing academic ROS 2 robotics project.
+
+# PROJECT
+
+Wildlife Multi-UAV/UGV Simulation
+
+# CURRENT MILESTONE
+
+V0.3 has now been built and validated substantially enough to become the authoritative baseline.
+
+Begin the **V0.4 build** from the existing confirmed V0.3 repository.
+
+This is a CONTINUATION build.
+
+Do NOT restart the project.
+
+Do NOT reconstruct V0.3 from an older reference.
+
+Do NOT replace working implementations merely because another version or reference solves the same problem differently.
+
+The actual confirmed V0.3 repository, its current Git history, build reports, validation evidence, scripts and runtime behavior are the source of truth.
+
+==================================================
+0. V0.3 HANDOFF — CURRENT VERIFIED STATE
+==================================================
+
+The completed V0.3 work reported the following:
+
+- The confirmed V0.3 folder is now the primary source/build location.
+- All 110 previously tracked files and Git history were retained.
+- Nine ROS packages build successfully.
+- PX4 SITL builds successfully.
+- The Micro XRCE-DDS Agent builds successfully.
+- 32 behavioral tests pass.
+- The independent eight-UAV LOGIC demo passes.
+- Two real single-UAV PX4 mission branches pass:
+  1. target -> standoff -> HOLD -> RETURN
+  2. no-target timeout -> RTL
+- Both tested PX4 mission branches finish:
+  - landed;
+  - disarmed;
+  - mission COMPLETE.
+- Typed ROS contracts remain frozen and intact.
+- The deterministic:
+  detector
+    -> tracker
+    -> target
+    -> assignment
+    -> operator
+  architecture remains intact.
+- No duplicate PX4 mission FSM/package was introduced.
+- Existing V0.3 implementation was preserved instead of copying a weaker duplicate reference implementation.
+
+Important improvements already present in V0.3 include:
+
+- readiness-aware active deployment;
+- queued LAUNCH handling;
+- early mission overrides;
+- vehicle map origins;
+- relative home altitude handling;
+- bounded search lanes;
+- configurable expected docking totals;
+- source-correlated command ACK handling;
+- fault reporting/recovery;
+- pinned dependency paths;
+- owned-process runtime handling;
+- PX4 wildlife Gazebo world;
+- reproducible validation scripts;
+- QGroundControl helper/validation scripts.
+
+Do NOT regress or casually replace any of these.
+
+The V0.3 implementation explicitly avoided weaker behavior such as:
+
+- one-shot PX4 command sequencing;
+- losing LAUNCH commands when the PX4 vehicle is not yet ready;
+- inferring docking too early;
+- reverting to old deployment behavior;
+- reverting to old mission behavior.
+
+Do not reintroduce those problems.
+
+The verified V0.2 branch remains frozen separately.
+
+V0.1 and reference material remain historical context only.
+
+==================================================
+1. IMPORTANT REMAINING V0.3 VALIDATION DEBT
+==================================================
+
+Although V0.3 is the authoritative development baseline, two important PX4 scale tests were NOT yet completed:
+
+- two-PX4-UAV real flight;
+- eight-PX4-UAV real flight.
+
+The immediate next milestone stated in the V0.3 report is:
+
+TWO-UAV NAMESPACE AND COMMAND ISOLATION.
+
+Therefore V0.4 development must begin by closing this validation debt before adding major new perception features.
+
+Do NOT assume multi-PX4 operation works merely because:
+
+- one PX4 UAV works;
+- eight logical UAVs work;
+- launch files exist for several vehicles.
+
+Prove it.
+
+==================================================
+2. SOURCE-OF-TRUTH RULE
+==================================================
+
+Before modifying anything:
+
+1. Locate the confirmed V0.3 source folder.
+2. Read the existing V0.3 README.
+3. Read the existing V0.3 architecture documentation.
+4. Read docs/V0_3_VALIDATION.md.
+5. Read the current V0.3 build report.
+6. Inspect Git status and recent commits.
+7. Inspect the actual launch files, packages, params and scripts.
+8. Run the existing V0.3 regression suite.
+
+If this prompt conflicts with the repository:
+
+THE CURRENT CONFIRMED V0.3 REPOSITORY WINS.
+
+Do not use an older V0.2 or external reference tree as the implementation baseline.
+
+==================================================
+3. GIT / VERSION WORKFLOW
+==================================================
+
+Preserve history.
+
+Before V0.4 modifications:
+
+- confirm V0.3 is committed cleanly;
+- create/tag a stable V0.3 checkpoint if one does not already exist;
+- branch V0.4 from the confirmed V0.3 state.
+
+Suggested conceptual structure:
+
+v0.3-final
+    |
+    +--> v0.4-development
+
+Do not squash away useful implementation history.
+
+Do not delete previous validation evidence.
+
+==================================================
+4. PROJECT PURPOSE
+==================================================
+
+This remains an academic, NON-CONTACT wildlife monitoring simulation.
+
+The intended complete mission flow remains:
+
+UGV
+ -> deployment request
+ -> UAV activation
+ -> PX4 arming/takeoff
+ -> search
+ -> wildlife/dummy-target observation
+ -> Detection
+ -> target tracking/fusion
+ -> persistent Target identity
+ -> UAV assignment
+ -> physical standoff
+ -> operator notification
+ -> operator chooses RETURN or CONTINUE_HOLD
+ -> UAV follows operator decision
+ -> return / landing / docking-state handling
+ -> mission completion
+
+The system consists conceptually of:
+
+- 1 UGV;
+- up to 8 UAVs;
+- UAVs logically associated with four tray slots;
+- simulated wildlife/dummy targets;
+- PX4 SITL vehicles;
+- Gazebo;
+- ROS 2;
+- QGroundControl;
+- human-in-the-loop mission authority.
+
+==================================================
+5. ARCHITECTURE THAT MUST BE PRESERVED
+==================================================
+
+Preserve the existing package boundaries unless a demonstrated technical need requires otherwise.
+
+Expected current structure remains approximately:
+
+wildlife_interfaces
+wildlife_core
+wildlife_perception
+wildlife_targets
+wildlife_swarm
+wildlife_mission
+wildlife_vehicles
+wildlife_simulation
+wildlife_bringup
+
+plus whatever existing PX4 integration code/package V0.3 already uses.
+
+Do NOT create another duplicate UAV/PX4 mission FSM package.
+
+Preserve the current V0.3 implementation.
+
+The major architecture contract remains:
+
+camera / detector
+        |
+        v
+    Detection
+        |
+        v
+tracking / fusion
+        |
+        v
+      Target
+        |
+        v
+swarm assignment
+        |
+        v
+UAV mission behavior
+        |
+        v
+ PX4 integration
+        |
+        v
+      PX4
+
+Telemetry returns through:
+
+PX4 / Gazebo
+    |
+    v
+PX4 integration layer
+    |
+    v
+DroneState
+    |
+    +--> mission
+    +--> perception
+    +--> assignment
+    +--> visualization
+
+PX4 owns:
+
+- attitude control;
+- rate control;
+- motor control;
+- low-level flight stabilization;
+- native PX4 failsafes.
+
+ROS owns:
+
+- mission intent;
+- deployment;
+- search planning;
+- detection/tracking;
+- assignment;
+- standoff requests;
+- operator workflow;
+- mission-level health decisions.
+
+Do not duplicate PX4 inner-loop controllers inside ROS.
+
+==================================================
+6. V0.4 PRIMARY GOAL
+==================================================
+
+V0.3 established real simulated vehicle integration.
+
+V0.4 must focus on:
+
+1. proving multi-PX4 operation;
+2. real Gazebo camera perception;
+3. defensible camera-to-world target localization;
+4. optional real object-detection backend;
+5. stronger target tracking/fusion;
+6. multi-UAV mission robustness;
+7. vehicle-health-aware assignment;
+8. basic mission-level deconfliction;
+9. improved examiner/operator visualization;
+10. repeatable end-to-end scenarios.
+
+V0.4 is NOT another PX4 architecture rewrite.
+
+==================================================
+7. V0.4 PHASE 0 — FULL V0.3 REGRESSION
+==================================================
+
+Before implementing V0.4 features, run the complete available V0.3 test suite.
+
+Verify:
+
+BUILD
+
+- ROS workspace builds;
+- all nine packages build;
+- PX4 builds;
+- XRCE-DDS Agent builds;
+- package metadata remains valid;
+- Python syntax passes;
+- XML passes;
+- YAML passes;
+- SDF/world files parse;
+- launch files import;
+- shell scripts parse.
+
+BEHAVIOR
+
+- all existing behavioral tests pass;
+- deterministic detector works;
+- tracker works;
+- target manager works;
+- assignment works;
+- operator service works;
+- deployment works;
+- docking counters work;
+- one-PX4-UAV test still works;
+- target/standoff/HOLD/RETURN test works;
+- no-target timeout/RTL works;
+- both still finish landed/disarmed/COMPLETE.
+
+Record baseline results before modifications.
+
+If any V0.3 regression appears:
+
+FIX THAT FIRST.
+
+==================================================
+8. V0.4 PHASE 1 — TWO PX4 UAVS
+==================================================
+
+This is the first real V0.4 engineering milestone.
+
+Do NOT start with camera perception.
+
+Launch exactly two real PX4 SITL vehicles.
+
+Suggested identities:
+
+uav01
+uav02
+
+Verify complete isolation.
+
+Check PX4 instances:
+
+- distinct PX4 instance IDs;
+- distinct MAV system IDs;
+- distinct DDS namespaces;
+- distinct ROS vehicle topics;
+- correct Gazebo models;
+- correct map origins;
+- correct home altitude references.
+
+Confirm that commands for:
+
+uav01
+
+NEVER accidentally affect:
+
+uav02
+
+and vice versa.
+
+Test independently:
+
+- launch;
+- arm;
+- takeoff;
+- OFFBOARD entry;
+- search;
+- HOLD;
+- RESUME;
+- RTL;
+- LAND if supported by current interface.
+
+Verify command ACK correlation remains correct per source vehicle.
+
+Test simultaneous movement.
+
+Confirm DroneState for uav01 always corresponds to uav01.
+
+Confirm DroneState for uav02 always corresponds to uav02.
+
+Check for:
+
+- namespace collisions;
+- PX4 topic collisions;
+- node-name collisions;
+- MAVLink ID collisions;
+- Gazebo entity-name collisions;
+- Micro XRCE-DDS collisions;
+- accidental broadcast commands;
+- cross-vehicle ACK confusion.
+
+Do not proceed until two-UAV command isolation passes.
+
+==================================================
+9. V0.4 PHASE 2 — TWO-UAV MISSION FLOW
+==================================================
+
+Once transport/control isolation passes, test actual mission behavior.
+
+Test:
+
+uav01 searching
++
+uav02 searching.
+
+Verify bounded search lanes do not overlap unnecessarily.
+
+Verify configured map origins correctly translate local PX4 positions into the shared ROS map.
+
+Test one target.
+
+Expected behavior:
+
+both UAVs may observe/detect target
+        |
+        v
+tracker creates ONE target
+        |
+        v
+assignment selects ONE UAV
+        |
+        v
+selected UAV flies to standoff
+        |
+        v
+other UAV remains available/searching
+
+Verify no duplicated target identity caused by vehicle namespaces.
+
+Test operator:
+
+CONTINUE_HOLD
+
+and:
+
+RETURN
+
+Verify commands reach only the assigned UAV.
+
+==================================================
+10. V0.4 PHASE 3 — MULTI-UAV PX4 SCALE TEST
+==================================================
+
+After 2 UAVs pass:
+
+test 3 or 4 PX4 vehicles before jumping to 8 if this simplifies debugging.
+
+Then test the intended eight-PX4 structure.
+
+For eight vehicles verify:
+
+uav01
+uav02
+uav03
+uav04
+uav05
+uav06
+uav07
+uav08
+
+Each must have:
+
+- unique ROS namespace;
+- unique PX4 instance identity;
+- unique MAV system ID;
+- unique spawn entity;
+- correct map origin;
+- isolated command path;
+- isolated telemetry path;
+- consistent DroneState identity.
+
+Do not consider eight-UAV support complete because all processes start.
+
+Verify meaningful telemetry from all vehicles.
+
+Verify at minimum:
+
+- all become ready;
+- launch sequencing works;
+- deployments do not lose commands;
+- all active DroneState publishers are healthy;
+- no namespace crossover occurs;
+- mission manager counts vehicles correctly;
+- docking totals reflect configured active vehicle count.
+
+A full eight-UAV mission flight should be attempted only after structural isolation is proven.
+
+Document CPU/RAM/load limitations if they become relevant.
+
+==================================================
+11. V0.4 PHASE 4 — QGROUNDCONTROL MULTI-VEHICLE TEST
+==================================================
+
+Use the existing V0.3 QGC scripts/workflow.
+
+Verify QGroundControl can distinguish multiple vehicles.
+
+Check:
+
+- system IDs;
+- vehicle identities;
+- telemetry;
+- flight mode;
+- armed state;
+- position;
+- battery;
+- warnings/failsafe state where available.
+
+QGroundControl is a PX4 operator/debug tool here.
+
+Do NOT introduce a second ROS mission pathway through QGC.
+
+The wildlife mission architecture remains ROS-driven.
+
+==================================================
+12. V0.4 PHASE 5 — REAL GAZEBO CAMERA
+==================================================
+
+After the PX4 multi-vehicle foundation is stable, start real perception.
+
+Begin with ONE vehicle.
+
+Use:
+
+uav01
+
+Add/verify a genuine Gazebo camera sensor.
+
+Do not begin with YOLO.
+
+Prove:
+
+Gazebo camera
+    ->
+Gazebo image topic
+    ->
+ros_gz_bridge
+    ->
+sensor_msgs/Image
+    ->
+ROS perception node.
+
+Use a stable ROS topic, conceptually:
+
+/drones/uav01/camera/image_raw
+
+but inspect existing naming conventions first.
+
+Verify:
+
+- actual image messages exist;
+- correct resolution;
+- useful frame rate;
+- timestamps;
+- frame ID;
+- image encoding;
+- cv_bridge conversion.
+
+Do not declare this phase complete merely because camera XML/SDF exists.
+
+Actual image messages must be observed.
+
+==================================================
+13. V0.4 PHASE 6 — CAMERA EXTRINSICS / TRANSFORMS
+==================================================
+
+Define camera geometry clearly.
+
+Document:
+
+- camera mounting position relative to UAV body;
+- camera orientation;
+- ROS camera optical-frame convention;
+- UAV body-frame convention;
+- shared map convention;
+- PX4 NED convention;
+- Gazebo world convention.
+
+Avoid hidden sign swaps and axis assumptions.
+
+If TF2 is appropriate and not already used, consider using it cleanly.
+
+Do not introduce TF complexity merely for appearance.
+
+Whatever method is chosen must be:
+
+- explicit;
+- deterministic;
+- tested.
+
+==================================================
+14. V0.4 PHASE 7 — IMAGE -> WORLD TARGET POSITION
+==================================================
+
+Detection currently needs a world/map location downstream.
+
+Implement a defensible camera localization model.
+
+For the simulation, a ground-plane ray intersection is acceptable.
+
+Conceptual pipeline:
+
+pixel coordinate
+    |
+    v
+camera ray
+    |
+    v
+camera intrinsics/FOV
+    |
+    v
+camera/body transform
+    |
+    v
+UAV pose in map
+    |
+    v
+map-frame ray
+    |
+    v
+ground-plane intersection
+    |
+    v
+Detection.position_world
+
+Use actual UAV pose.
+
+Do not use a fake constant camera height if real simulated altitude is available.
+
+Handle:
+
+- UAV roll;
+- pitch;
+- yaw;
+- camera mounting orientation;
+- altitude;
+- no valid ground intersection.
+
+Add unit tests.
+
+Important cases:
+
+- center pixel;
+- left/right pixel;
+- vehicle yaw rotation;
+- camera pitch;
+- different altitude;
+- invalid/upward ray;
+- coordinate-frame conversion.
+
+==================================================
+15. V0.4 PHASE 8 — OPEN-CV REAL IMAGE DETECTION
+==================================================
+
+Connect the existing or improved OpenCV detector to REAL Gazebo images.
+
+Use simple visual dummy targets first.
+
+Pipeline:
+
+Gazebo image
+    ->
+cv_bridge
+    ->
+OpenCV detector
+    ->
+pixel detection
+    ->
+camera geometry
+    ->
+map/world position
+    ->
+existing Detection message
+
+Retain the current Detection contract.
+
+Do not modify downstream tracker simply because the detector backend changed.
+
+Verify:
+
+- correct drone_id;
+- detection_id;
+- target_class;
+- confidence;
+- world position;
+- distance estimate where relevant;
+- timestamp.
+
+==================================================
+16. V0.4 PHASE 9 — SIMULATED WILDLIFE TARGET MODELS
+==================================================
+
+The Gazebo world must contain suitable visual targets for camera testing.
+
+Add lightweight simulated wildlife/dummy-target models.
+
+Priorities:
+
+- visually identifiable;
+- clearly separated from terrain;
+- easy to reproduce;
+- suitable for OpenCV and later YOLO;
+- academically understandable.
+
+Do not spend excessive effort on photorealism.
+
+Support scenario-configured positions.
+
+Initial motion types may include:
+
+- stationary;
+- straight-line;
+- waypoint loop.
+
+Keep motion deterministic first.
+
+==================================================
+17. V0.4 PHASE 10 — DETECTOR BACKEND ARCHITECTURE
+==================================================
+
+The perception package should support backend separation.
+
+Conceptually:
+
+detector_backend: sim
+detector_backend: opencv
+detector_backend: yolo
+
+The exact architecture should follow existing code style.
+
+Requirements:
+
+SIM
+
+- retained;
+- deterministic;
+- independent of camera;
+- remains acceptance-test backend.
+
+OPEN-CV
+
+- consumes real camera image;
+- lightweight;
+- useful even without neural network.
+
+YOLO
+
+- OPTIONAL;
+- add only after camera/OpenCV pipeline is working.
+
+Do not make YOLO mandatory for project startup.
+
+==================================================
+18. V0.4 PHASE 11 — OPTIONAL YOLO
+==================================================
+
+Only after the real camera/OpenCV path passes, optionally integrate a neural detector.
+
+If Ultralytics YOLO is appropriate, isolate it in wildlife_perception.
+
+Requirements:
+
+- configurable model path;
+- configurable confidence;
+- configurable device;
+- configurable classes;
+- meaningful error if model load fails;
+- no silent fallback pretending YOLO succeeded;
+- existing Detection output.
+
+Downstream packages must not know whether a Detection came from:
+
+- detector_sim;
+- OpenCV;
+- YOLO.
+
+Do not remove detector_sim.
+
+==================================================
+19. V0.4 PHASE 12 — TARGET TRACKING UPGRADE
+==================================================
+
+Real camera detections and moving targets may expose limitations in the V0.3 tracker.
+
+Inspect actual runtime data first.
+
+Improve tracking only where justified.
+
+Potential improvements:
+
+- timestamp-aware state updates;
+- velocity estimation;
+- constant-velocity prediction;
+- measurement-age handling;
+- covariance-aware gating;
+- duplicate-track suppression;
+- better stale-track logic.
+
+A simple Kalman filter is acceptable if needed.
+
+Do NOT add complex tracking solely because it sounds advanced.
+
+Preserve:
+
+- stable persistent target IDs;
+- assigned UAV;
+- operator status;
+- target lifecycle state.
+
+Fresh tracker updates must NOT reset an assigned target back to UNASSIGNED.
+
+==================================================
+20. V0.4 PHASE 13 — MULTI-UAV SENSOR FUSION
+==================================================
+
+Test two UAVs observing the same physical target.
+
+Expected:
+
+uav01 Detection
++
+uav02 Detection
+        |
+        v
+association / fusion
+        |
+        v
+ONE Target
+
+Verify:
+
+- target class;
+- spatial gate;
+- timestamps;
+- witness UAV list;
+- confidence;
+- covariance;
+- persistent target ID.
+
+Avoid:
+
+two cameras
+    ->
+two false independent target IDs
+
+if they are clearly viewing the same target.
+
+Test deliberately separated targets as well to ensure they are NOT wrongly merged.
+
+==================================================
+21. V0.4 PHASE 14 — MOVING TARGET TRACKING
+==================================================
+
+Add a controlled moving-target scenario.
+
+Start simple.
+
+Example:
+
+target follows a rectangular or waypoint path.
+
+Verify:
+
+- persistent identity;
+- estimated motion;
+- association while moving;
+- stale timeout;
+- reacquisition;
+- no excessive target duplication.
+
+If velocity_estimate already exists in the Target interface, populate it meaningfully when justified.
+
+==================================================
+22. V0.4 PHASE 15 — SWARM ASSIGNMENT ROBUSTNESS
+==================================================
+
+Do not replace the existing simple assignment algorithm unless testing proves it inadequate.
+
+Improve robustness.
+
+Test:
+
+- one UAV / one target;
+- two UAVs / one target;
+- two UAVs / two targets;
+- many UAVs / several targets;
+- target outside maximum assignment distance;
+- assigned UAV becomes unavailable;
+- UAV begins RTL;
+- UAV battery becomes low;
+- target is lost.
+
+Assignment candidates should normally exclude vehicles that are:
+
+- unready;
+- returning;
+- landing;
+- docked;
+- faulted;
+- below configured battery threshold.
+
+Consider reassignment only when operationally safe.
+
+Keep the algorithm understandable.
+
+Do NOT automatically introduce:
+
+- Hungarian optimization;
+- auctions;
+- reinforcement learning;
+- distributed consensus.
+
+==================================================
+23. V0.4 PHASE 16 — HEALTH-AWARE MISSION LOGIC
+==================================================
+
+V0.3 already introduced fault reporting/recovery.
+
+Build on it.
+
+Use actual PX4 telemetry where available.
+
+Monitor at mission level:
+
+- vehicle readiness;
+- arming state;
+- nav/flight mode;
+- position validity;
+- telemetry timeout;
+- battery;
+- landing state;
+- PX4 failsafe flags where practical;
+- command rejection/timeout.
+
+Safe high-level reactions may include:
+
+LOW BATTERY
+    ->
+RETURN_HOME
+
+TELEMETRY LOST
+    ->
+mark vehicle unavailable
+    ->
+avoid new assignments
+
+VEHICLE FAULT
+    ->
+release its assignment if appropriate
+
+PX4 FAILSAFE
+    ->
+do not fight PX4
+    ->
+report mission-level state
+
+Do not recreate PX4's failsafe controller.
+
+==================================================
+24. V0.4 PHASE 17 — BASIC MULTI-UAV DECONFLICTION
+==================================================
+
+This is mission-level separation, not a replacement flight controller.
+
+Build on existing bounded search lanes and any V0.3 altitude separation.
+
+Use simple, defensible rules.
+
+Possible approach:
+
+- altitude bands;
+- lane separation;
+- minimum search spacing;
+- standoff approach offset;
+- simple predicted proximity warning.
+
+Do not attempt research-grade collision avoidance.
+
+PX4 remains responsible for low-level flight stability/safety.
+
+The academic goal is to prevent obvious mission-planning conflicts.
+
+==================================================
+25. V0.4 PHASE 18 — STANDOFF BEHAVIOR IMPROVEMENT
+==================================================
+
+Verify real PX4 standoff flight with camera-derived target positions.
+
+The aircraft should maintain safe observation distance.
+
+Do not approach targets unnecessarily closely.
+
+Test:
+
+- stationary target;
+- moving target;
+- different approach headings;
+- CONTINUE_HOLD;
+- target motion while holding.
+
+If appropriate, update the desired standoff point as target position changes.
+
+Keep motion bounded and stable.
+
+Do not create pursuit behavior intended to harass wildlife.
+
+==================================================
+26. V0.4 PHASE 19 — UGV / DEPLOYMENT REGRESSION
+==================================================
+
+Do not ignore the UGV while improving UAVs.
+
+Verify:
+
+SINGLE
+
+- correct deployment point;
+- intended active UAVs;
+- readiness-aware launch.
+
+SPLIT
+
+- first deployment event;
+- second deployment event;
+- correct slots/UAVs;
+- no duplicate launch;
+- no missing second deployment.
+
+Verify the current waypoint-index semantics remain correct.
+
+Do not blindly change +1/-1 behavior unless actual code proves an error.
+
+Verify docking totals use configured active vehicle count.
+
+==================================================
+27. V0.4 PHASE 20 — OPERATOR WORKFLOW
+==================================================
+
+Human authority remains mandatory.
+
+Preserve:
+
+/operator/decision
+
+and the existing typed interface.
+
+Operator decisions remain conceptually:
+
+RETURN
+CONTINUE_HOLD
+
+Additional safe operations may be exposed only if justified.
+
+The operator should receive:
+
+- UAV;
+- target ID;
+- target class;
+- confidence;
+- target position;
+- assigned UAV;
+- mission state;
+- action-required status.
+
+Any future GUI must call the existing typed service.
+
+Do not create another independent mission-control path.
+
+==================================================
+28. V0.4 PHASE 21 — RVIZ IMPROVEMENT
+==================================================
+
+Make the project examiner-friendly.
+
+Useful RViz information may include:
+
+- UGV;
+- UAV locations;
+- UAV IDs;
+- UAV state;
+- UAV battery;
+- search paths;
+- assigned search lanes;
+- targets;
+- target IDs;
+- target confidence;
+- target tracks;
+- standoff radius;
+- target-to-assigned-UAV line;
+- deployment locations;
+- optional camera field-of-view;
+- fault/unavailable indication.
+
+Do not create excessive clutter.
+
+Use standard ROS visualization messages where possible.
+
+==================================================
+29. V0.4 PHASE 22 — MISSION STATUS
+==================================================
+
+Ensure the mission FSM remains correct with several vehicles.
+
+Important states remain conceptually:
+
+INIT
+DEPLOYING
+SEARCHING
+TARGET_FOUND
+AWAITING_OPERATOR
+RESOLVING
+COMPLETE
+PAUSED
+ABORTED
+
+Test transitions with multiple UAVs.
+
+Important:
+
+one UAV returning must not necessarily mean entire mission is complete.
+
+Mission COMPLETE should reflect configured mission semantics.
+
+Test:
+
+- all active UAVs complete;
+- one faulted UAV;
+- one returned UAV while others search;
+- target workflow;
+- no-target workflow;
+- abort;
+- pause/resume.
+
+Do not regress the V0.3 fix that allowed missions to leave AWAITING_OPERATOR.
+
+==================================================
+30. V0.4 PHASE 23 — SCENARIO FRAMEWORK
+==================================================
+
+Provide reproducible demonstrations through configuration.
+
+Suggested scenarios:
+
+A. LOGIC_ONLY
+
+8 logical UAVs
++
+detector_sim
+
+B. PX4_SINGLE_TARGET
+
+1 PX4 UAV
++
+detector_sim
+
+C. PX4_SINGLE_CAMERA
+
+1 PX4 UAV
++
+Gazebo camera
++
+OpenCV
+
+D. TWO_UAV_FUSION
+
+2 PX4 UAVs
++
+one physical target
+
+E. TWO_UAV_TWO_TARGETS
+
+2 PX4 UAVs
++
+2 targets
+
+F. SPLIT_DEPLOYMENT
+
+UGV split launch sequence
+
+G. MOVING_TARGET
+
+moving wildlife model
++
+tracking
+
+H. LOW_BATTERY
+
+health-aware RTL
+
+I. VEHICLE_UNAVAILABLE
+
+assignment/recovery test
+
+J. EIGHT_UAV_SCALE
+
+multi-instance structural/runtime test
+
+Prefer YAML configuration rather than scenario-specific hard-coded mission branches.
+
+==================================================
+31. V0.4 PHASE 24 — TEST SUITE EXPANSION
+==================================================
+
+Expand automated tests.
+
+PERCEPTION TESTS
+
+- real image callback;
+- empty image;
+- confidence threshold;
+- detector backend selection;
+- pixel location;
+- camera ray;
+- body transform;
+- map transform;
+- ground intersection;
+- invalid ray;
+- timestamp propagation.
+
+TRACKING TESTS
+
+- stable ID;
+- association;
+- class mismatch;
+- covariance;
+- moving target;
+- velocity;
+- stale target;
+- reacquisition;
+- two-UAV same-target fusion;
+- nearby different targets remain different.
+
+SWARM TESTS
+
+- one assignment;
+- no available vehicle;
+- low-battery exclusion;
+- fault exclusion;
+- returning vehicle exclusion;
+- reassignment;
+- multiple targets;
+- no duplicate UAV assignment.
+
+MISSION TESTS
+
+- normal mission;
+- HOLD;
+- RETURN;
+- timeout;
+- all vehicles docked;
+- mixed vehicle states;
+- ABORT;
+- PAUSE;
+- RESUME;
+- vehicle fault;
+- target lost.
+
+PX4 TESTS
+
+- namespace generation;
+- instance identity;
+- map origins;
+- command routing;
+- ACK source correlation;
+- queued LAUNCH;
+- readiness;
+- timeout;
+- telemetry mapping.
+
+DEPLOYMENT TESTS
+
+- SINGLE;
+- SPLIT;
+- second split waypoint;
+- no duplicate launches;
+- inactive vehicle not launched;
+- expected docking total.
+
+==================================================
+32. V0.4 PHASE 25 — LOGGING / OBSERVABILITY
+==================================================
+
+Improve debugging information without flooding the terminal.
+
+Important runtime events should be visible:
+
+- vehicle ready;
+- vehicle not ready;
+- deployment request;
+- queued launch;
+- PX4 command;
+- command ACK;
+- OFFBOARD entry;
+- takeoff complete;
+- search start;
+- detection;
+- track creation;
+- assignment;
+- standoff reached;
+- operator required;
+- operator decision;
+- RTL;
+- landing;
+- vehicle fault;
+- mission state transition.
+
+Include vehicle ID wherever ambiguity is possible.
+
+Do not hide meaningful state changes only in debug-level output.
+
+==================================================
+33. V0.4 PHASE 26 — PERFORMANCE / SCALE CHECK
+==================================================
+
+For multi-UAV operation record:
+
+- CPU usage;
+- memory usage;
+- Gazebo performance;
+- ROS traffic;
+- camera frame rate;
+- detector inference rate if YOLO is enabled.
+
+Do not optimize prematurely.
+
+Measure first.
+
+If eight cameras or eight YOLO instances are unrealistic on the development machine, design a configurable demo profile rather than hiding the limitation.
+
+Possible configurations might include:
+
+- cameras only on selected UAVs;
+- lower frame rates;
+- OpenCV instead of YOLO;
+- deterministic detector for scale demonstration.
+
+Document honestly.
+
+==================================================
+34. V0.4 PHASE 27 — END-TO-END EXAMINER DEMO
+==================================================
+
+Build a reproducible final demonstration.
+
+Target flow:
+
+1. Start ROS/Gazebo/PX4/XRCE environment.
+2. UGV appears.
+3. UAVs are associated with deployment slots.
+4. UGV reaches deployment point.
+5. Deployment is triggered.
+6. PX4 vehicle becomes ready.
+7. UAV arms and takes off.
+8. UAV performs physical search.
+9. Gazebo wildlife enters camera view.
+10. Camera publishes image.
+11. detector processes real image.
+12. Detection has defensible map/world position.
+13. tracker creates persistent Target.
+14. additional UAV detection fuses correctly if applicable.
+15. coordinator assigns one UAV.
+16. assigned UAV flies physically to standoff.
+17. RViz clearly shows assignment/standoff.
+18. operator receives alert.
+19. operator selects RETURN or CONTINUE_HOLD.
+20. UAV responds correctly.
+21. remaining UAVs continue according to mission state.
+22. returning vehicle uses PX4 RTL/landing.
+23. vehicle lands and disarms.
+24. docking/state accounting updates.
+25. mission reaches correct final state.
+
+The examiner must be able to understand the process visually and from status output.
+
+==================================================
+35. BACKEND SEPARATION MUST REMAIN
+==================================================
+
+Do not make every demonstration require every dependency.
+
+Maintain distinct testing modes.
+
+MODE A
+
+logic UAV
++
+detector_sim
+
+MODE B
+
+PX4 UAV
++
+detector_sim
+
+MODE C
+
+PX4 UAV
++
+Gazebo camera
++
+OpenCV
+
+MODE D
+
+PX4 UAV
++
+Gazebo camera
++
+optional YOLO
+
+MODE E
+
+multi-PX4
++
+detector_sim
+
+MODE F
+
+multi-PX4
++
+selected real camera perception
+
+This modularity is important for debugging and academic demonstration reliability.
+
+==================================================
+36. DEPENDENCY POLICY
+==================================================
+
+Keep the currently validated V0.3 dependency pins unless there is a demonstrated incompatibility.
+
+Do not upgrade PX4, ROS, Gazebo, XRCE-DDS, or related tools merely because newer versions exist.
+
+Any dependency change must answer:
+
+- Why is it necessary?
+- What current limitation does it solve?
+- What does it risk breaking?
+- Was V0.3 regression-tested afterward?
+
+Potential new V0.4 dependency:
+
+YOLO / Ultralytics
+
+Only if used.
+
+Do not add:
+
+- micro-ROS without embedded hardware;
+- Nav2 without explicit UGV autonomous-navigation need;
+- another middleware;
+- unnecessary optimization libraries.
+
+==================================================
+37. CONFIGURATION POLICY
+==================================================
+
+Prefer YAML/launch parameters for:
+
+- active vehicle count;
+- detector backend;
+- camera topics;
+- camera geometry;
+- confidence thresholds;
+- model path;
+- target classes;
+- tracker gates;
+- stale timeout;
+- battery threshold;
+- search bounds;
+- altitude layers;
+- deconfliction distance;
+- scenario choice;
+- target positions;
+- target motion.
+
+Avoid scattering magic values through Python.
+
+Per-UAV dynamically generated values may remain launch-generated where appropriate.
+
+==================================================
+38. SAFETY AND PROJECT SCOPE
+==================================================
+
+This remains NON-CONTACT wildlife monitoring.
+
+Allowed behavior:
+
+- observation;
+- search;
+- detection;
+- tracking;
+- association;
+- fusion;
+- safe standoff;
+- monitoring;
+- operator decision;
+- loiter/hold;
+- return;
+- landing;
+- docking;
+- simulation.
+
+Do NOT implement:
+
+- weapons;
+- attack logic;
+- projectile guidance;
+- payload release;
+- target destruction;
+- impact logic;
+- harmful autonomous behavior;
+- aggressive pursuit;
+- behavior intended to contact or distress wildlife.
+
+Maintain reasonable standoff.
+
+==================================================
+39. CODE QUALITY
+==================================================
+
+Do not perform a giant formatting rewrite.
+
+When touching existing code:
+
+- retain existing proven logic;
+- improve readability where needed;
+- use clear names;
+- use normal Python formatting;
+- add comments for non-obvious coordinate transforms;
+- document ROS/PX4 frame assumptions;
+- use type hints where useful;
+- keep responsibilities separated.
+
+Prefer small coherent commits.
+
+==================================================
+40. VALIDATION ORDER
+==================================================
+
+Follow this order.
+
+GATE 1
+V0.3 regression
+
+GATE 2
+two PX4 UAV namespace isolation
+
+GATE 3
+two PX4 UAV command isolation
+
+GATE 4
+two-PX4 mission flow
+
+GATE 5
+3/4 vehicle structural scale test if useful
+
+GATE 6
+eight-PX4 structural test
+
+GATE 7
+QGroundControl multi-vehicle validation
+
+GATE 8
+one real Gazebo camera
+
+GATE 9
+camera -> OpenCV
+
+GATE 10
+camera -> map/world target localization
+
+GATE 11
+one real-perception target mission
+
+GATE 12
+two-UAV same-target fusion
+
+GATE 13
+moving target
+
+GATE 14
+health/reassignment
+
+GATE 15
+basic deconfliction
+
+GATE 16
+multi-UAV camera/perception scenario
+
+GATE 17
+final examiner demo
+
+Do not skip lower gates and debug eight PX4 camera vehicles simultaneously.
+
+==================================================
+41. REPORTING WORKFLOW
+==================================================
+
+For each phase:
+
+1. State what you inspected.
+2. State what already exists.
+3. State the actual missing capability or bug.
+4. State the smallest coherent fix/addition.
+5. List files modified.
+6. Implement.
+7. Run tests.
+8. Report:
+   - PASS
+   - FAIL
+   - WARNINGS
+   - remaining limitations.
+9. Commit coherent changes.
+10. Continue to the next phase.
+
+Do not stop just to ask permission for routine implementation choices.
+
+If something is technically blocked, continue with all other independent work and report the block clearly.
+
+==================================================
+42. DO NOT COPY REFERENCE CODE BLINDLY
+==================================================
+
+A previous supplied V0.3 reference contained alternative implementations.
+
+The confirmed project deliberately DID NOT copy some of those because the existing implementation was stronger.
+
+That rule continues.
+
+When external/reference code differs:
+
+- inspect current implementation;
+- understand both;
+- retain current code if it is better;
+- copy only specific missing ideas if justified;
+- adapt them to existing architecture;
+- test after merging.
+
+Never replace proven V0.3 behavior simply to make the source resemble a reference.
+
+==================================================
+43. SPECIFIC V0.3 FEATURES THAT MUST NOT REGRESS
+==================================================
+
+Explicitly regression-test:
+
+- readiness-aware active deployment;
+- queued LAUNCH;
+- early mission override handling;
+- map origin transformation;
+- relative home altitude;
+- bounded search lanes;
+- configurable docking totals;
+- source-correlated ACKs;
+- command retries/recovery;
+- fault reporting;
+- pinned dependency paths;
+- runtime process ownership/cleanup;
+- PX4 wildlife world;
+- deterministic validation;
+- QGC scripts;
+- operator decision handling;
+- mission COMPLETE behavior;
+- no-target RTL;
+- target/standoff HOLD/RETURN.
+
+These represent hard-earned V0.3 fixes.
+
+==================================================
+44. V0.4 DEFINITION OF DONE
+==================================================
+
+V0.4 should NOT be declared complete until all applicable criteria below are satisfied.
+
+V0.3 REGRESSION
+
+- existing tests still pass;
+- one PX4 target mission still passes;
+- no-target timeout mission still passes.
+
+MULTI-PX4
+
+- two PX4 UAVs tested;
+- namespaces isolated;
+- commands isolated;
+- telemetry isolated;
+- ACKs correctly correlated;
+- two-UAV mission demonstrated;
+- eight-UAV structural/runtime status documented honestly.
+
+QGC
+
+- multiple relevant PX4 instances visible where intended;
+- IDs do not conflict.
+
+CAMERA
+
+- Gazebo produces real image;
+- ROS receives sensor_msgs/Image;
+- OpenCV receives image.
+
+GEOMETRY
+
+- image detection can produce defensible map/world location;
+- coordinate transformations are tested.
+
+PERCEPTION
+
+- detector_sim remains;
+- OpenCV real-image backend works;
+- YOLO optional if implemented.
+
+TRACKING
+
+- persistent IDs;
+- moving target handled appropriately;
+- multi-UAV same-target observations fuse correctly.
+
+SWARM
+
+- unavailable/faulted/low-battery UAV exclusion;
+- sensible reassignment if implemented;
+- multiple-target behavior verified.
+
+MISSION
+
+- operator flow works;
+- health/fault behavior does not break mission FSM;
+- COMPLETE semantics remain correct.
+
+VISUALIZATION
+
+- Gazebo, RViz and ROS state agree sufficiently for demonstration;
+- examiner can understand mission state.
+
+DOCUMENTATION
+
+- README reflects actual behavior;
+- architecture reflects V0.4;
+- dependencies are accurate;
+- validation commands are reproducible;
+- known limitations are explicit.
+
+==================================================
+45. REQUIRED V0.4 DELIVERABLES
+==================================================
+
+At the end create/update:
+
+README.md
+
+ARCHITECTURE.md
+
+docs/V0_4_SCOPE.md
+
+docs/V0_4_VALIDATION.md
+
+docs/DEPENDENCIES.md
+
+docs/DEMO_GUIDE.md
+
+V0_4_BUILD_REPORT.md
+
+V0_4_TEST_RESULTS.md
+
+CODEX_HANDOFF_V0_4.md
+
+Include an exact source archive or clearly identified Git commit/tag representing final V0.4.
+
+The V0.4 build report must distinguish:
+
+PASSED
+
+PARTIALLY VALIDATED
+
+NOT TESTED
+
+KNOWN LIMITATION
+
+Do not describe untested functionality as working.
+
+==================================================
+46. FINAL V0.4 BUILD REPORT
+==================================================
+
+At completion report:
+
+1. Git commit/tag.
+2. Packages changed.
+3. Files added.
+4. Files modified.
+5. V0.3 features preserved.
+6. V0.3 regressions found/fixed.
+7. Two-PX4 result.
+8. Eight-PX4 result.
+9. QGC result.
+10. Camera pipeline result.
+11. OpenCV result.
+12. YOLO result if implemented.
+13. Tracking/fusion result.
+14. Multi-target result.
+15. Health/failsafe result.
+16. Deconfliction result.
+17. RViz result.
+18. Logic demo result.
+19. Full mission result.
+20. Build/test totals.
+21. Runtime limitations.
+22. Exact next recommended milestone.
+
+==================================================
+47. FIRST ACTION IN THIS NEW CHAT
+==================================================
+
+Begin immediately with:
+
+# V0.4 BASELINE AUDIT
+
+Report briefly:
+
+A. confirmed current V0.3 repository path;
+
+B. current Git branch/commit/status;
+
+C. nine ROS packages and PX4 integration structure currently present;
+
+D. existing V0.3 validation/test commands;
+
+E. confirmed V0.3 regression status;
+
+F. exact current two-UAV launch/configuration;
+
+G. namespace / PX4 instance / MAV system / DDS mapping intended for uav01 and uav02;
+
+H. any blockers found.
+
+Then immediately perform the first new validation milestone:
+
+# TWO PX4 UAV NAMESPACE + COMMAND ISOLATION
+
+Do not start the camera or YOLO work until this milestone passes.
+
+Once two-UAV isolation passes, continue through the phases in this prompt without waiting for another architecture-planning conversation.
+
+The goal is to leave V0.4 as a tested, coherent continuation of the verified V0.3 system — not another redesign.

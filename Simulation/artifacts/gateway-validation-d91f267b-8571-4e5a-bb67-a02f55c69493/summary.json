@@ -1,0 +1,81 @@
+{
+  "run_id": "d91f267b-8571-4e5a-bb67-a02f55c69493",
+  "passed": true,
+  "wall_seconds": 258.13,
+  "sim_time": 153.53,
+  "launch_order": [
+    {
+      "id": "uav01",
+      "time": 22.66
+    },
+    {
+      "id": "uav02",
+      "time": 55.2
+    }
+  ],
+  "docking_order": [
+    {
+      "id": "uav02",
+      "time": 107.82
+    },
+    {
+      "id": "uav01",
+      "time": 153.53
+    }
+  ],
+  "carousel_events": [
+    {
+      "id": 11,
+      "time": 34.02,
+      "message": "Carousel indexing \u00b7 original lower tray moving to flight deck",
+      "kind": "info",
+      "drone": null
+    },
+    {
+      "id": 14,
+      "time": 54.48,
+      "message": "Carousel locked \u00b7 original lower tray at flight deck",
+      "kind": "info",
+      "drone": null
+    },
+    {
+      "id": 29,
+      "time": 107.82,
+      "message": "Carousel indexing \u00b7 original upper tray moving to flight deck",
+      "kind": "info",
+      "drone": null
+    },
+    {
+      "id": 30,
+      "time": 128.3,
+      "message": "Carousel locked \u00b7 original upper tray at flight deck",
+      "kind": "info",
+      "drone": null
+    }
+  ],
+  "maximum_measured_carriage_offset_m": 2.1518746614669233,
+  "moving_samples": 616,
+  "unlatched_or_armed_stored_aircraft_during_indexing": [],
+  "maximum_landing_image_age_s": 0.1700000000000017,
+  "final_landings": [
+    {
+      "id": "uav01",
+      "state": "DOCKED",
+      "armed": false,
+      "latched": true,
+      "tag_error": 0.01671625792617605,
+      "detection_latency": null,
+      "physical_xy_offset_m": 0.0014472276925220945
+    },
+    {
+      "id": "uav02",
+      "state": "DOCKED",
+      "armed": false,
+      "latched": true,
+      "tag_error": 0.024916120524702882,
+      "detection_latency": null,
+      "physical_xy_offset_m": 0.028394835583199354
+    }
+  ],
+  "detected_targets": 0
+}

@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "name": "Perimeter survey",
+  "wheels": 4,
+  "seed": 42,
+  "terrain": "proving_ground",
+  "population": 18,
+  "traffic": 10,
+  "target_present": true,
+  "target_class": "person",
+  "ugv_speed": 1.5,
+  "altitude": 9.0,
+  "flight_speed": 2.0,
+  "launch_interval": 5.0,
+  "search_timeout": 40.0,
+  "no_target_policy": "loiter",
+  "loiter_seconds": 20.0,
+  "loiter_radius": 5.0,
+  "observation_seconds": 15.0,
+  "standoff": 8.0,
+  "confidence": 0.4,
+  "landing_retries": 2,
+  "battery_return": 25.0,
+  "wind": 0.0,
+  "graphics_quality": "balanced",
+  "start": {
+    "x": -28.0,
+    "y": -22.0
+  },
+  "stops": [
+    {
+      "x": -12.0,
+      "y": -22.0,
+      "id": "alpha",
+      "label": "Alpha",
+      "drones": [
+        "uav01",
+        "uav02",
+        "uav03"
+      ],
+      "search_radius": 12.0,
+      "target_class": null,
+      "search_timeout": null,
+      "loiter_seconds": null
+    },
+    {
+      "x": 16.0,
+      "y": -22.0,
+      "id": "bravo",
+      "label": "Bravo",
+      "drones": [
+        "uav04",
+        "uav05"
+      ],
+      "search_radius": 12.0,
+      "target_class": null,
+      "search_timeout": null,
+      "loiter_seconds": null
+    },
+    {
+      "x": 30.0,
+      "y": 3.0,
+      "id": "charlie",
+      "label": "Charlie",
+      "drones": [
+        "uav06",
+        "uav07",
+        "uav08"
+      ],
+      "search_radius": 12.0,
+      "target_class": null,
+      "search_timeout": null,
+      "loiter_seconds": null
+    }
+  ]
+}

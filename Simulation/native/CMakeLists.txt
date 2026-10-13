@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(fieldlab_city LANGUAGES CXX)
+find_package(gz-sim8 REQUIRED)
+find_package(gz-plugin2 REQUIRED COMPONENTS register)
+add_library(fieldlab-city SHARED CityBody.cc LatchMonitor.cc)
+target_compile_features(fieldlab-city PRIVATE cxx_std_17)
+target_link_libraries(fieldlab-city PRIVATE gz-sim8::gz-sim8 gz-plugin2::register)
+install(TARGETS fieldlab-city LIBRARY DESTINATION lib)

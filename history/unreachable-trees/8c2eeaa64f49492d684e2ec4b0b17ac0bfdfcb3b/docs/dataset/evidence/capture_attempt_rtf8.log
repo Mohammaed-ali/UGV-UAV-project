@@ -1,0 +1,16 @@
+READY {'width': 640, 'height': 480, 'K': [269.96816635131836, 0.0, 320.0, 0.0, 269.9681854248047, 240.0, 0.0, 0.0, 1.0]}
+{'index': 0, 'seconds': 0.22489874199891347, 'labels': 0, 'native': 0, 'kind': 'negative', 'ious': []}
+{'index': 1, 'seconds': 0.12255441799970868, 'labels': 8, 'native': 8, 'kind': 'positive', 'ious': [0.6763868333895039, 0.9947859391319933, 0.7423975659654434, 0.9254025956060647, 0.9551628524033756, 0.9887264913449911, 0.5362059920297003, 0.9811731522497521]}
+{'index': 2, 'seconds': 0.13610541800153442, 'labels': 2, 'native': 2, 'kind': 'positive', 'ious': [0.9589279395333445, 0.994077062639689]}
+{'index': 3, 'seconds': 0.08428357600132586, 'labels': 0, 'native': 0, 'kind': 'distractor_only', 'ious': []}
+{'index': 4, 'seconds': 0.08448990900069475, 'labels': 2, 'native': 2, 'kind': 'positive', 'ious': [0.8663757950964986, 0.9868302461812057]}
+{'index': 5, 'seconds': 0.10459531400010746, 'labels': 0, 'native': 0, 'kind': 'distractor_only', 'ious': []}
+Traceback (most recent call last):
+  File "/tmp/v05_capture_probe.py", line 13, in <module>
+    image,label,meta=g.capture(scene)
+                     ^^^^^^^^^^^^^^^^
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/gazebo_backend.py", line 107, in capture
+    self.request('set_pose_vector',req,Boolean)
+  File "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/tools/synthetic_dataset/scripts/gazebo_backend.py", line 89, in request
+    raise RuntimeError('Gazebo service failed: '+suffix)
+RuntimeError: Gazebo service failed: set_pose_vector

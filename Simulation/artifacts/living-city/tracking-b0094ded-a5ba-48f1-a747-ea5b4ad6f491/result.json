@@ -1,0 +1,709 @@
+{
+  "passed": false,
+  "mission": {
+    "version": 1,
+    "name": "Perimeter survey",
+    "wheels": 4,
+    "seed": 42,
+    "terrain": "proving_ground",
+    "population": 0,
+    "traffic": 1,
+    "target_present": true,
+    "target_class": "car",
+    "ugv_speed": 1.5,
+    "altitude": 9,
+    "flight_speed": 3.0,
+    "launch_interval": 5,
+    "search_timeout": 90.0,
+    "no_target_policy": "return",
+    "loiter_seconds": 20,
+    "loiter_radius": 5,
+    "observation_seconds": 20.0,
+    "standoff": 8,
+    "confidence": 0.4,
+    "landing_retries": 2,
+    "battery_return": 25,
+    "wind": 0,
+    "graphics_quality": "balanced",
+    "living_city": true,
+    "city_scenario": "custom",
+    "walking_speed": 1.2,
+    "traffic_speed": 1.6,
+    "flight_boundary": 116.0,
+    "tracking_seconds": 45.0,
+    "reacquire_seconds": 60.0,
+    "tracking_altitude": 12.0,
+    "tracking_distance": 3.0,
+    "reacquire_confidence": 0.8,
+    "early_selection": true,
+    "tracking_uav": "auto",
+    "tracking_enabled": true,
+    "start": {
+      "x": 30.0,
+      "y": 31.5
+    },
+    "stops": [
+      {
+        "x": 30.0,
+        "y": 34.5,
+        "id": "city",
+        "label": "City survey",
+        "drones": [
+          "uav01"
+        ],
+        "search_radius": 12.0,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      }
+    ]
+  },
+  "selection_mode": "early",
+  "thresholds": {
+    "minimum_fresh_tracking_samples": 20,
+    "maximum_median_follow_distance_m": 8.0,
+    "identity_switches": 0,
+    "carrier_contacts": 0
+  },
+  "final": {
+    "run_id": "8540d249-b79c-47c1-a305-451f8f13e063",
+    "state": "COMPLETE",
+    "hold": false,
+    "sim_time": 147.56,
+    "stop_index": 0,
+    "runtime": {
+      "state": "running",
+      "progress": "Physics online \u00b7 waiting for mission start",
+      "error": null,
+      "processes": {
+        "gazebo": "running",
+        "xrce-agent": "running",
+        "uav01": "running"
+      }
+    },
+    "physics": {
+      "real_time_factor": 0.99,
+      "paused": false,
+      "age": 0.05
+    },
+    "carrier": {
+      "position": [
+        30.014696796245,
+        34.07040836579483,
+        0.7399999025042486
+      ],
+      "quaternion": [
+        -3.2214220339150607e-09,
+        3.306674412074822e-09,
+        0.7089983979691478,
+        0.7052100904533217
+      ],
+      "yaw": 1.5761538090694556,
+      "time": 147.592,
+      "received": 112979.788558092,
+      "speed": 0.0
+    },
+    "carousel": {
+      "active_level": "upper",
+      "requested_level": "upper",
+      "moving": false,
+      "phase": "locked",
+      "angle": 0.0,
+      "error": null,
+      "trays": {
+        "upper": {
+          "y": 1.2613426617877125e-07,
+          "z": 2.248430098650078
+        },
+        "lower": {
+          "y": 7.17290076843187e-08,
+          "z": 0.7799878172131363
+        }
+      }
+    },
+    "wheel_angles": {
+      "wheel_left_m1_1_joint": -2.7191482336865325,
+      "wheel_right_m1_1_joint": 16.20835041379483,
+      "wheel_left_1_1_joint": -2.7058534925786093,
+      "wheel_right_1_1_joint": 16.22195434094468
+    },
+    "drones": [
+      {
+        "id": "uav01",
+        "bay": 1,
+        "level": "upper",
+        "tag_id": 1,
+        "state": "DOCKED",
+        "position": [
+          29.316193249508906,
+          34.72512452128254,
+          3.3179464749735055
+        ],
+        "quaternion": [
+          4.993896260075585e-06,
+          -7.778273266585217e-06,
+          0.7135013310479504,
+          0.7006538735405397
+        ],
+        "measured": true,
+        "battery": 51.0,
+        "ready": false,
+        "armed": false,
+        "mode": 14,
+        "telemetry_age": 0.01,
+        "target": null,
+        "reason": "Search timed out",
+        "extension": 1.2613426617877125e-07,
+        "tray_position": [
+          29.33106335845972,
+          34.74675553573383,
+          3.092930001154327
+        ],
+        "estimated_position": [
+          29.27610716253519,
+          34.7404247469455,
+          3.355434491791633
+        ],
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": 0.01223774226429577,
+        "phase_seconds": 0,
+        "vision": {
+          "time": 147.5,
+          "sync_error": 0.0,
+          "tags": [],
+          "width": 640,
+          "height": 480,
+          "latency_ms": 15.8,
+          "received": 112979.725199834,
+          "detections": [],
+          "tag_time": 147.5,
+          "tag_latency_ms": 15.8
+        }
+      },
+      {
+        "id": "uav02",
+        "bay": 1,
+        "level": "lower",
+        "tag_id": 2,
+        "state": "STORED",
+        "position": [
+          29.33106346949924,
+          34.746755533639856,
+          1.8549869267895407
+        ],
+        "quaternion": [
+          1.8659059607756882e-10,
+          -7.119359759949615e-11,
+          0.7089983979697684,
+          0.7052100904526977
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 7.17290076843187e-08,
+        "tray_position": [
+          29.331063412864196,
+          34.74675553602531,
+          1.6244877197173848
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 147.6,
+        "vision": null
+      },
+      {
+        "id": "uav03",
+        "bay": 2,
+        "level": "upper",
+        "tag_id": 3,
+        "state": "STORED",
+        "position": [
+          30.691044001693392,
+          34.75404167535848,
+          3.323449242637092
+        ],
+        "quaternion": [
+          3.387251686081343e-11,
+          -1.6553540981520222e-11,
+          0.7089983979700062,
+          0.7052100904524584
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 1.2613426617877125e-07,
+        "tray_position": [
+          30.691043840727307,
+          34.7540416767719,
+          3.092930001154327
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 147.6,
+        "vision": null
+      },
+      {
+        "id": "uav04",
+        "bay": 2,
+        "level": "lower",
+        "tag_id": 4,
+        "state": "STORED",
+        "position": [
+          30.691043951766815,
+          34.754041674680316,
+          1.8549869265689232
+        ],
+        "quaternion": [
+          1.8659059607756882e-10,
+          -7.119359759949615e-11,
+          0.7089983979697684,
+          0.7052100904526977
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 7.17290076843187e-08,
+        "tray_position": [
+          30.691043895131784,
+          34.75404167706338,
+          1.6244877197173848
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 147.6,
+        "vision": null
+      },
+      {
+        "id": "uav05",
+        "bay": 3,
+        "level": "upper",
+        "tag_id": 5,
+        "state": "STORED",
+        "position": [
+          29.338349660467202,
+          33.386775052049536,
+          3.3234492425730675
+        ],
+        "quaternion": [
+          3.387251686081343e-11,
+          -1.6553540981520222e-11,
+          0.7089983979700062,
+          0.7052100904524584
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 1.2613426617877125e-07,
+        "tray_position": [
+          29.338349499497784,
+          33.386775053466245,
+          3.092930001154327
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 147.6,
+        "vision": null
+      },
+      {
+        "id": "uav06",
+        "bay": 3,
+        "level": "lower",
+        "tag_id": 6,
+        "state": "STORED",
+        "position": [
+          29.3383496105397,
+          33.38677505137228,
+          1.8549869262931438
+        ],
+        "quaternion": [
+          1.8659059607756882e-10,
+          -7.119359759949615e-11,
+          0.7089983979697684,
+          0.7052100904526977
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 7.17290076843187e-08,
+        "tray_position": [
+          29.338349553902262,
+          33.386775053757724,
+          1.6244877197173848
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 147.6,
+        "vision": null
+      },
+      {
+        "id": "uav07",
+        "bay": 4,
+        "level": "upper",
+        "tag_id": 7,
+        "state": "STORED",
+        "position": [
+          30.69833014273477,
+          33.39406119309091,
+          3.323449242540017
+        ],
+        "quaternion": [
+          3.387251686081343e-11,
+          -1.6553540981520222e-11,
+          0.7089983979700062,
+          0.7052100904524584
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 1.2613426617877125e-07,
+        "tray_position": [
+          30.698329981765372,
+          33.39406119450431,
+          3.092930001154327
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 147.6,
+        "vision": null
+      },
+      {
+        "id": "uav08",
+        "bay": 4,
+        "level": "lower",
+        "tag_id": 8,
+        "state": "STORED",
+        "position": [
+          30.69833009280727,
+          33.39406119241274,
+          1.8549869260725262
+        ],
+        "quaternion": [
+          1.8659059607756882e-10,
+          -7.119359759949615e-11,
+          0.7089983979697684,
+          0.7052100904526977
+        ],
+        "measured": true,
+        "battery": null,
+        "ready": false,
+        "armed": false,
+        "mode": null,
+        "telemetry_age": null,
+        "target": null,
+        "reason": null,
+        "extension": 7.17290076843187e-08,
+        "tray_position": [
+          30.69833003616985,
+          33.39406119479579,
+          1.6244877197173848
+        ],
+        "estimated_position": null,
+        "detection_latency": null,
+        "camera_active": false,
+        "latched": true,
+        "tag_error": null,
+        "phase_seconds": 147.6,
+        "vision": null
+      }
+    ],
+    "tracks": [],
+    "city": {
+      "actors": [
+        {
+          "id": "vehicle_0",
+          "kind": "car",
+          "position": [
+            86.88502522367826,
+            104.49999999999501,
+            0.02
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            1.9353884408651442e-12,
+            1.0
+          ],
+          "yaw": 3.8707768817302884e-12,
+          "time": 147.592,
+          "speed": 1.037,
+          "walk_phase": 797.8051833017516,
+          "wheel_angle": 453.48085195289076,
+          "yaw_rate": -3.684883086493832e-12,
+          "distance": 158.71829818351176,
+          "steering": -1.0437894399491241e-11,
+          "lane_error": 0.0,
+          "parked": false
+        }
+      ],
+      "violations": {},
+      "minimum_carrier_gap": 7.3756999815407776,
+      "contact_events": [],
+      "actor_contacts": [],
+      "crossings": [
+        {
+          "id": "crossing-0",
+          "x": -57.0,
+          "y": -37.0,
+          "pedestrian_entry": false,
+          "vehicle_green": true,
+          "owner": null,
+          "occupants": [],
+          "state": "vehicles"
+        },
+        {
+          "id": "crossing-1",
+          "x": 76.0,
+          "y": -37.0,
+          "pedestrian_entry": false,
+          "vehicle_green": true,
+          "owner": null,
+          "occupants": [],
+          "state": "vehicles"
+        },
+        {
+          "id": "crossing-2",
+          "x": -57.0,
+          "y": 102.0,
+          "pedestrian_entry": false,
+          "vehicle_green": true,
+          "owner": null,
+          "occupants": [],
+          "state": "vehicles"
+        },
+        {
+          "id": "crossing-3",
+          "x": 76.0,
+          "y": 102.0,
+          "pedestrian_entry": false,
+          "vehicle_green": true,
+          "owner": null,
+          "occupants": [],
+          "state": "vehicles"
+        }
+      ],
+      "crossing_passes": 0,
+      "crossing_violations": []
+    },
+    "catalogue": [],
+    "tracking": {
+      "state": "IDLE",
+      "target_id": null,
+      "drone_id": null,
+      "timeline": [],
+      "candidates": []
+    },
+    "tracking_events": [],
+    "events": [
+      {
+        "id": 1,
+        "time": 0.0,
+        "message": "Mission configuration saved",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 2,
+        "time": 0.0,
+        "message": "Initializing Gazebo and PX4",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 3,
+        "time": 8.68,
+        "message": "Simulation ready \u00b7 physical telemetry connected",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 4,
+        "time": 13.64,
+        "message": "Mission started \u00b7 following route",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 5,
+        "time": 22.46,
+        "message": "Arrived at City survey \u00b7 1 drones scheduled",
+        "kind": "info",
+        "drone": null
+      },
+      {
+        "id": 6,
+        "time": 22.46,
+        "message": "UAV01 \u00b7 preparing",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 7,
+        "time": 22.46,
+        "message": "UAV01 \u00b7 arming",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 8,
+        "time": 22.91,
+        "message": "UAV01 \u00b7 releasing",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 9,
+        "time": 22.98,
+        "message": "UAV01 \u00b7 takeoff",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 10,
+        "time": 32.35,
+        "message": "UAV01 \u00b7 searching",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 11,
+        "time": 122.41,
+        "message": "UAV01 \u00b7 returning \u00b7 Search timed out",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 12,
+        "time": 125.97,
+        "message": "UAV01 \u00b7 recovery queue",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 13,
+        "time": 125.97,
+        "message": "UAV01 \u00b7 tag acquire",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 14,
+        "time": 129.75,
+        "message": "UAV01 \u00b7 aligning",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 15,
+        "time": 130.43,
+        "message": "UAV01 \u00b7 descending",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 16,
+        "time": 145.48,
+        "message": "UAV01 \u00b7 landing",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 17,
+        "time": 147.49,
+        "message": "UAV01 \u00b7 latching",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 18,
+        "time": 147.56,
+        "message": "UAV01 \u00b7 docked",
+        "kind": "info",
+        "drone": "uav01"
+      },
+      {
+        "id": 19,
+        "time": 147.56,
+        "message": "Mission complete \u00b7 all deployed aircraft docked",
+        "kind": "success",
+        "drone": null
+      }
+    ],
+    "perception": {
+      "detector_ready": true,
+      "tag_ready": true,
+      "error": null,
+      "visual_tracking": {},
+      "performance": {
+        "detector_frames": 256,
+        "detector_total_ms": 102998.9,
+        "visual_frames": 0
+      }
+    }
+  },
+  "wall_seconds": 163.91,
+  "fresh_tracking_samples": 0,
+  "maximum_tracking_image_age": null,
+  "median_follow_distance": null,
+  "tracking_ids": [],
+  "evaluation_actor": null,
+  "actor_travel_m": {
+    "vehicle_0": 158.71829818351176
+  },
+  "tracking_fresh_fraction": 0.0,
+  "median_image_center_error_px": null,
+  "peak_owned_rss_mib": 2212.6,
+  "median_cpu_percent": 419.79999999999995,
+  "median_rtf": 0.99,
+  "maximum_telemetry_age": 0.03,
+  "native_storage_growth_bytes": 36642773
+}

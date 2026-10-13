@@ -1,0 +1,567 @@
+[0.022s] Invoking command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_interfaces -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces
+[0.156s] -- The C compiler identification is GNU 13.3.0
+[0.267s] -- The CXX compiler identification is GNU 13.3.0
+[0.311s] -- Detecting C compiler ABI info
+[0.572s] -- Detecting C compiler ABI info - done
+[0.596s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.599s] -- Detecting C compile features
+[0.606s] -- Detecting C compile features - done
+[0.628s] -- Detecting CXX compiler ABI info
+[0.930s] -- Detecting CXX compiler ABI info - done
+[0.963s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.963s] -- Detecting CXX compile features
+[0.970s] -- Detecting CXX compile features - done
+[0.978s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.333s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.653s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.791s] -- Found rosidl_default_generators: 1.6.1 (/opt/ros/jazzy/share/rosidl_default_generators/cmake)
+[1.815s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.988s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.177s] -- Found rosidl_adapter: 4.6.9 (/opt/ros/jazzy/share/rosidl_adapter/cmake)
+[2.189s] -- Found std_msgs: 5.3.8 (/opt/ros/jazzy/share/std_msgs/cmake)
+[2.319s] -- Found geometry_msgs: 5.3.8 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+[4.319s] -- Found ament_cmake_ros: 0.12.1 (/opt/ros/jazzy/share/ament_cmake_ros/cmake)
+[5.851s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[7.847s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[7.855s] -- Found python_cmake_module: 0.11.1 (/opt/ros/jazzy/share/python_cmake_module/cmake)
+[8.059s] -- Found PythonExtra: /usr/bin/python3  
+[8.924s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter Development NumPy Development.Module Development.Embed 
+[9.229s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[9.268s] -- Configuring done (9.2s)
+[9.468s] -- Generating done (0.2s)
+[9.511s] -- Build files have been written to: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces
+[9.548s] Invoked command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/src/wildlife_interfaces -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces
+[9.550s] Invoking command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces -- -j12 -l12
+[9.690s] [  1%] Generating Rust code for ROS interfaces
+[9.693s] [  1%] Built target ament_cmake_python_symlink_wildlife_interfaces
+[9.706s] [  2%] Generating type hashes for ROS interfaces
+[10.290s] running egg_info
+[10.296s] creating wildlife_interfaces.egg-info
+[10.341s] writing wildlife_interfaces.egg-info/PKG-INFO
+[10.347s] writing dependency_links to wildlife_interfaces.egg-info/dependency_links.txt
+[10.347s] writing top-level names to wildlife_interfaces.egg-info/top_level.txt
+[10.347s] writing manifest file 'wildlife_interfaces.egg-info/SOURCES.txt'
+[10.498s] reading manifest file 'wildlife_interfaces.egg-info/SOURCES.txt'
+[10.498s] writing manifest file 'wildlife_interfaces.egg-info/SOURCES.txt'
+[10.556s] [  2%] Built target ament_cmake_python_build_wildlife_interfaces_egg
+[11.477s] [  2%] Built target wildlife_interfaces__rs
+[11.488s] [  2%] Built target wildlife_interfaces__rosidl_generator_type_description
+[11.518s] [  2%] Generating C code for ROS interfaces
+[11.556s] [  2%] Generating C++ code for ROS interfaces
+[15.457s] [  2%] Built target wildlife_interfaces__cpp
+[16.546s] [  3%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/drone_state__description.c.o
+[16.548s] [  4%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/drone_state__functions.c.o
+[16.696s] [  4%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/target__type_support.c.o
+[16.757s] [  5%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/drone_command__description.c.o
+[16.781s] [  5%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/drone_command__functions.c.o
+[16.881s] [  6%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/drone_command__type_support.c.o
+[16.916s] [  7%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/tray_slot__description.c.o
+[16.944s] [  7%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/tray_slot__functions.c.o
+[17.025s] [  8%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/operator_alert__description.c.o
+[17.032s] [  9%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/tray_slot__type_support.c.o
+[17.142s] [ 10%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/operator_alert__type_support.c.o
+[17.142s] [  9%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/operator_alert__functions.c.o
+[17.237s] [ 11%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/deployment_request__description.c.o
+[17.281s] [ 11%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/deployment_request__functions.c.o
+[17.356s] [ 12%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/deployment_request__type_support.c.o
+[17.466s] [ 13%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/srv/detail/operator_decision__description.c.o
+[17.473s] [ 14%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/target__functions.c.o
+[17.619s] [ 15%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/srv/detail/operator_decision__type_support.c.o
+[17.663s] [ 16%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/srv/detail/deploy_drone__description.c.o
+[17.783s] [ 17%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/srv/detail/deploy_drone__type_support.c.o
+[17.866s] [ 17%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/srv/detail/mission_control__description.c.o
+[17.927s] [ 18%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/srv/detail/mission_control__functions.c.o
+[18.025s] [ 19%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/srv/detail/mission_control__type_support.c.o
+[18.074s] [ 19%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/action/detail/navigate_waypoints__description.c.o
+[18.229s] [ 20%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/action/detail/navigate_waypoints__functions.c.o
+[18.456s] [ 21%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/action/detail/navigate_waypoints__type_support.c.o
+[18.526s] [ 21%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/action/detail/search_area__description.c.o
+[18.788s] [ 22%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/action/detail/search_area__functions.c.o
+[19.158s] [ 23%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/action/detail/search_area__type_support.c.o
+[19.213s] [ 23%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/srv/detail/deploy_drone__functions.c.o
+[19.317s] [ 23%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/srv/detail/operator_decision__functions.c.o
+[19.436s] [ 24%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/target__description.c.o
+[19.573s] [ 24%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/detection__type_support.c.o
+[19.621s] [ 25%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/detection__functions.c.o
+[19.713s] [ 26%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/detection__description.c.o
+[19.789s] [ 26%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/ugv_state__type_support.c.o
+[19.838s] [ 27%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/ugv_state__functions.c.o
+[19.933s] [ 28%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/ugv_state__description.c.o
+[20.034s] [ 28%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_c.dir/rosidl_generator_c/wildlife_interfaces/msg/detail/drone_state__type_support.c.o
+[20.122s] [ 28%] Linking C shared library libwildlife_interfaces__rosidl_generator_c.so
+[20.286s] [ 28%] Built target wildlife_interfaces__rosidl_generator_c
+[20.335s] [ 29%] Generating C type support for eProsima Fast-RTPS
+[24.043s] [ 30%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/msg/detail/drone_state__type_support_c.cpp.o
+[24.787s] [ 30%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/msg/detail/operator_alert__type_support_c.cpp.o
+[25.811s] [ 31%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/msg/detail/deployment_request__type_support_c.cpp.o
+[27.014s] [ 32%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/srv/detail/operator_decision__type_support_c.cpp.o
+[28.343s] [ 32%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/srv/detail/deploy_drone__type_support_c.cpp.o
+[29.338s] [ 33%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/srv/detail/mission_control__type_support_c.cpp.o
+[30.135s] [ 34%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/action/detail/navigate_waypoints__type_support_c.cpp.o
+[31.003s] [ 34%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/action/detail/search_area__type_support_c.cpp.o
+[31.543s] [ 35%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/msg/detail/tray_slot__type_support_c.cpp.o
+[31.919s] [ 35%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/msg/detail/drone_command__type_support_c.cpp.o
+[32.297s] [ 36%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/msg/detail/target__type_support_c.cpp.o
+[32.700s] [ 37%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/msg/detail/detection__type_support_c.cpp.o
+[33.059s] [ 37%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/wildlife_interfaces/msg/detail/ugv_state__type_support_c.cpp.o
+[33.412s] [ 38%] Linking CXX shared library libwildlife_interfaces__rosidl_typesupport_fastrtps_c.so
+[33.489s] [ 38%] Built target wildlife_interfaces__rosidl_typesupport_fastrtps_c
+[33.504s] [ 38%] Generating C++ type support dispatch for ROS interfaces
+[34.175s] [ 39%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/msg/drone_state__type_support.cpp.o
+[34.410s] [ 39%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/msg/deployment_request__type_support.cpp.o
+[34.625s] [ 40%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/srv/operator_decision__type_support.cpp.o
+[34.917s] [ 41%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/srv/deploy_drone__type_support.cpp.o
+[35.194s] [ 41%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/srv/mission_control__type_support.cpp.o
+[35.476s] [ 42%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/action/navigate_waypoints__type_support.cpp.o
+[35.998s] [ 43%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/action/search_area__type_support.cpp.o
+[36.517s] [ 44%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/msg/operator_alert__type_support.cpp.o
+[36.741s] [ 45%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/msg/tray_slot__type_support.cpp.o
+[36.973s] [ 45%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/msg/drone_command__type_support.cpp.o
+[37.194s] [ 46%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/msg/target__type_support.cpp.o
+[37.412s] [ 46%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/msg/detection__type_support.cpp.o
+[37.645s] [ 47%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/wildlife_interfaces/msg/ugv_state__type_support.cpp.o
+[37.862s] [ 47%] Linking CXX shared library libwildlife_interfaces__rosidl_typesupport_cpp.so
+[37.947s] [ 47%] Built target wildlife_interfaces__rosidl_typesupport_cpp
+[37.963s] [ 48%] Generating C++ introspection for ROS interfaces
+[38.911s] [ 49%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/msg/detail/drone_state__type_support.cpp.o
+[39.155s] [ 50%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/srv/detail/operator_decision__type_support.cpp.o
+[39.470s] [ 50%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/srv/detail/deploy_drone__type_support.cpp.o
+[39.780s] [ 51%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/srv/detail/mission_control__type_support.cpp.o
+[40.083s] [ 52%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/action/detail/navigate_waypoints__type_support.cpp.o
+[40.689s] [ 52%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/action/detail/search_area__type_support.cpp.o
+[41.258s] [ 53%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/msg/detail/deployment_request__type_support.cpp.o
+[41.496s] [ 53%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/msg/detail/operator_alert__type_support.cpp.o
+[41.724s] [ 54%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/msg/detail/tray_slot__type_support.cpp.o
+[41.950s] [ 54%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/msg/detail/drone_command__type_support.cpp.o
+[42.175s] [ 55%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/msg/detail/target__type_support.cpp.o
+[42.438s] [ 56%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/msg/detail/detection__type_support.cpp.o
+[42.673s] [ 56%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/wildlife_interfaces/msg/detail/ugv_state__type_support.cpp.o
+[42.916s] [ 57%] Linking CXX shared library libwildlife_interfaces__rosidl_typesupport_introspection_cpp.so
+[43.026s] [ 57%] Built target wildlife_interfaces__rosidl_typesupport_introspection_cpp
+[43.043s] [ 58%] Generating C++ type support for eProsima Fast-RTPS
+[44.365s] [ 58%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/msg/detail/dds_fastrtps/drone_state__type_support.cpp.o
+[44.703s] [ 59%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/srv/detail/dds_fastrtps/deploy_drone__type_support.cpp.o
+[45.234s] [ 60%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/srv/detail/dds_fastrtps/mission_control__type_support.cpp.o
+[45.706s] [ 60%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/action/detail/dds_fastrtps/navigate_waypoints__type_support.cpp.o
+[46.486s] [ 61%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/action/detail/dds_fastrtps/search_area__type_support.cpp.o
+[47.251s] [ 61%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/srv/detail/dds_fastrtps/operator_decision__type_support.cpp.o
+[47.736s] [ 62%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/msg/detail/dds_fastrtps/deployment_request__type_support.cpp.o
+[48.124s] [ 63%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/msg/detail/dds_fastrtps/operator_alert__type_support.cpp.o
+[48.471s] [ 63%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/msg/detail/dds_fastrtps/tray_slot__type_support.cpp.o
+[48.810s] [ 64%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/msg/detail/dds_fastrtps/drone_command__type_support.cpp.o
+[49.204s] [ 64%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/msg/detail/dds_fastrtps/target__type_support.cpp.o
+[49.667s] [ 65%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/msg/detail/dds_fastrtps/detection__type_support.cpp.o
+[50.074s] [ 66%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/wildlife_interfaces/msg/detail/dds_fastrtps/ugv_state__type_support.cpp.o
+[50.594s] [ 67%] Linking CXX shared library libwildlife_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[50.721s] [ 67%] Built target wildlife_interfaces__rosidl_typesupport_fastrtps_cpp
+[50.738s] [ 68%] Generating C type support dispatch for ROS interfaces
+[51.469s] [ 68%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/msg/drone_state__type_support.cpp.o
+[51.512s] [ 69%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/srv/mission_control__type_support.cpp.o
+[51.557s] [ 69%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/action/navigate_waypoints__type_support.cpp.o
+[51.609s] [ 70%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/action/search_area__type_support.cpp.o
+[51.657s] [ 71%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/srv/deploy_drone__type_support.cpp.o
+[51.699s] [ 71%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/srv/operator_decision__type_support.cpp.o
+[51.741s] [ 72%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/msg/deployment_request__type_support.cpp.o
+[51.784s] [ 73%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/msg/operator_alert__type_support.cpp.o
+[51.822s] [ 73%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/msg/tray_slot__type_support.cpp.o
+[51.860s] [ 74%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/msg/drone_command__type_support.cpp.o
+[51.896s] [ 74%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/msg/target__type_support.cpp.o
+[51.937s] [ 75%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/msg/detection__type_support.cpp.o
+[51.976s] [ 76%] Building CXX object CMakeFiles/wildlife_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/wildlife_interfaces/msg/ugv_state__type_support.cpp.o
+[52.011s] [ 77%] Linking CXX shared library libwildlife_interfaces__rosidl_typesupport_c.so
+[52.050s] [ 77%] Built target wildlife_interfaces__rosidl_typesupport_c
+[52.062s] [ 77%] Generating C introspection for ROS interfaces
+[52.876s] [ 79%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/msg/detail/detection__type_support.c.o
+[52.876s] [ 79%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/msg/detail/ugv_state__type_support.c.o
+[52.877s] [ 79%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/msg/detail/drone_state__type_support.c.o
+[52.916s] [ 80%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/action/detail/navigate_waypoints__type_support.c.o
+[52.928s] [ 80%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/srv/detail/mission_control__type_support.c.o
+[52.930s] [ 81%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/action/detail/search_area__type_support.c.o
+[52.973s] [ 82%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/srv/detail/deploy_drone__type_support.c.o
+[52.989s] [ 83%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/srv/detail/operator_decision__type_support.c.o
+[52.997s] [ 83%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/msg/detail/deployment_request__type_support.c.o
+[53.019s] [ 84%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/msg/detail/operator_alert__type_support.c.o
+[53.036s] [ 84%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/msg/detail/tray_slot__type_support.c.o
+[53.049s] [ 85%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/msg/detail/target__type_support.c.o
+[53.050s] [ 86%] Building C object CMakeFiles/wildlife_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/wildlife_interfaces/msg/detail/drone_command__type_support.c.o
+[53.093s] [ 86%] Linking C shared library libwildlife_interfaces__rosidl_typesupport_introspection_c.so
+[53.132s] [ 86%] Built target wildlife_interfaces__rosidl_typesupport_introspection_c
+[53.156s] [ 86%] Built target wildlife_interfaces
+[53.182s] [ 87%] Generating Python code for ROS interfaces
+[54.985s] [ 87%] Built target wildlife_interfaces__py
+[55.010s] [ 87%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/msg/_detection_s.c.o
+[55.010s] [ 88%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/msg/_ugv_state_s.c.o
+[55.014s] [ 89%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/msg/_drone_state_s.c.o
+[55.108s] [ 90%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/action/_navigate_waypoints_s.c.o
+[55.116s] [ 91%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/action/_search_area_s.c.o
+[55.164s] [ 91%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/srv/_mission_control_s.c.o
+[55.273s] [ 93%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/srv/_deploy_drone_s.c.o
+[55.273s] [ 93%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/srv/_operator_decision_s.c.o
+[55.285s] [ 93%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/msg/_deployment_request_s.c.o
+[55.388s] [ 94%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/msg/_operator_alert_s.c.o
+[55.392s] [ 94%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/msg/_drone_command_s.c.o
+[55.393s] [ 95%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/msg/_tray_slot_s.c.o
+[55.485s] [ 96%] Building C object CMakeFiles/wildlife_interfaces__rosidl_generator_py.dir/rosidl_generator_py/wildlife_interfaces/msg/_target_s.c.o
+[55.605s] [ 96%] Linking C shared library libwildlife_interfaces__rosidl_generator_py.so
+[55.655s] [ 96%] Built target wildlife_interfaces__rosidl_generator_py
+[55.676s] [ 97%] Building C object CMakeFiles/wildlife_interfaces_s__rosidl_typesupport_introspection_c.dir/rosidl_generator_py/wildlife_interfaces/_wildlife_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o
+[55.677s] [ 97%] Building C object CMakeFiles/wildlife_interfaces_s__rosidl_typesupport_c.dir/rosidl_generator_py/wildlife_interfaces/_wildlife_interfaces_s.ep.rosidl_typesupport_c.c.o
+[55.683s] [ 98%] Building C object CMakeFiles/wildlife_interfaces_s__rosidl_typesupport_fastrtps_c.dir/rosidl_generator_py/wildlife_interfaces/_wildlife_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o
+[55.845s] [ 99%] Linking C shared module rosidl_generator_py/wildlife_interfaces/wildlife_interfaces_s__rosidl_typesupport_c.so
+[55.870s] [ 99%] Linking C shared module rosidl_generator_py/wildlife_interfaces/wildlife_interfaces_s__rosidl_typesupport_fastrtps_c.so
+[55.882s] [ 99%] Built target wildlife_interfaces_s__rosidl_typesupport_c
+[55.896s] [100%] Linking C shared module rosidl_generator_py/wildlife_interfaces/wildlife_interfaces_s__rosidl_typesupport_introspection_c.so
+[55.913s] [100%] Built target wildlife_interfaces_s__rosidl_typesupport_fastrtps_c
+[55.937s] [100%] Built target wildlife_interfaces_s__rosidl_typesupport_introspection_c
+[55.948s] Invoked command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces -- -j12 -l12
+[55.958s] Invoking command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces
+[55.965s] -- Install configuration: ""
+[55.965s] -- Execute custom install script
+[55.965s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/ament_index/resource_index/rosidl_interfaces/wildlife_interfaces
+[55.975s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/DroneState.json
+[55.984s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/UGVState.json
+[55.992s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/Detection.json
+[56.002s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/Target.json
+[56.011s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/DroneCommand.json
+[56.020s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/TraySlot.json
+[56.027s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/OperatorAlert.json
+[56.037s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/DeploymentRequest.json
+[56.046s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/srv/OperatorDecision.json
+[56.057s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/srv/DeployDrone.json
+[56.069s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/srv/MissionControl.json
+[56.078s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/action/NavigateWaypoints.json
+[56.087s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/action/SearchArea.json
+[56.099s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__functions.h
+[56.108s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__struct.h
+[56.118s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__type_support.h
+[56.127s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__functions.h
+[56.139s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__struct.h
+[56.146s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__type_support.h
+[56.156s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/navigate_waypoints.h
+[56.166s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/search_area.h
+[56.179s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/deployment_request.h
+[56.186s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__functions.h
+[56.197s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__struct.h
+[56.206s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__type_support.h
+[56.214s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__functions.h
+[56.226s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__struct.h
+[56.234s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__type_support.h
+[56.244s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__functions.h
+[56.251s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__struct.h
+[56.259s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__type_support.h
+[56.272s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__functions.h
+[56.283s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__struct.h
+[56.291s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__type_support.h
+[56.302s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__functions.h
+[56.310s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__struct.h
+[56.319s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__type_support.h
+[56.328s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__functions.h
+[56.339s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__struct.h
+[56.348s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__type_support.h
+[56.361s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__functions.h
+[56.374s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__struct.h
+[56.384s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__type_support.h
+[56.393s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__functions.h
+[56.402s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__struct.h
+[56.413s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__type_support.h
+[56.421s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detection.h
+[56.431s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/drone_command.h
+[56.439s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/drone_state.h
+[56.449s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/operator_alert.h
+[56.458s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/rosidl_generator_c__visibility_control.h
+[56.469s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/target.h
+[56.477s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/tray_slot.h
+[56.489s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/ugv_state.h
+[56.501s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/deploy_drone.h
+[56.514s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__functions.h
+[56.526s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__struct.h
+[56.538s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__type_support.h
+[56.550s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__functions.h
+[56.558s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__struct.h
+[56.568s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__type_support.h
+[56.577s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__functions.h
+[56.584s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__struct.h
+[56.594s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__type_support.h
+[56.604s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/mission_control.h
+[56.614s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/operator_decision.h
+[56.626s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/environment/library_path.sh
+[56.633s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/environment/library_path.dsv
+[56.642s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__rosidl_typesupport_fastrtps_c.h
+[56.653s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__rosidl_typesupport_fastrtps_c.h
+[56.661s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__rosidl_typesupport_fastrtps_c.h
+[56.669s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__rosidl_typesupport_fastrtps_c.h
+[56.678s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__rosidl_typesupport_fastrtps_c.h
+[56.685s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__rosidl_typesupport_fastrtps_c.h
+[56.696s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__rosidl_typesupport_fastrtps_c.h
+[56.705s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__rosidl_typesupport_fastrtps_c.h
+[56.712s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__rosidl_typesupport_fastrtps_c.h
+[56.721s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__rosidl_typesupport_fastrtps_c.h
+[56.729s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[56.739s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__rosidl_typesupport_fastrtps_c.h
+[56.749s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__rosidl_typesupport_fastrtps_c.h
+[56.757s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__rosidl_typesupport_fastrtps_c.h
+[56.768s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__rosidl_typesupport_introspection_c.h
+[56.776s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__rosidl_typesupport_introspection_c.h
+[56.784s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__rosidl_typesupport_introspection_c.h
+[56.793s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__rosidl_typesupport_introspection_c.h
+[56.803s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__rosidl_typesupport_introspection_c.h
+[56.810s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__rosidl_typesupport_introspection_c.h
+[56.822s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__rosidl_typesupport_introspection_c.h
+[56.830s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__rosidl_typesupport_introspection_c.h
+[56.837s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__rosidl_typesupport_introspection_c.h
+[56.847s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__rosidl_typesupport_introspection_c.h
+[56.855s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[56.865s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__rosidl_typesupport_introspection_c.h
+[56.873s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__rosidl_typesupport_introspection_c.h
+[56.882s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__rosidl_typesupport_introspection_c.h
+[56.894s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__builder.hpp
+[56.907s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__struct.hpp
+[56.917s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__traits.hpp
+[56.929s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__type_support.hpp
+[56.939s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__builder.hpp
+[56.946s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__struct.hpp
+[56.956s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__traits.hpp
+[56.966s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__type_support.hpp
+[56.977s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/navigate_waypoints.hpp
+[56.985s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/search_area.hpp
+[56.995s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/deployment_request.hpp
+[57.003s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__builder.hpp
+[57.015s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__struct.hpp
+[57.025s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__traits.hpp
+[57.033s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__type_support.hpp
+[57.041s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__builder.hpp
+[57.050s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__struct.hpp
+[57.058s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__traits.hpp
+[57.066s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__type_support.hpp
+[57.074s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__builder.hpp
+[57.083s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__struct.hpp
+[57.089s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__traits.hpp
+[57.096s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__type_support.hpp
+[57.105s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__builder.hpp
+[57.114s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__struct.hpp
+[57.124s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__traits.hpp
+[57.135s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__type_support.hpp
+[57.144s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__builder.hpp
+[57.151s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__struct.hpp
+[57.158s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__traits.hpp
+[57.166s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__type_support.hpp
+[57.175s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__builder.hpp
+[57.185s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__struct.hpp
+[57.195s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__traits.hpp
+[57.205s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__type_support.hpp
+[57.214s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__builder.hpp
+[57.223s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__struct.hpp
+[57.233s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__traits.hpp
+[57.244s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__type_support.hpp
+[57.256s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__builder.hpp
+[57.270s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__struct.hpp
+[57.281s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__traits.hpp
+[57.292s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__type_support.hpp
+[57.303s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detection.hpp
+[57.315s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/drone_command.hpp
+[57.325s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/drone_state.hpp
+[57.336s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/operator_alert.hpp
+[57.348s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
+[57.356s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/target.hpp
+[57.367s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/tray_slot.hpp
+[57.375s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/ugv_state.hpp
+[57.382s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/deploy_drone.hpp
+[57.391s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__builder.hpp
+[57.402s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__struct.hpp
+[57.410s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__traits.hpp
+[57.417s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__type_support.hpp
+[57.425s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__builder.hpp
+[57.431s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__struct.hpp
+[57.441s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__traits.hpp
+[57.452s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__type_support.hpp
+[57.464s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__builder.hpp
+[57.473s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__struct.hpp
+[57.482s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__traits.hpp
+[57.492s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__type_support.hpp
+[57.505s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/mission_control.hpp
+[57.518s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/operator_decision.hpp
+[57.528s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__rosidl_typesupport_fastrtps_cpp.hpp
+[57.539s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__rosidl_typesupport_fastrtps_cpp.hpp
+[57.550s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__rosidl_typesupport_fastrtps_cpp.hpp
+[57.559s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__rosidl_typesupport_fastrtps_cpp.hpp
+[57.570s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__rosidl_typesupport_fastrtps_cpp.hpp
+[57.581s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__rosidl_typesupport_fastrtps_cpp.hpp
+[57.591s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__rosidl_typesupport_fastrtps_cpp.hpp
+[57.599s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__rosidl_typesupport_fastrtps_cpp.hpp
+[57.607s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__rosidl_typesupport_fastrtps_cpp.hpp
+[57.614s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__rosidl_typesupport_fastrtps_cpp.hpp
+[57.624s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[57.634s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__rosidl_typesupport_fastrtps_cpp.hpp
+[57.645s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__rosidl_typesupport_fastrtps_cpp.hpp
+[57.653s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__rosidl_typesupport_fastrtps_cpp.hpp
+[57.667s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/navigate_waypoints__rosidl_typesupport_introspection_cpp.hpp
+[57.677s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/action/detail/search_area__rosidl_typesupport_introspection_cpp.hpp
+[57.686s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/deployment_request__rosidl_typesupport_introspection_cpp.hpp
+[57.698s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/detection__rosidl_typesupport_introspection_cpp.hpp
+[57.708s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_command__rosidl_typesupport_introspection_cpp.hpp
+[57.716s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/drone_state__rosidl_typesupport_introspection_cpp.hpp
+[57.728s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/operator_alert__rosidl_typesupport_introspection_cpp.hpp
+[57.740s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/target__rosidl_typesupport_introspection_cpp.hpp
+[57.753s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/tray_slot__rosidl_typesupport_introspection_cpp.hpp
+[57.766s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/msg/detail/ugv_state__rosidl_typesupport_introspection_cpp.hpp
+[57.774s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/deploy_drone__rosidl_typesupport_introspection_cpp.hpp
+[57.782s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/mission_control__rosidl_typesupport_introspection_cpp.hpp
+[57.794s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/include/wildlife_interfaces/wildlife_interfaces/srv/detail/operator_decision__rosidl_typesupport_introspection_cpp.hpp
+[57.803s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/environment/pythonpath.sh
+[57.811s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/environment/pythonpath.dsv
+[57.823s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces-0.3.0-py3.12.egg-info/PKG-INFO
+[57.832s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces-0.3.0-py3.12.egg-info/SOURCES.txt
+[57.841s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces-0.3.0-py3.12.egg-info/dependency_links.txt
+[57.853s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces-0.3.0-py3.12.egg-info/top_level.txt
+[57.867s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/__init__.py
+[57.877s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/_wildlife_interfaces_s.ep.rosidl_typesupport_c.c
+[57.886s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/_wildlife_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[57.895s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/_wildlife_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[57.906s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/action/__init__.py
+[57.915s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/action/_navigate_waypoints.py
+[57.929s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/action/_navigate_waypoints_s.c
+[57.940s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/action/_search_area.py
+[57.952s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/action/_search_area_s.c
+[57.964s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/__init__.py
+[57.976s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_deployment_request.py
+[57.987s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_deployment_request_s.c
+[57.997s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_detection.py
+[58.008s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_detection_s.c
+[58.016s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_drone_command.py
+[58.025s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_drone_command_s.c
+[58.035s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_drone_state.py
+[58.047s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_drone_state_s.c
+[58.055s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_operator_alert.py
+[58.068s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_operator_alert_s.c
+[58.077s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_target.py
+[58.087s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_target_s.c
+[58.099s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_tray_slot.py
+[58.108s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_tray_slot_s.c
+[58.120s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_ugv_state.py
+[58.131s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_ugv_state_s.c
+[58.140s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/__init__.py
+[58.147s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/_deploy_drone.py
+[58.157s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/_deploy_drone_s.c
+[58.167s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/_mission_control.py
+[58.177s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/_mission_control_s.c
+[58.186s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/_operator_decision.py
+[58.198s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/_operator_decision_s.c
+[58.207s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/wildlife_interfaces_s__rosidl_typesupport_c.so
+[58.216s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/wildlife_interfaces_s__rosidl_typesupport_fastrtps_c.so
+[58.225s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/wildlife_interfaces_s__rosidl_typesupport_introspection_c.so
+[58.238s] -- Up-to-date symlink: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/wildlife_interfaces_s__rosidl_typesupport_fastrtps_c.so
+[58.238s] -- Up-to-date symlink: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/wildlife_interfaces_s__rosidl_typesupport_introspection_c.so
+[58.238s] -- Up-to-date symlink: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/wildlife_interfaces_s__rosidl_typesupport_c.so
+[58.239s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/rust/Cargo.toml
+[58.247s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/rust/build.rs
+[58.257s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/rust/src/action.rs
+[58.266s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/rust/src/action/rmw.rs
+[58.276s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/rust/src/lib.rs
+[58.285s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/rust/src/msg.rs
+[58.292s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/rust/src/msg/rmw.rs
+[58.300s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/rust/src/srv.rs
+[58.309s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/rust/src/srv/rmw.rs
+[58.315s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/DroneState.idl
+[58.328s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/UGVState.idl
+[58.335s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/Detection.idl
+[58.343s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/Target.idl
+[58.353s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/DroneCommand.idl
+[58.363s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/TraySlot.idl
+[58.372s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/OperatorAlert.idl
+[58.384s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/DeploymentRequest.idl
+[58.396s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/srv/OperatorDecision.idl
+[58.408s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/srv/DeployDrone.idl
+[58.419s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/srv/MissionControl.idl
+[58.430s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/action/NavigateWaypoints.idl
+[58.443s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/action/SearchArea.idl
+[58.451s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/DroneState.msg
+[58.460s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/UGVState.msg
+[58.470s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/Detection.msg
+[58.483s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/Target.msg
+[58.494s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/DroneCommand.msg
+[58.505s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/TraySlot.msg
+[58.515s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/OperatorAlert.msg
+[58.525s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/msg/DeploymentRequest.msg
+[58.536s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/srv/OperatorDecision.srv
+[58.548s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/srv/DeployDrone.srv
+[58.559s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/srv/MissionControl.srv
+[58.571s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/action/NavigateWaypoints.action
+[58.577s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/action/SearchArea.action
+[58.586s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/ament_index/resource_index/package_run_dependencies/wildlife_interfaces
+[58.598s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/ament_index/resource_index/parent_prefix_path/wildlife_interfaces
+[58.609s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/environment/ament_prefix_path.sh
+[58.621s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/environment/ament_prefix_path.dsv
+[58.632s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/environment/path.sh
+[58.641s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/environment/path.dsv
+[58.650s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/local_setup.bash
+[58.661s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/local_setup.sh
+[58.673s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/local_setup.zsh
+[58.684s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/local_setup.dsv
+[58.691s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/package.dsv
+[58.701s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/ament_index/resource_index/packages/wildlife_interfaces
+[58.711s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/rosidl_cmake-extras.cmake
+[58.721s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[58.729s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[58.741s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[58.749s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[58.756s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[58.768s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[58.776s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/rosidl_cmake_aggregate_target-extras.cmake
+[58.786s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/wildlife_interfacesConfig.cmake
+[58.794s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/wildlife_interfacesConfig-version.cmake
+[58.803s] -- Symlinking: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/package.xml
+[58.811s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_generator_c.so
+[58.811s] -- Set non-toolchain portion of runtime path of "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_generator_c.so" to ""
+[58.811s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_fastrtps_c.so
+[58.811s] -- Set non-toolchain portion of runtime path of "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[58.811s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_introspection_c.so
+[58.812s] -- Set non-toolchain portion of runtime path of "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[58.812s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_c.so
+[58.812s] -- Set non-toolchain portion of runtime path of "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_c.so" to ""
+[58.812s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[58.812s] -- Set non-toolchain portion of runtime path of "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[58.813s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_introspection_cpp.so
+[58.813s] -- Set non-toolchain portion of runtime path of "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[58.813s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_cpp.so
+[58.814s] -- Set non-toolchain portion of runtime path of "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_typesupport_cpp.so" to ""
+[58.887s] Listing '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces'...
+[58.887s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/__init__.py'...
+[58.887s] Listing '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/action'...
+[58.887s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/action/__init__.py'...
+[58.887s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/action/_navigate_waypoints.py'...
+[58.888s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/action/_search_area.py'...
+[58.888s] Listing '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg'...
+[58.888s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/__init__.py'...
+[58.888s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_deployment_request.py'...
+[58.888s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_detection.py'...
+[58.888s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_drone_command.py'...
+[58.888s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_drone_state.py'...
+[58.888s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_operator_alert.py'...
+[58.888s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_target.py'...
+[58.888s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_tray_slot.py'...
+[58.889s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/msg/_ugv_state.py'...
+[58.889s] Listing '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv'...
+[58.889s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/__init__.py'...
+[58.889s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/_deploy_drone.py'...
+[58.889s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/_mission_control.py'...
+[58.889s] Compiling '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/python3.12/site-packages/wildlife_interfaces/srv/_operator_decision.py'...
+[58.892s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_generator_py.so
+[58.892s] -- Set non-toolchain portion of runtime path of "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/lib/libwildlife_interfaces__rosidl_generator_py.so" to ""
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/export_wildlife_interfaces__rosidl_generator_cExport.cmake
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/export_wildlife_interfaces__rosidl_generator_cExport-noconfig.cmake
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/export_wildlife_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/export_wildlife_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/wildlife_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/wildlife_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/wildlife_interfaces__rosidl_typesupport_cExport.cmake
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/wildlife_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/export_wildlife_interfaces__rosidl_generator_cppExport.cmake
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/export_wildlife_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[58.893s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/export_wildlife_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[58.894s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/wildlife_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[58.894s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/wildlife_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[58.894s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/wildlife_interfaces__rosidl_typesupport_cppExport.cmake
+[58.894s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/wildlife_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[58.894s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/export_wildlife_interfaces__rosidl_generator_pyExport.cmake
+[58.894s] -- Installing: /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/install/wildlife_interfaces/share/wildlife_interfaces/cmake/export_wildlife_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[58.895s] Invoked command in '/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3/build/wildlife_interfaces

@@ -1,0 +1,6198 @@
+{
+  "audited_frames": 200,
+  "by_altitude": {
+    "10": {
+      "count": 128,
+      "max": 0.9990085071048337,
+      "mean": 0.8703543079366531,
+      "median": 0.9585139801415148,
+      "min": 0.09763627003437093,
+      "p05": 0.5275043500713206,
+      "p25": 0.7862292381438856,
+      "p95": 0.9963629469530401
+    },
+    "15": {
+      "count": 132,
+      "max": 0.9962874858759662,
+      "mean": 0.9216140146141321,
+      "median": 0.9713732103293056,
+      "min": 0.502610446406191,
+      "p05": 0.6586137023424783,
+      "p25": 0.9081547298398275,
+      "p95": 0.9943299552323313
+    },
+    "20": {
+      "count": 112,
+      "max": 0.997782275378806,
+      "mean": 0.941377152932427,
+      "median": 0.9794346189551197,
+      "min": 0.5445212648054444,
+      "p05": 0.7589342570877884,
+      "p25": 0.9321434657150974,
+      "p95": 0.9937481282202382
+    },
+    "30": {
+      "count": 128,
+      "max": 0.9952658045886263,
+      "mean": 0.9379536436362144,
+      "median": 0.9727763770264184,
+      "min": 0.38758467340414915,
+      "p05": 0.7803351117672314,
+      "p25": 0.9233158253293404,
+      "p95": 0.9921740637291584
+    },
+    "40": {
+      "count": 101,
+      "max": 0.9919260767066429,
+      "mean": 0.9171617469653967,
+      "median": 0.9560929944638783,
+      "min": 0.5127189254290356,
+      "p05": 0.7501270107817607,
+      "p25": 0.8786462398762542,
+      "p95": 0.985894691645977
+    }
+  },
+  "by_angle": {
+    "0": {
+      "count": 143,
+      "max": 0.9990085071048337,
+      "mean": 0.8955049428710269,
+      "median": 0.9580720894852248,
+      "min": 0.27525183384190033,
+      "p05": 0.560356020516133,
+      "p25": 0.873438842945307,
+      "p95": 0.9947567029766622
+    },
+    "10": {
+      "count": 145,
+      "max": 0.9965595763112908,
+      "mean": 0.9326159203256235,
+      "median": 0.9715384868716559,
+      "min": 0.5864323934212455,
+      "p05": 0.724180651329631,
+      "p25": 0.9114761425804413,
+      "p95": 0.9941130409012043
+    },
+    "20": {
+      "count": 154,
+      "max": 0.9984439743424242,
+      "mean": 0.9135110427755155,
+      "median": 0.9713732103293056,
+      "min": 0.09763627003437093,
+      "p05": 0.6774163375722245,
+      "p25": 0.9000454933967641,
+      "p95": 0.99527087621572
+    },
+    "30": {
+      "count": 159,
+      "max": 0.9963662401209908,
+      "mean": 0.9258920090385389,
+      "median": 0.9701819484021397,
+      "min": 0.5014929079608914,
+      "p05": 0.6755671758263236,
+      "p25": 0.9279458820215315,
+      "p95": 0.9933317895689575
+    }
+  },
+  "by_class": {
+    "bus": {
+      "count": 140,
+      "max": 0.9984439743424242,
+      "mean": 0.9111646189822343,
+      "median": 0.9838033729941122,
+      "min": 0.4414898786848456,
+      "p05": 0.58502790467263,
+      "p25": 0.8923234163786296,
+      "p95": 0.996290953135653
+    },
+    "car": {
+      "count": 140,
+      "max": 0.9968122430304652,
+      "mean": 0.9453570407373738,
+      "median": 0.9718846069431262,
+      "min": 0.5362059920297003,
+      "p05": 0.7546568289025848,
+      "p25": 0.9519814304309869,
+      "p95": 0.9915978078974688
+    },
+    "person": {
+      "count": 147,
+      "max": 0.9793193047416351,
+      "mean": 0.8769920417203069,
+      "median": 0.9178143088880585,
+      "min": 0.09763627003437093,
+      "p05": 0.5901543834555276,
+      "p25": 0.8648637231605318,
+      "p95": 0.9728798746872765
+    },
+    "truck": {
+      "count": 174,
+      "max": 0.9990085071048337,
+      "mean": 0.9330642690155119,
+      "median": 0.9817930811403339,
+      "min": 0.11963503803089347,
+      "p05": 0.6994241750149542,
+      "p25": 0.93861543114707,
+      "p95": 0.9948885932122361
+    }
+  },
+  "coverage": [
+    "altitude_10",
+    "altitude_15",
+    "altitude_20",
+    "altitude_30",
+    "altitude_40",
+    "angle_0",
+    "angle_10",
+    "angle_20",
+    "angle_30",
+    "background_dirt",
+    "background_grass",
+    "background_mixed",
+    "background_road",
+    "class_bus",
+    "class_car",
+    "class_person",
+    "class_truck",
+    "distance_edge",
+    "distance_far",
+    "distance_medium",
+    "distance_near",
+    "distractor_only",
+    "lighting_evening",
+    "lighting_morning",
+    "lighting_noon",
+    "lighting_shadow",
+    "multi_object",
+    "negative",
+    "occlusion",
+    "positive",
+    "shadows",
+    "truncation"
+  ],
+  "definition_note": "Visible boxes can disagree with full projected silhouettes under occlusion, clipping and pixel quantization; IoU is not a visibility fraction.",
+  "iou": {
+    "count": 601,
+    "max": 0.9990085071048337,
+    "mean": 0.9171115562434764,
+    "median": 0.9687571786021125,
+    "min": 0.09763627003437093,
+    "p05": 0.6691594710309757,
+    "p25": 0.9058060084489193,
+    "p95": 0.9942948874796992
+  },
+  "matched_instances": 601,
+  "method": "native visible box vs independent realized primitive silhouette projection",
+  "observations": [
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_21595d334cb8fd41_000040",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.98243943674063,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_21595d334cb8fd41_000040",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9810525771446826,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_21595d334cb8fd41_000040",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9933962330846428,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_21595d334cb8fd41_000040",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.5864323934212455,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_21595d334cb8fd41_000040",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9739336196229217,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_9056634f070ce72d_000099",
+      "instance_id": "pool_truck_3_0",
+      "iou": 0.9906215464907953,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_9056634f070ce72d_000099",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9758800359160923,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_9056634f070ce72d_000099",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.7285412228780554,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_2ab4e7c6d1897581_000167",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.38758467340414915,
+      "occlusion_requested": "moderate",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_2ab4e7c6d1897581_000167",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9743430900070088,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_2ab4e7c6d1897581_000167",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.9758799811783685,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_2ab4e7c6d1897581_000167",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9836937752041308,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_2ab4e7c6d1897581_000167",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9886968389311921,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_2ab4e7c6d1897581_000167",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.906622705602164,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_8fd22f1568297ec4_000002",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9589279395333453,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_8fd22f1568297ec4_000002",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9940770626395721,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_0eb522b15cdc1f94_000092",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.4414898786848456,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_0eb522b15cdc1f94_000092",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9724030122002839,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_e837fe411abbc897_000150",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.957447401432609,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_e837fe411abbc897_000150",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9451617266161344,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_85c03cc8e03d74f7_000156",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9917686321106198,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_85c03cc8e03d74f7_000156",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9451587688020499,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_85c03cc8e03d74f7_000156",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9383502138108214,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_85c03cc8e03d74f7_000156",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9920304749857384,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_85c03cc8e03d74f7_000156",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.9950866015892217,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_85c03cc8e03d74f7_000156",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.8710532462411742,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_1fcb84bd1ac6399d_000105",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.990647699200057,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_1fcb84bd1ac6399d_000105",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.7523045831855386,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_1fcb84bd1ac6399d_000105",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.5456559593272023,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_1fcb84bd1ac6399d_000105",
+      "instance_id": "pool_bus_0_1",
+      "iou": 0.9581000207496841,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_2cced830b04893ca_000052",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9954029678494414,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_2cced830b04893ca_000052",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9871149231402848,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_2cced830b04893ca_000052",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9255543841512817,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_2cced830b04893ca_000052",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9076044093756714,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_2cced830b04893ca_000052",
+      "instance_id": "pool_bus_0_1",
+      "iou": 0.8942340117856955,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_689ab156ae16a2fe_000191",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9880595729304498,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_689ab156ae16a2fe_000191",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9829879884953745,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_689ab156ae16a2fe_000191",
+      "instance_id": "pool_car_2_1",
+      "iou": 0.9539100641763967,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_d61c21cfc170bb1a_000022",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.983762625299562,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_96cc460be836ff76_000197",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9843369908715685,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_75e3e3cb54a16d54_000160",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9832110577511309,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_75e3e3cb54a16d54_000160",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9678195145076258,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_75e3e3cb54a16d54_000160",
+      "instance_id": "pool_person_2_1",
+      "iou": 0.8564894684380546,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_accc83ff00006ba9_000001",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.6763868333895039,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_accc83ff00006ba9_000001",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9947859391319933,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_accc83ff00006ba9_000001",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.7423975659654434,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_accc83ff00006ba9_000001",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9254025956060647,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_accc83ff00006ba9_000001",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9551628524033756,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_accc83ff00006ba9_000001",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9887264913449911,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_accc83ff00006ba9_000001",
+      "instance_id": "pool_car_1_1",
+      "iou": 0.5362059920297003,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_accc83ff00006ba9_000001",
+      "instance_id": "pool_car_1_2",
+      "iou": 0.9811731522497521,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_7206527a02df4c31_000088",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9281987220342609,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_7206527a02df4c31_000088",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9837041161315464,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_7206527a02df4c31_000088",
+      "instance_id": "pool_person_1_1",
+      "iou": 0.939078110860684,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_6448944661a14ebe_000128",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9838547230590391,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_6448944661a14ebe_000128",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9677644697981673,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_00ab3199ce4b24ef_000050",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.990543226059564,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_00ab3199ce4b24ef_000050",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9052865700159196,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_00ab3199ce4b24ef_000050",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.6611747774442639,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_974138899e21057f_000013",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9543919293518325,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_974138899e21057f_000013",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9824505075529101,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_974138899e21057f_000013",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9894839205615966,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_974138899e21057f_000013",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.951317860010031,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_974138899e21057f_000013",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9921110792293759,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_6f7db42aa797542e_000166",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9948412377168282,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_b32825b7115be7f5_000080",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9844145424437747,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_b32825b7115be7f5_000080",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8645882776358911,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_b32825b7115be7f5_000080",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9811597789710309,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_b32825b7115be7f5_000080",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9862048347675604,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_b32825b7115be7f5_000080",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.9923875545595309,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_b32825b7115be7f5_000080",
+      "instance_id": "pool_bus_1_2",
+      "iou": 0.9801876032951804,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_b32825b7115be7f5_000080",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.966627736047703,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_b32825b7115be7f5_000080",
+      "instance_id": "pool_car_2_1",
+      "iou": 0.9304124131212616,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_18f1ac6f436330e6_000142",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9566027417504658,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_18f1ac6f436330e6_000142",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9717639767441907,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_18f1ac6f436330e6_000142",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9557663578749517,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_18f1ac6f436330e6_000142",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.9812208600895794,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_5ee1e688b47a06f6_000140",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.967305853519619,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_5ee1e688b47a06f6_000140",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9232539522227929,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_6928a5d25e151f60_000193",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9697031061370545,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_6928a5d25e151f60_000193",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.7944487399205712,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_6928a5d25e151f60_000193",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9380007584904129,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_7a0d5120b0c009d5_000093",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9887541970585295,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_7a0d5120b0c009d5_000093",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.9910808191136629,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_7a0d5120b0c009d5_000093",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9644365844522997,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_ced8e3a650efbe0f_000187",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.992752614592974,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_ced8e3a650efbe0f_000187",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.8847691356670017,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_ced8e3a650efbe0f_000187",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9939247199937218,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_ced8e3a650efbe0f_000187",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9772807151427958,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_ced8e3a650efbe0f_000187",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9627832793754402,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_ced8e3a650efbe0f_000187",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.90841740953097,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_aea237733c50fafe_000064",
+      "instance_id": "pool_bus_2_0",
+      "iou": 0.9313221820785355,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_aea237733c50fafe_000064",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9816190164829051,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_eb8e869f2a81281e_000185",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9383884358119269,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_eb8e869f2a81281e_000185",
+      "instance_id": "pool_person_2_1",
+      "iou": 0.9171742132370392,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_eb8e869f2a81281e_000185",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9927532476293949,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_c776d35c9753cf91_000148",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9990085071048337,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_c776d35c9753cf91_000148",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.6437511027932801,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_c776d35c9753cf91_000148",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.3123848225928154,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_c776d35c9753cf91_000148",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9942948874796992,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_c1652785c5dbee53_000012",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9311720973671336,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_c1652785c5dbee53_000012",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.8443112290814423,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_c1652785c5dbee53_000012",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9789519504255093,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_be2f1692b7bb1c71_000033",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9889652678125304,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_be2f1692b7bb1c71_000033",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9912332387762668,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_be2f1692b7bb1c71_000033",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9745739051227679,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_be2f1692b7bb1c71_000033",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9922587639062006,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_3a21057f68324ec9_000091",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.7525593130746157,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_fb17e1daef134ede_000115",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9915830616494197,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_fb17e1daef134ede_000115",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9855425606807612,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_fb17e1daef134ede_000115",
+      "instance_id": "pool_car_2_1",
+      "iou": 0.9961325231695044,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_fb17e1daef134ede_000115",
+      "instance_id": "pool_car_2_2",
+      "iou": 0.9275176707070842,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_fb17e1daef134ede_000115",
+      "instance_id": "pool_car_1_1",
+      "iou": 0.9892462267000037,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_fb17e1daef134ede_000115",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.98609199620711,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_957488184a784c9a_000047",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9651858741072046,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_ade31dcc8a2fb27b_000063",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9841764310248848,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_ade31dcc8a2fb27b_000063",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9835855688176434,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_ade31dcc8a2fb27b_000063",
+      "instance_id": "pool_bus_0_1",
+      "iou": 0.6705975843431112,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_ade31dcc8a2fb27b_000063",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.9867380377363228,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_ade31dcc8a2fb27b_000063",
+      "instance_id": "pool_car_3_0",
+      "iou": 0.9207934862185227,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_ade31dcc8a2fb27b_000063",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9876906284347294,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_ade31dcc8a2fb27b_000063",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9341946261963452,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_61897636cf91f66f_000069",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9671783356487068,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_61897636cf91f66f_000069",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.961436692688065,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_61897636cf91f66f_000069",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.9798010523303798,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_8dec0724404dca8d_000137",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9394110831558157,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_8dec0724404dca8d_000137",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9712335838604826,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_8dec0724404dca8d_000137",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9573629337430416,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_8dec0724404dca8d_000137",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.8205971069716282,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_8dec0724404dca8d_000137",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.7593231306459118,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_878d7287aff96215_000189",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9336311690065977,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_878d7287aff96215_000189",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9928395373790999,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_878d7287aff96215_000189",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9440350763485181,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_878d7287aff96215_000189",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9745747982131802,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_878d7287aff96215_000189",
+      "instance_id": "pool_person_0_1",
+      "iou": 0.9485748060859004,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_878d7287aff96215_000189",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9883140538392106,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_290973fc9c0264d1_000041",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9721937192076958,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_290973fc9c0264d1_000041",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9455346956121863,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_290973fc9c0264d1_000041",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9723658358130706,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_304b454bf589ee4a_000118",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9832824747351528,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_304b454bf589ee4a_000118",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9824027474627486,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_3c71e26550f38196_000071",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.996896499316595,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_3c71e26550f38196_000071",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.8984566278234193,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_3c71e26550f38196_000071",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9853622585603438,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_29e2c0953f839314_000059",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.8472212243110265,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_29e2c0953f839314_000059",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.991882030578043,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_29e2c0953f839314_000059",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9875196649557421,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_29e2c0953f839314_000059",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.8510352293683988,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_9d93fdb78379ab4e_000037",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8789599687176354,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_9d93fdb78379ab4e_000037",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9940537098308243,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_9d93fdb78379ab4e_000037",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.7152080093131508,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_9d93fdb78379ab4e_000037",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9899348883712459,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_9d93fdb78379ab4e_000037",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9961356994127594,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_9d93fdb78379ab4e_000037",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.6843644679474196,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_a93f54736a65ccb8_000087",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9220139579355325,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_a93f54736a65ccb8_000087",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9126875145023123,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_6fc8bfabe9e91890_000143",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9636523285388781,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_6fc8bfabe9e91890_000143",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9361881010690039,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_6fc8bfabe9e91890_000143",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9341790835021438,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_6fc8bfabe9e91890_000143",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.967131821559851,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_bca350430bf1c4c0_000149",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.8597197210942283,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_bca350430bf1c4c0_000149",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9902484434189137,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_44b584ac0d0b6fcf_000068",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9846628100637256,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_44b584ac0d0b6fcf_000068",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.8619235456839792,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_44b584ac0d0b6fcf_000068",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.972115495721435,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_15b271dbfe534221_000144",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.990290553551137,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_15b271dbfe534221_000144",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9921167922403694,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_15b271dbfe534221_000144",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9910416948402008,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_15b271dbfe534221_000144",
+      "instance_id": "pool_bus_2_0",
+      "iou": 0.5526849824615719,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_15b271dbfe534221_000144",
+      "instance_id": "pool_car_3_0",
+      "iou": 0.9882570023984848,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_15b271dbfe534221_000144",
+      "instance_id": "pool_bus_0_1",
+      "iou": 0.8865916301574316,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_87cf00b743898796_000176",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9388120403422756,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_87cf00b743898796_000176",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.864823817406832,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_87cf00b743898796_000176",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9853626769187742,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_b6330daae7299232_000055",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9857767291194246,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_b6330daae7299232_000055",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9623261104547502,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_b6330daae7299232_000055",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9813204246267502,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_b6330daae7299232_000055",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.9660532347050356,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_b6330daae7299232_000055",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.8897052258618251,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_66a37e75f4963ee5_000116",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.8468228458754941,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_66a37e75f4963ee5_000116",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9857970018247465,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_e2cf5e0bb0ec1242_000186",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.866549376505384,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_e2cf5e0bb0ec1242_000186",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9536909537734521,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_e2cf5e0bb0ec1242_000186",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9751989692237399,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_e2cf5e0bb0ec1242_000186",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.976527240104219,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_e2cf5e0bb0ec1242_000186",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.985894691645977,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_e2cf5e0bb0ec1242_000186",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9052287926919207,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_e2cf5e0bb0ec1242_000186",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.9687571786021125,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_e2cf5e0bb0ec1242_000186",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.8649036289142317,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_c2974503f8ddafc2_000195",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9746042804854617,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_c2974503f8ddafc2_000195",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9265688893799616,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_1d3006d960f1c273_000188",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.8722520705289382,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_8e3e1d874e6d201c_000181",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9904116409714593,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_8e3e1d874e6d201c_000181",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.5381742449982276,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_8e3e1d874e6d201c_000181",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.8911436711713445,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_8e3e1d874e6d201c_000181",
+      "instance_id": "pool_truck_1_2",
+      "iou": 0.6554834994402959,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_8e3e1d874e6d201c_000181",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9859011876356426,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_8e3e1d874e6d201c_000181",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9913388080538255,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_8e3e1d874e6d201c_000181",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9908933835076021,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_8e3e1d874e6d201c_000181",
+      "instance_id": "pool_car_0_1",
+      "iou": 0.9884138124601223,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_2c246285fe0a1fa0_000084",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9397359080324503,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_2c246285fe0a1fa0_000084",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9058060084489193,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_2c246285fe0a1fa0_000084",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9821978131303191,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_f9a8920e8d4bd489_000102",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9823195451916173,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_d23393bb19596acc_000004",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9903412038633126,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_d23393bb19596acc_000004",
+      "instance_id": "pool_car_1_1",
+      "iou": 0.9868302461812078,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_50b9fbcd7ccc92e7_000117",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.6691594710309757,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_636937c5651edc8e_000098",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9952300893687858,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_636937c5651edc8e_000098",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.7919407349452634,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_91507ebccbbbe33a_000134",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9167233489037057,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_91507ebccbbbe33a_000134",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9522277693992472,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_4490424dd97eb4ec_000038",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9828927647201826,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_4490424dd97eb4ec_000038",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9877748797476803,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_4490424dd97eb4ec_000038",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9184282536778349,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_4490424dd97eb4ec_000038",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.9870413790368361,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_4490424dd97eb4ec_000038",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9314821417055456,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_bd6327dff1e7cb24_000129",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9864061434472227,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_bd6327dff1e7cb24_000129",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.8224751597223219,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_bd6327dff1e7cb24_000129",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.933077141007676,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_bd6327dff1e7cb24_000129",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9149099965974484,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_79cc3ee8f7dbd526_000161",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9899778471733233,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_79cc3ee8f7dbd526_000161",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9831740372331491,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_79cc3ee8f7dbd526_000161",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.9866175865155009,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_79cc3ee8f7dbd526_000161",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9908195707554865,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_79cc3ee8f7dbd526_000161",
+      "instance_id": "pool_truck_1_2",
+      "iou": 0.993151735566513,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_79cc3ee8f7dbd526_000161",
+      "instance_id": "pool_truck_0_1",
+      "iou": 0.9840447916629331,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_638f0a821d6accc7_000054",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9906518379489255,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_638f0a821d6accc7_000054",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.6533363373124226,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_46be58aef655faa4_000112",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9963880145765506,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_46be58aef655faa4_000112",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9832685257271359,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_46be58aef655faa4_000112",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9754304558648826,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_299fb5bb258a0f0d_000027",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9723813353279657,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_299fb5bb258a0f0d_000027",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.7456826980629409,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_299fb5bb258a0f0d_000027",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9900265206434412,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_299fb5bb258a0f0d_000027",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9792686425077423,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_299fb5bb258a0f0d_000027",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8957886170503934,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_299fb5bb258a0f0d_000027",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.8746256153616758,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_299fb5bb258a0f0d_000027",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.9493144844978003,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_299fb5bb258a0f0d_000027",
+      "instance_id": "pool_car_2_1",
+      "iou": 0.9849388231338132,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_e290d1696ebce666_000145",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.7051640770549604,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_e290d1696ebce666_000145",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9762164008763947,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_6a78619fee1ad902_000025",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9937207713166935,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_6a78619fee1ad902_000025",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9048120901167984,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_b7826fc24d397eb2_000183",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9461136952587993,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_b7826fc24d397eb2_000183",
+      "instance_id": "pool_person_3_1",
+      "iou": 0.9334583802753763,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_b7826fc24d397eb2_000183",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9972575531864043,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_b7826fc24d397eb2_000183",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.7888682000983479,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_b7826fc24d397eb2_000183",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.8637773832925602,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_b7826fc24d397eb2_000183",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9930839268857912,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_b7826fc24d397eb2_000183",
+      "instance_id": "pool_person_1_1",
+      "iou": 0.9399919370874629,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_98c2f15e00ced5d7_000172",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9362929335874464,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_98c2f15e00ced5d7_000172",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9068591735898733,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_98c2f15e00ced5d7_000172",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9917550880547704,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_98c2f15e00ced5d7_000172",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9293869707198766,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_98c2f15e00ced5d7_000172",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9844548596616364,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_98c2f15e00ced5d7_000172",
+      "instance_id": "pool_person_1_1",
+      "iou": 0.8507036445193839,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_98c2f15e00ced5d7_000172",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.9876701578373174,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_3e9c394892b37b16_000018",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9701819484021397,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_3e9c394892b37b16_000018",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9921412700537958,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_3e9c394892b37b16_000018",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.502610446406191,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_3e9c394892b37b16_000018",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9837434730065244,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_3e9c394892b37b16_000018",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9554040861822125,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_b29c2a4c39dc07ae_000061",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9729013582902543,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_b29c2a4c39dc07ae_000061",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.8572701749815766,
+      "occlusion_requested": "moderate",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_227606aa74e3a1f5_000159",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9886205238635573,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_227606aa74e3a1f5_000159",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9922081613784084,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_227606aa74e3a1f5_000159",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.715826441090577,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_227606aa74e3a1f5_000159",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9790711024808897,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_227606aa74e3a1f5_000159",
+      "instance_id": "pool_truck_0_1",
+      "iou": 0.9914342186571522,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_5b88e02040b198ea_000034",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.09763627003437093,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_5b88e02040b198ea_000034",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9984439743424242,
+      "occlusion_requested": "moderate",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_5b88e02040b198ea_000034",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.8597145402460603,
+      "occlusion_requested": "moderate",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_d762587d464d7dd3_000051",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.7563572763847446,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_d762587d464d7dd3_000051",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9781540981875924,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_d762587d464d7dd3_000051",
+      "instance_id": "pool_car_2_1",
+      "iou": 0.9778481447357203,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_d762587d464d7dd3_000051",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9133917908253518,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_6926c19f07ce0401_000139",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9970206748296416,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_6926c19f07ce0401_000139",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.994808015809658,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_6926c19f07ce0401_000139",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.5784766391209107,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_6926c19f07ce0401_000139",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.27525183384190033,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_6926c19f07ce0401_000139",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.7975374564633346,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_6926c19f07ce0401_000139",
+      "instance_id": "pool_person_3_1",
+      "iou": 0.904564017308242,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_56ae08770b4fb4db_000096",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9963568310697029,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_8849aa57ad283a2e_000111",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.6609258149515908,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_8849aa57ad283a2e_000111",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9899836835882926,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_8849aa57ad283a2e_000111",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9932659084106503,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_891223e51b0f8f63_000162",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8232537954416674,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_44c9c1c461e324ce_000094",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9965595763112908,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_44c9c1c461e324ce_000094",
+      "instance_id": "pool_truck_0_1",
+      "iou": 0.9018635558414931,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_44c9c1c461e324ce_000094",
+      "instance_id": "pool_truck_0_2",
+      "iou": 0.7474291956206737,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_6c0e3d7793212dbd_000107",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8924973253929999,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_6c0e3d7793212dbd_000107",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9868422491994231,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_6c0e3d7793212dbd_000107",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9943525313020594,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_6c0e3d7793212dbd_000107",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.98430392903737,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_5ee40e9d829f1cbe_000126",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8715123904881554,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_5ee40e9d829f1cbe_000126",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.994909976219294,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_5ee40e9d829f1cbe_000126",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9936036440419334,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_5ee40e9d829f1cbe_000126",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9796586777297626,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_5ee40e9d829f1cbe_000126",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.8880667067347005,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_6442923fd23d88eb_000180",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9477102054721325,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_6442923fd23d88eb_000180",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9635263259009874,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_6442923fd23d88eb_000180",
+      "instance_id": "pool_person_0_1",
+      "iou": 0.9730842443245591,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_6442923fd23d88eb_000180",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9454036196072518,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_6442923fd23d88eb_000180",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9933821762279791,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_6442923fd23d88eb_000180",
+      "instance_id": "pool_person_2_1",
+      "iou": 0.9603512633935504,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_6442923fd23d88eb_000180",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.6933135440410118,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_6442923fd23d88eb_000180",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.8397275431076935,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_be9fc4a5b340dbf0_000032",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.5127189254290356,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_be9fc4a5b340dbf0_000032",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9717501609810936,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_be9fc4a5b340dbf0_000032",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.967423719145444,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_6dba98a94ec68ed5_000153",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.7183685152568704,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_6dba98a94ec68ed5_000153",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9953567559837329,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_6dba98a94ec68ed5_000153",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9707430378040165,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_74e9c403b7443dcd_000109",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.8211393674169291,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_74e9c403b7443dcd_000109",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.806171321514989,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_86259fa247ad9e11_000184",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9809803397468687,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_86259fa247ad9e11_000184",
+      "instance_id": "pool_truck_0_1",
+      "iou": 0.9861110688827547,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_86259fa247ad9e11_000184",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9689881202701687,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_86259fa247ad9e11_000184",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9851709156911506,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_2a58aa03151873b3_000036",
+      "instance_id": "pool_car_3_0",
+      "iou": 0.9740476963267393,
+      "occlusion_requested": "moderate",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_dc959b1292983782_000119",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9920577445604308,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_ca1882a06f4594ec_000133",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9417677217566645,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_ca1882a06f4594ec_000133",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.7067168251339029,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_ca1882a06f4594ec_000133",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.8426184959900022,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_ca1882a06f4594ec_000133",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.7184684023111694,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_41da624664a4f41d_000147",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.983357462159792,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_41da624664a4f41d_000147",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9569017029846426,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_41da624664a4f41d_000147",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.8939365365148729,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_41da624664a4f41d_000147",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9923167335602476,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_1058f927bf270297_000127",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9731116058134829,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_1058f927bf270297_000127",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.7029096258796744,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_1058f927bf270297_000127",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9962874858759662,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_1058f927bf270297_000127",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.9280002278328546,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_1058f927bf270297_000127",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.989084846750418,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_1058f927bf270297_000127",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9721705493222386,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_1058f927bf270297_000127",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.8312314198583463,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_c72759adf5da1464_000192",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.943247466866865,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_39bac6dcc5f8d5ec_000104",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.7025049759377991,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_39bac6dcc5f8d5ec_000104",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9903481517709459,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_39bac6dcc5f8d5ec_000104",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9918779866104009,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_39bac6dcc5f8d5ec_000104",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9661591485552711,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_dd7aa1c3b657cee8_000075",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.991147178177444,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_dd7aa1c3b657cee8_000075",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.8721317458002171,
+      "occlusion_requested": "moderate",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_dd7aa1c3b657cee8_000075",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.986008149129223,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_dd7aa1c3b657cee8_000075",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.9873235326977478,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_dd7aa1c3b657cee8_000075",
+      "instance_id": "pool_truck_2_2",
+      "iou": 0.6937026875868136,
+      "occlusion_requested": "moderate",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_dd7aa1c3b657cee8_000075",
+      "instance_id": "pool_truck_0_1",
+      "iou": 0.9164304991478778,
+      "occlusion_requested": "moderate",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_dd7aa1c3b657cee8_000075",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9620950256380337,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_d429cd70f816b6d5_000089",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9920202623552656,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_b9393087dcead8d7_000090",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9952658045886263,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_b9393087dcead8d7_000090",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.993748010533224,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_b9393087dcead8d7_000090",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9532625283335666,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_b9393087dcead8d7_000090",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.9942042984931994,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_b9393087dcead8d7_000090",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9603958321451356,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_b9393087dcead8d7_000090",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8905524460397032,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_d912bcd07725bf7d_000045",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9496809522943229,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_d912bcd07725bf7d_000045",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9747841404731304,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_774ee1acdfd0e8c8_000124",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9834666903375557,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_774ee1acdfd0e8c8_000124",
+      "instance_id": "pool_car_3_0",
+      "iou": 0.9792105601804769,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_774ee1acdfd0e8c8_000124",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9909216475242091,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_9fd595e72e0c744a_000035",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.976717017908272,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_9fd595e72e0c744a_000035",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9962326024411104,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_6899dbdda7c013e3_000039",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9838441206886623,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_6899dbdda7c013e3_000039",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9349656784742221,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_e296c0e626792630_000103",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.8177114220461947,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_e296c0e626792630_000103",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9197418585676842,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_e296c0e626792630_000103",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9714526980029072,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_989d64e2b22b7e02_000083",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9617068208495938,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_989d64e2b22b7e02_000083",
+      "instance_id": "pool_car_0_1",
+      "iou": 0.9716198348941197,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_989d64e2b22b7e02_000083",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9880214664688871,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_989d64e2b22b7e02_000083",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.7223483267415489,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_989d64e2b22b7e02_000083",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.8708290320451773,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_ebd781067d73a591_000065",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9751461004374218,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_ebd781067d73a591_000065",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9466117118021085,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_ebd781067d73a591_000065",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9968122430304652,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_ebd781067d73a591_000065",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9935950856902728,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_ebd781067d73a591_000065",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.880352903927112,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_a459775fc6977239_000165",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.964992766169263,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_c5ef15e404643373_000079",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.965888878044891,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_c5ef15e404643373_000079",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9940959996227035,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_c5ef15e404643373_000079",
+      "instance_id": "pool_person_0_1",
+      "iou": 0.9645527229996556,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_c5ef15e404643373_000079",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.8916036466782497,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_a0c00c5a028b6759_000042",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9875266012493581,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_a0c00c5a028b6759_000042",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9509407817505169,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_a0c00c5a028b6759_000042",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.9921162271656236,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_a0c00c5a028b6759_000042",
+      "instance_id": "pool_bus_2_0",
+      "iou": 0.9934725365626184,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_1863561ba16d6607_000031",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9036047179458682,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_1863561ba16d6607_000031",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.7501270107817607,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_e6fb3404ab7767f4_000158",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9948770792853587,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_df0adf6c86a6e589_000146",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9928581573432772,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_df0adf6c86a6e589_000146",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.948136141930944,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_df0adf6c86a6e589_000146",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.6222967008856494,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_df0adf6c86a6e589_000146",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9508984772136606,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_df0adf6c86a6e589_000146",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9838645336155241,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_df0adf6c86a6e589_000146",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9718486515596504,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_df0adf6c86a6e589_000146",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.7435746887695652,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_df0adf6c86a6e589_000146",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.6681902577577018,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_e742d4ad3a984a68_000011",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9888143776790973,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_e742d4ad3a984a68_000011",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9830738075265318,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_e742d4ad3a984a68_000011",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9223059331581707,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_e742d4ad3a984a68_000011",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9733795562010241,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_e742d4ad3a984a68_000011",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.98420207020105,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_e742d4ad3a984a68_000011",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.8539277008128013,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_667475813737ad65_000085",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9150679663823629,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_667475813737ad65_000085",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9918093375298768,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_01968ef83ecc57e1_000171",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9720052371420616,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_01968ef83ecc57e1_000171",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9862588172791462,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_01968ef83ecc57e1_000171",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9923704547595408,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_01968ef83ecc57e1_000171",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9715384868716559,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_01968ef83ecc57e1_000171",
+      "instance_id": "pool_bus_0_1",
+      "iou": 0.981726678037675,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_01968ef83ecc57e1_000171",
+      "instance_id": "pool_car_0_1",
+      "iou": 0.9428301077630973,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_abf4d5de60daa171_000177",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9890050755988784,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_abf4d5de60daa171_000177",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9822290268835029,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_abf4d5de60daa171_000177",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.5475443234438427,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_abf4d5de60daa171_000177",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9956593226021256,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_abf4d5de60daa171_000177",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9178143088880585,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_dcc99d1d541daa8f_000121",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.8806207178332961,
+      "occlusion_requested": "moderate",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_70c55559289c03ab_000157",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9841760445283787,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_70c55559289c03ab_000157",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.6832973577698598,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_70c55559289c03ab_000157",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9342471092758157,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_70c55559289c03ab_000157",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9830132987568713,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_70c55559289c03ab_000157",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9929809493435733,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_a5c78e2455484789_000009",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.955377727524975,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_a5c78e2455484789_000009",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9784568000712079,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_a5c78e2455484789_000009",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9427796999467686,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_2b76d422333e7e6f_000074",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9919465672735507,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_2b76d422333e7e6f_000074",
+      "instance_id": "pool_car_3_0",
+      "iou": 0.9489185858313554,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_2b76d422333e7e6f_000074",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9778110271859077,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_2b76d422333e7e6f_000074",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9149564623735817,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_2b76d422333e7e6f_000074",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.5014929079608914,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_2b76d422333e7e6f_000074",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.7215615314165132,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_44e1f729cab33df2_000196",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.6181849693331244,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_44e1f729cab33df2_000196",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9749755188300259,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_44e1f729cab33df2_000196",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9839123210302072,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_7a8dc17de480cadf_000179",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9757155982151251,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_7a8dc17de480cadf_000179",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9903855316509197,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_7a8dc17de480cadf_000179",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9083381699945462,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_7a8dc17de480cadf_000179",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.8317489140378364,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_7a8dc17de480cadf_000179",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.5583426184489354,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_7a8dc17de480cadf_000179",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.958632459396287,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_7a8dc17de480cadf_000179",
+      "instance_id": "pool_truck_0_1",
+      "iou": 0.9700652256441011,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_b8cc52e081035f46_000163",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9560929944638783,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_b8cc52e081035f46_000163",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.8061754463096685,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_b8cc52e081035f46_000163",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.7004629351382874,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_b8cc52e081035f46_000163",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9786583753073926,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_b8cc52e081035f46_000163",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9550973746629389,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_b8cc52e081035f46_000163",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8901272594261699,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_b8cc52e081035f46_000163",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9845824205584542,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_b8cc52e081035f46_000163",
+      "instance_id": "pool_car_2_1",
+      "iou": 0.9427170077477862,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_8b3015add9640c98_000086",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.8089584845115846,
+      "occlusion_requested": "mild",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_8b3015add9640c98_000086",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9613823641569315,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_8b3015add9640c98_000086",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.977356120899452,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_8b3015add9640c98_000086",
+      "instance_id": "pool_car_0_1",
+      "iou": 0.9642783124384559,
+      "occlusion_requested": "mild",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_94d3cd77bb2c41d6_000155",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9959411190662253,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_94d3cd77bb2c41d6_000155",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9901783262763637,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_94d3cd77bb2c41d6_000155",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.52281885055527,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_94d3cd77bb2c41d6_000155",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.11963503803089347,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_94d3cd77bb2c41d6_000155",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9480236930355288,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_94d3cd77bb2c41d6_000155",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.809005967402268,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_94d3cd77bb2c41d6_000155",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9353928941466667,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_5fcf6b31ab13f969_000168",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9874618494075708,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_5fcf6b31ab13f969_000168",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.8094720307229478,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_5fcf6b31ab13f969_000168",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9908610830198883,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_5fcf6b31ab13f969_000168",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.8615920727604058,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_5fcf6b31ab13f969_000168",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9092632395508584,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_5fcf6b31ab13f969_000168",
+      "instance_id": "pool_person_2_1",
+      "iou": 0.9539658210920631,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_db964191bc7c753c_000108",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9871304692776807,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_db964191bc7c753c_000108",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9694398908897419,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_db964191bc7c753c_000108",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9878136236189135,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_db964191bc7c753c_000108",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.7391854394818493,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_db964191bc7c753c_000108",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9276930420088021,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_db964191bc7c753c_000108",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.9946159009774318,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_f17f4701720d8601_000097",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9663041220370874,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_b65b9f69bf585cb3_000101",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9481161458966467,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_b65b9f69bf585cb3_000101",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9402669921267756,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_4c8eb28f3a082557_000046",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9732938949402894,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_8b8c1d2b0d503e7e_000174",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9531515565464981,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_8b8c1d2b0d503e7e_000174",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.8992254445481442,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_8b8c1d2b0d503e7e_000174",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9759053199452197,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_8b8c1d2b0d503e7e_000174",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9576444317566032,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_8b8c1d2b0d503e7e_000174",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9904256082908094,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_8b8c1d2b0d503e7e_000174",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9776026704120055,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_a23201ac0e857f4e_000020",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.8051171427222878,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_a23201ac0e857f4e_000020",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9807353108687751,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_a23201ac0e857f4e_000020",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9942899377761699,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_a23201ac0e857f4e_000020",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.6818623426328969,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_a23201ac0e857f4e_000020",
+      "instance_id": "pool_truck_0_1",
+      "iou": 0.9912247122583275,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_a23201ac0e857f4e_000020",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.8579489596389004,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_a23201ac0e857f4e_000020",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.7089272182415222,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_d8b99fa728b0243e_000122",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.983979765497997,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_d8b99fa728b0243e_000122",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9496580742389423,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_d8b99fa728b0243e_000122",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9348053567822422,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_d8b99fa728b0243e_000122",
+      "instance_id": "pool_person_0_1",
+      "iou": 0.7607945465451074,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_56b1eca88eb145d9_000010",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9581213934357612,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_56b1eca88eb145d9_000010",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9512519257120957,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_56b1eca88eb145d9_000010",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8663664270824875,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_56b1eca88eb145d9_000010",
+      "instance_id": "pool_truck_3_0",
+      "iou": 0.9919260767066429,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_56b1eca88eb145d9_000010",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.7516130107271249,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_56b1eca88eb145d9_000010",
+      "instance_id": "pool_person_3_1",
+      "iou": 0.9088590692034428,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_b7c5edf7efbce6b3_000048",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9796705783007533,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_b7c5edf7efbce6b3_000048",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.8359123104800485,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_b7c5edf7efbce6b3_000048",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9810210655025967,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_b7c5edf7efbce6b3_000048",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9621043109434136,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_b7c5edf7efbce6b3_000048",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9695279743740742,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_88fde1b587b245b7_000081",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9675226969983712,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_88fde1b587b245b7_000081",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9512424135262061,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_99a847d0a867b168_000130",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9643219009214737,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_99a847d0a867b168_000130",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.8901446409425953,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_99a847d0a867b168_000130",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9878836440740432,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_9ea8c44b79be7c97_000190",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9801696779985947,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_9ea8c44b79be7c97_000190",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9683157155407112,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_9ea8c44b79be7c97_000190",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9893350572013916,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_a586b8222458b7ed_000151",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9395576598654684,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_a586b8222458b7ed_000151",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9924932550986099,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_0af61e6db7db9b9f_000113",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.6871922916109374,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_ae995be5324267db_000182",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.988065617686616,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_ae995be5324267db_000182",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9806949715912054,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_ae995be5324267db_000182",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.8400104592588464,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_267f9151943fdcb2_000053",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.6340129227395634,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_267f9151943fdcb2_000053",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9893787710368207,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_267f9151943fdcb2_000053",
+      "instance_id": "pool_truck_2_1",
+      "iou": 0.9274665032156978,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_267f9151943fdcb2_000053",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9580720894852248,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_cebbb893aab19a8f_000049",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9771680839858438,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_cebbb893aab19a8f_000049",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9804008966312816,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_922897b8719db6b2_000154",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9961353660708424,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_922897b8719db6b2_000154",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.992349851461783,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_922897b8719db6b2_000154",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9937350412493885,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_922897b8719db6b2_000154",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9650477051775302,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_922897b8719db6b2_000154",
+      "instance_id": "pool_truck_0_1",
+      "iou": 0.9925081219382762,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_922897b8719db6b2_000154",
+      "instance_id": "pool_car_2_1",
+      "iou": 0.9910458575349459,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_922897b8719db6b2_000154",
+      "instance_id": "pool_truck_0_2",
+      "iou": 0.7264873854006999,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_922897b8719db6b2_000154",
+      "instance_id": "pool_bus_0_1",
+      "iou": 0.7052390733191604,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_2950752c1ec083b3_000132",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9835688547617005,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_2950752c1ec083b3_000132",
+      "instance_id": "pool_truck_3_0",
+      "iou": 0.7059495599083313,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_2950752c1ec083b3_000132",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9934363568258681,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_2950752c1ec083b3_000132",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9114761425804413,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_2950752c1ec083b3_000132",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9056469604525204,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_f2017d28162003cc_000029",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9864620036417092,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_f2017d28162003cc_000029",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8200429891266262,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_f2017d28162003cc_000029",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9816507316798702,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_f2017d28162003cc_000029",
+      "instance_id": "pool_car_1_1",
+      "iou": 0.9636542379281088,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_f2017d28162003cc_000029",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9756813323231707,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_ff3574396c7f60cd_000169",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9813571353971648,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_ff3574396c7f60cd_000169",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9820019089435662,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_ff3574396c7f60cd_000169",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9894403633397207,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_ff3574396c7f60cd_000169",
+      "instance_id": "pool_truck_1_1",
+      "iou": 0.9380128009102656,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_b5a0b0e4dc50a173_000019",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9963662401209908,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 10,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_b5a0b0e4dc50a173_000019",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9793193047416351,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_3f70f81db121b762_000114",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.8500820488973987,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_3f70f81db121b762_000114",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9740400943696449,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_3f70f81db121b762_000114",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9869494297452908,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_3f70f81db121b762_000114",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.8719591326190789,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_3f70f81db121b762_000114",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9731699193158865,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_3f70f81db121b762_000114",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9846498270208273,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_3f70f81db121b762_000114",
+      "instance_id": "pool_person_0_1",
+      "iou": 0.8245766916242279,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_55efea115cba3b29_000073",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.5415800715131954,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_55efea115cba3b29_000073",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9920810567297362,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_55efea115cba3b29_000073",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9594207910021442,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "person",
+      "frame_id": "scene_55efea115cba3b29_000073",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.921545825314411,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_55efea115cba3b29_000073",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9804714420133941,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_335ca7e2961f5067_000007",
+      "instance_id": "pool_truck_3_0",
+      "iou": 0.9794714297824498,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "bus",
+      "frame_id": "scene_335ca7e2961f5067_000007",
+      "instance_id": "pool_bus_2_0",
+      "iou": 0.9886662484558448,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_335ca7e2961f5067_000007",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9731714187248712,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_2a5d52afbbab804b_000030",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.8123698884369414,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_2a5d52afbbab804b_000030",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.8786462398762542,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_2a5d52afbbab804b_000030",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9809618773938443,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_9dd9d878c2da9c0c_000072",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.9176556179955071,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_9dd9d878c2da9c0c_000072",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.9808517111193694,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_9dd9d878c2da9c0c_000072",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9884846863219336,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "car",
+      "frame_id": "scene_9dd9d878c2da9c0c_000072",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.5445212648054444,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_9dd9d878c2da9c0c_000072",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9473978292997207,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "truck",
+      "frame_id": "scene_ec44efbcd1c7a9ab_000131",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9929441281004573,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_ec44efbcd1c7a9ab_000131",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9705758713363726,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_3f4bf501d9bb2fe5_000082",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9781246888232755,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_3f4bf501d9bb2fe5_000082",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9778731159710159,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_3f4bf501d9bb2fe5_000082",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9755194994918817,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_3f4bf501d9bb2fe5_000082",
+      "instance_id": "pool_person_1_0",
+      "iou": 0.9296045759940063,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 40,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_3f4bf501d9bb2fe5_000082",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.686763656932713,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 40,
+      "angle": 20,
+      "class": "bus",
+      "frame_id": "scene_c4fd39569bb3a01c_000044",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.7667779405028804,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_0312a2a8004dc502_000100",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9861774121251031,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_0312a2a8004dc502_000100",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9862166398794341,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_0312a2a8004dc502_000100",
+      "instance_id": "pool_car_2_0",
+      "iou": 0.8204325749328482,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_0312a2a8004dc502_000100",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.9868423315109311,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "bus",
+      "frame_id": "scene_0312a2a8004dc502_000100",
+      "instance_id": "pool_bus_1_1",
+      "iou": 0.9773233444967698,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_d99b247ebf14e50d_000135",
+      "instance_id": "pool_car_1_0",
+      "iou": 0.9843227807778946,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_d99b247ebf14e50d_000135",
+      "instance_id": "pool_truck_2_0",
+      "iou": 0.9908246842471772,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 20,
+      "class": "car",
+      "frame_id": "scene_76f9c2437f0f4c21_000043",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9850314909029514,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_5a72399f309015a7_000062",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.6174024535696337,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_5a72399f309015a7_000062",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.816624732894033,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_5a72399f309015a7_000062",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9236524560530637,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "car",
+      "frame_id": "scene_5a72399f309015a7_000062",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9808370193029976,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "truck",
+      "frame_id": "scene_5a72399f309015a7_000062",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.8524032697599457,
+      "occlusion_requested": "none",
+      "truncated": true
+    },
+    {
+      "altitude": 30,
+      "angle": 10,
+      "class": "person",
+      "frame_id": "scene_5a72399f309015a7_000062",
+      "instance_id": "pool_person_0_1",
+      "iou": 0.8891796486964836,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "car",
+      "frame_id": "scene_ee42d9f746a165b7_000017",
+      "instance_id": "pool_car_0_0",
+      "iou": 0.9552581955910121,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_ee42d9f746a165b7_000017",
+      "instance_id": "pool_person_0_0",
+      "iou": 0.9061934515554501,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "truck",
+      "frame_id": "scene_ee42d9f746a165b7_000017",
+      "instance_id": "pool_truck_1_0",
+      "iou": 0.9917111418492901,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 15,
+      "angle": 30,
+      "class": "person",
+      "frame_id": "scene_ee42d9f746a165b7_000017",
+      "instance_id": "pool_person_3_0",
+      "iou": 0.9474107296736753,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_c538885600c1c446_000125",
+      "instance_id": "pool_bus_1_0",
+      "iou": 0.9933487790573218,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "bus",
+      "frame_id": "scene_c538885600c1c446_000125",
+      "instance_id": "pool_bus_0_0",
+      "iou": 0.997782275378806,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "truck",
+      "frame_id": "scene_c538885600c1c446_000125",
+      "instance_id": "pool_truck_0_0",
+      "iou": 0.9835734541772584,
+      "occlusion_requested": "none",
+      "truncated": false
+    },
+    {
+      "altitude": 20,
+      "angle": 0,
+      "class": "person",
+      "frame_id": "scene_c538885600c1c446_000125",
+      "instance_id": "pool_person_2_0",
+      "iou": 0.95131601640964,
+      "occlusion_requested": "none",
+      "truncated": false
+    }
+  ]
+}

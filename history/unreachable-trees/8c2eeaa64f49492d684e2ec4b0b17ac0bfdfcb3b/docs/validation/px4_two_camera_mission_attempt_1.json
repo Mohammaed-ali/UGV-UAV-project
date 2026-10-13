@@ -1,0 +1,83 @@
+{
+  "result": "FAIL",
+  "failure": "both vehicles not docked",
+  "two_camera": true,
+  "track_witnesses": {
+    "tgt_001": [
+      "uav01",
+      "uav02"
+    ],
+    "tgt_002": [
+      "uav01"
+    ]
+  },
+  "elapsed_s": 260.0,
+  "states": {
+    "uav01": 9,
+    "uav02": 6
+  },
+  "state_histories": {
+    "uav01": [
+      0,
+      2,
+      3,
+      5,
+      6,
+      7,
+      9
+    ],
+    "uav02": [
+      0,
+      2,
+      3,
+      5,
+      6
+    ]
+  },
+  "ready": {
+    "uav01": true,
+    "uav02": true
+  },
+  "flight": {
+    "uav01": {
+      "offboard": true,
+      "armed": true,
+      "gcs": true
+    },
+    "uav02": {
+      "offboard": true,
+      "armed": true,
+      "gcs": true
+    }
+  },
+  "landed": {
+    "uav01": true,
+    "uav02": false
+  },
+  "disarmed": {
+    "uav01": true,
+    "uav02": false
+  },
+  "detections": {
+    "uav01": 30,
+    "uav02": 7
+  },
+  "assignments": {
+    "tgt_001": [
+      "uav01"
+    ],
+    "tgt_002": [
+      "uav02"
+    ]
+  },
+  "second_searched_during_assignment": true,
+  "held": true,
+  "returned": true,
+  "phases": [
+    "INIT",
+    "DEPLOYING",
+    "SEARCHING",
+    "TARGET_FOUND",
+    "AWAITING_OPERATOR"
+  ]
+}

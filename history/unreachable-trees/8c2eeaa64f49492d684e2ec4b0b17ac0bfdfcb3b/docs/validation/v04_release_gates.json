@@ -1,0 +1,126 @@
+{
+  "result": "PASS_FOR_DOCUMENTED_V04_SCOPE",
+  "baseline": "v0.3-final",
+  "release_tag": "v0.4-final",
+  "runtime_commit": "64ffdb0e180500bd67e9a7f53bae93f142d13256",
+  "checked_utc": "2026-10-04T16:02:38.725682+00:00",
+  "automated_and_live_gates": {
+    "px4_no_target": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_no_target.json",
+      "elapsed_s": 85.6
+    },
+    "px4_target": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_target.json",
+      "elapsed_s": 91.3
+    },
+    "px4_two_isolation": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_two_isolation.json",
+      "elapsed_s": 84.1
+    },
+    "px4_two_mission": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_two_mission.json",
+      "elapsed_s": 143.7
+    },
+    "px4_fleet_4": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_fleet_4.json",
+      "elapsed_s": 17.4
+    },
+    "px4_fleet_8": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_fleet_8.json",
+      "elapsed_s": 20.8
+    },
+    "px4_camera": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_camera.json",
+      "elapsed_s": 9.1
+    },
+    "px4_real_camera_mission": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_real_camera_mission.json",
+      "elapsed_s": 87.6
+    },
+    "px4_two_camera_fusion": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_two_camera_fusion.json",
+      "elapsed_s": 77.3
+    },
+    "px4_moving_target": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_moving_target.json",
+      "elapsed_s": 104.0
+    },
+    "px4_low_battery": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_low_battery.json",
+      "elapsed_s": 92.4
+    },
+    "px4_vehicle_unavailable": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_vehicle_unavailable.json",
+      "elapsed_s": 92.6
+    },
+    "px4_two_targets": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_two_targets.json",
+      "elapsed_s": 81.9
+    },
+    "px4_fleet_flight": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_fleet_flight.json",
+      "elapsed_s": 236.8
+    },
+    "px4_two_camera_mission": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_two_camera_mission.json",
+      "elapsed_s": 163.7
+    },
+    "px4_examiner_demo": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_examiner_demo.json",
+      "elapsed_s": 114.9
+    },
+    "px4_examiner_visual_qa": {
+      "result": "PASS",
+      "evidence": "docs/validation/px4_examiner_visual_qa.json",
+      "elapsed_s": 144.0
+    },
+    "v04_logic": {
+      "result": "PASS",
+      "evidence": "docs/validation/v04_logic.json",
+      "elapsed_s": 160.7
+    },
+    "v04_final_tests": {
+      "result": "PASS",
+      "evidence": "docs/validation/v04_final_tests.json"
+    },
+    "v04_static_checks": {
+      "result": "PASS",
+      "evidence": "docs/validation/v04_static_checks.json"
+    }
+  },
+  "visual_qa": {
+    "result": "PASS",
+    "scope": "two-vehicle QGC UI; real-camera examiner Gazebo/RViz mission; eight GCS links/IDs via backend probes",
+    "evidence": [
+      "docs/validation/qgc_two_camera_mission.png",
+      "docs/validation/rviz_examiner_standoff.png",
+      "docs/validation/gazebo_examiner_standoff.png",
+      "docs/validation/gazebo_examiner_overview.png"
+    ]
+  },
+  "not_tested": [
+    "eight-camera flight",
+    "YOLO",
+    "physical UGV navigation/tray docking",
+    "calibrated time-synchronized localization/velocity",
+    "general collision avoidance",
+    "comprehensive native failsafes"
+  ],
+  "known_shutdown_warning": "Legacy daemon stdin console may abort at finalization after mission COMPLETE; helpers stopped owned processes."
+}

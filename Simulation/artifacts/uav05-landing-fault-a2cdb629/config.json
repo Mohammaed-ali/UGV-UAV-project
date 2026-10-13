@@ -1,0 +1,767 @@
+{
+  "mission": {
+    "version": 1,
+    "name": "Perimeter survey",
+    "wheels": 4,
+    "seed": 42,
+    "terrain": "proving_ground",
+    "population": 6,
+    "traffic": 3,
+    "target_present": true,
+    "target_class": "person",
+    "ugv_speed": 1.5,
+    "altitude": 9.0,
+    "flight_speed": 2.0,
+    "launch_interval": 5.0,
+    "search_timeout": 40.0,
+    "no_target_policy": "loiter",
+    "loiter_seconds": 20.0,
+    "loiter_radius": 5.0,
+    "observation_seconds": 15.0,
+    "standoff": 8.0,
+    "confidence": 0.4,
+    "landing_retries": 2,
+    "battery_return": 25.0,
+    "wind": 0.0,
+    "graphics_quality": "balanced",
+    "start": {
+      "x": -28.0,
+      "y": -22.0
+    },
+    "stops": [
+      {
+        "x": -12.0,
+        "y": -22.0,
+        "id": "alpha",
+        "label": "Alpha",
+        "drones": [
+          "uav01",
+          "uav02",
+          "uav03"
+        ],
+        "search_radius": 12.0,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      },
+      {
+        "x": 16.0,
+        "y": -22.0,
+        "id": "bravo",
+        "label": "Bravo",
+        "drones": [
+          "uav04",
+          "uav05"
+        ],
+        "search_radius": 12.0,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      },
+      {
+        "x": 30.0,
+        "y": 3.0,
+        "id": "charlie",
+        "label": "Charlie",
+        "drones": [
+          "uav06",
+          "uav07",
+          "uav08"
+        ],
+        "search_radius": 12.0,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      }
+    ]
+  },
+  "scene": {
+    "name": "fieldlab",
+    "size": 150,
+    "objects": [
+      {
+        "id": "building_0",
+        "kind": "building",
+        "x": -35,
+        "y": 17,
+        "z": 0,
+        "sx": 12,
+        "sy": 10,
+        "sz": 7,
+        "yaw": 0
+      },
+      {
+        "id": "building_1",
+        "kind": "building",
+        "x": -13,
+        "y": 20,
+        "z": 0,
+        "sx": 10,
+        "sy": 10,
+        "sz": 9,
+        "yaw": 0
+      },
+      {
+        "id": "building_2",
+        "kind": "building",
+        "x": 9,
+        "y": 25,
+        "z": 0,
+        "sx": 14,
+        "sy": 10,
+        "sz": 7,
+        "yaw": 0
+      },
+      {
+        "id": "building_3",
+        "kind": "building",
+        "x": 43,
+        "y": 25,
+        "z": 0,
+        "sx": 10,
+        "sy": 14,
+        "sz": 11,
+        "yaw": 0
+      },
+      {
+        "id": "building_4",
+        "kind": "building",
+        "x": -43,
+        "y": -10,
+        "z": 0,
+        "sx": 8,
+        "sy": 12,
+        "sz": 5,
+        "yaw": 0
+      },
+      {
+        "id": "person_0",
+        "kind": "person",
+        "x": -9.76917122467386,
+        "y": -15.849935468663999,
+        "z": 0,
+        "yaw": -1.4135324813693264,
+        "variant": 0
+      },
+      {
+        "id": "person_1",
+        "kind": "person",
+        "x": 11.571371810381164,
+        "y": -11.581172715015926,
+        "z": 0,
+        "yaw": 1.1102356231618007,
+        "variant": 1
+      },
+      {
+        "id": "person_2",
+        "kind": "person",
+        "x": 36.27487308327753,
+        "y": 9.521632995776496,
+        "z": 0,
+        "yaw": -0.49057967536482705,
+        "variant": 2
+      },
+      {
+        "id": "person_3",
+        "kind": "person",
+        "x": -19.523244488990876,
+        "y": -14.68817215117838,
+        "z": 0,
+        "yaw": 0.0336482675267602,
+        "variant": 3
+      },
+      {
+        "id": "person_4",
+        "kind": "person",
+        "x": 8.424575514941818,
+        "y": -14.80697409588011,
+        "z": 0,
+        "yaw": 0.9417516972311732,
+        "variant": 0
+      },
+      {
+        "id": "person_5",
+        "kind": "person",
+        "x": 30.719063689651467,
+        "y": 10.322643732244181,
+        "z": 0,
+        "yaw": 0.5608728333644475,
+        "variant": 1
+      },
+      {
+        "id": "vehicle_0",
+        "kind": "car",
+        "x": -20,
+        "y": -7,
+        "z": 0,
+        "yaw": 0,
+        "variant": 0
+      },
+      {
+        "id": "vehicle_1",
+        "kind": "truck",
+        "x": -2,
+        "y": -7,
+        "z": 0,
+        "yaw": 0,
+        "variant": 1
+      },
+      {
+        "id": "vehicle_2",
+        "kind": "bus",
+        "x": 16,
+        "y": -7,
+        "z": 0,
+        "yaw": 0,
+        "variant": 0
+      }
+    ],
+    "slots": [
+      {
+        "id": "uav01",
+        "bay": 1,
+        "level": "upper",
+        "tag_id": 1,
+        "x": -1.5,
+        "y": 0.0,
+        "z": 1.5,
+        "side": 1
+      },
+      {
+        "id": "uav02",
+        "bay": 1,
+        "level": "lower",
+        "tag_id": 2,
+        "x": -1.5,
+        "y": 0.0,
+        "z": 0.7,
+        "side": 1
+      },
+      {
+        "id": "uav03",
+        "bay": 2,
+        "level": "upper",
+        "tag_id": 3,
+        "x": -0.5,
+        "y": 0.0,
+        "z": 1.5,
+        "side": -1
+      },
+      {
+        "id": "uav04",
+        "bay": 2,
+        "level": "lower",
+        "tag_id": 4,
+        "x": -0.5,
+        "y": 0.0,
+        "z": 0.7,
+        "side": -1
+      },
+      {
+        "id": "uav05",
+        "bay": 3,
+        "level": "upper",
+        "tag_id": 5,
+        "x": 0.5,
+        "y": 0.0,
+        "z": 1.5,
+        "side": 1
+      },
+      {
+        "id": "uav06",
+        "bay": 3,
+        "level": "lower",
+        "tag_id": 6,
+        "x": 0.5,
+        "y": 0.0,
+        "z": 0.7,
+        "side": 1
+      },
+      {
+        "id": "uav07",
+        "bay": 4,
+        "level": "upper",
+        "tag_id": 7,
+        "x": 1.5,
+        "y": 0.0,
+        "z": 1.5,
+        "side": -1
+      },
+      {
+        "id": "uav08",
+        "bay": 4,
+        "level": "lower",
+        "tag_id": 8,
+        "x": 1.5,
+        "y": 0.0,
+        "z": 0.7,
+        "side": -1
+      }
+    ],
+    "ground_color": "#a6aa8e"
+  },
+  "assets": {
+    "human_mesh_0": [
+      {
+        "file": "/assets-sim/models/human_mesh_0/skin.dae",
+        "color": [
+          0.68,
+          0.45,
+          0.32
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_0/hair.dae",
+        "color": [
+          0.07,
+          0.045,
+          0.025
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_0/shoes.dae",
+        "color": [
+          0.055,
+          0.055,
+          0.055
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_0/shirt.dae",
+        "color": [
+          0.15,
+          0.24,
+          0.36
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_0/trousers.dae",
+        "color": [
+          0.11,
+          0.13,
+          0.17
+        ]
+      }
+    ],
+    "human_mesh_1": [
+      {
+        "file": "/assets-sim/models/human_mesh_1/skin.dae",
+        "color": [
+          0.36,
+          0.23,
+          0.16
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_1/hair.dae",
+        "color": [
+          0.22,
+          0.14,
+          0.06
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_1/shoes.dae",
+        "color": [
+          0.055,
+          0.055,
+          0.055
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_1/shirt.dae",
+        "color": [
+          0.47,
+          0.23,
+          0.16
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_1/trousers.dae",
+        "color": [
+          0.19,
+          0.2,
+          0.19
+        ]
+      }
+    ],
+    "human_mesh_2": [
+      {
+        "file": "/assets-sim/models/human_mesh_2/skin.dae",
+        "color": [
+          0.79,
+          0.58,
+          0.43
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_2/hair.dae",
+        "color": [
+          0.055,
+          0.04,
+          0.03
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_2/shoes.dae",
+        "color": [
+          0.055,
+          0.055,
+          0.055
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_2/shirt.dae",
+        "color": [
+          0.36,
+          0.43,
+          0.28
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_2/trousers.dae",
+        "color": [
+          0.25,
+          0.22,
+          0.18
+        ]
+      }
+    ],
+    "human_mesh_3": [
+      {
+        "file": "/assets-sim/models/human_mesh_3/skin.dae",
+        "color": [
+          0.53,
+          0.33,
+          0.22
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_3/hair.dae",
+        "color": [
+          0.07,
+          0.045,
+          0.025
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_3/shoes.dae",
+        "color": [
+          0.055,
+          0.055,
+          0.055
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_3/shirt.dae",
+        "color": [
+          0.55,
+          0.49,
+          0.34
+        ]
+      },
+      {
+        "file": "/assets-sim/models/human_mesh_3/trousers.dae",
+        "color": [
+          0.11,
+          0.13,
+          0.17
+        ]
+      }
+    ],
+    "car_mesh_0": [
+      {
+        "file": "/assets-sim/models/car_mesh_0/rubber_paint_1.dae",
+        "color": [
+          0.23139280080795288,
+          0.23139280080795288,
+          0.2552683353424072
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/rubber_paint_5.dae",
+        "color": [
+          0.20390230417251587,
+          0.20390230417251587,
+          0.2177039384841919
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_4.dae",
+        "color": [
+          0.4838995039463043,
+          0.5044878721237183,
+          0.5965357422828674
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_10.dae",
+        "color": [
+          0.5617197751998901,
+          0.5850982069969177,
+          0.6915084719657898
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_11.dae",
+        "color": [
+          0.4465853273868561,
+          0.4656389355659485,
+          0.5501015782356262
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_6.dae",
+        "color": [
+          0.4201960265636444,
+          0.43754878640174866,
+          0.5143628120422363
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_9.dae",
+        "color": [
+          0.3526017367839813,
+          0.35610949993133545,
+          0.41787365078926086
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_2.dae",
+        "color": [
+          0.37235328555107117,
+          0.37810394167900085,
+          0.43999969959259033
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_5.dae",
+        "color": [
+          0.20390230417251587,
+          0.20390230417251587,
+          0.2177039384841919
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_3.dae",
+        "color": [
+          0.723270058631897,
+          0.32314160466194153,
+          0.24750196933746338
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_0.dae",
+        "color": [
+          0.6805883049964905,
+          0.6805883049964905,
+          0.7205883264541626
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_7.dae",
+        "color": [
+          0.7259243726730347,
+          0.7549160122871399,
+          0.7820168733596802
+        ]
+      },
+      {
+        "file": "/assets-sim/models/car_mesh_0/paint_8.dae",
+        "color": [
+          0.7900000214576721,
+          0.6631617546081543,
+          0.1841176450252533
+        ]
+      }
+    ],
+    "truck_mesh_0": [
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_2.dae",
+        "color": [
+          0.3602181375026703,
+          0.36455750465393066,
+          0.4263712167739868
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_10.dae",
+        "color": [
+          0.4201960265636444,
+          0.4375487267971039,
+          0.5143627524375916
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_8.dae",
+        "color": [
+          0.2028065025806427,
+          0.2028065025806427,
+          0.21623840928077698
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_1.dae",
+        "color": [
+          0.22855055332183838,
+          0.22855055332183838,
+          0.2513101100921631
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/glass_paint_4.dae",
+        "color": [
+          0.22402846813201904,
+          0.5338566303253174,
+          0.39914020895957947
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_6.dae",
+        "color": [
+          0.713128387928009,
+          0.7315776944160461,
+          0.761925220489502
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_0.dae",
+        "color": [
+          0.5716179609298706,
+          0.5947795510292053,
+          0.700478196144104
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_7.dae",
+        "color": [
+          0.7900000214576721,
+          0.6664705872535706,
+          0.1899999976158142
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_5.dae",
+        "color": [
+          0.7179412245750427,
+          0.27088236808776855,
+          0.22382354736328125
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/rubber_paint_1.dae",
+        "color": [
+          0.22855055332183838,
+          0.22855055332183838,
+          0.2513101100921631
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/rubber_paint_8.dae",
+        "color": [
+          0.2028065025806427,
+          0.2028065025806427,
+          0.21623840928077698
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_9.dae",
+        "color": [
+          0.5162032246589661,
+          0.5375934839248657,
+          0.6362566351890564
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_11.dae",
+        "color": [
+          0.47388726472854614,
+          0.494219571352005,
+          0.5845014452934265
+        ]
+      },
+      {
+        "file": "/assets-sim/models/truck_mesh_0/paint_3.dae",
+        "color": [
+          0.4455399811267853,
+          0.4644865095615387,
+          0.5486860871315002
+        ]
+      }
+    ],
+    "bus_mesh_0": [
+      {
+        "file": "/assets-sim/models/bus_mesh_0/paint_body.dae",
+        "color": [
+          0.52,
+          0.55,
+          0.52
+        ]
+      },
+      {
+        "file": "/assets-sim/models/bus_mesh_0/chassis.dae",
+        "color": [
+          0.09,
+          0.09,
+          0.09
+        ]
+      },
+      {
+        "file": "/assets-sim/models/bus_mesh_0/glass_windows.dae",
+        "color": [
+          0.075,
+          0.14,
+          0.17
+        ]
+      },
+      {
+        "file": "/assets-sim/models/bus_mesh_0/glass_front.dae",
+        "color": [
+          0.07,
+          0.13,
+          0.16
+        ]
+      },
+      {
+        "file": "/assets-sim/models/bus_mesh_0/glass_rear.dae",
+        "color": [
+          0.07,
+          0.13,
+          0.16
+        ]
+      },
+      {
+        "file": "/assets-sim/models/bus_mesh_0/rubber_wheels.dae",
+        "color": [
+          0.045,
+          0.045,
+          0.045
+        ]
+      },
+      {
+        "file": "/assets-sim/models/bus_mesh_0/roof_detail.dae",
+        "color": [
+          0.24,
+          0.26,
+          0.25
+        ]
+      },
+      {
+        "file": "/assets-sim/models/bus_mesh_0/lamps.dae",
+        "color": [
+          0.86,
+          0.82,
+          0.63
+        ]
+      },
+      {
+        "file": "/assets-sim/models/bus_mesh_0/mirrors.dae",
+        "color": [
+          0.18,
+          0.19,
+          0.19
+        ]
+      }
+    ]
+  }
+}

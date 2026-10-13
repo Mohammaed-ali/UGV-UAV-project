@@ -1,0 +1,72 @@
+{
+  "completed_utc": "2026-10-08T02:02:32.970051+00:00",
+  "physical_runs": {
+    "single": {
+      "run_id": "32810c16-74bc-4e39-a4f7-e87069814d32",
+      "passed": true,
+      "original_mission_restored": true,
+      "summary": "/home/mohammed-ali/Downloads/gpt /Simulation/artifacts/gateway-validation-32810c16-74bc-4e39-a4f7-e87069814d32/summary.json"
+    },
+    "eight_city": {
+      "run_id": "5091e0b0-774d-48f9-8f24-c9a0870588f7",
+      "passed": true,
+      "original_mission_restored": true,
+      "summary": "/home/mohammed-ali/Downloads/gpt /Simulation/artifacts/gateway-validation-5091e0b0-774d-48f9-8f24-c9a0870588f7/summary.json"
+    },
+    "two_stops": {
+      "run_id": "58849088-5b4d-4f65-b40e-be60a3b0f67f",
+      "passed": true,
+      "original_mission_restored": true,
+      "summary": "/home/mohammed-ali/Downloads/gpt /Simulation/artifacts/gateway-validation-58849088-5b4d-4f65-b40e-be60a3b0f67f/summary.json"
+    }
+  },
+  "backend_tests_passed": 27,
+  "frontend_tests_passed": 3,
+  "frontend_build": "PASS",
+  "runtime": "offline",
+  "restored_plan": "Perimeter survey",
+  "rack": {
+    "radius": 2.15,
+    "center_z": 1.5150000000000001,
+    "half_height": 0.735,
+    "upper_z": 2.25,
+    "lower_z": 0.78,
+    "pad_z": 0.075,
+    "base_z": 0.74,
+    "chassis_size": 3.05,
+    "deck_size": 3.22,
+    "wheel_x": 1.1,
+    "wheel_y": 1.66
+  },
+  "primary_preservation": {
+    "primary": "/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3",
+    "checked_files": 142,
+    "changed_files": [],
+    "git_status_matches": true,
+    "passed": true
+  },
+  "storage": {
+    "archived_native_bytes": 476301213,
+    "archive_budget_bytes": 536870912,
+    "within_budget": true,
+    "mission_reports_bytes": 55248456,
+    "previous_cleanup_bytes_freed": 9302085655
+  },
+  "internet": {
+    "checked_utc": "2026-10-08T01:48:45Z",
+    "public_url": "[REDACTED TEMPORARY SHARE URL]",
+    "anonymous_state": 401,
+    "login": 200,
+    "secure_cookie": true,
+    "authenticated_state": 200,
+    "run_id": "5091e0b0-774d-48f9-8f24-c9a0870588f7",
+    "cross_origin_command": 403,
+    "live_websocket": true,
+    "passed": true
+  },
+  "limitations": [
+    "Static people and parked vehicles",
+    "No broad obstacle avoidance",
+    "Wind and larger multi-stop fleets remain unvalidated"
+  ]
+}

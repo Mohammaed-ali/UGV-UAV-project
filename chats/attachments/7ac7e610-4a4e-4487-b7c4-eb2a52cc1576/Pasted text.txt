@@ -1,0 +1,274 @@
+Build a complete, runnable, interactive browser based 3D simulation for my existing UGV and drone project. Implement the application, connect it to the robotics simulation, and validate the complete mission cycle.
+
+The workspace is:
+
+`/home/mohammed-ali/Downloads/gpt /wildlife_ws_ros2_jazzy_v0_3`
+
+The application must let me configure a four- or six-wheeled UGV, define its route and stopping points, and allocate up to eight onboard drones across those stops. The drones must launch, search using cameras, detect a user-selected target, approach it for observation, and return to land precisely on their assigned UGV trays using AprilTags. If they cannot find a target, they must follow a configurable hover or loiter policy before returning.
+
+Use **flat terrain with a sparse outdoor built environment** as the default. Include people, vehicles, buildings, and obstacles, while keeping the scene small enough to run efficiently. Prioritize credible vehicle dynamics, working perception, and reliable docking.
+
+Follow these requirements:
+
+1. **Inspect the actual project before changing it.**
+
+   Read applicable `AGENTS.md` instructions, the README, architecture documentation, dependency pins, mission and deployment logic, PX4 adapters, camera configuration, vehicle models, and relevant validation reports.
+
+   The directory name includes v0.3, but its current documentation describes later development. Establish the actual baseline from the files.
+
+   Inspect Git status and running simulation or dataset processes. Preserve existing uncommitted work, datasets, evidence files, and dependency pins. Keep the earlier workspaces untouched.
+
+   Identify which existing components can be reused and which require physical implementation. Current documentation describes a logical UGV/display proxy, simplified docking at simulated home, eight-aircraft flight without cameras, and separate one/two-camera validation. These are starting points, not proof that the requested system already exists.
+
+2. **Use a browser interface connected to the existing simulation stack.**
+
+   Browser based means that I interact with the system through a browser. A local simulation backend is acceptable and preferred for the requested physics.
+
+   Use React, TypeScript, Vite, and Three.js for the frontend unless the repository provides a suitable existing frontend. Use Three.js WebGL2 as the initial rendering baseline. [Three.js renderer documentation](https://threejs.org/docs/pages/WebGLRenderer.html).
+
+   Keep ROS 2 Jazzy, Gazebo Harmonic, and the project’s pinned PX4 SITL stack as the authoritative robotics backend. Jazzy and Harmonic are an officially supported pairing. [Gazebo compatibility documentation](https://gazebosim.org/docs/harmonic/ros_installation/).
+
+   Implement a narrow ROS-to-web gateway, preferably using a ROS-compatible Python environment with FastAPI and WebSockets. Keep mission decisions in the existing ROS mission system.
+
+   Gazebo owns physical poses, contacts, vehicle motion, and sensor generation. PX4 owns UAV flight control. The browser renders measured state and sends validated operator intentions.
+
+3. **Keep the browser and sensor world consistent.**
+
+   Use a shared scene description for geometry, asset identifiers, dimensions, initial positions, routes, collision shapes, and tag placement.
+
+   Every perception-relevant person, vehicle, building, obstacle, and tray must exist in the Gazebo sensor world and appear consistently in the browser view.
+
+   Stream authoritative transforms to the browser. Interpolate poses for smooth display without feeding interpolated poses back into flight control.
+
+   Define and verify the conversions among ROS ENU coordinates, PX4 NED/FRD coordinates, camera optical coordinates, and Three.js coordinates. Preserve each UAV’s correct spawn-origin mapping.
+
+   Use meters, seconds, kilograms, and documented angular units throughout.
+
+4. **Create an efficient, believable environment.**
+
+   Start with a bounded flat area, approximately 150 × 150 meters, containing a road or marked route, a few buildings, pedestrians, parked vehicles, limited moving traffic, and obstacles that can obscure targets.
+
+   Expose population and object-density controls. Include an empty terrain preset for performance and physics checks.
+
+   Reuse suitable project assets and their recorded provenance. Use plausible scale, PBR materials, restrained shadows, and recognizable human and vehicle meshes.
+
+   Use simple collision geometry beneath detailed visual meshes. Pedestrians may use animated kinematic motion with capsule collision proxies; document this approximation. Vehicles must have bounded motion and collision representation.
+
+   Ensure browser animation and Gazebo camera rendering show the same actor positions and behavior.
+
+5. **Implement physical four- and six-wheeled UGV variants.**
+
+   Provide a browser selector for four or six wheels, with four wheels as the default.
+
+   Model the chassis, wheels, wheel joints, rack, trays, mass, inertia, friction, motor limits, braking, and payload. Use a documented steering or skid-steering configuration.
+
+   Drive the UGV through wheel actuation and a path-following controller. Measure its progress from odometry. Direct pose changes are allowed for initialization and reset, not normal driving.
+
+   Include realistic acceleration and deceleration. Stop before deployment, verify low measured speed, and hold the vehicle stationary during launch and docking.
+
+   Choose carrier dimensions from the actual drone envelopes and required clearances. Resize the carrier if necessary to accommodate eight drones physically.
+
+   Carry stored drones through physical tray contact and latching constraints. Their mass must affect the carrier without being counted twice.
+
+6. **Implement the existing four-by-two stacked rack physically.**
+
+   Preserve the existing arrangement of four paired bays, each containing an upper and lower drone:
+
+   - Bay 1: `uav01` upper, `uav02` lower.
+   - Bay 2: `uav03` upper, `uav04` lower.
+   - Bay 3: `uav05` upper, `uav06` lower.
+   - Bay 4: `uav07` upper, `uav08` lower.
+
+   Treat this as four bays across two vertical levels, giving eight individually addressed docking positions.
+
+   Implement an accessible launch and recovery mechanism. Lower drones must have a clear path past upper shelves and stored aircraft. A practical default is a motorized sliding tray that extends beyond the rack before launch or landing.
+
+   Model tray movement with joints, limits, collisions, and measured position. Include a latch or retention mechanism that releases before takeoff and engages after verified landing and disarming.
+
+   Validate rotor clearance, shelf clearance, tray access, and neighboring aircraft separation. Prevent conflicting tray operations. Show these operations in the browser.
+
+7. **Provide a complete route and stop editor.**
+
+   Include a predefined route that works immediately. Let me add, move, reorder, and delete waypoints using the 3D view and a numeric editor.
+
+   Let me designate deployment stops and configure, for each stop: its position, arrival tolerance, dwell policy, deployment count, selected drone IDs, search area, target criteria, and recovery policy.
+
+   Support arbitrary allocations totaling up to eight drones, including eight at one stop, four plus four, three plus five, and three plus two plus three. A stop may deploy zero drones.
+
+   Extend the existing fixed SINGLE/SPLIT scheduling to support these allocations while preserving compatible existing launch profiles.
+
+   Reject duplicate allocations, unavailable aircraft, impossible tray operations, and routes through obstacles. The default policy is to recover the current group before proceeding to the next deployment stop.
+
+8. **Expose useful mission inputs in the browser.**
+
+   Provide controls for wheel configuration, route selection, drone allocation, launch interval, search altitude, search speed, search timeout, target criteria, detection confidence, observation distance, and observation duration.
+
+   For no-target behavior, provide “Return immediately,” “Hover, then return,” and “Loiter, then return.” Let me enter the duration in seconds or minutes. For loitering, expose radius and speed.
+
+   Also expose landing retry limits, battery return threshold, basic wind settings, random seed, and graphics quality.
+
+   Use sensible defaults derived from the existing project. Explain units and validation errors. Save and load versioned JSON mission configurations.
+
+   Define precedence among defaults, mission settings, stop settings, and per-drone settings so the effective configuration is clear.
+
+9. **Keep target selection separate from target detection.**
+
+   Let me select a supported target class, such as person, car, truck, or bus, according to the chosen detector’s actual capabilities. Preserve wildlife classes where supported.
+
+   Allow selection of an already detected target track. Clicking an undetected scene object may set search criteria or an approximate search region, but must not automatically mark it detected.
+
+   For a specific instance, use an observed track or distinguishable visual attributes. Explain ambiguity when several objects look alike.
+
+   Keep scene population controls separate from mission target criteria so I can create a mission where the selected target is absent.
+
+   Simulator object IDs and exact object positions may support scene setup and evaluation. They must not act as hidden inputs to the operational detector.
+
+10. **Implement camera-based object detection.**
+
+    Each searching UAV must obtain actual rendered Gazebo camera images with calibration and timestamps.
+
+    Implement a working image-based detector for the supported people and vehicle targets. Prefer a compact pretrained model with CPU-capable inference, pinned weights, checksums, and documented licensing. GPU acceleration may be optional.
+
+    Reuse existing perception components where appropriate, but extend them where they cannot recognize the requested objects. Do not report simulated detections or color-marker demonstrations as realistic person/vehicle detection.
+
+    Produce image bounding boxes, class labels, confidence, and persistent target tracks. Estimate target position from calibrated imagery and suitable pose, ground-plane, or depth information.
+
+    Associate images with pose at image capture time. Bound acceptable synchronization error and reject stale observations.
+
+    Maintain the distinction between detections, persistent targets, and observer assignment.
+
+11. **Implement coordinated flight and target approach.**
+
+    Preserve PX4 SITL as the UAV controller. Launch and fly through supported commands and setpoints.
+
+    Verify readiness, arming, command acknowledgments, telemetry freshness, namespace isolation, and the Offboard heartbeat. PX4 requires an ongoing control-health signal and has specific mode-entry and loss-of-signal behavior. [PX4 Offboard documentation](https://docs.px4.io/v1.17/en/flight_modes/offboard).
+
+    Implement physically driven takeoff, search, observation, hover, loiter, return, and landing with bounded speed and acceleration.
+
+    Give drones separate search sectors and safe separation. Use launch sequencing, holding locations, and an exclusive final docking corridor.
+
+    When a target is confirmed, approach a configurable observation distance and maintain it. Preserve the existing single-observer behavior by default; additional observers should require an explicit allocation.
+
+    Provide bounded obstacle avoidance using documented information sources. Show whether obstacle knowledge comes from a known map or sensors.
+
+12. **Implement no-target and target-loss policies.**
+
+    After the search timeout, execute the configured immediate-return, hover, or loiter policy.
+
+    Hovering must use active position control. Loitering must follow a controlled orbit or bounded pattern.
+
+    Show the remaining search and loiter time for each drone. Mission durations must use simulation time, with minutes converted to seconds.
+
+    Define whether target detection during loiter resumes observation. Provide an explicit policy for losing an observed target, such as a bounded reacquisition period followed by return.
+
+    Battery and flight-controller failsafes take precedence over the requested duration. Display the reason when they interrupt the mission.
+
+13. **Implement AprilTag-based precision landing.**
+
+    Give every tray a unique AprilTag identity and a documented mapping among drone, bay, level, tray, and tag ID.
+
+    Render actual tag textures into the downward camera image. Detect tag corners from pixels and estimate relative pose using calibrated intrinsics, camera extrinsics, and metric tag size. Use AprilTag 3 and a supported family consistently. [AprilTag detection and pose documentation](https://github.com/AprilRobotics/apriltag).
+
+    Position the markers or tag board so they remain visible during approach. Account for the tray’s measured extension and the camera-to-landing-gear offset.
+
+    Use carrier telemetry for coarse rendezvous and camera-derived tag measurements for final alignment. Validate confidence, pose ambiguity, reprojection error, observation age, and expected tag ID.
+
+    Gate descent on alignment, yaw, relative velocity, tray availability, and stationary-carrier status. On tag loss, hold or retry within configured limits.
+
+    Verify the selected landing-control method against the pinned PX4 version and build. Native precision landing has prerequisites that must be checked; use a tested ROS/PX4 visual-servo approach where appropriate. [PX4 precision landing documentation](https://docs.px4.io/v1.17/en/advanced_features/precland).
+
+14. **Confirm physical docking and correct recovery location.**
+
+    A drone is docked only after measured landing-gear contact on the correct tray, sufficiently low relative velocity, stable contact, confirmed disarming, and successful latch engagement.
+
+    Do not infer docking solely from elapsed time or distance to a point. Record wrong-tray contact, excessive touchdown speed, and failed latch attempts.
+
+    Return to the UGV’s current assigned recovery location and tray pose. The original takeoff location must not become an incorrect return destination after the UGV has moved.
+
+    Keep the UGV stationary during final recovery. Moving-platform landing is outside the initial required scope.
+
+    If recovery fails, use a configured holding or emergency landing procedure and report the failure accurately.
+
+    Mission completion must account for deployed aircraft. Unused drones remain stored and should not prevent completion.
+
+15. **Build a polished operator interface.**
+
+    Make the main viewport large enough to inspect the carrier, trays, drones, and environment. Provide free orbit, top-down, UGV-follow, drone-follow, and docking-close-up views.
+
+    Display route lines, stop markers, drone trails, search areas, assignments, and optional camera frustums.
+
+    Include a mission configuration panel, per-stop deployment editor, eight-drone status panel, upper/lower rack occupancy display, selected-drone camera panel, detection overlays, and an event timeline.
+
+    Show battery, flight mode, mission state, target assignment, return reason, tag ID, landing progress, and faults.
+
+    Provide Start, mission Hold, Resume, Recall Selected, Recall All, Abort, and Reset controls. Distinguish mission hold from pausing the simulation world.
+
+    Show command acceptance and later state confirmation separately. Display connection status and stale data clearly.
+
+16. **Use an authoritative, explicit mission state model.**
+
+    Extend the existing mission authority rather than creating a second controller in the browser.
+
+    Represent stored/latched, tray preparation, readiness, launch, takeoff, search, detection confirmation, observation, no-target hover/loiter, return, recovery queue, tag acquisition, alignment, descent, touchdown, disarm, latching, and docking.
+
+    Preserve existing state-enum values and typed interfaces. Add compatible messages or services where richer state is necessary.
+
+    Define measured transition conditions, timeouts, retry limits, and recovery actions. A command acknowledgment alone must not imply the physical operation finished.
+
+    Track tray reservations independently from aircraft flight state.
+
+    Use mission/run identifiers to prevent retained ROS events or delayed web commands from replaying launches after reset. Ensure reconnecting the browser does not create duplicate commands.
+
+17. **Manage performance and timing deliberately.**
+
+    Run Gazebo without its desktop GUI where supported, while retaining camera rendering. Test EGL/OGRE2 headless rendering on the available machine and document any required fallback. [Gazebo headless rendering documentation](https://gazebosim.org/api/sim/8/headless_rendering.html).
+
+    Begin with the project’s 640 × 480, 10 Hz camera profile and measure its limits. Enable operational cameras for deployed drones; stored drones may have inactive cameras.
+
+    Throttle browser image previews independently of perception. Closing a camera panel must not disable a searching drone’s sensor.
+
+    Stream lightweight telemetry separately from images. Use bounded queues and drop obsolete preview frames.
+
+    Optimize browser rendering with instancing, LOD, controlled shadow resolution, and limited pixel ratio.
+
+    Measure one-, two-, four-, and eight-drone camera missions. Target at least 30 FPS in the browser and real-time simulation where achievable. Report actual FPS, real-time factor, resource use, image rates, perception latency, and telemetry age.
+
+    Use a documented fixed physics step and verify PX4 timing. Keep simulation-time mission deadlines separate from wall-time connection watchdogs.
+
+18. **Validate progressively with meaningful tests.**
+
+    Establish baseline results before edits, then validate: physical UGV driving; loaded rack transport; single-drone tray release and takeoff; real image detection; visual precision docking; split deployment; and the complete eight-drone mission.
+
+    Include automated checks for allocation validation, frame conversions, target-observation freshness, tray reservations, docking conditions, and duplicate-command prevention.
+
+    Exercise both UGV variants and these scenarios: eight drones at one stop; uneven allocation across several stops; target absent; target hidden behind a building; wrong or obscured tag; occupied recovery tray; low battery; obstacle interference; UGV recovery at a different stop; browser reconnect; and mission reset.
+
+    Test no-target durations in both seconds and minutes.
+
+    Inspect the actual browser interface and sensor images during live missions. Capture screenshots and evidence from authoritative telemetry.
+
+    Use simulator truth for offline evaluation of detection and landing error. Keep it out of the perception and final landing-control inputs.
+
+19. **Deliver a runnable implementation with honest evidence.**
+
+    Provide frontend source, ROS/web gateway, physical vehicle and rack models, launch configuration, mission schema, presets, detector assets or reproducible preparation scripts, tag assets, tests, and documentation.
+
+    Add a convenient local startup script that launches the required components and prints the browser URL. Quote paths correctly because this workspace contains spaces.
+
+    Reuse the existing environment setup and pinned dependency locations. Bind locally by default, validate web requests, and expose allowlisted mission commands.
+
+    Include mission export, timestamped event logs, and telemetry export for reviewing runs.
+
+    Document exact setup and run commands, supported hardware, model assumptions, and measured limitations. Clearly distinguish implemented features from validated features.
+
+    Do not claim eight-camera operation, precise landing, full aerodynamic realism, or real-world detector accuracy without corresponding evidence. Simplified aerodynamics, pedestrian motion, and traffic behavior should be documented.
+
+20. **Carry the implementation through the complete mission cycle.**
+
+    Work in stages: baseline audit and design; live browser connection; physical UGV and rack; one-drone perception and docking; generalized stop scheduling; coordinated fleet operation; then performance tuning and acceptance testing.
+
+    Make routine engineering decisions using these requirements and the repository. Record assumptions and continue without requesting confirmation for ordinary reversible choices.
+
+    If a dependency or hardware limit blocks a requirement, complete independent work, identify the exact blocker, and provide a concrete recovery path. Keep all incomplete or unverified capabilities visible.
+
+    The finished demonstration must let me configure the mission entirely in the browser, watch the loaded UGV physically follow its route, deploy the selected drones at each stop, inspect their camera detections, observe target approach or timed no-target loiter, and watch each aircraft land on its assigned tray, disarm, and latch back onto the carrier.

@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "run_id": "a2cdb629-d678-4158-81e4-63119ee854ea",
+  "wall_seconds": 173.12,
+  "physical_takeoffs": {
+    "uav01": {
+      "sim_time": 111.34,
+      "initial_z": 2.42,
+      "measured_position": [
+        -13.868051000322572,
+        -20.356872231081915,
+        4.718530734500514
+      ],
+      "mode": 14,
+      "state": "TAKEOFF",
+      "armed": true,
+      "latched": false
+    },
+    "uav02": {
+      "sim_time": 129.13,
+      "initial_z": 1.6199999999999999,
+      "measured_position": [
+        -13.916860726729617,
+        -20.37737685717677,
+        3.7964492414402318
+      ],
+      "mode": 14,
+      "state": "TAKEOFF",
+      "armed": true,
+      "latched": false
+    },
+    "uav03": {
+      "sim_time": 147.12,
+      "initial_z": 2.42,
+      "measured_position": [
+        -12.876490802028725,
+        -23.625083099935235,
+        4.568853977664099
+      ],
+      "mode": 14,
+      "state": "TAKEOFF",
+      "armed": true,
+      "latched": false
+    }
+  },
+  "mission_preserved": true,
+  "backend_regression_tests": 18,
+  "primary_preservation": true,
+  "current_state": "DEPLOYING",
+  "current_first_stop": [
+    {
+      "id": "uav01",
+      "state": "DESCENDING",
+      "armed": true,
+      "latched": false,
+      "position": [
+        -13.810766216548558,
+        -20.296246522608563,
+        4.861200761133879
+      ]
+    },
+    {
+      "id": "uav02",
+      "state": "RETURNING",
+      "armed": true,
+      "latched": false,
+      "position": [
+        -8.136449221143215,
+        -17.816537273451686,
+        9.904713588806294
+      ]
+    },
+    {
+      "id": "uav03",
+      "state": "RETURNING",
+      "armed": true,
+      "latched": false,
+      "position": [
+        -15.53913854268347,
+        -14.45449987272905,
+        10.851738828314195
+      ]
+    }
+  ]
+}

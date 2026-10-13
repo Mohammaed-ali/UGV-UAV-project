@@ -1,0 +1,12 @@
+geometry_msgs/Polygon search_area
+float32 altitude
+float32 search_speed
+string pattern
+---
+bool target_found
+string target_id
+geometry_msgs/Point target_position
+---
+float32 coverage_percent
+geometry_msgs/Point current_position
+uint32 detections_count

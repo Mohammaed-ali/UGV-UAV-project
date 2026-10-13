@@ -1,0 +1,32 @@
+ugv_manager:
+  ros__parameters:
+    deployment_mode: "SINGLE"
+    waypoints: [0.0, 0.0, 20.0, 0.0, 20.0, 20.0]
+    speed: 1.5
+    arrival_tolerance: 0.5
+    deploy_at_waypoint_indices: [0]
+    publish_rate_hz: 10.0
+
+deployment_manager:
+  ros__parameters:
+    inter_drone_delay: 3.0
+    deployment_mode: "SINGLE"
+
+docking_manager:
+  ros__parameters:
+    report_period: 5.0
+
+uav_defaults:
+  ros__parameters:
+    search_altitude: 10.0
+    standoff_distance: 12.0
+    search_speed: 1.2
+    loiter_duration: 20.0
+    search_timeout: 90.0
+    battery_drain_per_second: 0.15
+    lane_spacing: 5.0
+    search_half_width: 30.0
+    standoff_altitude_offset: 3.0
+    motion_tolerance: 0.5
+    home_x: 0.0
+    home_y: 0.0

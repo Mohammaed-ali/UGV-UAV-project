@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="canopy_mild">
+    <static>true</static>
+    <link name="body">
+      <visual name="roof">
+        <pose>0 0 5.1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2 3 0.2</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.45 0.43 0.37 1</ambient>
+          <diffuse>0.45 0.43 0.37 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="leg_-1.0_-1.5">
+        <pose>-1.0 -1.5 2.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.15 0.15 5</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.45 0.43 0.37 1</ambient>
+          <diffuse>0.45 0.43 0.37 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="leg_-1.0_1.5">
+        <pose>-1.0 1.5 2.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.15 0.15 5</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.45 0.43 0.37 1</ambient>
+          <diffuse>0.45 0.43 0.37 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="leg_1.0_-1.5">
+        <pose>1.0 -1.5 2.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.15 0.15 5</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.45 0.43 0.37 1</ambient>
+          <diffuse>0.45 0.43 0.37 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+      <visual name="leg_1.0_1.5">
+        <pose>1.0 1.5 2.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.15 0.15 5</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.45 0.43 0.37 1</ambient>
+          <diffuse>0.45 0.43 0.37 1</diffuse>
+          <specular>0 0 0 1</specular>
+        </material>
+        <cast_shadows>true</cast_shadows>
+      </visual>
+    </link>
+  </model>
+</sdf>

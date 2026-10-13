@@ -1,0 +1,34 @@
+{
+  "build": "implemented",
+  "acceptance": "partial: initial discovery in the occlusion preset and latest GUI tracking trials did not pass",
+  "core_gates": [
+    "600-second separated living city",
+    "controlled obstacle stop",
+    "post-survey person following and docking",
+    "moving car following and docking",
+    "camera loss",
+    "lookalike ambiguity rejection",
+    "eight aircraft / six wheels",
+    "eight aircraft / four-wheel split",
+    "stopping car / partial turn coverage",
+    "operating-area exit",
+    "browser import/save/reset",
+    "cold restart and required asset loading",
+    "local/private internet access",
+    "primary isolation"
+  ],
+  "backend_tests": 81,
+  "frontend_tests": 3,
+  "production_build": "passed",
+  "junk_bytes_freed": 1848606986,
+  "primary_untouched": true,
+  "docs": "docs/LIVING_CITY_VALIDATION.md",
+  "limits": [
+    "Occlusion/reappearance preset missed initial confirmation; not accepted",
+    "Historical target reacquisition timed out in the public-browser attempt; fresh GUI following remains unverified",
+    "Repeated-stop landing regression fixed and covered by two unit regressions; native repeat-stop physics not repeated",
+    "In-app mission-download observer did not produce a saved file; export API verified",
+    "Background occupancy is controlled kinematic motion, not full tire/biomechanical dynamics",
+    "Vehicle subclass and visual identity confidence remain provisional; optional UAV handoff deferred"
+  ]
+}

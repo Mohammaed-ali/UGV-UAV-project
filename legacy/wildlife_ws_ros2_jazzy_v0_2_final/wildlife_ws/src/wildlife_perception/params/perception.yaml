@@ -1,0 +1,111 @@
+uav01_perception:
+  ros__parameters:
+    drone_id: "uav01"
+    random_seed: 0
+    detection_range: 18.0
+    detection_probability: 0.55
+    confidence_noise_sigma: 0.03
+    position_noise_sigma: 0.25
+    confidence_threshold: 0.50
+    publish_period: 1.0
+    target_positions: [15.0, 12.0, 25.0, 8.0]
+    target_classes: ["dummy_animal", "dummy_animal"]
+
+uav02_perception:
+  ros__parameters:
+    drone_id: "uav02"
+    random_seed: 0
+    detection_range: 18.0
+    detection_probability: 0.55
+    confidence_noise_sigma: 0.03
+    position_noise_sigma: 0.25
+    confidence_threshold: 0.50
+    publish_period: 1.0
+    target_positions: [15.0, 12.0, 25.0, 8.0]
+    target_classes: ["dummy_animal", "dummy_animal"]
+
+uav03_perception:
+  ros__parameters:
+    drone_id: "uav03"
+    random_seed: 0
+    detection_range: 18.0
+    detection_probability: 0.55
+    confidence_noise_sigma: 0.03
+    position_noise_sigma: 0.25
+    confidence_threshold: 0.50
+    publish_period: 1.0
+    target_positions: [15.0, 12.0, 25.0, 8.0]
+    target_classes: ["dummy_animal", "dummy_animal"]
+
+uav04_perception:
+  ros__parameters:
+    drone_id: "uav04"
+    random_seed: 0
+    detection_range: 18.0
+    detection_probability: 0.55
+    confidence_noise_sigma: 0.03
+    position_noise_sigma: 0.25
+    confidence_threshold: 0.50
+    publish_period: 1.0
+    target_positions: [15.0, 12.0, 25.0, 8.0]
+    target_classes: ["dummy_animal", "dummy_animal"]
+
+uav05_perception:
+  ros__parameters:
+    drone_id: "uav05"
+    random_seed: 0
+    detection_range: 18.0
+    detection_probability: 0.55
+    confidence_noise_sigma: 0.03
+    position_noise_sigma: 0.25
+    confidence_threshold: 0.50
+    publish_period: 1.0
+    target_positions: [15.0, 12.0, 25.0, 8.0]
+    target_classes: ["dummy_animal", "dummy_animal"]
+
+uav06_perception:
+  ros__parameters:
+    drone_id: "uav06"
+    random_seed: 0
+    detection_range: 18.0
+    detection_probability: 0.55
+    confidence_noise_sigma: 0.03
+    position_noise_sigma: 0.25
+    confidence_threshold: 0.50
+    publish_period: 1.0
+    target_positions: [15.0, 12.0, 25.0, 8.0]
+    target_classes: ["dummy_animal", "dummy_animal"]
+
+uav07_perception:
+  ros__parameters:
+    drone_id: "uav07"
+    random_seed: 0
+    detection_range: 18.0
+    detection_probability: 0.55
+    confidence_noise_sigma: 0.03
+    position_noise_sigma: 0.25
+    confidence_threshold: 0.50
+    publish_period: 1.0
+    target_positions: [15.0, 12.0, 25.0, 8.0]
+    target_classes: ["dummy_animal", "dummy_animal"]
+
+uav08_perception:
+  ros__parameters:
+    drone_id: "uav08"
+    random_seed: 0
+    detection_range: 18.0
+    detection_probability: 0.55
+    confidence_noise_sigma: 0.03
+    position_noise_sigma: 0.25
+    confidence_threshold: 0.50
+    publish_period: 1.0
+    target_positions: [15.0, 12.0, 25.0, 8.0]
+    target_classes: ["dummy_animal", "dummy_animal"]
+
+
+opencv_detector:
+  ros__parameters:
+    target_class: "dummy_animal"
+    min_area: 250.0
+    camera_height_m: 10.0
+    hfov_deg: 78.0
