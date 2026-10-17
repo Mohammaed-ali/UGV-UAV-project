@@ -53,7 +53,7 @@ function Carrier({snapshot,mission,scene}:{snapshot:Snapshot;mission:Mission;sce
     <Html position={[0,0,3.05]} center distanceFactor={13} zIndexRange={[5,0]}><div className="world-label carrier-label"><span className="status-dot"/> CARRIER 01</div></Html>
   </group>;
 }
-function Aircraft({drone,selected,onSelect}:{drone:Drone;selected:boolean;onSelect:()=>void}){
+function Aircraft({drone,selected,onSelect,onNearView=false}:{drone:Drone;selected:boolean;onSelect:()=>void;onNearView?:boolean}){
   const ref=useRef<THREE.Group>(null);const rotors=useRef<THREE.Mesh[]>([]);
   useFrame((_,dt)=>{if(ref.current){ref.current.position.lerp(new THREE.Vector3(...drone.position),Math.min(1,dt*14));ref.current.quaternion.slerp(new THREE.Quaternion(...drone.quaternion),Math.min(1,dt*12));}if(drone.armed)rotors.current.forEach((r,i)=>r.rotation.z+=dt*(i%2?35:-35));});
   const airborne=!['STORED','DOCKED','PREPARING','ARMING','RELEASING'].includes(drone.state);
@@ -66,7 +66,7 @@ function Aircraft({drone,selected,onSelect}:{drone:Drone;selected:boolean;onSele
       <Box size={[.02,.02,.21]} position={[x*.1,y*.11,-.12]} color="#53645a"/>
     </group>))}
     <Box size={[.25,.016,.016]} position={[0,-.132,-.22]} color="#66746b"/><Box size={[.25,.016,.016]} position={[0,.132,-.22]} color="#66746b"/>
-    {airborne&&<Html position={[0,0,.6]} center distanceFactor={16} zIndexRange={[8,0]}><div className={`world-label drone-label ${selected?'selected':''}`}><span style={{background:droneColor(drone.state)}} className="status-dot"/>{drone.id.toUpperCase()}</div></Html>}
+    {airborne&&<Html position={[0,0,.6]} center distanceFactor={onNearView?3:16} zIndexRange={[8,0]}><div className={`world-label drone-label ${selected?'selected':''}`}><span style={{background:droneColor(drone.state)}} className="status-dot"/>{drone.id.toUpperCase()}</div></Html>}
     {selected&&<mesh position={[0,0,-.24]}><ringGeometry args={[.42,.46,48]}/><meshBasicMaterial color="#d5f16a" side={THREE.DoubleSide}/></mesh>}
   </group>;
 }
@@ -101,19 +101,38 @@ function ObjectModel({obj,assets,onTarget,actor,living,placementHandlers,selecte
     </Suspense>
   </group>;
 }
+
+function CloseApproachOverlay({snapshot}:{snapshot:Snapshot}){
+  const close=snapshot.tracking.close_approach;
+  const aircraft=snapshot.drones.find(d=>d.id===snapshot.tracking.drone_id);
+  if(!close||!aircraft||!['APPROACHING','HOLDING','RETREATING'].includes(close.state))return null;
+  const surface=close.nearest_point??close.target_point;
+  if(!surface||close.measured_clearance_m==null)return null;
+  const source=new THREE.Vector3(...aircraft.position),point=new THREE.Vector3(...surface);
+  const bottom=source.clone().add(point.clone().sub(source).normalize().multiplyScalar(close.aircraft_radius_m));
+  const midpoint=bottom.clone().lerp(point,.5);
+  return <group>
+    <mesh position={surface}><sphereGeometry args={[close.requested_clearance_m,24,16]}/><meshBasicMaterial color="#e3b873" wireframe transparent opacity={.25} depthWrite={false}/></mesh>
+    <Line points={[bottom.toArray() as Vec3,surface]} color={close.state==='HOLDING'?'#d5f16a':'#e3b873'} lineWidth={2}/>
+    <Html position={midpoint.toArray() as Vec3} center distanceFactor={5} zIndexRange={[9,0]} style={{pointerEvents:'none'}}><div className="world-label close-range-label">{close.measured_clearance_m.toFixed(2)} m gap · {close.requested_clearance_m.toFixed(2)} m minimum</div></Html>
+  </group>;
+}
+
 function Cameras({mode,snapshot,selected,fitRequest,placing}:{mode:ViewMode;snapshot:Snapshot;selected:string;fitRequest:number;placing:boolean}){
   const controls=useRef<OrbitControlsImpl>(null);const {camera}=useThree();const last=useRef('');
   useEffect(()=>{camera.up.copy(up);},[camera]);
   useEffect(()=>{last.current='';},[fitRequest]);
   useFrame((_,dt)=>{
     if(!controls.current)return;
-    const signature=`${mode}/${mode==='drone'?selected:''}/${fitRequest}`;
-    const p=new THREE.Vector3(...(mode==='drone'?(snapshot.drones.find(d=>d.id===selected)?.position??snapshot.carrier.position):snapshot.carrier.position));
+    const focusId=mode==='close'?(snapshot.tracking.drone_id??selected):selected;
+    const signature=`${mode}/${['drone','close'].includes(mode)?focusId:''}/${fitRequest}`;
+    const p=new THREE.Vector3(...(['drone','close'].includes(mode)?(snapshot.drones.find(d=>d.id===focusId)?.position??snapshot.carrier.position):snapshot.carrier.position));
     if(mode==='carrier'||mode==='dock')p.z+=1.4;
+    if(mode==='close'&&snapshot.tracking.close_approach?.target_point&&['APPROACHING','HOLDING'].includes(snapshot.tracking.close_approach.state))p.lerp(new THREE.Vector3(...snapshot.tracking.close_approach.target_point),.4);
     if(signature!==last.current){
-      const offsets:Record<ViewMode,Vec3>={orbit:[38,-52,42],top:[0,-.1,150],carrier:[9,-12,7],drone:[5,-7,4],dock:[6,-8,5]};
+      const offsets:Record<ViewMode,Vec3>={orbit:[38,-52,42],top:[0,-.1,150],carrier:[9,-12,7],drone:[5,-7,4],dock:[6,-8,5],close:[3,-4,2]};
       camera.position.copy(p.clone().add(new THREE.Vector3(...offsets[mode])));controls.current.target.copy(p);controls.current.update();last.current=signature;
-    }else if(['carrier','drone','dock'].includes(mode)){
+    }else if(['carrier','drone','dock','close'].includes(mode)){
       const delta=p.clone().sub(controls.current.target);camera.position.add(delta.multiplyScalar(Math.min(1,dt*4)));controls.current.target.lerp(p,Math.min(1,dt*4));
     }
   });
@@ -142,6 +161,7 @@ export default function World({mission,scene,assets,snapshot,selected,selectDron
   });
   return <Canvas frameloop="demand" shadows={mission.graphics_quality!=='low'} dpr={[1,mission.graphics_quality==='high'?2:mission.graphics_quality==='low'?1:1.5]} camera={{position:[0,-50,40],up:[0,0,1],fov:42,near:.05,far:430}} gl={{antialias:true,alpha:false}}>
     <color attach="background" args={['#dce4d9']}/><fog attach="fog" args={['#dce4d9',190,380]}/>
+    <CloseApproachOverlay snapshot={snapshot}/>
     <ambientLight intensity={1.2}/><hemisphereLight args={['#eef3e6','#7e896f',1.1]} position={[0,0,50]}/>
     <directionalLight castShadow position={[-25,-35,65]} intensity={2.3} shadow-mapSize={[mission.graphics_quality==='high'?2048:1024,mission.graphics_quality==='high'?2048:1024]} shadow-camera-left={-70} shadow-camera-right={70} shadow-camera-top={70} shadow-camera-bottom={-70} shadow-camera-near={1} shadow-camera-far={180} shadow-bias={-.0003}/>
     <mesh receiveShadow onClick={e=>{if(actorEditing&&selectedActor&&e.delta<3){e.stopPropagation();onMoveActor(selectedActor,Math.round(e.point.x*2)/2,Math.round(e.point.y*2)/2);}}} onPointerDown={e=>{if(editing&&!actorEditing){e.stopPropagation();onPlace(Math.round(e.point.x*2)/2,Math.round(e.point.y*2)/2,e.shiftKey);}}}>
@@ -170,7 +190,7 @@ export default function World({mission,scene,assets,snapshot,selected,selectDron
     </group>)}
     {dropPoint&&<group position={dropPoint}><mesh><ringGeometry args={[1.5,1.6,48]}/><meshBasicMaterial color="#dcec9a"/></mesh><Html center><div className="world-label">Drop destination</div></Html></group>}
     <Carrier snapshot={snapshot} mission={mission} scene={scene}/>
-    {snapshot.drones.map(d=><Aircraft key={d.id} drone={d} selected={d.id===selected} onSelect={()=>selectDrone(d.id)}/>)}
+    {snapshot.drones.map(d=><Aircraft key={d.id} drone={d} selected={d.id===selected} onSelect={()=>selectDrone(d.id)} onNearView={view==='close'&&d.id===snapshot.tracking.drone_id}/>)}
     {(mission.living_city?snapshot.catalogue.filter(t=>t.age<3):snapshot.tracks).filter(t=>t.position).map(t=><Html key={t.id} position={t.position!} center><div className="world-label detection-label">{t.id} · {(t.confidence*100).toFixed(0)}%</div></Html>)}
     {mission.living_city&&snapshot.catalogue.filter(t=>t.selected&&t.age>=1&&t.age<30).map(t=><group key={t.id} position={t.predicted_position}><mesh><ringGeometry args={[Math.min(25,t.uncertainty_m)-.1,Math.min(25,t.uncertainty_m),64]}/><meshBasicMaterial color="#d5aa6c" transparent opacity={.65}/></mesh><Html center><div className="world-label">Estimated · {t.age.toFixed(1)} s old</div></Html></group>)}
     {snapshot.tracking.search_goal&&['SEARCHING','REACQUIRING'].includes(snapshot.tracking.state)&&<group position={[snapshot.tracking.search_goal[0],snapshot.tracking.search_goal[1],.09]}><mesh><ringGeometry args={[3.8,4.,48]}/><meshBasicMaterial color="#87aebe" transparent opacity={.65}/></mesh><Html center><div className="world-label">Search hypothesis · no sighting</div></Html></group>}

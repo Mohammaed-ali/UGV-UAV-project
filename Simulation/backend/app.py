@@ -102,11 +102,12 @@ def state():return engine.snapshot()
 
 class Command(BaseModel):
     model_config=ConfigDict(extra='forbid')
-    name:Literal['initialize','start','hold','resume','recall','recall_all','abort','pause_world','reset','camera','target_select','track_start','track_stop','target_confirm']
+    name:Literal['initialize','start','hold','resume','recall','recall_all','abort','pause_world','reset','camera','target_select','track_start','track_stop','target_confirm','approach_start','approach_stop']
     request_id:str=Field(min_length=1,max_length=80)
     run_id:str
     drone_id:str|None=None
     target_id:str|None=Field(default=None,max_length=64,pattern=r'^[a-zA-Z0-9_-]+$')
+    clearance_m:float|None=Field(default=None,ge=.5,le=10.,allow_inf_nan=False)
 
 @app.post('/api/command')
 async def command(cmd:Command):
@@ -125,6 +126,8 @@ async def command(cmd:Command):
             if not engine.follow or engine.state!='TRACKING':raise ValueError('No active tracking flight.')
             engine.follow.finish(engine,'Operator stopped tracking','stopped')
         elif cmd.name=='target_confirm':engine.confirm_target(cmd.target_id)
+        elif cmd.name=='approach_start':engine.start_approach(cmd.clearance_m)
+        elif cmd.name=='approach_stop':engine.stop_approach()
         else:engine.command(cmd.name,cmd.drone_id)
     except ValueError as e:raise HTTPException(409,str(e))
     result={'accepted':True,'request_id':cmd.request_id,'run_id':engine.run_id,'state':engine.state};engine.seen_commands[key]=result

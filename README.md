@@ -1,5 +1,8 @@
 # UAV / UGV project — complete local export
 
+> **17 October 2026 update:** Simulation source, missions, validation evidence and the KUKA vertical-carousel/Fusion planning files have been refreshed. The two associated chat transcripts are exported. See [the update report](export/updates/2026-10-17/README.md) for scope, hashes, exclusions and validation. The original 13 October export records remain historical snapshots.
+
+
 Start with [HANDOVER.md](HANDOVER.md) for the inspected state, Windows access,
 dependency reconstruction, startup and remaining validation limits.
 

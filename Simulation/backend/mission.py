@@ -2,7 +2,7 @@
 from __future__ import annotations
 import math,time,uuid,json
 from pathlib import Path
-from .config import Mission,scene,slot,wrap
+from .config import Mission,scene,slot,wrap,spawn_pose
 from .city import search_classes,matches_class
 from .rack import Carousel,BASE_Z,PAD_Z,UPPER_Z
 
@@ -13,7 +13,7 @@ def distance(a,b):return math.sqrt(sum((x-y)**2 for x,y in zip(a,b)))
 
 class Engine:
     def __init__(self,root,runtime,vision):
-        self.root=root;self.runtime=runtime;self.vision=vision;self.config=Mission();self.run_id=str(uuid.uuid4());self.state='DRAFT';self.stop_index=0;self.events=[];self.drones={};self.dock_owner=None;self.launch_owner=None;self.last_launch=-100.;self.last_time=0.;self.hold=False;self.abort=False;self.tracks=[];self.seen_commands={};self.last_log=0.;self.carousel=Carousel();self.drive_watch=None;self.reset_drones()
+        self.root=root;self.runtime=runtime;self.vision=vision;self.config=Mission();self.run_id=str(uuid.uuid4());self.state='DRAFT';self.stop_index=0;self.events=[];self.drones={};self.dock_owner=None;self.launch_owner=None;self.last_launch=-100.;self.last_time=0.;self.hold=False;self.abort=False;self.tracks=[];self.seen_commands={};self.last_log=0.;self.carousel=Carousel();self.drive_watch=None;self.world_was_paused=False;self.resume_deadline=None;self.reset_drones()
     def reset_drones(self):
         self.city=None;self.drive_waypoint=1;self.follow=None;self.flight_planner=None;self.follow_stop=None
         self.drones={s['id']:{**s,'state':'STORED','entered':0.,'battery':None,'target':None,'reason':None,'deployed':False,'retry':0,'search_start':None,'goal':None,'contact_since':None} for s in [slot(i) for i in range(8)]}
@@ -27,7 +27,7 @@ class Engine:
         # Simulation time restarts at zero. Corridor reservations and timers
         # belong to the old run, including when it ended during recovery.
         self.dock_owner=None;self.launch_owner=None;self.last_launch=-100.;self.last_time=0.;self.last_log=0.;self.logged_event_id=0
-        self.hold=False;self.abort=False;self.seen_commands.clear();self.carousel=Carousel();self.drive_watch=None
+        self.hold=False;self.abort=False;self.seen_commands.clear();self.carousel=Carousel();self.drive_watch=None;self.world_was_paused=False;self.resume_deadline=None
         self.city=None;self.follow=None;self.follow_stop=None;self.flight_planner=None;self.drive_waypoint=1;self.log_limited=False
         from .storage import prune_mission_logs
         prune_mission_logs(self.root,keep=self.run_id)
@@ -74,6 +74,8 @@ class Engine:
         public_paths=[{'kind':p['kind'],'points':p['points']} for p in scene(self.config).get('networks',[]) if p['kind'] in ('sidewalk','vehicle')]
         self.vision.registry.select(key,self.now())
         self.follow=Follow(key,d['id'],self.now(),self.config,public_paths);self.follow.initial_ground=d['state']
+        if hasattr(self.vision,'depth_targets'):self.vision.depth_targets[d['id']]=key
+        if hasattr(self.runtime.gz,'proximity'):self.runtime.gz.proximity(d['id'],True)
         carrier=self.pose('carrier')['position']
         group=[other['id'] for other in self.drones.values() if other['state'] not in TERMINAL or other['id']==d['id']]
         self.follow_stop=Stop(id='tracking',label='Tracking bay',x=carrier[0],y=carrier[1],drones=group)
@@ -96,12 +98,37 @@ class Engine:
             health=self.runtime.fleet.status(d['id'])
             self.follow.tick(self,d,health['position'],self.config.tracking_altitude)
         self.vision.sites[d['id']]='tracking';self.event(f'Tracking mission · {key} · {d["id"].upper()}')
+    def start_approach(self,clearance=None):
+        if self.runtime.state!='running' or self.state!='TRACKING' or not self.follow or self.follow.cancelled:
+            raise ValueError('Start tracking a camera target before closing in.')
+        if self.hold or self.runtime.gz.paused:
+            raise ValueError('Resume the mission before closing in.')
+        if self.follow.state!='TRACKING':
+            raise ValueError('Wait for a fresh confirmed tracking lock before closing in.')
+        clearance=self.config.approach_clearance if clearance is None else clearance
+        if not math.isfinite(clearance) or not .5<=clearance<=10:
+            raise ValueError('Minimum clearance must be between 0.5 and 10 meters.')
+        d=self.drones[self.follow.drone_id];health=self.runtime.fleet.status(d['id'])
+        if not health['fresh'] or not health['armed'] or not health['offboard'] or health['position'] is None or d['state']!='TARGET_TRACKING':
+            raise ValueError('The tracking aircraft must have fresh, armed Offboard telemetry.')
+        target=self.vision.registry.get(self.follow.target_id,self.now())
+        if not self.follow.close.identity_ok(target,d['id']):
+            raise ValueError('Wait for a fresh, unambiguous observation from the tracking aircraft.')
+        self.follow.close.start(self.now(),health['position'],clearance)
+        self.runtime.gz.proximity(d['id'],True)
+        self.event(f'{d["id"].upper()} · close approach requested · minimum clearance {clearance:.2f} m')
+    def stop_approach(self):
+        if self.state!='TRACKING' or not self.follow or not self.follow.close.active:
+            raise ValueError('No close approach is active.')
+        self.follow.close.retreat(self.now(),'Operator requested a return to normal tracking')
+        self.event('Backing off vertically to normal tracking altitude')
     def confirm_target(self,key):
         if not self.follow or self.follow.state not in ('REACQUIRING','SEARCHING','OCCLUDED'):raise ValueError('No uncertain tracking identity to confirm.')
         row=self.vision.registry.get(key,self.now())
         if not row or row['age']>1:raise ValueError('Confirm a candidate with a fresh camera observation.')
         if key not in [c['id'] for c in self.follow.candidates(self.vision.registry,self.now())]:raise ValueError('Candidate does not have matching visual evidence.')
         self.vision.registry.confirm(key,self.now());self.follow.target_id=key;self.event(f'Operator reconfirmed identity as {key}')
+        if hasattr(self.vision,'depth_targets'):self.vision.depth_targets[self.follow.drone_id]=key
     def command(self,name,did=None):
         if name=='initialize':self.runtime.initialize(self.config);self.state='INITIALIZING';self.event('Initializing Gazebo and PX4')
         elif name=='start':
@@ -201,7 +228,15 @@ class Engine:
                 if not self.drones[did].get('tracking'):self.vision.sites[did]=self.config.stops[min(self.stop_index,len(self.config.stops)-1)].label
         if self.state=='INITIALIZING':self.state='READY';self.event('Simulation ready · physical telemetry connected')
         if self.state in ('DRAFT','READY','COMPLETE','ABORTED','FAULT'):return
-        if gz.paused:return
+        if gz.paused:
+            self.world_was_paused=True;return
+        if self.world_was_paused:
+            self.world_was_paused=False;self.resume_deadline=time.monotonic()+2.
+        if self.resume_deadline is not None:
+            fresh=not self.runtime.fleet or all(self.runtime.fleet.status(d['id'])['fresh'] for d in self.drones.values() if d['state'] not in TERMINAL and d['deployed'])
+            if not fresh and time.monotonic()<self.resume_deadline:
+                gz.drive(0,0);return
+            self.resume_deadline=None
         if time.monotonic()-gz.received>3:
             self.state='FAULT';self.event('Physics telemetry lost. Mission stopped.','error');return
         if self.hold:
@@ -211,6 +246,12 @@ class Engine:
                 d['entered']+=dt
                 if d['search_start'] is not None:d['search_start']+=dt
             if self.follow:
+                self.follow.close.freeze(now)
+                if self.follow.close.active:
+                    self.follow.close.retreat(now,'Close approach cancelled by mission hold')
+                    aircraft=self.drones[self.follow.drone_id];health=self.runtime.fleet.status(aircraft['id'])
+                    if health['fresh'] and health['position'] is not None:
+                        p=health['position'];self.set_goal(aircraft,[p[0],p[1],max(p[2],self.config.tracking_altitude)])
                 self.follow.started+=dt
                 if self.follow.tracking_started is not None:self.follow.tracking_started+=dt
                 if self.follow.lost_since is not None:self.follow.lost_since+=dt
@@ -480,9 +521,9 @@ class Engine:
         gz=self.runtime.gz;fleet=self.runtime.fleet;now=self.now();rows=[]
         for did,d in self.drones.items():
             p=self.pose(did);health=fleet.status(did) if fleet and did in fleet.ids else {}
-            fallback=[self.config.start.x+d['x'],self.config.start.y+d['y'],BASE_Z+d['z']+.26]
-            rows.append({'id':did,'bay':d['bay'],'level':d['level'],'tag_id':d['tag_id'],'state':d['state'],'position':p['position'] if p else fallback,'quaternion':p['quaternion'] if p else [0,0,0,1],'measured':p is not None,'battery':health.get('battery'),'ready':health.get('ready',False),'armed':health.get('armed',False),'mode':health.get('mode'),'telemetry_age':health.get('age'),'target':d['target'],'reason':d['reason'],'extension':abs(self.carousel.measured(gz,d['level'])['y']),'tray_position':self.tray_pose(d),'estimated_position':health.get('position'),'detection_latency':d.get('detection_latency'),'camera_active':did in getattr(gz,'enabled_cameras',set()) if gz else False,'latched':gz.latches.get(did)=='attached' if gz else True,'tag_error':d.get('tag_error'),'landing_pose_check':d.get('landing_pose_check'),'phase_seconds':round(max(0,now-d['entered']),1),'vision':self.vision.latest.get(did)})
-        carrier=self.pose('carrier') or {'position':[self.config.start.x,self.config.start.y,BASE_Z],'quaternion':[0,0,0,1],'yaw':0}
+            fallback=spawn_pose(self.config,(d['x'],d['y'],d['z']+.26))
+            rows.append({'id':did,'bay':d['bay'],'level':d['level'],'tag_id':d['tag_id'],'state':d['state'],'position':p['position'] if p else fallback['position'],'quaternion':p['quaternion'] if p else fallback['quaternion'],'measured':p is not None,'battery':health.get('battery'),'ready':health.get('ready',False),'armed':health.get('armed',False),'mode':health.get('mode'),'telemetry_age':health.get('age'),'target':d['target'],'reason':d['reason'],'extension':abs(self.carousel.measured(gz,d['level'])['y']),'tray_position':self.tray_pose(d),'estimated_position':health.get('position'),'detection_latency':d.get('detection_latency'),'camera_active':did in getattr(gz,'enabled_cameras',set()) if gz else False,'latched':gz.latches.get(did)=='attached' if gz else True,'tag_error':d.get('tag_error'),'landing_pose_check':d.get('landing_pose_check'),'phase_seconds':round(max(0,now-d['entered']),1),'vision':self.vision.latest.get(did)})
+        carrier=self.pose('carrier') or spawn_pose(self.config)
         registry=getattr(self.vision,'registry',None)
         catalogue=registry.snapshot(now) if registry else []
         tracking=self.follow.snapshot(registry,now) if self.follow and registry else {'state':'SELECTED' if registry and registry.selected else 'IDLE','target_id':registry.selected if registry else None,'drone_id':None,'timeline':[],'candidates':[]}

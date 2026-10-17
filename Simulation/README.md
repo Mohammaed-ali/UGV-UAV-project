@@ -127,6 +127,21 @@ while returning aircraft wait in their holding ring, reactivate for landing, and
 deactivate after docking. Opening a browser camera preview adds its own sensor
 demand; closing it releases only that demand and leaves mission perception active.
 
+## Close approach after target tracking
+
+After selecting **Track**, use **Close in from above** in the detected-target
+panel to request a measured overhead close hold. Minimum clearance starts at
+0.50 m and can be adjusted before each approach. The controller accounts for a
+conservative aircraft envelope plus a control buffer; this value is provisional
+for simulation-scale review. A close camera view and metric ruler show the gap.
+**Back off to tracking** climbs vertically and resumes normal following.
+No spraying or delivery action or effect is included.
+
+Camera identity, synchronized rendered depth and PX4 telemetry gate descent.
+Brief observation gaps hold altitude; sustained loss, insufficient clearance or
+excessive target speed causes backoff. See [Close approach](docs/CLOSE_APPROACH.md)
+for operation, sensor limits and the reproducible native validation gate.
+
 ## Configuration and isolation
 
 Mission schema version is 1. Backend validation rejects duplicate or unknown

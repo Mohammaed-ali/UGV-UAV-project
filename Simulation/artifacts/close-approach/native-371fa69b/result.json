@@ -1,0 +1,120 @@
+{
+  "passed": true,
+  "mission": {
+    "version": 1,
+    "name": "Perimeter survey",
+    "wheels": 4,
+    "seed": 42,
+    "terrain": "proving_ground",
+    "population": 0,
+    "traffic": 1,
+    "target_present": true,
+    "target_class": "vehicle",
+    "target_classes": [
+      "vehicle"
+    ],
+    "actor_placements": [],
+    "ugv_speed": 1.5,
+    "altitude": 12.0,
+    "flight_speed": 3.0,
+    "launch_interval": 5.0,
+    "search_timeout": 90.0,
+    "no_target_policy": "return",
+    "loiter_seconds": 20.0,
+    "loiter_radius": 10.0,
+    "observation_seconds": 20.0,
+    "standoff": 8.0,
+    "confidence": 0.4,
+    "landing_retries": 2,
+    "battery_return": 25.0,
+    "wind": 0.0,
+    "graphics_quality": "balanced",
+    "living_city": true,
+    "city_scenario": "moving-vehicle",
+    "walking_speed": 0.3,
+    "traffic_speed": 0.3,
+    "flight_boundary": 116.0,
+    "tracking_seconds": 240.0,
+    "reacquire_seconds": 30.0,
+    "tracking_altitude": 12.0,
+    "tracking_distance": 1.0,
+    "reacquire_confidence": 0.8,
+    "early_selection": true,
+    "tracking_uav": "auto",
+    "tracking_enabled": true,
+    "approach_clearance": 0.5,
+    "approach_speed": 0.4,
+    "aerial_vehicles": true,
+    "start": {
+      "x": 30.0,
+      "y": 31.5
+    },
+    "stops": [
+      {
+        "id": "close-test",
+        "label": "Close approach test",
+        "x": 30.0,
+        "y": 34.5,
+        "drones": [
+          "uav01"
+        ],
+        "search_radius": 20.0,
+        "target_class": null,
+        "search_timeout": null,
+        "loiter_seconds": null
+      }
+    ]
+  },
+  "phase": "backing-off",
+  "native_clearance_samples": 346,
+  "minimum_evaluated_aircraft_envelope_gap_m": 0.61049886476922,
+  "held_seconds": 8.019999999999982,
+  "selected_id": "Vehicle-001",
+  "close_hold_reached": true,
+  "wall_seconds": 210.21,
+  "final_state": "COMPLETE",
+  "recovered": true,
+  "final_close": {
+    "state": "CANCELLED",
+    "reason": "Normal tracking resumed \u00b7 Operator requested a return to normal tracking",
+    "requested_clearance_m": 0.5,
+    "aircraft_radius_m": 0.5,
+    "measured_clearance_m": null,
+    "range_age": 38.73599999999999,
+    "alignment_m": 0.2266182553147302,
+    "target_point": [
+      17.509875115639716,
+      16.154007463143177,
+      1.518080020719295
+    ],
+    "nearest_point": [
+      17.51603591238592,
+      16.259762879536552,
+      1.5336726724518428
+    ],
+    "events": [
+      {
+        "time": 102.83,
+        "state": "APPROACHING",
+        "detail": "Waiting for aligned RGB and depth observations"
+      },
+      {
+        "time": 129.06,
+        "state": "HOLDING",
+        "detail": "Holding above the selected target at the requested minimum clearance"
+      },
+      {
+        "time": 137.14,
+        "state": "RETREATING",
+        "detail": "Operator requested a return to normal tracking"
+      },
+      {
+        "time": 143.92,
+        "state": "CANCELLED",
+        "detail": "Normal tracking resumed \u00b7 Operator requested a return to normal tracking"
+      }
+    ],
+    "approach_direction": "overhead"
+  },
+  "original_configuration_restored": true
+}

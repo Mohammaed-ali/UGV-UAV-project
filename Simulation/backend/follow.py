@@ -1,11 +1,13 @@
 """Follow one operator-selected camera track, with bounded loss handling."""
 import math
 from .tracking import similarity
+from .service import CloseApproach
 
 class Follow:
     def __init__(self,target_id,did,now,config,public_paths=None):
         self.target_id=target_id;self.drone_id=did;self.state='REACQUIRING';self.entered=now
         self.started=now;self.tracking_started=None;self.lost_since=now;self.reason=None;self.outcome=None;self.timeline=[];self.config=config
+        self.close=CloseApproach(config)
         self.initial_ground=None;self.cancelled=False;self.finished_at=None;self.loss_at=None;self.public_paths=public_paths or [];self.search_anchor=None;self.search_goal=None;self.filtered_goal=None;self.goal_time=now
     def phase(self,state,now,detail):
         if self.state==state:return
@@ -13,6 +15,12 @@ class Follow:
     def finish(self,engine,reason,outcome='finished'):
         # A repeated stop/recall must preserve an approach already under way.
         if self.cancelled:return
+        self.close.stop(engine.now(),reason)
+        gz=getattr(getattr(engine,'runtime',None),'gz',None)
+        if hasattr(gz,'proximity'):gz.proximity(self.drone_id,False)
+        vision=getattr(engine,'vision',None)
+        if hasattr(vision,'depth_targets'):vision.depth_targets.pop(self.drone_id,None)
+        if hasattr(vision,'close_observations'):vision.close_observations.pop(self.drone_id,None)
         self.reason=reason;self.outcome=outcome;self.cancelled=True;self.finished_at=engine.now()
         if outcome=='lost':self.phase('LOST',engine.now(),reason)
         self.phase('RETURNING',engine.now(),reason)
@@ -30,6 +38,7 @@ class Follow:
         if now-self.started>self.config.tracking_seconds+self.config.reacquire_seconds+100:
             self.finish(engine,'Maximum airborne tracking budget reached');return
         if target is None:self.finish(engine,'Selected camera track expired','lost');return
+        if self.close.active and self.close.tick(engine,d,pos,alt,target):return
         fresh=target['age']<1. and not target['ambiguous'] and target['identity_confidence']>=self.config.reacquire_confidence
         if fresh:
             if max(abs(target['position'][0]),abs(target['position'][1]))>self.config.flight_boundary+max(1.,target['uncertainty_m']):
@@ -101,4 +110,4 @@ class Follow:
     def snapshot(self,registry,now):
         return {'target_id':self.target_id,'drone_id':self.drone_id,'state':self.state,'reason':self.reason,'outcome':self.outcome,
                 'elapsed':round(max(0,(self.finished_at or now)-(self.tracking_started if self.tracking_started is not None else now)),2),'duration':self.config.tracking_seconds,
-                'timeline':self.timeline,'search_goal':self.search_goal,'candidates':self.candidates(registry,now) if self.state in ('REACQUIRING','SEARCHING','OCCLUDED') else []}
+                'close_approach':self.close.snapshot(now),'timeline':self.timeline,'search_goal':self.search_goal,'candidates':self.candidates(registry,now) if self.state in ('REACQUIRING','SEARCHING','OCCLUDED') else []}

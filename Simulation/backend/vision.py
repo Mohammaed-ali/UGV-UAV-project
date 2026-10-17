@@ -28,19 +28,19 @@ def camera_relative(vector,pose):
 def camera_to_world(vector,pose):
     return np.asarray(pose['position'])+camera_relative(vector,pose)
 
-def ground_point(u,v,pose,width=640,height=480):
+def ground_point(u,v,pose,width=640,height=480,plane_height=0.):
     focal=width/(2*math.tan(1.22/2));origin=camera_to_world([0,0,0],pose)
     endpoint=camera_to_world([(u-width/2)/focal,(v-height/2)/focal,1],pose)
     ray=endpoint-origin
     if ray[2]>=-.1:return None
-    return (origin-ray*origin[2]/ray[2]).tolist()
+    return (origin+ray*(plane_height-origin[2])/ray[2]).tolist()
 
 class Vision:
     def __init__(self,root,runtime):
         self.root=root;self.runtime=runtime;self.running=True;self.latest={};self.processed={};self.raw={};self.annotated={};self.targets=[];self.error=None;self.detector_ready=False;self.tag_ready=False;self.confidence=.4;self.landing=set();self.track_counter=0;self.tag_latest={};self.object_latest={};self.tag_processed={};self.lock=threading.RLock();self.generation=0
         self.searching=set();self.inflight=set()
         self.performance={'detector_frames':0,'detector_total_ms':0.,'visual_frames':0};self.registry=Registry();self.observer_keys={};self.sites={};self.aerial_ready=False;self.aerial_error=None
-        self.anchors={};self.optical_states={};self.optical_debug={}
+        self.anchors={};self.optical_states={};self.optical_debug={};self.close_observations={};self.depth_targets={}
         cv2.setNumThreads(2)
         self.tag_thread=threading.Thread(target=self.run_tags,daemon=True);self.tag_thread.start()
         self.threads=[threading.Thread(target=self.run,daemon=True) for _ in range(2)]
@@ -48,6 +48,13 @@ class Vision:
         for thread in self.threads:thread.start()
         self.optical_thread=threading.Thread(target=self.run_optical,daemon=True);self.optical_thread.start()
         self.aerial_thread=threading.Thread(target=self.run_aerial_vehicles,daemon=True);self.aerial_thread.start()
+    def metric_detections(self,did,stamp,frame,pose,detections):
+        if did not in getattr(self,'depth_targets',{}) or pose is None:return detections
+        from .depth_visual import surface_candidates,localize_detections
+        gz=self.runtime.gz
+        history=list(getattr(gz,'depth_history',{}).get(did,[]))
+        packet=min(history,key=lambda p:abs(p['time']-stamp)) if history else None
+        return localize_detections(detections,surface_candidates(frame,packet,pose,stamp))
     def run(self):
         try:
             model=self.root/'assets/detector/yolox.onnx'
@@ -107,7 +114,8 @@ class Vision:
                     if getattr(getattr(self.runtime,'mission',None),'living_city',False):
                         with self.lock:
                             if generation!=self.generation or self.runtime.gz is not gz:continue
-                            result['detections']=self.registry.update(did,p['time'],result['detections'],frame,self.sites.get(did,'survey'),self.confidence)
+                            localized=self.metric_detections(did,p['time'],frame,object_pose,result['detections'])
+                            result['detections']=self.registry.update(did,p['time'],localized,frame,self.sites.get(did,'survey'),self.confidence)
                             if any(d['confidence']>=self.confidence for d in result['detections']):self.anchors[did]={'frame':frame.copy(),'time':p['time'],'detections':result['detections'],'pose':object_pose}
                         for det in result['detections']:
                             x,y,_,_=det['box'];cv2.putText(canvas,det['track_id'],(int(x),max(32,int(y)-18)),cv2.FONT_HERSHEY_SIMPLEX,.45,(112,237,214),1)
@@ -160,6 +168,7 @@ class Vision:
                         if position is not None:dets.append({'class':name,'confidence':float(conf[indices[k]]),'box':[x,y,w,h],'position':position,'source':'Aerial vehicle detector','class_provisional':True})
                 with self.lock:
                     if generation!=self.generation or self.runtime.gz is not gz:continue
+                    dets=self.metric_detections(did,p['time'],frame,pose,dets)
                     detections=self.registry.update(did,p['time'],dets,frame,self.sites.get(did,'survey'),self.confidence,frame_key=did+'-aerial')
                     for det in detections:
                         key=det['track_id']
@@ -179,7 +188,8 @@ class Vision:
             except Exception as error:self.aerial_error=str(error)
 
     def run_optical(self):
-        from .optical import Optical,compensated_seed
+        from .optical import Optical,compensated_seed,interior_patch
+        from .depth_visual import DepthVisual,paired_rgb
         seen={}
         while self.running:
             gz=self.runtime.gz;selected=self.registry.selected
@@ -188,21 +198,47 @@ class Vision:
             for did,p in packets:
                 key=selected or self.observer_keys.get(did)
                 if not key:continue
+                if getattr(self,'depth_targets',{}).get(did)==key:
+                    p=paired_rgb(p,getattr(gz,'rgb_history',{}).get(did,[]),getattr(gz,'depth_history',{}).get(did,[]),seen.get(did,-1.))
+                    if p is None:continue
                 if did not in self.searching or did in self.landing or seen.get(did)==p['time']:continue
                 seen[did]=p['time'];generation=self.generation
                 pose,sync=self.runtime.fleet.perception_pose(did,p['time']) if self.runtime.fleet else (None,999.)
                 if pose is None or sync>.25:continue
                 anchor=self.anchors.get(did);tracker=self.optical_states.get(did)
+                close=self.close_observations.get(did)
+                close_mode=bool(close and close['target_id']==key and abs(p['time']-close['time'])<1.)
+                depth_selected=getattr(self,'depth_targets',{}).get(did)==key or close_mode
+                plane=close['surface_point'][2] if close_mode else None
+                def depth_packet(stamp,drone=did,bridge=gz):
+                    history=list(getattr(bridge,'depth_history',{}).get(drone,[]))
+                    return min(history,key=lambda d:abs(d['time']-stamp)) if history else None
+                if depth_selected and (tracker is None or not isinstance(tracker[1],DepthVisual)):
+                    row=self.registry.get(key,p['time'])
+                    debug={'time':p['time']}
+                    depth_tracker=DepthVisual.seed(row,p['image'],depth_packet(p['time']),pose,p['time'],depth_packet,debug)
+                    self.performance.setdefault('depth_continuity',{})[did]=debug
+                    if depth_tracker:
+                        tracker=(key,depth_tracker);self.optical_states[did]=tracker
+                if not depth_selected and tracker and isinstance(tracker[1],DepthVisual):
+                    self.optical_states.pop(did,None);tracker=None
+                if tracker:
+                    # Keep the current image identity when entering close view.
+                    # Requiring a new detector seed here discards a good live lock.
+                    tracker[1].close_mode=close_mode
+                    if close_mode:tracker[1].plane_height=plane
                 if tracker is None or tracker[0]!=key:
                     det=next((d for d in (anchor or {}).get('detections',[]) if d.get('track_id')==key and d['confidence']>=self.confidence),None)
                     if det is None or p['time']-anchor['time']>1.5:continue
                     seed_frame,seed_box=anchor['frame'],det['box']
+                    if close_mode:seed_box=interior_patch(seed_box,.35,80.)
+                    plane_height=plane if close_mode else (.8 if det['class']!='person' else .6)
                     current_pose=pose
                     if anchor.get('pose') is not None and current_pose is not None and sync<=.25:
-                        corrected=compensated_seed(seed_frame,seed_box,anchor['pose'],current_pose,.8 if det['class']!='person' else .6)
+                        corrected=compensated_seed(seed_frame,seed_box,anchor['pose'],current_pose,plane_height)
                         if corrected is None:continue
                         seed_frame,seed_box=corrected
-                    tracker=(key,Optical(seed_frame,seed_box,anchor['time'],pose=pose,plane_height=.8 if det['class']!='person' else .6,person_guard=det['class']=='person'));self.optical_states[did]=tracker
+                    tracker=(key,Optical(seed_frame,seed_box,anchor['time'],pose=pose,plane_height=plane_height,person_guard=det['class']=='person',close_mode=close_mode));self.optical_states[did]=tracker
                     self.optical_debug[did]={'seed_time':anchor['time'],'method':tracker[1].method,'successes':0,'state':'seeded'}
                 try:
                     result=tracker[1].update(p['image'],p['time'],pose)
@@ -211,14 +247,15 @@ class Vision:
                             with self.registry.lock:
                                 row=self.registry.tracks.get(key)
                                 if row is not None:
-                                    if key not in self.registry.ambiguities:self.registry._event(key,'identity-uncertain',p['time'],'Separate nearby image regions share the observed clothing colour')
+                                    if key not in self.registry.ambiguities:self.registry._event(key,'identity-uncertain',p['time'],'Nearby image candidates have similar visual appearance')
                                     row['identity_confidence']=min(.55,row['identity_confidence']);self.registry.ambiguities[key]=tracker[1].rivals
                         self.optical_debug[did]={**self.optical_debug.get(did,{}),'state':'image lock lost','last_frame':p['time']}
                         self.optical_states.pop(did,None);continue
                     box,quality=result;x,y,w,h=box
                     row=self.registry.get(key,p['time'])
                     if row is None:continue
-                    position=ground_point(x+w/2,y+h*(.94 if row['class']=='person' else .5),pose)
+                    position=list(tracker[1].last_position) if isinstance(tracker[1],DepthVisual) else ground_point(x+w/2,y+h*(.5 if close_mode else .94 if row['class']=='person' else .5),pose,plane_height=plane if close_mode else 0.)
+                    if position is not None and close_mode:position[2]=0.  # Registry remains a horizontal map track.
                     if position is None:continue
                     with self.lock:
                         if generation!=self.generation or self.runtime.gz is not gz:continue

@@ -1,0 +1,59 @@
+{
+  "status": "SIMULATION REFERENCE ONLY - NOT MANUFACTURING DIMENSIONS",
+  "source": "/home/mohammed-ali/Downloads/gpt /Simulation/backend/rack.py",
+  "units": "mm",
+  "tray_plate_envelope": [
+    2650,
+    2650,
+    80
+  ],
+  "pad_block_envelope": [
+    1040,
+    1040,
+    55
+  ],
+  "bay_center_offset_xy": 680,
+  "adjacent_bay_center_pitch": 1360,
+  "tray_link_origin_z_relative_to_carrier_base_link": {
+    "upper": 2250,
+    "lower": 780
+  },
+  "simulated_carrier_base_link_above_ground": 740,
+  "station_vertical_separation": 1470,
+  "simulated_chassis_plan": [
+    3050,
+    3050
+  ],
+  "simulated_deck_plan": [
+    3220,
+    3220
+  ],
+  "center_path": {
+    "y_semiaxis": 2150,
+    "z_center": 1515,
+    "z_semiaxis": 735,
+    "phase_separation_degrees": 180,
+    "trays_remain_horizontal": true
+  },
+  "implied_tray_only_lateral_swept_width": 6950,
+  "assignment": {
+    "tray_A_original_upper": [
+      "UAV01",
+      "UAV03",
+      "UAV05",
+      "UAV07"
+    ],
+    "tray_B_original_lower": [
+      "UAV02",
+      "UAV04",
+      "UAV06",
+      "UAV08"
+    ]
+  },
+  "warnings": [
+    "Simulated coordinated prismatic joints are not a finished mechanical transmission.",
+    "Plate and pad block thicknesses are simulation placeholders.",
+    "Do not resize the actual OEM vehicle to match the simulated vehicle.",
+    "All dimensions, payloads, motion and stability must be checked against the actual UGV and UAVs."
+  ]
+}

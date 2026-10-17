@@ -1,0 +1,70 @@
+{
+  "checked_utc": "2026-10-14T20:06:41.194891+00:00",
+  "features": {
+    "instant_airborne_track": true,
+    "compact_districts": 3,
+    "buildings": 12,
+    "ugv_max_m_s": 10,
+    "traffic_max_m_s": 20,
+    "people_max_m_s": 5,
+    "actor_drag_and_coordinates": true,
+    "search_classes_max": 3
+  },
+  "verification": {
+    "backend_tests_passed": 109,
+    "frontend_tests_passed": 3,
+    "production_build_passed": true,
+    "native_city_controls_passed": true,
+    "native_ugv_peak_m_s": 10.0,
+    "operator_placements": [
+      {
+        "id": "person_0",
+        "class": "person",
+        "free_placement_error_m": 0.0,
+        "stationary": true,
+        "lane_placement_error_m": 0.0,
+        "path": "walk-0--1",
+        "resumed": true
+      },
+      {
+        "id": "vehicle_0",
+        "class": "car",
+        "free_placement_error_m": 0.0,
+        "stationary": true,
+        "lane_placement_error_m": 4.440892098500626e-16,
+        "path": "lane-0--1",
+        "resumed": true
+      },
+      {
+        "id": "vehicle_2",
+        "class": "bus",
+        "free_placement_error_m": 0.0,
+        "stationary": true,
+        "lane_placement_error_m": 1.7763568394002505e-15,
+        "path": "lane-0--1",
+        "resumed": true
+      }
+    ],
+    "browser_drag_and_save_passed": true,
+    "user_mission_restored": true,
+    "primary_workspace_preserved": true,
+    "private_internet_access_passed": true
+  },
+  "tracking": {
+    "activation_same_command": true,
+    "controller_wall_ms": 5.06,
+    "physical_docked": true,
+    "disarmed": true,
+    "latched": true,
+    "benchmark_passed": false,
+    "fresh_fraction": 0.41025641025641024,
+    "geometric_visible_coverage": 0.34285714285714286,
+    "identity_switches": 0,
+    "limitation": "Camera lock remains intermittent; the uninterrupted-follow benchmark did not pass. Immediate activation, reacquisition without identity switching, and native return/docking were verified."
+  },
+  "evidence": {
+    "city": "artifacts/instant-tracking/city-controls-9e786cc5-c2c4-42ca-a8b1-08651568bd2d/result.json",
+    "follow": "artifacts/living-city/tracking-bd5d6221-1f40-410b-8391-54dc9406bbd9/result.json",
+    "browser": "artifacts/instant-tracking/browser-drag-proof.jpg"
+  }
+}

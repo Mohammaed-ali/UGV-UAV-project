@@ -2,7 +2,7 @@
 from pathlib import Path
 import math
 import xml.etree.ElementTree as E
-from .config import Mission, scene, slot
+from .config import Mission, scene, slot, spawn_pose
 from .rack import BASE_Z,UPPER_Z,LOWER_Z,CENTER_Z,HALF_HEIGHT,RADIUS,PAD_Z,CHASSIS_SIZE,DECK_SIZE,WHEEL_X,WHEEL_Y
 
 def el(parent,tag,text=None,**attrs):
@@ -38,7 +38,7 @@ def shape(link,name,kind,size,xyz=(0,0,0),color='.2 .25 .25 1',collision=True,rp
     return v
 
 def carrier(world,m):
-    a=el(world,'model',name='carrier');pose(a,(m.start.x,m.start.y,BASE_Z,0,0,0))
+    a=el(world,'model',name='carrier');start=spawn_pose(m);pose(a,(*start['position'],0,0,start['yaw']))
     base=el(a,'link',name='base_link');inertial(base,240,(CHASSIS_SIZE,CHASSIS_SIZE,.5));shape(base,'chassis','box',(CHASSIS_SIZE,CHASSIS_SIZE,.5),color='.16 .24 .23 1')
     shape(base,'deck','box',(DECK_SIZE,DECK_SIZE,.12),(0,0,.31),'.25 .31 .29 1')
     if m.living_city:city_contact(base,'chassis_collision')
@@ -86,7 +86,7 @@ def carrier(world,m):
 
 def aircraft(world,m,idx):
     import os,copy
-    s=slot(idx);did=s['id'];a=el(world,'model',name=did);pose(a,(m.start.x+s['x'],m.start.y+s['y'],BASE_Z+s['z']+.26,0,0,0))
+    s=slot(idx);did=s['id'];a=el(world,'model',name=did);start=spawn_pose(m,(s['x'],s['y'],s['z']+.26));pose(a,(*start['position'],0,0,start['yaw']))
     models=Path(os.environ['FIELDLAB_DEPS'])/'PX4-Autopilot/Tools/simulation/gz/models'
     base=E.parse(models/'x500_base/model.sdf').getroot().find('model')
     for child in base:
@@ -99,6 +99,9 @@ def aircraft(world,m,idx):
     link=el(a,'link',name='camera_link');pose(link,(0,0,-.08,0,math.pi/2,0));inertial(link,.01,(.02,.02,.02))
     sensor=el(link,'sensor',name='down_camera',type='camera');el(sensor,'always_on','false');el(sensor,'update_rate',10);el(sensor,'topic',f'/fieldlab/{did}/camera')
     cam=el(sensor,'camera');el(cam,'horizontal_fov',1.22);im=el(cam,'image');el(im,'width',640);el(im,'height',480);el(im,'format','R8G8B8');cl=el(cam,'clip');el(cl,'near',.03);el(cl,'far',100)
+    # A small, co-located depth sensor is subscribed only during close approach.
+    sensor=el(link,'sensor',name='proximity_depth',type='depth_camera');el(sensor,'always_on','false');el(sensor,'update_rate',10);el(sensor,'topic',f'/fieldlab/{did}/proximity')
+    cam=el(sensor,'camera');el(cam,'horizontal_fov',1.22);im=el(cam,'image');el(im,'width',160);el(im,'height',120);el(im,'format','R_FLOAT32');cl=el(cam,'clip');el(cl,'near',.05);el(cl,'far',100)
     j=el(a,'joint',name='camera_joint',type='fixed');el(j,'parent','base_link');el(j,'child','camera_link')
 
 def city_contact(link,collision):

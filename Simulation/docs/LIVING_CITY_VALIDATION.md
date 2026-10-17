@@ -140,3 +140,29 @@ Building-occlusion survey `tracking-bffb2012-de74-43e6-afd2-ee39862e8a1f` remain
 The public-browser run exposed a repeated-stop defect: a stop during DESCENDING restarted RETURNING while the approach reservation remained held. That run remains FAIL and was reset after preserving measured state. Follow finish is now idempotent, recall preserves all existing recovery phases, and the browser disables Stop during RETURNING/DOCKED/FINISHED. Two focused regression checks passed; the subsequent native operator recall and docking passed. Actual repeat-stop-during-approach physics was not repeated.
 
 Final public-browser handover rendered the restored three-stop/eight-aircraft city preview at approximately 29–33 FPS after cleanup. `browser-final-city.jpg` is the actual browser screenshot; it is a scene preview, with physical runtime offline until initialization.
+
+## Compact city and immediate Track controls — 2026-10-14
+
+109 backend tests, 3 frontend tests, and the production build pass. Browser
+selection, drag, validated placement, and Save were exercised; the test moved
+a person from (-85, -55) to (-98.5, -55.5). The operator mission was restored.
+
+The native speed/placement gate passes with UGV cruise set to 10 m/s, traffic
+20 m/s, and people 5 m/s. Measured UGV speed reached 10.0 m/s. Six people and
+six vehicles stayed within their networks with zero actor/UGV contacts, zero
+actor contacts, and zero crossing violations. A person, car and bus were moved
+into free space and then returned to proper public paths; native pose confirmation
+and resumed path motion passed. The protected service lane rejected placement.
+This is a focused 100-simulation-second control gate, not a full fleet mission.
+
+A native PX4 camera flight confirmed a person and switched to TRACKING in the
+same start_tracking command (5.06 ms inside the controller; network/browser
+latency is additional). It returned, disarmed and latched physically at 114.2 s.
+No identity switches or false reacquisitions were measured. The uninterrupted
+follow benchmark remains partial: only 16 fresh samples, 0.410 fresh fraction,
+and 0.343 geometric-visible coverage. Its failing result and camera evidence
+are retained. Earlier tracking acceptance results apply to the preceding map.
+
+The private internet HTTP/WebSocket check and primary workspace preservation
+check pass. Full details and evidence paths are in
+`artifacts/instant-tracking/release-summary.json`.

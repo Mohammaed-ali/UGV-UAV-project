@@ -19,3 +19,18 @@
 .target-card{flex-direction:column;cursor:default}.target-select{display:flex;text-align:left;gap:8px;padding:0;border:0;background:none;cursor:pointer;min-width:0;color:inherit}.target-select>div{display:flex;flex-direction:column;gap:3px}.target-track{align-self:stretch;font-size:11px;padding:5px 9px}
 
 .class-options{display:flex;flex-wrap:wrap;gap:8px 12px;font-size:12px;margin:8px 0}.class-options label{display:flex;gap:5px;align-items:center}.class-options input{accent-color:#7b9955}
+
+.close-approach{margin-top:16px;padding:14px;border:1px solid #c8d6ba;border-radius:10px;background:#f2f6e9}
+.close-heading{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.close-heading span{font-size:11px;color:#64765c;text-transform:capitalize}
+.close-approach p{margin:8px 0;font-size:12px}
+.close-approach>small{display:block;font-size:11px;line-height:1.5;color:#6e7b64;margin:7px 0}
+.close-metrics{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0}
+.close-metrics span{display:flex;flex-direction:column;font-size:10px;color:#72816a}
+.close-metrics b{font-size:14px;color:#38523c;margin-top:3px}
+.close-range-label{white-space:nowrap;border:1px solid #b8cd8f;background:#f8ffe8}
+
+.close-view-hud{position:absolute;left:12px;bottom:64px;z-index:15;display:flex;flex-direction:column;gap:4px;padding:9px 12px;border:1px solid #bacd99;border-radius:8px;background:#f5fbece8;pointer-events:none;color:#34513b;font-size:11px}.close-view-hud b{font-size:12px}
+
+.target-layout{max-height:440px;min-width:0}.target-detail,.target-cards{min-width:0}.close-heading{flex-wrap:wrap}.close-approach{max-width:100%;min-width:0;overflow-wrap:anywhere}.close-approach .target-actions{flex-wrap:wrap}.close-approach .target-actions button{flex:1 1 155px;min-height:34px;white-space:normal}.close-approach .number-wrap input{width:100%;min-width:0}
+@media(max-width:760px){.target-layout{grid-template-columns:minmax(0,1fr);max-height:none;overflow:visible}.target-tools{flex-wrap:wrap}.target-detail-top{flex-wrap:wrap}.close-approach{padding:10px}.close-heading{gap:5px}}

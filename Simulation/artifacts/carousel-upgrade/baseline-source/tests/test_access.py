@@ -13,7 +13,7 @@ def request(host='127.0.0.1:8765',origin=None,cookie=None,forwarded=False):
 
 def test_remote_requests_require_authentication_and_exact_host(tmp_path):
     access=Access(tmp_path)
-    (tmp_path/'.runtime/public-url.txt').write_text('https://example.trycloudflare.com')
+    (tmp_path/'.runtime/public-url.txt').write_text('[REDACTED TEMPORARY SHARE URL]')
     assert access.authorized(request())
     remote=request('example.trycloudflare.com',forwarded=True)
     assert access.host_allowed(remote) and not access.authorized(remote)
@@ -39,9 +39,9 @@ def test_signed_session_expiry_tampering_and_key_rotation(tmp_path):
 
 def test_remote_mutations_and_websockets_require_same_origin(tmp_path):
     access=Access(tmp_path)
-    (tmp_path/'.runtime/public-url.txt').write_text('https://example.trycloudflare.com')
-    assert access.origin_allowed(request('example.trycloudflare.com',origin='https://example.trycloudflare.com'),required=True)
-    assert not access.origin_allowed(request('example.trycloudflare.com',origin='https://other.trycloudflare.com'),required=True)
+    (tmp_path/'.runtime/public-url.txt').write_text('[REDACTED TEMPORARY SHARE URL]')
+    assert access.origin_allowed(request('example.trycloudflare.com',origin='[REDACTED TEMPORARY SHARE URL]'),required=True)
+    assert not access.origin_allowed(request('example.trycloudflare.com',origin='[REDACTED TEMPORARY SHARE URL]'),required=True)
     assert not access.origin_allowed(request('example.trycloudflare.com'),required=True)
     assert access.origin_allowed(request(origin='http://127.0.0.1:8765'),required=True)
 
@@ -51,7 +51,7 @@ def test_http_gateway_blocks_state_and_commands_until_login(tmp_path):
     from fastapi.testclient import TestClient
     from backend.access import install_access
     access=Access(tmp_path)
-    public='https://example.trycloudflare.com'
+    public='[REDACTED TEMPORARY SHARE URL]'
     (tmp_path/'.runtime/public-url.txt').write_text(public)
     app=FastAPI();install_access(app,access)
     @app.get('/api/state')

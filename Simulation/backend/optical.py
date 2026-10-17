@@ -36,8 +36,16 @@ def compensated_seed(frame,box,old_pose,new_pose,plane_height=0.):
     warped=cv2.warpPerspective(frame,matrix,(w,h),borderValue=(114,114,114))
     return warped,[*low,*size]
 
+def interior_patch(box,fraction=.5,cap=None):
+    """A central part of an already identified image object, never a new ID."""
+    x,y,w,h=box
+    bw=max(8.,min(w,w*fraction,cap if cap is not None else w))
+    bh=max(8.,min(h,h*fraction,cap if cap is not None else h))
+    return [x+(w-bw)/2,y+(h-bh)/2,bw,bh]
+
 class Optical:
-    def __init__(self,frame,box,stamp,pose=None,plane_height=0.,person_guard=False):
+    def __init__(self,frame,box,stamp,pose=None,plane_height=0.,person_guard=False,close_mode=False):
+        self.close_mode=close_mode
         self.gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY);self.box=list(box);self.stamp=stamp
         x,y,w,h=box;self.corners=np.array([[x,y,1],[x+w,y,1],[x,y+h,1],[x+w,y+h,1]],dtype=float)
         self.signature=appearance(frame,box,person_guard);self.points=self.features(frame,box)
@@ -122,6 +130,8 @@ class Optical:
             if app<.72:return None
             self.rivals=self.similar_regions(frame,box,pose)
             if self.rivals or not self.clothing_present:return None
+            if self.close_mode and max(w/width,h/height)>.45:
+                box=interior_patch(box);self.rebase(frame,box)
             self.box=list(box);self.stamp=stamp;self.frame=frame.copy();self.pose=pose
             return self.box,float(min(.98,.7+.25*app))
         if self.points is None or len(self.points)<4 or stamp<=self.stamp or stamp-self.stamp>1.:return None

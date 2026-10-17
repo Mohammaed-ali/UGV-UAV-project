@@ -69,6 +69,8 @@ class Mission(StrictModel):
     early_selection: bool = True
     tracking_uav: Literal['auto','uav01','uav02','uav03','uav04','uav05','uav06','uav07','uav08'] = 'auto'
     tracking_enabled: bool = True
+    approach_clearance: float = Field(default=.5,ge=.5,le=10.)
+    approach_speed: float = Field(default=.4,ge=.1,le=.75)
     aerial_vehicles: bool = True
     start: Point = Field(default_factory=lambda: Point(x=-28,y=-22))
     stops: list[Stop] = Field(default_factory=lambda: [
@@ -115,6 +117,18 @@ def slot(index: int) -> dict:
     return {'id':f'uav{index+1:02d}','bay':bay+1,'level':level,'tag_id':index+1,
             'x':PITCH if bay<2 else -PITCH,'y':PITCH if bay%2==0 else -PITCH,
             'z':(UPPER_Z if level=='upper' else LOWER_Z)+PAD_Z,'side':1 if bay%2==0 else -1}
+
+def spawn_pose(m: Mission, offset=(0.,0.,0.)) -> dict:
+    """Place the loaded rack facing its first travel leg before physics starts."""
+    route=[(m.start.x,m.start.y),(m.stops[0].x,m.stops[0].y)]
+    if m.living_city:
+        from .city import service_route
+        route=service_route(m.start,m.stops[0])
+    first=next(p for p in route[1:] if math.dist(route[0],p)>1e-6)
+    yaw=math.atan2(first[1]-route[0][1],first[0]-route[0][0])
+    x,y,z=offset;c,s=math.cos(yaw),math.sin(yaw)
+    return {'position':[m.start.x+c*x-s*y,m.start.y+s*x+c*y,BASE_Z+z],
+            'quaternion':[0.,0.,math.sin(yaw/2),math.cos(yaw/2)],'yaw':yaw}
 
 def scene(m: Mission) -> dict:
     if m.living_city:

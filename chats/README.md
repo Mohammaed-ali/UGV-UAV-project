@@ -21,6 +21,7 @@ Local transcripts contain stored user and assistant text. Tool records are separ
 | Guardian review | local transcript exported | [Read](../chats/local/01a109a8-60d1-71e0-90b8-c7f4b10133f1.md) |
 | Guardian review | local transcript exported | [Read](../chats/local/01a109db-7814-71e2-9d04-dc58e593a103.md) |
 | ## Referenced ChatGPT conversation: | local transcript exported | [Read](../chats/local/01a112b4-263c-7500-8689-4e962ecf4849.md) |
+| KUKA UGV vertical carousel — Fusion… | local transcript exported | [Read](local/01a13ffb-48fc-7672-b87a-4e980a0cdbf6.md) |
 | Plan browser simulation prompt | local transcript exported | [Read](../chats/local/01a112b6-d0f6-7051-a9c7-d522b648c300.md) |
 | Guardian review | local transcript exported | [Read](../chats/local/01a112c4-3247-7443-ad8f-db4ffcfee106.md) |
 | Guardian review | local transcript exported | [Read](../chats/local/01a11434-ff19-7580-ae18-9188dafe0884.md) |
@@ -66,3 +67,8 @@ Local transcripts contain stored user and assistant text. Tool records are separ
 Cloud reader returned no additional page cursors. Truncation flags and turn counts are recorded in `export/chats.json`. Full older account history, deleted chats, uncached attachments and the unavailable linked conversation cannot be reconstructed here. Local tool outputs retain any truncation already present in the stored logs. The active export chat is a snapshot, ending before its final commit and upload.
 
 System/developer prompts, internal reasoning and raw app databases are excluded. These transcripts are files for future context; cloning does not import them into Codex as live conversations. One unrelated MCQ coursework chat launched from the project directory is explicitly excluded.
+
+
+## Update — 17 October 2026
+
+See the [update report](../export/updates/2026-10-17/README.md) for the new KUKA/Fusion transcript and refreshed Simulation transcript.

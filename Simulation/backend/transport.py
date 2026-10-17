@@ -45,7 +45,7 @@ class GazeboBridge:
             self.sub(Contacts,f'/fieldlab/trays/{did}/contact',lambda msg,d=did:self.contact_cb(d,msg))
             self.sub(StringMsg,f'/fieldlab/trays/{did}/'+('latch_measured' if living_city else 'latch'),lambda msg,d=did:self.latch_cb(d,msg))
             # Subscribe only on demand; sensor consumers, not the browser viewport, select cameras.
-        self.Image=Image;self.enabled_cameras=set();self.camera_consumers={};self.preview_id=None
+        self.depth_packets={};self.depth_history={};self.rgb_history={};self.enabled_proximity=set();self.Image=Image;self.enabled_cameras=set();self.camera_consumers={};self.preview_id=None
 
     def sub(self,cls,topic,cb,rate=None):
         self.callbacks.append(cb)
@@ -64,6 +64,22 @@ class GazeboBridge:
         elif not consumers and did in self.enabled_cameras:
             self.node.unsubscribe(f'/fieldlab/{did}/camera');self.enabled_cameras.discard(did)
             with self.lock:self.camera_packets.pop(did,None)
+
+    def proximity(self,did,enabled=True):
+        topic=f'/fieldlab/{did}/proximity'
+        if enabled and did not in self.enabled_proximity:
+            self.sub(self.Image,topic,lambda msg,d=did:self.depth_cb(d,msg),10)
+            self.enabled_proximity.add(did)
+        elif not enabled and did in self.enabled_proximity:
+            self.node.unsubscribe(topic);self.enabled_proximity.discard(did)
+            with self.lock:self.depth_packets.pop(did,None);self.depth_history.pop(did,None);self.rgb_history.pop(did,None)
+    def depth_cb(self,did,msg):
+        from .service import decode_depth
+        image=decode_depth(msg)
+        if image is None:return
+        with self.lock:
+            packet={'image':image,'time':simstamp(msg.header),'received':time.monotonic()}
+            self.depth_packets[did]=packet;self.depth_history.setdefault(did,deque(maxlen=15)).append(packet)
 
     def preview(self,did):
         if self.preview_id and self.preview_id!=did:self.camera(self.preview_id,False,'preview')
@@ -117,6 +133,7 @@ class GazeboBridge:
         with self.lock:
             history=list(self.histories.get(did,[]));near=min(history,key=lambda p:abs(p['time']-stamp)) if history else None
             packet={'image':frame,'time':stamp,'pose':near,'sync_error':abs(near['time']-stamp) if near else 1e9,'received':time.monotonic()}
+            if did in self.enabled_proximity:self.rgb_history.setdefault(did,deque(maxlen=8)).append(packet)
             self.camera_packets[did]=packet;self.image_counts[did]=self.image_counts.get(did,0)+1
     def publish(self,topic,msg):
         if topic not in self.publishers:self.publishers[topic]=self.node.advertise(topic,type(msg))
