@@ -49,10 +49,13 @@ credential values and temporary private sharing links are excluded or redacted.
 - **PASS:** 153 backend tests and three frontend tests on the temporary export.
 - **PASS:** TypeScript and Vite production builds. Vite retains its existing
   advisory about the large scene bundle.
-- **PASS:** original ROS HEAD, Git refs and uncommitted-file status unchanged.
+- **PASS:** original ROS HEAD, branches, tags and uncommitted-file status unchanged.
 - **PASS with reviewed candidates:** gitleaks directory scan; 495 candidates
   were checksum fields, filesystem paths or Python expressions. No unresolved
   candidates remain. Known local access keys and private share links are removed.
+- **PASS:** GitHub main matched the data commit; all 24 new Git LFS objects
+  offer downloads, totaling 277,587,973 bytes. A downloaded 1,438,370-byte run
+  log matched its SHA256. See `remote-verification.json`.
 - **NOT RUN:** new flight qualification or a Windows/WSL runtime. The existing
   close-approach result covers one UAV and one slow-moving car: 8.02 seconds of
   hold, 0.6105 m minimum evaluated clearance, backoff, return, landing, disarm and
